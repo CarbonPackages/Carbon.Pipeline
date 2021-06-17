@@ -1,3 +1,4 @@
+// cssnano and svgo optimisation has some issues with pleeease-filters
 module.exports = (ctx) => ({
     plugins: {
         "postcss-import-alias": ctx.importAlias,
@@ -46,7 +47,7 @@ module.exports = (ctx) => ({
         autoprefixer: true,
         cssnano: ctx.minify
             ? {
-                  preset: ["default", { discardComments: { removeAll: true } }],
+                  preset: ["default", { discardComments: { removeAll: true }, svgo: false }],
               }
             : false,
         "postcss-reporter": {
