@@ -76,7 +76,7 @@ function build() {
 function css(css, file) {
     const time = process.hrtime();
     print(cyan(`Processing ${bold(file.from)}...`));
-    return rc("./.postcssrc.mjs")
+    return rc()
         .then((ctx) => {
             configFile = ctx.file;
             return postcss([rebasePlugin, ...ctx.plugins])
