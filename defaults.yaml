@@ -1,0 +1,27 @@
+extensions:
+  css: ['.pcss', '.css']
+  js: ['.js', '.jsx', '.json']
+  module: ['.mjs', '.mjsx', '.mts', '.mtsx', '.msjs']
+  ts: ['.ts', '.tsx', '.mts', '.mtsx']
+  svelte: ['.svelte', '.sjs', '.msjs']
+
+folder:
+  base: DistributionPackages
+  input: Fusion
+  # additionalAliases can be a string or an array
+  additionalAliases: Packages
+  target:
+    inline: Private/Templates/InlineAssets
+    css: Public/Styles
+    js: Public/Scripts
+    module: Public/Modules
+
+buildDefaults:
+  inline: false
+  sourcemap: true
+  format: iife
+  # purge can be a string or an array
+  purge: DistributionPackages/**/Private/**/*.{js,fusion,html}
+
+# packages can be an object (for one package) or an array (for multiple packages)
+packages: []

@@ -1,0 +1,27 @@
+{
+    "name": "carbon/pipeline",
+    "type": "neos-build",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jon Uhlmann",
+            "email": "me@jonnitto.ch"
+        }
+    ],
+    "archive": {
+        "exclude": [
+            "/.gitattributes",
+            "/.gitignore",
+            "/.github",
+            "/CODE_OF_CONDUCT.md",
+            "/LICENSE"
+        ]
+    },
+    "extra": {
+        "neos": {
+            "installer-resource-folders": [
+                "Installer"
+            ]
+        }
+    }
+}
