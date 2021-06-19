@@ -1,9 +1,11 @@
+# packages can be an object (for one package) or an array (for multiple packages)
+packages: []
+
 extensions:
   css: ['.pcss', '.css']
   js: ['.js', '.jsx', '.json']
-  module: ['.mjs', '.mjsx', '.mts', '.mtsx', '.msjs']
   ts: ['.ts', '.tsx', '.mts', '.mtsx']
-  svelte: ['.svelte', '.sjs', '.msjs']
+  module: ['.mjs', '.mjsx', '.mts', '.mtsx']
 
 folder:
   base: DistributionPackages
@@ -23,5 +25,12 @@ buildDefaults:
   # purge can be a string or an array
   purge: DistributionPackages/**/Private/**/*.{js,fusion,html}
 
-# packages can be an object (for one package) or an array (for multiple packages)
-packages: []
+esbuild:
+  plugins:
+    vue:
+      enable: false
+    svelte:
+      enable: false
+      options:
+        compileOptions:
+          css: true
