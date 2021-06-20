@@ -10,10 +10,10 @@
 packages:
   - name: Vendor.Bar
     files:
-      - 'Main.pcss'
-      - 'Main.js'
+      - Main.pcss
+      - Main.js
   - name: Vendor.Foo
-    files: 'Main.js'
+    files: Main.js
 
 
 # Enable frameworks (if needed)
