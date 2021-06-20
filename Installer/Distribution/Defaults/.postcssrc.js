@@ -9,7 +9,7 @@ module.exports = (ctx) => ({
         },
         "postcss-assets": {
             cachebuster: false,
-            basePath: "DistributionPackages/",
+            basePath: `${ctx.basePath}/`,
             baseUrl: "/_Resources/Static/Packages",
             loadPaths: ["**/Resources/Public/**/*"],
         },
