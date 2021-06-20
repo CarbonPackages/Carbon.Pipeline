@@ -13,6 +13,9 @@
     "watch:css": "node ./Build/Carbon.Pipeline/postcss.mjs --watch",
     "pipeline": "yarn install --silent --non-interactive;yarn build"
   },
+  "resolutions": {
+    "**/css-select": "^4.1.2"
+  },
   "dependencies": {},
   "devDependencies": {
     "autoprefixer": "^10.2.6",
