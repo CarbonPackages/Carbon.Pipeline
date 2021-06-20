@@ -7,8 +7,8 @@ const pipeline = readYamlFile("pipeline");
 const defaults = readYamlFile("defaults", "Build/Carbon.Pipeline");
 const config = { ...defaults, ...pipeline };
 
-const jsFiles = [];
-const cssFiles = {};
+const scriptFiles = [];
+const styleFiles = {};
 
 stringToArray(config.packages).forEach((entry) => {
     const entryFolder = path.join(
@@ -17,14 +17,14 @@ stringToArray(config.packages).forEach((entry) => {
         "Resources/Private",
         entry.inputFolder || config.folder.input
     );
-    const jsEntries = [];
+    const scriptEntries = [];
     const moduleEntries = [];
     stringToArray(entry.files).forEach((filename) => {
-        if (checkFileExtension("css", filename)) {
+        if (checkFileExtension("style", filename)) {
             const baseFilename = filename.substring(0, filename.lastIndexOf("."));
-            const conf = entryConfig(entry, "css");
+            const conf = entryConfig(entry, "style");
             const from = path.join(entryFolder, filename);
-            cssFiles[path.resolve(from)] = {
+            styleFiles[path.resolve(from)] = {
                 from,
                 to: path.join(conf.outdir, `${baseFilename}.css`),
                 sourcemap: conf.sourcemap,
@@ -32,19 +32,19 @@ stringToArray(config.packages).forEach((entry) => {
             };
         } else if (checkFileExtension("module", filename)) {
             moduleEntries.push(path.join(entryFolder, filename));
-        } else {
-            jsEntries.push(path.join(entryFolder, filename));
+        } else if (checkFileExtension("script", filename)) {
+            scriptEntries.push(path.join(entryFolder, filename));
         }
     });
-    if (jsEntries.length) {
-        jsFiles.push(jsEntryConfig(entry, jsEntries, "js"));
+    if (scriptEntries.length) {
+        scriptFiles.push(scriptEntryConfig(entry, scriptEntries, "script"));
     }
     if (moduleEntries.length) {
-        jsFiles.push(jsEntryConfig(entry, moduleEntries, "module"));
+        scriptFiles.push(scriptEntryConfig(entry, moduleEntries, "module"));
     }
 });
 
-function jsEntryConfig(entry, entryPoints, type) {
+function scriptEntryConfig(entry, entryPoints, type) {
     const conf = entryConfig(entry, type);
     const format = type === "module" ? "esm" : entry.format || config.buildDefaults.format;
 
@@ -134,4 +134,4 @@ function stringToArray(entry) {
     return [entry];
 }
 
-export { asyncForEach, jsFiles, cssFiles, watch, minify, config, error, print, stringToArray };
+export { asyncForEach, scriptFiles, styleFiles, watch, minify, config, error, print, stringToArray };

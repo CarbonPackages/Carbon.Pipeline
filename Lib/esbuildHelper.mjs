@@ -1,5 +1,5 @@
 import BROWSERLIST from "browserslist";
-import { asyncForEach, jsFiles, watch, minify, error, config } from "./helper.mjs";
+import { asyncForEach, scriptFiles, watch, minify, error, config } from "./helper.mjs";
 
 const browserlist = (() => {
     const SUPPORTED_BUILD_TARGETS = ["es", "chrome", "edge", "firefox", "ios", "node", "safari"];
@@ -29,4 +29,4 @@ async function dynamicImport(name) {
     return dynamicImport.default;
 }
 
-export { browserlist, jsFiles as files, asyncForEach, watch, minify, error, dynamicImport, esbuildConfig };
+export { browserlist, scriptFiles as files, asyncForEach, watch, minify, error, dynamicImport, esbuildConfig };
