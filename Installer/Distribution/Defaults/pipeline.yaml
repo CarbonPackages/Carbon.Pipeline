@@ -1,22 +1,23 @@
 # A package entry has the following options:
 
-# name                  <string>        (required) The name of the package
-# files                 <array|string>  (required) The names of the entry files
-# folder.input          <string>        (optional) (default: `Fusion`) The folder under `Resources/Private` where to look for the entry files
-# folder.output.inline  <string>        (optional) (default: `Private/Templates/InlineAssets`) The folder where inline files get rendered
-# folder.output.style   <string>        (optional) (default: `Public/Styles`) The folder where styles get rendered
-# folder.output.script  <string>        (optional) (default: `Public/Scripts`) The folder where scripts get rendered
-# folder.output.module  <string>        (optional) (default: `Public/Modules`) The folder where modules files get rendered
-# inline                <boolean>       (optional) (default: `false`) Flag to toggle if the files should be written to `Resources/Private/Templates/InlineAssets`
-# sourcemap             <boolean>       (optional) (default: `true`) Flag to toggle source map generation
-# format                <string>        (optional) (default: `iife`)
+# package                <string>        (required) The name of the package
+# files                  <array|string>  (required) The names of the entry files
+# folder.input           <string>        (optional) (default: `Fusion`) The folder under `Resources/Private` where to look for the entry files
+# folder.output.package  <string>        (optional) If set, the files will be writen in a different package
+# folder.output.inline   <string>        (optional) (default: `Private/Templates/InlineAssets`) The folder where inline files get rendered
+# folder.output.style    <string>        (optional) (default: `Public/Styles`) The folder where styles get rendered
+# folder.output.script   <string>        (optional) (default: `Public/Scripts`) The folder where scripts get rendered
+# folder.output.module   <string>        (optional) (default: `Public/Modules`) The folder where modules files get rendered
+# inline                 <boolean>       (optional) (default: `false`) Flag to toggle if the files should be written to `Resources/Private/Templates/InlineAssets`
+# sourcemap              <boolean>       (optional) (default: `true`) Flag to toggle source map generation
+# format                 <string>        (optional) (default: `iife`)
 
 packages:
-  - name: Vendor.Bar
+  - package: Vendor.Bar
     files:
       - Main.pcss
       - Main.js
-  - name: Vendor.Foo
+  - package: Vendor.Foo
     files: Main.js
 
 

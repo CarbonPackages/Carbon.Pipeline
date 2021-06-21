@@ -16,19 +16,22 @@ const minify = production || process.argv.includes("--minify");
 process.env.NODE_ENV = production ? "production" : "development";
 process.env.TAILWIND_MODE = watch ? "watch" : "build";
 
-
-
-
 stringToArray(config.packages).forEach((entry) => {
+    const files = stringToArray(entry.files);
+    if (!entry.package || !files) {
+        error("No package or file defined. Please set it in your pipeline.yaml");
+        process.exit(1);
+    }
+
     const entryFolder = path.join(
         config.folder.base,
-        entry.name,
+        entry.package,
         "Resources/Private",
         entry.folder?.input || config.folder.input
     );
     const scriptEntries = [];
     const moduleEntries = [];
-    stringToArray(entry.files).forEach((filename) => {
+    files.forEach((filename) => {
         if (checkFileExtension("style", filename)) {
             const baseFilename = filename.substring(0, filename.lastIndexOf("."));
             const conf = entryConfig(entry, "style");
@@ -68,11 +71,14 @@ function entryConfig(entry, type) {
     const inline = getValue(entry, "inline");
     const sourcemap = inline ? false : getValue(entry, "sourcemap");
     const outputFolderKey = inline ? "inline" : type;
+    const folderOutput = entry.folder?.output;
     let outputFolder = config.folder.output[outputFolderKey];
-    if (entry.folder?.output) {
-        outputFolder = getValue(entry.folder.output, outputFolderKey);
+    let packageName = entry.package;
+    if (folderOutput) {
+        outputFolder = folderOutput[outputFolderKey] || outputFolder;
+        packageName = folderOutput.package || packageName;
     }
-    const outdir = path.join(config.folder.base, entry.name, "Resources", outputFolder);
+    const outdir = path.join(config.folder.base, packageName, "Resources", outputFolder);
     return {
         sourcemap,
         outdir,
