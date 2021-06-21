@@ -264,21 +264,6 @@ esbuild:
 
 </details>
 
-## Add Vue
-
-```bash
-yarn add --dev vue vue-template-compiler esbuild-vue
-```
-
-```yaml
-esbuild:
-  plugins:
-    vue:
-      enable: true
-      # You can pass your needed options here
-      # options:
-```
-
 [preview]: https://repository-images.githubusercontent.com/377838441/8d66c680-d27d-11eb-99a4-85ab35081318
 [esbuild]: https://esbuild.github.io
 [postcss]: https://postcss.org
