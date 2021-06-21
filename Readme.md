@@ -2,17 +2,17 @@
 
 [![Download]][main.zip] [![David]][david-dm] [![GitHub stars]][stargazers] [![GitHub watchers]][subscription] [![GitHub license]][license] [![GitHub issues]][issues] [![GitHub forks]][network] [![Twitter]][tweet] [![Sponsor @Jonnitto on GitHub]][sponsor]
 
-**Carbon.Pipeline is a delicious blend of tasks and build tools poured into [esbuild] and [PostCSS] to form a full-featured, ultra fast modern Javascript and CSS bundler for Flow Framework and [Neos CMS].**
+**Carbon.Pipeline is a delicious blend of [esbuild] and [PostCSS] to form a full-featured, ultra-fast modern Javascript and CSS bundler for Flow Framework and [Neos CMS].**
 
 ## Getting started
 
-To use this build stack, you can either run `composer require carbon/pipeline --dev` or [download the code as zip file][main.zip] and put it in the folder `Build/Carbon.Pipeline`. It's recommended only to download manually if you want to make some bigger adjustments to the build stack. If you miss a :sparkles: feature, or found a :bug: bug, feel free to [open an issue].
+To use this build stack, you can either run `composer require carbon/pipeline --dev` or [download the code as zip file][main.zip] and put it in the folder `Build/Carbon.Pipeline`. It's recommended only to download manually if you want to make some more significant adjustments to the build stack. If you miss a :sparkles: feature or found a :bug: bug, feel free to [open an issue].
 
 If you install the build stack via [composer], some files (if not already existing) will be copied to your root folder.
 
 ## Add files to the build stack
 
-The whole configuration, including which files to build is configured in [`pipeline.yaml`]. The default values are set in [`defaults.yaml`] and get merged with your configuration. Under the key `packages` you can either add an array with package settings, or, if you have just one entry, you can directly add the configuration:
+The whole configuration, including which files to build, is configured in [`pipeline.yaml`]. The default values are set in [`defaults.yaml`] and merged with your configuration. Under the key `packages`, you can either add an array with package settings or, if you have just one entry, you can directly add the configuration:
 
 ```yaml
 packages:
@@ -48,7 +48,7 @@ A package entry has the following options:
 | `sourcemap`   | `boolean`           |          | Flag to toggle source map generation                                           | `true`   | `false`                    |
 | `format`      | `string`            |          | Set the format of the output file. [Read more][esbuild format]                 | `iife`   | `cjs`                      |
 
-The targets folder can be adjusted under the key `folder.target`. If you want to change the input folder, or build defaults for all your packages, you can also set this globally in your [`pipeline.yaml`]:
+The targets folder can be adjusted under the key `folder.target`. If you want to change the input folder or build defaults for all your packages, you can also set this globally in your [`pipeline.yaml`]:
 
 ```yaml
 folder:
@@ -61,7 +61,7 @@ buildDefaults:
 
 Please look at the [`defaults.yaml`] file for all the options.
 
-If you set an entry file with the javascript module suffix (`.mjs`, `.mjsx`, `.mts` or `.mtsx`) the format of this file will enforced to `esm`. E.g. if you have the following array `["Main.js", "Module.mjs"]`, and have no specific setting for the format, `Main.js` will have the format `iife` and `Module.mjs` will have the format `esm`
+If you set an entry file with the javascript module suffix (`.mjs`, `.mjsx`, `.mts` or `.mtsx`) the format of this file will be enforced to `esm`. E.g., if you have the following array `["Main.js", "Module.mjs"]`, and have no specific setting for the format, `Main.js` will have the format `iife` and `Module.mjs` will have the format `esm`
 
 ## Yarn tasks
 
@@ -74,7 +74,7 @@ There are three predefined tasks:
 | `yarn build`    | Build the files once for production             |         ✓          | `concurrently yarn:build:*`                          |
 | `yarn pipeline` | Run install, and build the files for production |         ✓          | `yarn install --silent --non-interactive;yarn build` |
 
-The tasks are splitted up, so they can run in paralell mode. But you can also run them seperatly:
+The tasks are split up, so they can run in parallel mode. But you can also run them separately:
 
 | Command          | Description                                    | Optimize file size | Command                                                 |
 | ---------------- | ---------------------------------------------- | :----------------: | ------------------------------------------------------- |
@@ -154,7 +154,7 @@ If you want to use [TypeScript], add the following packages to `package.json`:
 yarn add --dev typescript @typescript-eslint/eslint-plugin
 ```
 
-Add your `tsconfig.json` file, this is just an example:
+Add your `tsconfig.json` file; this is just an example:
 
 ```json
 {
