@@ -1,4 +1,4 @@
-![Carbon.Pipeline – Build stack for Neos CMS][preview]
+![Carbon.Pipeline – Build stack for Neos CMS][logo]
 
 [![Download]][main.zip] [![David]][david-dm] [![GitHub stars]][stargazers] [![GitHub watchers]][subscription] [![GitHub license]][license] [![GitHub issues]][issues] [![GitHub forks]][network] [![Twitter]][tweet] [![Sponsor @Jonnitto on GitHub]][sponsor]
 
@@ -289,7 +289,7 @@ esbuild:
 
 </details>
 
-[preview]: https://repository-images.githubusercontent.com/377838441/8d66c680-d27d-11eb-99a4-85ab35081318
+[logo]: https://repository-images.githubusercontent.com/377838441/de0f0b80-d2df-11eb-86a9-7988d27d4ab0
 [esbuild]: https://esbuild.github.io
 [postcss]: https://postcss.org
 [open an issue]: https://github.com/CarbonPackages/Carbon.Pipeline/issues/new
