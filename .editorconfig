@@ -13,30 +13,13 @@ indent_style = space
 indent_size = 4
 
 # Exceptions
-[{*.{yaml,yml,sh,jscsrc},package.json,.*rc}]
+[{*.yaml,package.json,.*rc}]
 indent_size = 2
 
-
-[*.{js,mjs,mjsx}]
+[*.{js,mjs}]
 max_line_length = 120
 
-[*.json]
-max_line_length = 1000
-
-# Export from flow
-[Sites.xml]
-indent_size = 1
-
-# Template files
-[*.{htm,html}]
-max_line_length = 200
-indent_size = 2
-
-[*.{note,md,edit,read}]
-max_line_length = 200
+[*.md]
+max_line_length = 120
 trim_trailing-whitespace = false
 indent_size = 2
-
-[Makefile]
-indent_style = tab
-indent_size = 1
