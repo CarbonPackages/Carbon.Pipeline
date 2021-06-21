@@ -15,7 +15,7 @@ stringToArray(config.packages).forEach((entry) => {
         config.folder.base,
         entry.name,
         "Resources/Private",
-        entry.inputFolder || config.folder.input
+        entry.folder?.input || config.folder.input
     );
     const scriptEntries = [];
     const moduleEntries = [];
@@ -58,13 +58,12 @@ function scriptEntryConfig(entry, entryPoints, type) {
 function entryConfig(entry, type) {
     const inline = getValue(entry, "inline");
     const sourcemap = inline ? false : getValue(entry, "sourcemap");
-    const outdir = path.join(
-        config.folder.base,
-        entry.name,
-        "Resources",
-        inline ? config.folder.target.inline : config.folder.target[type]
-    );
-
+    const outputFolderKey = inline ? "inline" : type;
+    let outputFolder = config.folder.output[outputFolderKey];
+    if (entry.folder?.output) {
+        outputFolder = getValue(entry.folder.output, outputFolderKey);
+    }
+    const outdir = path.join(config.folder.base, entry.name, "Resources", outputFolder);
     return {
         sourcemap,
         outdir,

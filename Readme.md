@@ -37,22 +37,46 @@ packages:
   files: Main.js
 ```
 
+To change the input and / or the output folder, you can to this with the `folder` option:
+
+```yaml
+packages:
+  name: Vendor.Bar
+  files: Main.js
+  folder:
+    input: Assets
+    output:
+      inline: Private/Templates
+      style: Public
+      script: Public
+      module: Public
+```
+
 A package entry has the following options:
 
-| Key           | Type                | required | Description                                                                    | Default  | Example                    |
-| ------------- | ------------------- | :------: | ------------------------------------------------------------------------------ | -------- | -------------------------- |
-| `name`        | `string`            |    ✓     | The name of the package                                                        |          | `Vendor.Foo`               |
-| `files`       | `array` or `string` |    ✓     | The names of the entry files                                                   |          | `["Main.js", "Main.pcss"]` |
-| `inputFolder` | `string`            |          | The folder under `Resources/Private` where to look for the entry files         | `Fusion` | `Assets`                   |
-| `inline`      | `boolean`           |          | Flag to toggle if the files should be inlined. If set, sourcemaps are disabled | `false`  | `true`                     |
-| `sourcemap`   | `boolean`           |          | Flag to toggle source map generation                                           | `true`   | `false`                    |
-| `format`      | `string`            |          | Set the format of the output file. [Read more][esbuild format]                 | `iife`   | `cjs`                      |
+| Key                    | Type                | Description                                                                    | Default                          | Example      |
+| ---------------------- | ------------------- | ------------------------------------------------------------------------------ | -------------------------------- | ------------ |
+| `name`                 | `string`            | The name of the package (required)                                             |                                  | `Vendor.Foo` |
+| `files`                | `array` or `string` | The names of the entry files (required)                                        |                                  | `Main.js`    |
+| `folder.input`         | `string`            | The folder under `Resources/Private` where to look for the entry files         | `Fusion`                         | `Assets`     |
+| `folder.output.inline` | `string`            | The folder where inline files get rendered                                     | `Private/Templates/InlineAssets` | `Assets`     |
+| `folder.output.style`  | `string`            | The folder where inline styles rendered                                        | `Public/Styles`                  | `Assets`     |
+| `folder.output.script` | `string`            | The folder where inline scripts rendered                                       | `Public/Scripts`                 | `Assets`     |
+| `folder.output.module` | `string`            | The folder where inline modules rendered                                       | `Public/Modules`                 | `Assets`     |
+| `inline`               | `boolean`           | Flag to toggle if the files should be inlined. If set, sourcemaps are disabled | `false`                          | `true`       |
+| `sourcemap`            | `boolean`           | Flag to toggle source map generation                                           | `true`                           | `false`      |
+| `format`               | `string`            | Set the format of the output file. [Read more][esbuild format]                 | `iife`                           | `cjs`        |
 
-The targets folder can be adjusted under the key `folder.target`. If you want to change the input folder or build defaults for all your packages, you can also set this globally in your [`pipeline.yaml`]:
+The target folders can be adjusted under the key `folder.output`. If you want to change the defaults for all your packages, you can also set this globally in your [`pipeline.yaml`]:
 
 ```yaml
 folder:
-  input: Fusion
+  input: Assets
+  output:
+    inline: Private/Templates
+    style: Public
+    script: Public
+    module: Public
 
 buildDefaults:
   sourcemap: false
