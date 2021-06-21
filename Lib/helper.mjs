@@ -104,13 +104,14 @@ function readYamlFile(file, folder) {
 }
 
 function error(err) {
+    let feedback = err;
     if (typeof err === "string") {
-        console.error(red(err));
+        feedback = red(err);
     } else if (err.name === "CssSyntaxError") {
-        console.error(err.toString());
-    } else {
-        console.error(err);
+        feedback = err.toString();
     }
+    console.error(`\n${feedback}\n`);
+
     // Watch mode shouldn't exit on error
     if (watch) {
         return;
