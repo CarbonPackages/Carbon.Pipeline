@@ -298,7 +298,7 @@ esbuild:
 [`defaults.yaml`]: defaults.yaml
 [esbuild format]: https://esbuild.github.io/api/#format
 [david]: https://img.shields.io/david/dev/CarbonPackages/Carbon.Pipeline
-[david-dm]: https://david-dm.org/CarbonPackages/Carbon.Pipeline?type=dev
+[david-dm]: https://david-dm.org/CarbonPackages/Carbon.Pipeline?type=dev&path=Installer/Distribution/Defaults
 [github issues]: https://img.shields.io/github/issues/CarbonPackages/Carbon.Pipeline
 [issues]: https://github.com/CarbonPackages/Carbon.Pipeline/issues
 [github forks]: https://img.shields.io/github/forks/CarbonPackages/Carbon.Pipeline
