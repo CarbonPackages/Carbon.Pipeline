@@ -37,7 +37,6 @@ module.exports = (ctx) => ({
         "postcss-each": true,
         "postcss-hexrgba": true,
         "postcss-clip-path-polyfill": true,
-        "postcss-responsive-type": true,
         "postcss-easings": true,
         "pleeease-filters": true,
         "postcss-quantity-queries": true,

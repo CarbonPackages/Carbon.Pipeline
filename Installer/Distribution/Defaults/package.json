@@ -50,7 +50,6 @@
     "postcss-preset-env": "^6.7.0",
     "postcss-quantity-queries": "^0.5.0",
     "postcss-reporter": "^7.0.2",
-    "postcss-responsive-type": "^1.0.0",
     "postcss-round-subpixels": "^2.0.0",
     "postcss-sort-media-queries": "^3.11.12",
     "postcss-url": "^10.1.3",
