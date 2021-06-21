@@ -10,6 +10,15 @@ const config = { ...defaults, ...pipeline };
 const scriptFiles = [];
 const styleFiles = {};
 
+const watch = process.argv.includes("--watch");
+const production = process.argv.includes("--production");
+const minify = production || process.argv.includes("--minify");
+process.env.NODE_ENV = production ? "production" : "development";
+process.env.TAILWIND_MODE = watch ? "watch" : "build";
+
+
+
+
 stringToArray(config.packages).forEach((entry) => {
     const entryFolder = path.join(
         config.folder.base,
@@ -92,19 +101,6 @@ function readYamlFile(file, folder) {
         error(err);
         process.exit(1);
     }
-}
-
-const watch = process.argv.includes("--watch");
-const production = process.argv.includes("--production");
-const minify = production || process.argv.includes("--minify");
-
-if (watch) {
-    process.env.NODE_ENV = "development";
-    process.env.TAILWIND_MODE = "watch";
-}
-if (production) {
-    process.env.NODE_ENV = "production";
-    process.env.TAILWIND_MODE = "build";
 }
 
 function error(err) {
