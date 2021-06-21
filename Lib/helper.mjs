@@ -125,9 +125,12 @@ function print(message) {
 
 function stringToArray(entry) {
     if (Array.isArray(entry)) {
-        return entry;
+        return entry.filter((item) => !!item);
     }
-    return [entry];
+    if (entry) {
+        return [entry];
+    }
+    return null;
 }
 
 export { asyncForEach, scriptFiles, styleFiles, watch, minify, config, error, print, stringToArray };
