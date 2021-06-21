@@ -5,13 +5,13 @@
     "authors": [
         {
             "name": "Jon Uhlmann",
-            "email": "me@jonnitto.ch"
+            "email": "me@jonnitto.ch",
+            "homepage": "https://www.jonnitto.ch"
         }
     ],
     "archive": {
         "exclude": [
             "/.gitattributes",
-            "/.gitignore",
             "/.github",
             "/CODE_OF_CONDUCT.md",
             "/LICENSE"
