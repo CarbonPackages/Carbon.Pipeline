@@ -1,4 +1,4 @@
-# Pass an object with the following properties to the array:
+# A package entry has the following options:
 
 # name          <string>        (required) The name of the package
 # files         <array|string>  (required) The names of the entry files
