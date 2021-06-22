@@ -23,6 +23,9 @@ buildDefaults:
   inline: false
   sourcemap: true
   format: iife
+  # external an be a string or an array
+  # https://esbuild.github.io/api/#external
+  external: null
   # purge can be a string or an array
   purge: DistributionPackages/**/Private/**/*.{js,fusion,html}
 

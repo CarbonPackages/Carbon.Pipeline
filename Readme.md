@@ -66,6 +66,7 @@ A package entry has the following options:
 | `folder.output.script`   | `string`            | The folder where inline scripts rendered                                       | `Public/Assets`      |
 | `folder.output.module`   | `string`            | The folder where inline modules rendered                                       | `Public/Assets`      |
 | `folder.output.commonJS` | `string`            | The folder where inline commonJS files get rendered                            | `Public/Assets`      |
+| `external`               | `string` or `array` | You can mark a file or a package as [external] to exclude it from your build.  | `*/Modules/*`        |
 | `inline`                 | `boolean`           | Flag to toggle if the files should be inlined. If set, sourcemaps are disabled | `true`               |
 | `sourcemap`              | `boolean`           | Flag to toggle source map generation                                           | `false`              |
 | `format`                 | `string`            | Set the format of the output file. [Read more][esbuild format]                 | `cjs`                |
@@ -86,6 +87,7 @@ folder:
 and these for the build options:
 
 ```yaml
+external: null
 inline: false
 sourcemap: true
 format: iife
