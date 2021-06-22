@@ -50,23 +50,24 @@ packages:
       style: Public
       script: Public
       module: Public
+      commonJS: Public
 ```
 
 A package entry has the following options:
 
-| Key                     | Type                | Description                                                                    | Default                          | Example      |
-| ----------------------- | ------------------- | ------------------------------------------------------------------------------ | -------------------------------- | ------------ |
-| `package`               | `string`            | The name of the package (required)                                             |                                  | `Vendor.Foo` |
-| `files`                 | `array` or `string` | The names of the entry files (required)                                        |                                  | `Main.js`    |
-| `folder.input`          | `string`            | The folder under `Resources/Private` where to look for the entry files         | `Fusion`                         | `Assets`     |
-| `folder.output.package` | `string`            | If set, the files will be writen in a different package                        |                                  | `Foo.Bar`    |
-| `folder.output.inline`  | `string`            | The folder where inline files get rendered                                     | `Private/Templates/InlineAssets` | `Assets`     |
-| `folder.output.style`   | `string`            | The folder where inline styles rendered                                        | `Public/Styles`                  | `Assets`     |
-| `folder.output.script`  | `string`            | The folder where inline scripts rendered                                       | `Public/Scripts`                 | `Assets`     |
-| `folder.output.module`  | `string`            | The folder where inline modules rendered                                       | `Public/Modules`                 | `Assets`     |
-| `inline`                | `boolean`           | Flag to toggle if the files should be inlined. If set, sourcemaps are disabled | `false`                          | `true`       |
-| `sourcemap`             | `boolean`           | Flag to toggle source map generation                                           | `true`                           | `false`      |
-| `format`                | `string`            | Set the format of the output file. [Read more][esbuild format]                 | `iife`                           | `cjs`        |
+| Key                     | Type                | Description                                                                    | Default                          | Example              |
+| ----------------------- | ------------------- | ------------------------------------------------------------------------------ | -------------------------------- | -------------------- |
+| `package`               | `string`            | The name of the package (required)                                             |                                  | `Vendor.Foo`         |
+| `files`                 | `array` or `string` | The names of the entry files (required)                                        |                                  | `Main.js`            |
+| `folder.input`          | `string`            | The folder under `Resources/Private` where to look for the entry files         | `Fusion`                         | `Assets`             |
+| `folder.output.package` | `string`            | If set, the files will be writen in a different package                        |                                  | `Foo.Bar`            |
+| `folder.output.inline`  | `string`            | The folder where inline files get rendered                                     | `Private/Templates/InlineAssets` | `Private/Templates/` |
+| `folder.output.style`   | `string`            | The folder where inline styles rendered                                        | `Public/Styles`                  | `Public/Assets`      |
+| `folder.output.script`  | `string`            | The folder where inline scripts rendered                                       | `Public/Scripts`                 | `Public/Assets`      |
+| `folder.output.module`  | `string`            | The folder where inline modules rendered                                       | `Public/Modules`                 | `Public/Assets`      |
+| `inline`                | `boolean`           | Flag to toggle if the files should be inlined. If set, sourcemaps are disabled | `false`                          | `true`               |
+| `sourcemap`             | `boolean`           | Flag to toggle source map generation                                           | `true`                           | `false`              |
+| `format`                | `string`            | Set the format of the output file. [Read more][esbuild format]                 | `iife`                           | `cjs`                |
 
 The target folders can be adjusted under the key `folder.output`. If you want to change the defaults for all your packages, you can also set this globally in your [`pipeline.yaml`]:
 
@@ -78,6 +79,7 @@ folder:
     style: Public
     script: Public
     module: Public
+    commonJS: Public
 
 buildDefaults:
   sourcemap: false
@@ -86,7 +88,7 @@ buildDefaults:
 
 Please look at the [`defaults.yaml`] file for all the options.
 
-If you set an entry file with the javascript module suffix (`.mjs`, `.mjsx`, `.mts` or `.mtsx`) the format of this file will be enforced to `esm`. E.g., if you have the following array `["Main.js", "Module.mjs"]`, and have no specific setting for the format, `Main.js` will have the format `iife` and `Module.mjs` will have the format `esm`
+If you set an entry file with the javascript module suffix (`.mjs`, `.mjsx`, `.mts` or `.mtsx`) the format of this file will be enforced to `esm`. The same with commonJS: If you set an entry file with the javascript commonJS suffix (`.cjs`, `.cjsx`, `.cts` or `.ctsx`) the format of this file will be enforced to `cjs`. E.g., if you have the following array `["Main.js", "Module.mjs", "CommonJS.cjs"]`, and have no specific setting for the format, `Main.js` will have the format `iife`, `Module.mjs` will have the format `esm` and `CommonJS.cjs` will have the format `cjs`.
 
 ## Yarn tasks
 

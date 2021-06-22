@@ -5,6 +5,7 @@ extensions:
   style: [".pcss", ".css"]
   script: [".js", ".jsx", ".ts", ".tsx", ".json"]
   module: [".mjs", ".mjsx", ".mts", ".mtsx"]
+  commonJS: [".cjs", ".cjsx", ".cts", ".ctsx"]
 
 folder:
   base: DistributionPackages
@@ -16,6 +17,7 @@ folder:
     style: Public/Styles
     script: Public/Scripts
     module: Public/Modules
+    commonJS: Public/CommonJS
 
 buildDefaults:
   inline: false

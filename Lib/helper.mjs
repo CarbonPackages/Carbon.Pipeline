@@ -31,6 +31,7 @@ stringToArray(config.packages).forEach((entry) => {
     );
     const scriptEntries = [];
     const moduleEntries = [];
+    const commonJsEntries = [];
     files.forEach((filename) => {
         if (checkFileExtension("style", filename)) {
             const baseFilename = filename.substring(0, filename.lastIndexOf("."));
@@ -44,12 +45,17 @@ stringToArray(config.packages).forEach((entry) => {
             };
         } else if (checkFileExtension("module", filename)) {
             moduleEntries.push(path.join(entryFolder, filename));
+        } else if (checkFileExtension("commonJS", filename)) {
+            commonJsEntries.push(path.join(entryFolder, filename));
         } else if (checkFileExtension("script", filename)) {
             scriptEntries.push(path.join(entryFolder, filename));
         }
     });
     if (scriptEntries.length) {
         scriptFiles.push(scriptEntryConfig(entry, scriptEntries, "script"));
+    }
+    if (commonJsEntries.length) {
+        scriptFiles.push(scriptEntryConfig(entry, commonJsEntries, "commonJS", "cjs"));
     }
     if (moduleEntries.length) {
         scriptFiles.push(scriptEntryConfig(entry, moduleEntries, "module", "esm"));

@@ -67,6 +67,8 @@ async function build() {
             target: browserlist,
             legalComments: "linked",
             loader: {
+                ".cjsx": "jsx",
+                ".ctsx": "tsx",
                 ".mjsx": "jsx",
                 ".mtsx": "tsx",
             },
