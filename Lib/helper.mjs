@@ -5,7 +5,7 @@ import { red } from "colorette";
 
 const pipeline = readYamlFile("pipeline");
 const defaults = readYamlFile("defaults", "Build/Carbon.Pipeline");
-const config = { ...defaults, ...pipeline };
+const config = deepMerge(defaults, pipeline);
 
 const scriptFiles = [];
 const styleFiles = {};
@@ -137,6 +137,14 @@ function stringToArray(entry) {
         return [entry];
     }
     return null;
+}
+
+function deepMerge(target, source) {
+    for (const key of Object.keys(source)) {
+        if (source[key] instanceof Object) Object.assign(source[key], deepMerge(target[key], source[key]));
+    }
+    Object.assign(target || {}, source);
+    return target;
 }
 
 export { asyncForEach, scriptFiles, styleFiles, watch, minify, config, error, print, stringToArray };
