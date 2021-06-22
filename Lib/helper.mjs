@@ -17,8 +17,8 @@ const minify = production || process.argv.includes("--minify");
 process.env.NODE_ENV = production ? "production" : "development";
 process.env.TAILWIND_MODE = watch ? "watch" : "build";
 
-stringToArray(config.packages).forEach((entry) => {
-    const files = stringToArray(entry.files);
+toArray(config.packages).forEach((entry) => {
+    const files = toArray(entry.files);
     if (!entry.package || !files) {
         error("No package or file defined. Please set it in your pipeline.yaml");
         process.exit(1);
@@ -135,7 +135,7 @@ function print(message) {
     console.warn(message);
 }
 
-function stringToArray(entry) {
+function toArray(entry) {
     if (Array.isArray(entry)) {
         return entry.filter((item) => !!item);
     }
@@ -145,4 +145,4 @@ function stringToArray(entry) {
     return null;
 }
 
-export { asyncForEach, scriptFiles, styleFiles, watch, minify, config, error, print, stringToArray };
+export { asyncForEach, scriptFiles, styleFiles, watch, minify, config, error, print, toArray };
