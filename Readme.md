@@ -173,7 +173,7 @@ By the way: [Alpine.js] is excellent in combination with [Tailwind CSS].
 ## Javascript
 
 <details>
-<summary><strong>Usage of TypeScript</strong></summary>
+<summary><strong>TypeScript</strong></summary>
 
 If you want to use [TypeScript], add the following packages to `package.json`:
 
@@ -223,7 +223,7 @@ To enable the correct linting, edit [`.eslintrc`]:
 </details>
 
 <details>
-<summary><strong>Usage of React</strong></summary>
+<summary><strong>React</strong></summary>
 
 Using JSX syntax usually requires you to manually import the JSX library you are using. For example, if you are using React, by default you will need to import React into each JSX file like this:
 
@@ -235,7 +235,7 @@ render(<div />);
 </details>
 
 <details>
-<summary><strong>Usage Preact</strong></summary>
+<summary><strong>Preact</strong></summary>
 
 If you're using JSX with a library other than React (such as [Preact],), you'll likely need to configure the [JSX factory] and [JSX fragment] settings since they default to `React.createElement `and `React.Fragment` respectively. Add this to your `tsconfig.json` or `jsconfig.json`:
 
@@ -251,9 +251,7 @@ If you're using JSX with a library other than React (such as [Preact],), you'll 
 </details>
 
 <details>
-
-<details>
-<summary><strong>Usage of Svelte</strong></summary>
+<summary><strong>Svelte</strong></summary>
 
 If you want to use [Svelte], add the following packages to `package.json`:
 
@@ -300,7 +298,7 @@ Your `tsconfig.json` may look like this:
 </details>
 
 <details>
-<summary><strong>Usage of Vue.js</strong></summary>
+<summary><strong>Vue.js</strong></summary>
 
 If you want to use [Vue.js], add the following packages to `package.json`:
 
