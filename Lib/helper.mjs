@@ -115,14 +115,20 @@ function readYamlFile(file, folder) {
     }
 }
 
-function error(err) {
-    let feedback = err;
-    if (typeof err === "string") {
-        feedback = red(err);
-    } else if (err.name === "CssSyntaxError") {
-        feedback = err.toString();
-    }
-    console.error(`\n${feedback}\n`);
+function error() {
+    const linebreak = () => console.log("\n");
+    const output = (value) => console.error(value);
+    linebreak();
+    Array.from(arguments).forEach((err) => {
+        if (typeof err === "string") {
+            output(err);
+        } else if (err.name === "CssSyntaxError") {
+            output(err.toString());
+        } else {
+            output(err);
+        }
+    });
+    linebreak();
 
     // Watch mode shouldn't exit on error
     if (watch) {
@@ -131,8 +137,8 @@ function error(err) {
     process.exit(1);
 }
 
-function print(message) {
-    console.warn(message);
+function print() {
+    console.warn(...arguments);
 }
 
 function toArray(entry) {
