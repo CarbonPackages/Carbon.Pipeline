@@ -55,19 +55,41 @@ packages:
 
 A package entry has the following options:
 
-| Key                     | Type                | Description                                                                    | Default                          | Example              |
-| ----------------------- | ------------------- | ------------------------------------------------------------------------------ | -------------------------------- | -------------------- |
-| `package`               | `string`            | The name of the package (required)                                             |                                  | `Vendor.Foo`         |
-| `files`                 | `array` or `string` | The names of the entry files (required)                                        |                                  | `Main.js`            |
-| `folder.input`          | `string`            | The folder under `Resources/Private` where to look for the entry files         | `Fusion`                         | `Assets`             |
-| `folder.output.package` | `string`            | If set, the files will be writen in a different package                        |                                  | `Foo.Bar`            |
-| `folder.output.inline`  | `string`            | The folder where inline files get rendered                                     | `Private/Templates/InlineAssets` | `Private/Templates/` |
-| `folder.output.style`   | `string`            | The folder where inline styles rendered                                        | `Public/Styles`                  | `Public/Assets`      |
-| `folder.output.script`  | `string`            | The folder where inline scripts rendered                                       | `Public/Scripts`                 | `Public/Assets`      |
-| `folder.output.module`  | `string`            | The folder where inline modules rendered                                       | `Public/Modules`                 | `Public/Assets`      |
-| `inline`                | `boolean`           | Flag to toggle if the files should be inlined. If set, sourcemaps are disabled | `false`                          | `true`               |
-| `sourcemap`             | `boolean`           | Flag to toggle source map generation                                           | `true`                           | `false`              |
-| `format`                | `string`            | Set the format of the output file. [Read more][esbuild format]                 | `iife`                           | `cjs`                |
+| Key                      | Type                | Description                                                                    | Example              |
+| ------------------------ | ------------------- | ------------------------------------------------------------------------------ | -------------------- |
+| `package`                | `string`            | The name of the package (required)                                             | `Vendor.Foo`         |
+| `files`                  | `array` or `string` | The names of the entry files (required)                                        | `Main.js`            |
+| `folder.input`           | `string`            | The folder under `Resources/Private` where to look for the entry files         | `Assets`             |
+| `folder.output.package`  | `string`            | If set, the files will be writen in a different package                        | `Foo.Bar`            |
+| `folder.output.inline`   | `string`            | The folder where inline files get rendered                                     | `Private/Templates/` |
+| `folder.output.style`    | `string`            | The folder where inline styles rendered                                        | `Public/Assets`      |
+| `folder.output.script`   | `string`            | The folder where inline scripts rendered                                       | `Public/Assets`      |
+| `folder.output.module`   | `string`            | The folder where inline modules rendered                                       | `Public/Assets`      |
+| `folder.output.commonJS` | `string`            | The folder where inline commonJS files get rendered                            | `Public/Assets`      |
+| `inline`                 | `boolean`           | Flag to toggle if the files should be inlined. If set, sourcemaps are disabled | `true`               |
+| `sourcemap`              | `boolean`           | Flag to toggle source map generation                                           | `false`              |
+| `format`                 | `string`            | Set the format of the output file. [Read more][esbuild format]                 | `cjs`                |
+
+These are the default values for the folders:
+
+```yaml
+folder:
+  input: Fusion
+  output:
+    inline: Private/Templates/InlineAssets
+    style: Public/Styles
+    script: Public/Scripts
+    module: Public/Modules
+    commonJS: Public/CommonJS
+```
+
+and these for the build options:
+
+```yaml
+inline: false
+sourcemap: true
+format: iife
+```
 
 The target folders can be adjusted under the key `folder.output`. If you want to change the defaults for all your packages, you can also set this globally in your [`pipeline.yaml`]:
 
@@ -92,7 +114,7 @@ If you set an entry file with the javascript module suffix (`.mjs`, `.mjsx`, `.m
 
 ## Yarn tasks
 
-There are three predefined tasks:
+There are four predefined tasks:
 
 | Command         | Description                                     | Optimize file size | Command                                              |
 | --------------- | ----------------------------------------------- | :----------------: | ---------------------------------------------------- |
