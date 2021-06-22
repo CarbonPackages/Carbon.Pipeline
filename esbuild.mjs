@@ -55,6 +55,7 @@ async function build() {
     // Pre-import plugins
     const plugins = await importPlugins();
     await asyncForEach(files, async ({ entryPoints, sourcemap, outdir, format, external }) => {
+        const jsExtension = format === "esm" ? ".mjs" : format === "cjs" ? ".cjs" : ".js";
         await ESBUILD.build({
             entryPoints,
             sourcemap,
@@ -69,6 +70,9 @@ async function build() {
             color: true,
             logLevel: esbuildConfig.logLevel || "info",
             legalComments: esbuildConfig.legalComments || "linked",
+            outExtension: {
+                ".js": jsExtension,
+            },
             loader: {
                 ".cjsx": "jsx",
                 ".ctsx": "tsx",
