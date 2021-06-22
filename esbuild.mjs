@@ -65,6 +65,7 @@ async function build() {
             minify,
             watch,
             target: browserlist,
+            color: true,
             logLevel: esbuildConfig.logLevel || "info",
             legalComments: esbuildConfig.legalComments || "linked",
             loader: {
