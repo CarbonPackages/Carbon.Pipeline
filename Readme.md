@@ -221,6 +221,36 @@ To enable the correct linting, edit [`.eslintrc`]:
 </details>
 
 <details>
+<summary><strong>Usage of React</strong></summary>
+
+Using JSX syntax usually requires you to manually import the JSX library you are using. For example, if you are using React, by default you will need to import React into each JSX file like this:
+
+```js
+import * as React from "react";
+render(<div />);
+```
+
+</details>
+
+<details>
+<summary><strong>Usage Preact</strong></summary>
+
+If you're using JSX with a library other than React (such as [Preact],), you'll likely need to configure the [JSX factory] and [JSX fragment] settings since they default to `React.createElement `and `React.Fragment` respectively. Add this to your `tsconfig.json` or `jsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment"
+  }
+}
+```
+
+</details>
+
+<details>
+
+<details>
 <summary><strong>Usage of Svelte</strong></summary>
 
 If you want to use [Svelte], add the following packages to `package.json`:
@@ -348,5 +378,9 @@ esbuild:
 [cssnano]: https://cssnano.co
 [postcss-reporter]: https://www.npmjs.com/package/postcss-reporter
 [typescript]: https://www.typescriptlang.org
+[react]: https://reactjs.org
+[preact]: https://preactjs.com
 [svelte]: https://svelte.dev
 [vue.js]: https://vuejs.org
+[jsx factory]: https://esbuild.github.io/api/#jsx-factory
+[jsx fragment]: https://esbuild.github.io/api/#jsx-fragment
