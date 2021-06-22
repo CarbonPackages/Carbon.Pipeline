@@ -65,10 +65,13 @@ toArray(config.packages).forEach((entry) => {
 
 function scriptEntryConfig(entry, entryPoints, type, format = null) {
     const conf = entryConfig(entry, type);
+    const external = toArray(entry.external || config.buildDefaults.external) || [];
     format = format || entry.format || config.buildDefaults.format;
+
     return {
         entryPoints,
         format,
+        external,
         ...conf,
     };
 }

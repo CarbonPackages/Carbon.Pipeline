@@ -54,7 +54,7 @@ async function importPlugins() {
 async function build() {
     // Pre-import plugins
     const plugins = await importPlugins();
-    await asyncForEach(files, async ({ entryPoints, sourcemap, outdir, format }) => {
+    await asyncForEach(files, async ({ entryPoints, sourcemap, outdir, format, external }) => {
         await ESBUILD.build({
             entryPoints,
             sourcemap,
@@ -64,6 +64,7 @@ async function build() {
             format,
             minify,
             watch,
+            external,
             target: browserlist,
             color: true,
             logLevel: esbuildConfig.logLevel || "info",
