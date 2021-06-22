@@ -121,7 +121,7 @@ import "Packages/Plugins/Jonnitto.PhotoSwipe/Resources/Private/Assets/PhotoSwipe
 
 ```css
 @import "DistributionPackages/Vendor.Foo/Resources/Private/Fusion/Main.pcss";
-@import "Packages/Plugins/Jonnitto.PhotoSwipe/Resources/Private/Assets/Dark.scss";
+@import "Packages/Carbon/Carbon.Image/Resources/Private/Assets/Tailwind.pcss";
 ```
 
 Thanks to [postcss-easy-import], you can also use globbing in CSS imports: `@import "Presentation/**/*.pcss";`
