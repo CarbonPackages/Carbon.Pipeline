@@ -66,6 +66,10 @@ async function build() {
             watch,
             target: browserlist,
             legalComments: "linked",
+            loader: {
+                ".mjsx": "jsx",
+                ".mtsx": "tsx",
+            },
             plugins: (() => {
                 let returnValue = [];
                 const svelte = plugins.svelte;
