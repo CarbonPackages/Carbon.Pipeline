@@ -2,13 +2,13 @@ import path from "path";
 import postcssrc from "postcss-load-config";
 import nodeResolve from "resolve";
 import { DepGraph } from "dependency-graph";
-import { styleFiles, watch, minify, config, error, print, stringToArray } from "./helper.mjs";
+import { styleFiles, watch, minify, config, error, print, toArray } from "./helper.mjs";
 
 function rc() {
     return postcssrc({
         importAlias: (() => {
             const alias = {};
-            const aliasFolders = [...new Set([config.folder.base, ...stringToArray(config.folder.additionalAliases)])];
+            const aliasFolders = [...new Set([config.folder.base, ...toArray(config.folder.additionalAliases)])];
             aliasFolders.forEach((folder) => {
                 alias[folder] = path.resolve(path.dirname(folder), folder);
             });
@@ -60,7 +60,7 @@ const dependencyGraph = {
 function dependencies(results) {
     const messages = [];
 
-    stringToArray(results).forEach((result) => {
+    toArray(results).forEach((result) => {
         if (result.messages <= 0) return;
 
         result.messages
