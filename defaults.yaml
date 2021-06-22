@@ -1,5 +1,5 @@
 # packages can be an object (for one package) or an array (for multiple packages)
-packages: []
+# packages: []
 
 extensions:
   style: [".pcss", ".css"]
