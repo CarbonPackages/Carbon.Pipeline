@@ -37,12 +37,18 @@ packages:
   files: Main.js
 ```
 
+If you don't set files, all parsable files from the input folder get rendered.
+
+```yaml
+packages:
+  package: Vendor.Bar
+```
+
 To change the input and / or the output folder, you can to this with the `folder` option:
 
 ```yaml
 packages:
   package: Vendor.Bar
-  files: Main.js
   folder:
     input: Assets
     output:
@@ -53,23 +59,45 @@ packages:
       commonJS: Public
 ```
 
+Further you can write to the files to another package:
+
+```yaml
+packages:
+  package: Vendor.Bar
+  folder:
+    output:
+      package: Vendor.Theme
+```
+
+If you want to go crazy with multi-sites in Neos, you can also write the files to multiple packages:
+
+```yaml
+packages:
+  package: Vendor.Bar
+  folder:
+    output:
+      package:
+        - Vendor.Theme
+        - Vendor.Bar
+```
+
 A package entry has the following options:
 
-| Key                      | Type                | Description                                                                    | Example              |
-| ------------------------ | ------------------- | ------------------------------------------------------------------------------ | -------------------- |
-| `package`                | `string`            | The name of the package (required)                                             | `Vendor.Foo`         |
-| `files`                  | `array` or `string` | The names of the entry files (required)                                        | `Main.js`            |
-| `folder.input`           | `string`            | The folder under `Resources/Private` where to look for the entry files         | `Assets`             |
-| `folder.output.package`  | `string`            | If set, the files will be writen in a different package                        | `Foo.Bar`            |
-| `folder.output.inline`   | `string`            | The folder where inline files get rendered                                     | `Private/Templates/` |
-| `folder.output.style`    | `string`            | The folder where inline styles rendered                                        | `Public/Assets`      |
-| `folder.output.script`   | `string`            | The folder where inline scripts rendered                                       | `Public/Assets`      |
-| `folder.output.module`   | `string`            | The folder where inline modules rendered                                       | `Public/Assets`      |
-| `folder.output.commonJS` | `string`            | The folder where inline commonJS files get rendered                            | `Public/Assets`      |
-| `external`               | `string` or `array` | You can mark a file or a package as [external] to exclude it from your build.  | `*/Modules/*`        |
-| `inline`                 | `boolean`           | Flag to toggle if the files should be inlined. If set, sourcemaps are disabled | `true`               |
-| `sourcemap`              | `boolean`           | Flag to toggle source map generation                                           | `false`              |
-| `format`                 | `string`            | Set the format of the output file. [Read more][esbuild format]                 | `cjs`                |
+| Key                      | Type                | Description                                                                                      | Example              |
+| ------------------------ | ------------------- | ------------------------------------------------------------------------------------------------ | -------------------- |
+| `package`                | `string`            | The name of the package (required)                                                               | `Vendor.Foo`         |
+| `files`                  | `string` or `array` | The names of the entry files. If none given, all parsable files in the input folder get rendered | `Main.js`            |
+| `folder.input`           | `string`            | The folder under `Resources/Private` where to look for the entry files                           | `Assets`             |
+| `folder.output.package`  | `string` or `array` | If set, the files will be writen in a different package (one or multiple)                        | `Foo.Bar`            |
+| `folder.output.inline`   | `string`            | The folder where inline files get rendered                                                       | `Private/Templates/` |
+| `folder.output.style`    | `string`            | The folder where inline styles rendered                                                          | `Public/Assets`      |
+| `folder.output.script`   | `string`            | The folder where inline scripts rendered                                                         | `Public/Assets`      |
+| `folder.output.module`   | `string`            | The folder where inline modules rendered                                                         | `Public/Assets`      |
+| `folder.output.commonJS` | `string`            | The folder where inline commonJS files get rendered                                              | `Public/Assets`      |
+| `external`               | `string` or `array` | You can mark a file or a package as [external] to exclude it from your build.                    | `*/Modules/*`        |
+| `inline`                 | `boolean`           | Flag to toggle if the files should be inlined. If set, sourcemaps are disabled                   | `true`               |
+| `sourcemap`              | `boolean`           | Flag to toggle source map generation                                                             | `false`              |
+| `format`                 | `string`            | Set the format of the output file. [Read more][esbuild format]                                   | `cjs`                |
 
 These are the default values for the folders:
 
@@ -408,3 +436,4 @@ esbuild:
 [vue.js]: https://vuejs.org
 [jsx factory]: https://esbuild.github.io/api/#jsx-factory
 [jsx fragment]: https://esbuild.github.io/api/#jsx-fragment
+[external]: https://esbuild.github.io/api/#external

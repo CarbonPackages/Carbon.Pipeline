@@ -3,6 +3,7 @@ import fs from "fs-extra";
 import path from "path";
 import { red } from "colorette";
 import deepmerge from "deepmerge";
+import glob from "glob";
 
 const pipeline = readYamlFile("pipeline");
 const defaults = readYamlFile("defaults", "Build/Carbon.Pipeline");
@@ -17,10 +18,16 @@ const minify = production || process.argv.includes("--minify");
 process.env.NODE_ENV = production ? "production" : "development";
 process.env.TAILWIND_MODE = watch ? "watch" : "build";
 
+const allFileExtensions = Object.entries(config.extensions)
+    .reduce((acc, curr) => {
+        return [...acc, ...curr[1]];
+    }, [])
+    .join(",")
+    .replace(/\./g, "");
+
 toArray(config.packages).forEach((entry) => {
-    const files = toArray(entry.files);
-    if (!entry.package || !files) {
-        error("No package or file defined. Please set it in your pipeline.yaml");
+    if (!entry.package) {
+        error("No package defined. Please set it in your pipeline.yaml");
         process.exit(1);
     }
 
@@ -30,6 +37,16 @@ toArray(config.packages).forEach((entry) => {
         "Resources/Private",
         entry.folder?.input || config.folder.input
     );
+
+    let files = toArray(entry.files);
+    if (!files) {
+        files = glob.sync(`${entryFolder}/*.{${allFileExtensions}}`).map((entry) => path.basename(entry));
+    }
+    if (!files) {
+        error(`No files found in ${entryFolder}`);
+        process.exit(1);
+    }
+
     const scriptEntries = [];
     const moduleEntries = [];
     const commonJsEntries = [];
