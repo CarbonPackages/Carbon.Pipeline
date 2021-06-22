@@ -2,13 +2,13 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "build": "concurrently yarn:build:*",
+    "build": "concurrently -r yarn:build:*",
     "build:js": "node ./Build/Carbon.Pipeline/esbuild.mjs --production",
     "build:css": "node ./Build/Carbon.Pipeline/postcss.mjs --production",
-    "dev": "concurrently yarn:dev:*",
+    "dev": "concurrently -r yarn:dev:*",
     "dev:js": "node ./Build/Carbon.Pipeline/esbuild.mjs",
     "dev:css": "node ./Build/Carbon.Pipeline/postcss.mjs",
-    "watch": "concurrently yarn:watch:*",
+    "watch": "concurrently -r yarn:watch:*",
     "watch:js": "node ./Build/Carbon.Pipeline/esbuild.mjs --watch",
     "watch:css": "node ./Build/Carbon.Pipeline/postcss.mjs --watch",
     "pipeline": "yarn install --silent --non-interactive;yarn build"

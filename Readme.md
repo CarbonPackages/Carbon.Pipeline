@@ -118,9 +118,9 @@ There are four predefined tasks:
 
 | Command         | Description                                     | Optimize file size | Command                                              |
 | --------------- | ----------------------------------------------- | :----------------: | ---------------------------------------------------- |
-| `yarn watch`    | Start the file watcher                          |                    | `concurrently yarn:watch:*`                          |
-| `yarn dev`      | Build the files once                            |                    | `concurrently yarn:dev:*`                            |
-| `yarn build`    | Build the files once for production             |         ✓          | `concurrently yarn:build:*`                          |
+| `yarn watch`    | Start the file watcher                          |                    | `concurrently -r yarn:watch:*`                       |
+| `yarn dev`      | Build the files once                            |                    | `concurrently -r yarn:dev:*`                         |
+| `yarn build`    | Build the files once for production             |         ✓          | `concurrently -r yarn:build:*`                       |
 | `yarn pipeline` | Run install, and build the files for production |         ✓          | `yarn install --silent --non-interactive;yarn build` |
 
 The tasks are split up, so they can run in parallel mode. But you can also run them separately:

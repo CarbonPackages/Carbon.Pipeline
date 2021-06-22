@@ -71,7 +71,6 @@ async function build() {
             write,
             target: browserlist,
             outdir: firstOutdir,
-            color: true,
             logLevel: esbuildConfig.logLevel || "info",
             legalComments: esbuildConfig.legalComments || "linked",
             outExtension: {
