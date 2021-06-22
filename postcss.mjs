@@ -82,7 +82,7 @@ function css(css, file) {
             return postcss([rebasePlugin, ...ctx.plugins])
                 .process(css, {
                     from: file.from,
-                    to: file.to,
+                    to: file.to[0],
                     map: file.sourcemap
                         ? {
                               absolute: false,
@@ -93,10 +93,13 @@ function css(css, file) {
                     ...(ctx.options || {}),
                 })
                 .then((result) => {
-                    const tasks = [fs.outputFile(file.to, result.css)];
-                    if (result.map) {
-                        tasks.push(fs.outputFile(`${file.to}.map`, result.map.toString()));
-                    }
+                    const tasks = [];
+                    file.to.forEach((to) => {
+                        tasks.push(fs.outputFile(to, result.css));
+                        if (result.map) {
+                            tasks.push(fs.outputFile(`${to}.map`, result.map.toString()));
+                        }
+                    });
                     return Promise.all(tasks).then(() => {
                         const prettyTime = prettyHrtime(process.hrtime(time));
                         print(green(`Finished ${bold(file.from)} in ${bold(prettyTime)}`));

@@ -1,4 +1,5 @@
 import ESBUILD from "esbuild";
+import fs from "fs-extra";
 import {
     browserlist,
     asyncForEach,
@@ -56,17 +57,20 @@ async function build() {
     const plugins = await importPlugins();
     await asyncForEach(files, async ({ entryPoints, sourcemap, outdir, format, external }) => {
         const jsExtension = format === "esm" ? ".mjs" : format === "cjs" ? ".cjs" : ".js";
+        const firstOutdir = outdir[0];
+        const write = outdir.length === 1;
         await ESBUILD.build({
             entryPoints,
             sourcemap,
             bundle: true,
             platform: "browser",
-            outdir,
             format,
             minify,
             watch,
             external,
+            write,
             target: browserlist,
+            outdir: firstOutdir,
             color: true,
             logLevel: esbuildConfig.logLevel || "info",
             legalComments: esbuildConfig.legalComments || "linked",
@@ -96,7 +100,18 @@ async function build() {
                 }
                 return returnValue;
             })(),
-        }).catch(error);
+        })
+            .then((result) => {
+                if (!write) {
+                    outdir.forEach((dir) => {
+                        result.outputFiles.forEach(({ path, contents }) => {
+                            path = path.replace(firstOutdir, dir);
+                            fs.outputFile(path, contents);
+                        });
+                    });
+                }
+            })
+            .catch(error);
     });
 }
 

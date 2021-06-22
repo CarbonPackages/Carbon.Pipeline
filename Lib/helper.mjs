@@ -38,9 +38,10 @@ toArray(config.packages).forEach((entry) => {
             const baseFilename = filename.substring(0, filename.lastIndexOf("."));
             const conf = entryConfig(entry, "style");
             const from = path.join(entryFolder, filename);
+            const to = conf.outdir.map((dir) => path.join(dir, `${baseFilename}.css`));
             styleFiles[path.resolve(from)] = {
                 from,
-                to: path.join(conf.outdir, `${baseFilename}.css`),
+                to,
                 sourcemap: conf.sourcemap,
                 outdir: conf.outdir,
             };
@@ -87,7 +88,7 @@ function entryConfig(entry, type) {
         outputFolder = folderOutput[outputFolderKey] || outputFolder;
         packageName = folderOutput.package || packageName;
     }
-    const outdir = path.join(config.folder.base, packageName, "Resources", outputFolder);
+    const outdir = toArray(packageName).map((pkg) => path.join(config.folder.base, pkg, "Resources", outputFolder));
     return {
         sourcemap,
         outdir,
