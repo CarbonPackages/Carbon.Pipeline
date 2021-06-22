@@ -52,14 +52,13 @@ stringToArray(config.packages).forEach((entry) => {
         scriptFiles.push(scriptEntryConfig(entry, scriptEntries, "script"));
     }
     if (moduleEntries.length) {
-        scriptFiles.push(scriptEntryConfig(entry, moduleEntries, "module"));
+        scriptFiles.push(scriptEntryConfig(entry, moduleEntries, "module", "esm"));
     }
 });
 
-function scriptEntryConfig(entry, entryPoints, type) {
+function scriptEntryConfig(entry, entryPoints, type, format = null) {
     const conf = entryConfig(entry, type);
-    const format = type === "module" ? "esm" : entry.format || config.buildDefaults.format;
-
+    format = format || entry.format || config.buildDefaults.format;
     return {
         entryPoints,
         format,
