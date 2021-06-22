@@ -65,7 +65,8 @@ async function build() {
             minify,
             watch,
             target: browserlist,
-            legalComments: "linked",
+            logLevel: esbuildConfig.logLevel || "info",
+            legalComments: esbuildConfig.legalComments || "linked",
             loader: {
                 ".cjsx": "jsx",
                 ".ctsx": "tsx",

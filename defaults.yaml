@@ -27,6 +27,10 @@ buildDefaults:
   purge: DistributionPackages/**/Private/**/*.{js,fusion,html}
 
 esbuild:
+  # https://esbuild.github.io/api/#log-level
+  logLevel: info
+  # https://esbuild.github.io/api/#legal-comments
+  legalComments: linked
   plugins:
     vue:
       enable: false
