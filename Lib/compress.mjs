@@ -12,11 +12,21 @@ async function write(path, contents) {
     return { path, contents };
 }
 
+function writeCheck(filename) {
+    return !filename.endsWith(".LEGAL.txt") && !filename.endsWith(".map");
+}
+
 async function writeGz(filename, contents) {
+    if (!compression?.gzip || !writeCheck(filename)) {
+        return undefined;
+    }
     return await write(`${filename}.gz`, await compressGz(contents, { level: compression.gzip }));
 }
 
 async function writeBr(filename, contents) {
+    if (!compression?.brotli || !writeCheck(filename)) {
+        return undefined;
+    }
     return await write(
         `${filename}.br`,
         await compressBr(contents, { params: { [zlib.constants.BROTLI_PARAM_QUALITY]: compression.brotli } })
@@ -35,12 +45,8 @@ function esPlugin({ onEnd } = {}) {
                     result.outputFiles.map(async ({ path: filename, contents }) =>
                         Promise.all([
                             write(filename, contents),
-                            compression?.gzip && !filename.endsWith(".LEGAL.txt")
-                                ? writeGz(filename, contents)
-                                : undefined,
-                            compression?.brotli && !filename.endsWith(".LEGAL.txt")
-                                ? writeBr(filename, contents)
-                                : undefined,
+                            writeGz(filename, contents),
+                            writeBr(filename, contents),
                         ])
                     )
                 );
