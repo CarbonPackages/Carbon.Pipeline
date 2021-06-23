@@ -1,5 +1,6 @@
 import BROWSERLIST from "browserslist";
-import { asyncForEach, scriptFiles, watch, minify, error, config } from "./helper.mjs";
+import fs from "fs-extra";
+import { config, scriptFiles, compression, dynamicImport } from "./helper.mjs";
 
 const browserlist = (() => {
     const SUPPORTED_BUILD_TARGETS = ["es", "chrome", "edge", "firefox", "ios", "node", "safari"];
@@ -22,11 +23,67 @@ const browserlist = (() => {
     return TARGETS.filter(Boolean);
 })();
 
-const esbuildConfig = config.esbuild;
-
-async function dynamicImport(name) {
-    const dynamicImport = await import(name);
-    return dynamicImport.default;
+function assignPlugin(obj, options) {
+    if (typeof options !== "object") {
+        options = {};
+    }
+    return { ...obj, ...options };
 }
 
-export { browserlist, scriptFiles as files, asyncForEach, watch, minify, error, dynamicImport, esbuildConfig };
+function writeFilesToAnotherPackage(outputFiles, baseDir, newDir) {
+    outputFiles.forEach(({ path, contents }) => {
+        path = path.replace(baseDir, newDir);
+        fs.outputFile(path, contents);
+    });
+}
+
+async function importPlugins() {
+    const plugins = {};
+    const esbuildPlugins = config.esbuild?.plugins;
+
+    if (compression) {
+        plugins["compress"] = await dynamicImport("./compress.mjs", "esPlugin");
+    }
+    if (!esbuildPlugins) {
+        return plugins;
+    }
+
+    const sveltePlugin = esbuildPlugins?.svelte;
+    if (sveltePlugin?.enable === true) {
+        const plugin = await dynamicImport("esbuild-svelte");
+        const preprocess = await dynamicImport("svelte-preprocess");
+        plugins["svelte"] = assignPlugin(
+            {
+                plugin,
+                preprocess,
+            },
+            sveltePlugin.options
+        );
+    }
+
+    const vuePlugin = esbuildPlugins?.vue;
+    if (vuePlugin?.enable === true) {
+        const plugin = await dynamicImport("esbuild-vue");
+        plugins["vue"] = assignPlugin(
+            {
+                plugin,
+            },
+            vuePlugin.options
+        );
+    }
+
+    return plugins;
+}
+
+const logLevel = config.esbuild?.logLevel || "info";
+const legalComments = config.esbuild?.legalComments || "linked";
+
+export {
+    browserlist,
+    scriptFiles as files,
+    logLevel,
+    legalComments,
+    assignPlugin,
+    writeFilesToAnotherPackage,
+    importPlugins,
+};

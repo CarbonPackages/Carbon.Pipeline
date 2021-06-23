@@ -28,6 +28,9 @@ buildDefaults:
   external: null
   # purge can be a string or an array
   purge: DistributionPackages/**/Private/**/*.{js,fusion,html}
+  compression:
+    brotli: 11
+    gzip: 9
 
 esbuild:
   # https://esbuild.github.io/api/#log-level

@@ -1,56 +1,14 @@
 import ESBUILD from "esbuild";
-import fs from "fs-extra";
+import { asyncForEach, watch, minify, error, compression } from "./Lib/helper.mjs";
 import {
     browserlist,
-    asyncForEach,
     files,
-    watch,
-    minify,
-    error,
-    dynamicImport,
-    esbuildConfig,
+    logLevel,
+    legalComments,
+    assignPlugin,
+    writeFilesToAnotherPackage,
+    importPlugins,
 } from "./Lib/esbuildHelper.mjs";
-
-function assignPlugin(obj, options) {
-    if (typeof options !== "object") {
-        options = {};
-    }
-    return { ...obj, ...options };
-}
-
-async function importPlugins() {
-    const esbuildPlugins = esbuildConfig?.plugins;
-    if (!esbuildPlugins) {
-        return {};
-    }
-    const plugins = {};
-
-    const sveltePlugin = esbuildPlugins?.svelte;
-    if (sveltePlugin?.enable === true) {
-        const plugin = await dynamicImport("esbuild-svelte");
-        const preprocess = await dynamicImport("svelte-preprocess");
-        plugins["svelte"] = assignPlugin(
-            {
-                plugin,
-                preprocess,
-            },
-            sveltePlugin.options
-        );
-    }
-
-    const vuePlugin = esbuildPlugins?.vue;
-    if (vuePlugin?.enable === true) {
-        const plugin = await dynamicImport("esbuild-vue");
-        plugins["vue"] = assignPlugin(
-            {
-                plugin,
-            },
-            vuePlugin.options
-        );
-    }
-
-    return plugins;
-}
 
 async function build() {
     // Pre-import plugins
@@ -58,7 +16,9 @@ async function build() {
     await asyncForEach(files, async ({ entryPoints, sourcemap, outdir, format, external }) => {
         const jsExtension = format === "esm" ? ".mjs" : format === "cjs" ? ".cjs" : ".js";
         const firstOutdir = outdir[0];
-        const write = outdir.length === 1;
+        const multiplePackages = outdir.length > 1;
+        const write = compression ? false : !multiplePackages;
+
         await ESBUILD.build({
             entryPoints,
             sourcemap,
@@ -69,10 +29,10 @@ async function build() {
             watch,
             external,
             write,
+            logLevel,
+            legalComments,
             target: browserlist,
             outdir: firstOutdir,
-            logLevel: esbuildConfig.logLevel || "info",
-            legalComments: esbuildConfig.legalComments || "linked",
             outExtension: {
                 ".js": jsExtension,
             },
@@ -97,16 +57,27 @@ async function build() {
                 if (vue?.plugin) {
                     returnValue.push(vue.plugin(vue.options));
                 }
+                if (compression) {
+                    returnValue.push(
+                        plugins.compress({
+                            onEnd: ({ outputFiles }) => {
+                                if (multiplePackages) {
+                                    // We skip the first entry with index = 1
+                                    for (let index = 1; index < outdir.length; index++) {
+                                        writeFilesToAnotherPackage(outputFiles, firstOutdir, outdir[index]);
+                                    }
+                                }
+                            },
+                        })
+                    );
+                }
                 return returnValue;
             })(),
         })
             .then((result) => {
-                if (!write) {
+                if (!write && !compression) {
                     outdir.forEach((dir) => {
-                        result.outputFiles.forEach(({ path, contents }) => {
-                            path = path.replace(firstOutdir, dir);
-                            fs.outputFile(path, contents);
-                        });
+                        writeFilesToAnotherPackage(result.outputFiles, firstOutdir, dir);
                     });
                 }
             })

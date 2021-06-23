@@ -2,7 +2,7 @@ import path from "path";
 import postcssrc from "postcss-load-config";
 import nodeResolve from "resolve";
 import { DepGraph } from "dependency-graph";
-import { styleFiles, watch, minify, config, error, print, toArray } from "./helper.mjs";
+import { styleFiles, minify, config, toArray } from "./helper.mjs";
 
 function rc() {
     return postcssrc({
@@ -141,4 +141,4 @@ const rebasePlugin = (({ rootDir = process.cwd() } = {}) => {
     };
 })();
 
-export { rc, dependencyGraph, dependencies, getAncestorDirs, watch, styleFiles as files, rebasePlugin, error, print };
+export { rc, dependencyGraph, dependencies, getAncestorDirs, styleFiles as files, rebasePlugin };

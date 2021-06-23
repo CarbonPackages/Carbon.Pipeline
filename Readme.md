@@ -166,6 +166,23 @@ The tasks are split up, so they can run in parallel mode. But you can also run t
 
 If course you can add also your own tasks e.g. `yarn build:test`.
 
+## Compression of files
+
+In production mode (`yarn build`), the files get also compressed (gzip & brotli). You can edit the compression level under the key [`buildDefaults.compression`]. Per default, the highest compression level is set. To disable compression at all you can set it to `false`:
+
+```yaml
+buildDefaults:
+  compression: false
+```
+
+Or, if you want to disable just one of them, you can set the entry to `false`:
+
+```yaml
+buildDefaults:
+  compression:
+    gzip: false
+```
+
 ## Import files from DistributionPackages and other Packages
 
 By default, two aliases are predefined: `DistributionPackages` and `Packages`. Like that you can import (CSS and JS) files from other packages like that:
@@ -380,6 +397,7 @@ esbuild:
 [composer]: https://getcomposer.org
 [`pipeline.yaml`]: Installer/Distribution/Defaults/pipeline.yaml
 [`defaults.yaml`]: defaults.yaml
+[`builddefaults.compression`]: defaults.yaml#L31-L33
 [esbuild format]: https://esbuild.github.io/api/#format
 [david]: https://img.shields.io/david/dev/CarbonPackages/Carbon.Pipeline?label=dependencies&logo=npm&path=Installer%2FDistribution%2FDefaults
 [david-dm]: https://david-dm.org/CarbonPackages/Carbon.Pipeline?type=dev&path=Installer/Distribution/Defaults

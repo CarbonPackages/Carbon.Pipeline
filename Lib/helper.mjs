@@ -15,6 +15,7 @@ const styleFiles = {};
 const watch = process.argv.includes("--watch");
 const production = process.argv.includes("--production");
 const minify = production || process.argv.includes("--minify");
+const compression = production && !watch ? config.buildDefaults.compression : false;
 process.env.NODE_ENV = production ? "production" : "development";
 process.env.TAILWIND_MODE = watch ? "watch" : "build";
 
@@ -29,6 +30,10 @@ toArray(config.packages).forEach((entry) => {
     if (!entry.package) {
         error("No package defined. Please set it in your pipeline.yaml");
         process.exit(1);
+    }
+
+    if (!compression) {
+        removeCompressedFiles(entry);
     }
 
     const entryFolder = path.join(
@@ -92,6 +97,22 @@ function scriptEntryConfig(entry, entryPoints, type, format = null) {
         external,
         ...conf,
     };
+}
+
+function removeCompressedFiles(entry) {
+    const entryOutput = entry.folder?.output || {};
+    const outputFolder = deepmerge(config.folder.output, entryOutput);
+    const packageName = entryOutput.package || entry.package;
+    let files = [];
+    toArray(packageName).forEach((pkg) => {
+        for (const key in outputFolder) {
+            if (key !== "inline" && key !== "package") {
+                const folder = path.resolve(path.join(config.folder.base, pkg, "Resources", outputFolder[key]));
+                files = [...files, ...glob.sync(`${folder}/*.{br,gz}`)];
+            }
+        }
+    });
+    files.forEach((file) => fs.remove(file));
 }
 
 function entryConfig(entry, type) {
@@ -172,4 +193,25 @@ function toArray(entry) {
     return null;
 }
 
-export { asyncForEach, scriptFiles, styleFiles, watch, minify, config, error, print, toArray };
+async function dynamicImport(name, selector = "default") {
+    const dynamicImport = await import(name);
+    if (!selector) {
+        return dynamicImport;
+    }
+    return dynamicImport[selector];
+}
+
+export {
+    asyncForEach,
+    scriptFiles,
+    styleFiles,
+    watch,
+    minify,
+    config,
+    error,
+    print,
+    toArray,
+    production,
+    compression,
+    dynamicImport,
+};
