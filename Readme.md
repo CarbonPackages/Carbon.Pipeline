@@ -168,7 +168,7 @@ If course you can add also your own tasks e.g. `yarn build:test`.
 
 ## Compression of files
 
-In production mode (`yarn build`), the files get also compressed (gzip & brotli). You can edit the compression level under the key [`buildDefaults.compression`]. Per default, the highest compression level is set. To disable compression at all you can set it to `false`:
+In production mode (`yarn build`), the files also get compressed with [gzip] and [brotli]. You can edit the compression level under the key [`buildDefaults.compression`]. Per default, the highest compression level is set. To disable compression at all, you can set it to `false`:
 
 ```yaml
 buildDefaults:
@@ -457,3 +457,5 @@ esbuild:
 [jsx factory]: https://esbuild.github.io/api/#jsx-factory
 [jsx fragment]: https://esbuild.github.io/api/#jsx-fragment
 [external]: https://esbuild.github.io/api/#external
+[brotli]: https://github.com/google/brotli
+[gzip]: https://nodejs.org/api/zlib.html
