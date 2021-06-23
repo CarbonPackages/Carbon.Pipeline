@@ -148,11 +148,12 @@ async function asyncForEach(array, callback) {
 }
 
 function readYamlFile(file, folder) {
-    const filePath = folder ? path.join(folder, `${file}.yaml`) : `${file}.yaml`;
+    file = `${file}.yaml`;
+    const filePath = folder ? path.join(folder, file) : file;
     try {
         return yaml.load(fs.readFileSync(path.join("./", filePath), "utf8"));
     } catch (err) {
-        error(err);
+        error(`Error reading ${file}:`, err);
         process.exit(1);
     }
 }
@@ -163,7 +164,7 @@ function error() {
     linebreak();
     Array.from(arguments).forEach((err) => {
         if (typeof err === "string") {
-            output(err);
+            output(red(err));
         } else if (err.name === "CssSyntaxError") {
             output(err.toString());
         } else {

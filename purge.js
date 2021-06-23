@@ -1,17 +1,23 @@
 const path = require("path");
 const yaml = require("js-yaml");
 const fs = require("fs");
+const { red } = require("colorette");
 
 const pipeline = readYamlFile("pipeline");
 const defaults = readYamlFile("defaults", "Build/Carbon.Pipeline");
 const config = { ...defaults, ...pipeline };
 
 function readYamlFile(file, folder) {
-    const filePath = folder ? path.join(folder, `${file}.yaml`) : `${file}.yaml`;
+    file = `${file}.yaml`;
+    const filePath = folder ? path.join(folder, file) : file;
     try {
         return yaml.load(fs.readFileSync(path.join("./", filePath), "utf8"));
     } catch (err) {
-        error(err);
+        const linebreak = () => console.log("\n");
+        linebreak();
+        console.error(red(`Error reading ${file}:`));
+        console.error(err);
+        linebreak();
         process.exit(1);
     }
 }
