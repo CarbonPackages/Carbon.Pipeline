@@ -12,51 +12,58 @@ let configFile;
 let compressFunction = compression ? await dynamicImport("./compress.mjs", null) : {};
 let { writeBr, writeGz } = compressFunction;
 
-async function renderFiles(keys) {
+function renderFiles(keys) {
     if (typeof keys === "string") {
         keys = [keys];
     }
     if (!keys) {
         keys = Object.keys(files);
     }
-    return await keys.map((key) => {
-        return readCache(key).then((content) => css(content, files[key]));
-    });
+    return Promise.all(
+        keys.map((key) => {
+            return readCache(key).then((content) => css(content, files[key]));
+        })
+    );
 }
 
-async function build() {
-    const files = await renderFiles();
-    if (watch) {
-        const input = results.map((result) => path.resolve(result.opts.from));
-        const printMessage = () => print(dim("\nWaiting for file changes..."));
-        printMessage();
-        const watcher = chokidar.watch(input.concat(dependencies(results)), {
-            awaitWriteFinish: {
-                stabilityThreshold: 50,
-                pollInterval: 10,
-            },
-        });
-        if (configFile) {
-            watcher.add(configFile);
-        }
-        watcher.on("ready", printMessage).on("change", (file) => {
-            let recompile = [];
-            if (input.includes(file)) {
-                recompile.push(file);
+function build() {
+    Promise.resolve()
+        .then(() => {
+            return renderFiles();
+        })
+        .then((results) => {
+            if (watch) {
+                const input = results.map((result) => path.resolve(result.opts.from));
+                const printMessage = () => print(dim("\nWaiting for file changes..."));
+                printMessage();
+                const watcher = chokidar.watch(input.concat(dependencies(results)), {
+                    awaitWriteFinish: {
+                        stabilityThreshold: 50,
+                        pollInterval: 10,
+                    },
+                });
+                if (configFile) {
+                    watcher.add(configFile);
+                }
+                watcher.on("ready", printMessage).on("change", (file) => {
+                    let recompile = [];
+                    if (input.includes(file)) {
+                        recompile.push(file);
+                    }
+                    const dependants = dependencyGraph
+                        .dependantsOf(file)
+                        .concat(getAncestorDirs(file).flatMap(dependencyGraph.dependantsOf));
+                    recompile = recompile.concat(dependants.filter((file) => input.includes(file)));
+                    if (!recompile.length) {
+                        recompile = input;
+                    }
+                    return renderFiles([...new Set(recompile)])
+                        .then((results) => watcher.add(dependencies(results)))
+                        .then(printMessage)
+                        .catch(error);
+                });
             }
-            const dependants = dependencyGraph
-                .dependantsOf(file)
-                .concat(getAncestorDirs(file).flatMap(dependencyGraph.dependantsOf));
-            recompile = recompile.concat(dependants.filter((file) => input.includes(file)));
-            if (!recompile.length) {
-                recompile = input;
-            }
-            return renderFiles([...new Set(recompile)])
-                .then((results) => watcher.add(dependencies(results)))
-                .then(printMessage)
-                .catch(error);
         });
-    }
 }
 
 function css(css, file) {
