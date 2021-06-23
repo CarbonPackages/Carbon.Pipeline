@@ -85,7 +85,7 @@ A package entry has the following options:
 
 | Key                      | Type                | Description                                                                                      | Example              |
 | ------------------------ | ------------------- | ------------------------------------------------------------------------------------------------ | -------------------- |
-| `package`                | `string`            | The name of the package (required)                                                               | `Vendor.Foo`         |
+| `package`                | `string`            | The name of the package **(required)**                                                           | `Vendor.Foo`         |
 | `files`                  | `string` or `array` | The names of the entry files. If none given, all parsable files in the input folder get rendered | `Main.js`            |
 | `folder.input`           | `string`            | The folder under `Resources/Private` where to look for the entry files                           | `Assets`             |
 | `folder.output.package`  | `string` or `array` | If set, the files will be writen in a different package (one or multiple)                        | `Foo.Bar`            |
@@ -163,6 +163,8 @@ The tasks are split up, so they can run in parallel mode. But you can also run t
 | `yarn dev:css`   | Build the files once for CSS files             |                    | `node ./Build/Carbon.Pipeline/postcss.mjs`              |
 | `yarn build:js`  | Build the JavaScript files once for production |         ✓          | `node ./Build/Carbon.Pipeline/esbuild.mjs --production` |
 | `yarn build:css` | Build the CSS files once for production        |         ✓          | `node ./Build/Carbon.Pipeline/postcss.mjs --production` |
+
+If course you can add also your own tasks e.g. `yarn build:test`.
 
 ## Import files from DistributionPackages and other Packages
 
