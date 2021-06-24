@@ -157,12 +157,12 @@ The tasks are split up, so they can run in parallel mode. But you can also run t
 
 | Command          | Description                                    | Optimize file size | Command                                                 |
 | ---------------- | ---------------------------------------------- | :----------------: | ------------------------------------------------------- |
-| `yarn watch:js`  | Start the file watcher for JavaScript files    |                    | `node ./Build/Carbon.Pipeline/esbuild.mjs --watch`      |
-| `yarn watch:css` | Start the file watcher for CSS files           |                    | `node ./Build/Carbon.Pipeline/postcss.mjs --watch`      |
-| `yarn dev:js`    | Build the files once for JavaScript files      |                    | `node ./Build/Carbon.Pipeline/esbuild.mjs`              |
-| `yarn dev:css`   | Build the files once for CSS files             |                    | `node ./Build/Carbon.Pipeline/postcss.mjs`              |
-| `yarn build:js`  | Build the JavaScript files once for production |         ✓          | `node ./Build/Carbon.Pipeline/esbuild.mjs --production` |
-| `yarn build:css` | Build the CSS files once for production        |         ✓          | `node ./Build/Carbon.Pipeline/postcss.mjs --production` |
+| `yarn watch:js`  | Start the file watcher for JavaScript files    |                    | `node Build/Carbon.Pipeline/esbuild.mjs --watch`      |
+| `yarn watch:css` | Start the file watcher for CSS files           |                    | `node Build/Carbon.Pipeline/postcss.mjs --watch`      |
+| `yarn dev:js`    | Build the files once for JavaScript files      |                    | `node Build/Carbon.Pipeline/esbuild.mjs`              |
+| `yarn dev:css`   | Build the files once for CSS files             |                    | `node Build/Carbon.Pipeline/postcss.mjs`              |
+| `yarn build:js`  | Build the JavaScript files once for production |         ✓          | `node Build/Carbon.Pipeline/esbuild.mjs --production` |
+| `yarn build:css` | Build the CSS files once for production        |         ✓          | `node Build/Carbon.Pipeline/postcss.mjs --production` |
 
 If course you can add also your own tasks e.g. `yarn build:test`.
 
