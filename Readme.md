@@ -6,9 +6,15 @@
 
 ## Getting started
 
-To use this build stack, you can either run `composer require carbon/pipeline --dev` or [download the code as zip file][main.zip] and put it in the folder `Build/Carbon.Pipeline`. It's recommended only to download manually if you want to make some more significant adjustments to the build stack. If you miss a :sparkles: feature or found a :bug: bug, feel free to [open an issue].
+First, thank you that you want to give this build stack a try! If you miss a ✨ feature or found a 🐛 bug, feel free to [open an issue].
 
-If you install the build stack via [composer], some files (if not already existing) will be copied to your root folder.
+### Install via composer
+
+Run `composer require carbon/pipeline --dev`. During the installation, some files (if not already existing) will be copied to your root folder. After installing the package, run the command `yarn install` to install the required packages, defined in `package.json`. Feel free to modify and change dependencies before installing 👍
+
+### Manual install
+
+If you want to make some significant adjustments to the build stack, you can also [download the code as zip file][main.zip] and put it in the folder `Build/Carbon.Pipeline`. Go to `Carbon.Pipeline/Installer/Distribution/Defaults` and copy the files to your root folder (Don't forget the hidden files, starting with a dot). After this is done, run the command `yarn install` to install the required packages, defined in `package.json`. Feel free to modify and change dependencies before installing 👍
 
 ## Add files to the build stack
 
@@ -155,8 +161,8 @@ There are four predefined tasks:
 
 The tasks are split up, so they can run in parallel mode. But you can also run them separately:
 
-| Command          | Description                                    | Optimize file size | Command                                                 |
-| ---------------- | ---------------------------------------------- | :----------------: | ------------------------------------------------------- |
+| Command          | Description                                    | Optimize file size | Command                                               |
+| ---------------- | ---------------------------------------------- | :----------------: | ----------------------------------------------------- |
 | `yarn watch:js`  | Start the file watcher for JavaScript files    |                    | `node Build/Carbon.Pipeline/esbuild.mjs --watch`      |
 | `yarn watch:css` | Start the file watcher for CSS files           |                    | `node Build/Carbon.Pipeline/postcss.mjs --watch`      |
 | `yarn dev:js`    | Build the files once for JavaScript files      |                    | `node Build/Carbon.Pipeline/esbuild.mjs`              |
