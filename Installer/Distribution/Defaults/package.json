@@ -11,7 +11,8 @@
     "watch": "concurrently -r yarn:watch:*",
     "watch:js": "node Build/Carbon.Pipeline/esbuild.mjs --watch",
     "watch:css": "node Build/Carbon.Pipeline/postcss.mjs --watch",
-    "pipeline": "yarn install --silent --non-interactive;yarn build"
+    "pipeline:install": "yarn install --silent --non-interactive",
+    "pipeline": "concurrently -r yarn:pipeline:*;yarn build"
   },
   "resolutions": {
     "**/css-select": "^4.1.2"
