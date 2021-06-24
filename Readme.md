@@ -150,7 +150,7 @@ If you set an entry file with the javascript module suffix (`.mjs`, `.mjsx`, `.m
 
 ## Yarn tasks
 
-There are four predefined tasks:
+There are four predefined main tasks:
 
 | Command         | Description                                     | Optimize file size | Command                                              |
 | --------------- | ----------------------------------------------- | :----------------: | ---------------------------------------------------- |
@@ -170,7 +170,17 @@ The tasks are split up, so they can run in parallel mode. But you can also run t
 | `yarn build:js`  | Build the JavaScript files once for production |         ✓          | `node Build/Carbon.Pipeline/esbuild.mjs --production` |
 | `yarn build:css` | Build the CSS files once for production        |         ✓          | `node Build/Carbon.Pipeline/postcss.mjs --production` |
 
-Of course, you can also add your own tasks, e.g. `yarn build:test`.
+### Extendibility
+
+Of course, you can also add your own tasks in the `scripts` section of your `package.json` file. For example, if you have a Neos UI custom editor and want to start all your tasks in one place, you can add them like this:
+
+```
+"build:editor": "yarn --cwd DistributionPackages/Foo.Editor/Resources/Private/Editor/ build",
+"watch:editor": "yarn --cwd DistributionPackages/Foo.Editor/Resources/Private/Editor/ watch",
+"pipeline:editor": "yarn --cwd DistributionPackages/Foo.Editor/Resources/Private/Editor/ install --silent --non-interactive",
+```
+
+Because the tasks start with `build:`, respectively with `watch:` or `pipeline:`, the tasks will be included in the corresponding root command. In this example, `yarn build`, `yarn watch` or `yarn pipeline`.
 
 ## Compression of files
 
