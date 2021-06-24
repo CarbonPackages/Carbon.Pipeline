@@ -3,14 +3,14 @@
   "private": true,
   "scripts": {
     "build": "concurrently -r yarn:build:*",
-    "build:js": "node ./Build/Carbon.Pipeline/esbuild.mjs --production",
-    "build:css": "node ./Build/Carbon.Pipeline/postcss.mjs --production",
+    "build:js": "node Build/Carbon.Pipeline/esbuild.mjs --production",
+    "build:css": "node Build/Carbon.Pipeline/postcss.mjs --production",
     "dev": "concurrently -r yarn:dev:*",
-    "dev:js": "node ./Build/Carbon.Pipeline/esbuild.mjs",
-    "dev:css": "node ./Build/Carbon.Pipeline/postcss.mjs",
+    "dev:js": "node Build/Carbon.Pipeline/esbuild.mjs",
+    "dev:css": "node Build/Carbon.Pipeline/postcss.mjs",
     "watch": "concurrently -r yarn:watch:*",
-    "watch:js": "node ./Build/Carbon.Pipeline/esbuild.mjs --watch",
-    "watch:css": "node ./Build/Carbon.Pipeline/postcss.mjs --watch",
+    "watch:js": "node Build/Carbon.Pipeline/esbuild.mjs --watch",
+    "watch:css": "node Build/Carbon.Pipeline/postcss.mjs --watch",
     "pipeline": "yarn install --silent --non-interactive;yarn build"
   },
   "resolutions": {
