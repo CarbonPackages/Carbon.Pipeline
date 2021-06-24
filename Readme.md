@@ -10,7 +10,7 @@ First, thank you that you want to give this build stack a try! If you miss a ✨
 
 ### Install via composer
 
-Run `composer require carbon/pipeline --dev`. During the installation, some files (if not already existing) will be copied to your root folder. After installing the package, run the command `yarn install` to install the required packages, defined in `package.json`. Feel free to modify and change dependencies before installing 👍
+Run `composer require carbon/pipeline --dev`. Some files (if not already existing) will be copied to your root folder during the installation. After installing the package, run the command `yarn install` to install the required packages, defined in `package.json`. Feel free to modify and change dependencies before installing 👍
 
 ### Manual install
 
@@ -50,7 +50,7 @@ packages:
   package: Vendor.Bar
 ```
 
-To change the input and / or the output folder, you can to this with the `folder` option:
+To change the input and/or the output folder, you can do this with the `folder` option:
 
 ```yaml
 packages:
@@ -65,7 +65,7 @@ packages:
       commonJS: Public
 ```
 
-Further you can write to the files to another package:
+Further, you can write the files to another package:
 
 ```yaml
 packages:
@@ -170,7 +170,7 @@ The tasks are split up, so they can run in parallel mode. But you can also run t
 | `yarn build:js`  | Build the JavaScript files once for production |         ✓          | `node Build/Carbon.Pipeline/esbuild.mjs --production` |
 | `yarn build:css` | Build the CSS files once for production        |         ✓          | `node Build/Carbon.Pipeline/postcss.mjs --production` |
 
-If course you can add also your own tasks e.g. `yarn build:test`.
+Of course, you can also add your own tasks, e.g. `yarn build:test`.
 
 ## Compression of files
 
@@ -229,7 +229,7 @@ This template comes with a variety of PostCSS Plugins. Feel free to remove some 
 | [cssnano]                    | Modern CSS compression                                                                                                    |
 | [postcss-reporter]           | `console.log()` the messages (warnings, etc.) registered by other PostCSS plugins                                         |
 
-Of course you can add your own or remove not needed Plugins as you want. This is just ment as a starting point.
+Of course, you can add your own or remove not-needed Plugins as you want. This is just meant as a starting point.
 
 </details>
 
@@ -294,7 +294,7 @@ To enable the correct linting, edit [`.eslintrc`]:
 <details>
 <summary><strong>React</strong></summary>
 
-Using JSX syntax usually requires you to manually import the JSX library you are using. For example, if you are using React, by default you will need to import React into each JSX file like this:
+Using JSX syntax usually requires you to manually import the JSX library you are using. For example, if you are using React, by default, you will need to import React into each JSX file like this:
 
 ```js
 import * as React from "react";
