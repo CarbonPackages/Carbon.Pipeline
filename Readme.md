@@ -213,7 +213,7 @@ import "Packages/Plugins/Jonnitto.PhotoSwipe/Resources/Private/Assets/PhotoSwipe
 @import "Packages/Carbon/Carbon.Image/Resources/Private/Assets/Tailwind.pcss";
 ```
 
-Thanks to [postcss-easy-import], you can also use globbing in CSS imports: `@import "Presentation/**/*.pcss";`
+Thanks to a custom made `resolve` function, you can also use [globbing][glob] in CSS imports: `@import "Presentation/**/*.pcss";`
 
 ### PostCSS
 
@@ -226,8 +226,7 @@ This template comes with a variety of PostCSS Plugins. Feel free to remove some 
 
 | Name                         | Description                                                                                                               |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| [postcss-import-alias]       | Use aliases in your PostCSS import statements                                                                             |
-| [postcss-easy-import]        | Resolving files with globs                                                                                                |
+| [postcss-import]             | Plugin to transform `@import` rules by inlining content. Thanks to a custom `resolve` function you can also use [glob]    |
 | [Tailwind CSS]               | A utility-first CSS framework for rapidly building custom user interfaces                                                 |
 | [postcss-nested]             | Unwrap nested rules like how Sass does it                                                                                 |
 | [postcss-assets]             | Plugin to manage assets                                                                                                   |
@@ -432,8 +431,7 @@ esbuild:
 [alpine.js]: https://github.com/alpinejs/alpine
 [`tailwind.config.js`]: Installer/Distribution/Defaults/tailwind.config.js
 [tailwind file-size]: https://tailwindcss.com/docs/controlling-file-size
-[postcss-import-alias]: https://www.npmjs.com/package/postcss-import-alias
-[postcss-easy-import]: https://www.npmjs.com/package/postcss-easy-import
+[postcss-import]: https://www.npmjs.com/package/postcss-import
 [postcss-focus-visible]: https://www.npmjs.com/package/postcss-focus-visible
 [postcss-nested]: https://www.npmjs.com/package/postcss-nested
 [postcss-assets]: https://www.npmjs.com/package/postcss-assets
@@ -443,6 +441,7 @@ esbuild:
 [can i use]: https://caniuse.com
 [cssnano]: https://cssnano.co
 [postcss-reporter]: https://www.npmjs.com/package/postcss-reporter
+[glob]: https://www.npmjs.com/package/glob
 [typescript]: https://www.typescriptlang.org
 [react]: https://reactjs.org
 [preact]: https://preactjs.com

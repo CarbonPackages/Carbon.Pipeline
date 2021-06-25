@@ -1,25 +1,15 @@
 import path from "path";
+import glob from "glob";
 import postcssrc from "postcss-load-config";
-import nodeResolve from "resolve";
+import resolve from "resolve";
 import { DepGraph } from "dependency-graph";
 import { styleFiles, minify, config, toArray } from "./helper.mjs";
 
 function rc() {
     return postcssrc({
-        importAlias: (() => {
-            const alias = {};
-            const aliasFolders = [...new Set([config.folder.base, ...toArray(config.folder.additionalAliases)])];
-            aliasFolders.forEach((folder) => {
-                alias[folder] = path.resolve(path.dirname(folder), folder);
-            });
-            return alias;
-        })(),
-        easyImport: {
-            extensions: config.extensions.style,
-            prefix: "_",
-        },
-        minify: minify,
+        minify,
         basePath: config.folder.base,
+        resolve: importResolve,
     })
         .then((rc) => {
             return rc;
@@ -27,6 +17,67 @@ function rc() {
         .catch((err) => {
             if (!err.message.includes("No PostCSS Config found")) throw err;
         });
+}
+
+const importAliases = (() => {
+    const alias = {};
+    const aliasFolders = [...new Set([config.folder.base, ...toArray(config.folder.additionalAliases)])];
+    aliasFolders.forEach((folder) => {
+        alias[folder] = path.resolve(path.dirname(folder), folder);
+    });
+    return alias;
+})();
+
+function resolveAlias(path) {
+    const pathComponents = path.split("/");
+    const [base] = pathComponents;
+
+    if (importAliases.hasOwnProperty(base)) {
+        pathComponents[0] = importAliases[base];
+        return resolveAlias(pathComponents.join("/"));
+    }
+
+    return pathComponents.join("/");
+}
+
+function resolveModule(id, opts) {
+    id = resolveAlias(id);
+    return new Promise((res, rej) => {
+        resolve(id, opts, (err, path) => (err ? rej(err) : res(path)));
+    });
+}
+
+function importResolve(id, base, options) {
+    const paths = options.path;
+    const resolveOpts = {
+        basedir: base,
+        paths,
+        moduleDirectory: ["web_modules", "node_modules"].concat(options.addModulesDirectories),
+        extensions: [".css", ".pcss"],
+        packageFilter: function processPackage(pkg) {
+            if (pkg.style) {
+                pkg.main = pkg.style;
+            } else if (!pkg.main || !/\.css$/.test(pkg.main)) {
+                pkg.main = "index.css";
+            }
+            return pkg;
+        },
+        preserveSymlinks: false,
+    };
+
+    const files = glob.hasMagic(id) ? glob.sync(path.join(base, id)) : [id];
+    return Promise.all(
+        files.map((id) =>
+            resolveModule(`./${id}`, resolveOpts)
+                .catch(() => resolveModule(id, resolveOpts))
+                .catch(() => {
+                    if (paths.indexOf(base) === -1) {
+                        paths.unshift(base);
+                    }
+                    throw new Error(`Failed to find '${id}' in [${paths.join(",\n        ")}]`);
+                })
+        )
+    );
 }
 
 const graph = new DepGraph();
@@ -89,56 +140,4 @@ function getAncestorDirs(fileOrDir) {
     return [parentDir, ...getAncestorDirs(parentDir)];
 }
 
-const rebasePlugin = (({ rootDir = process.cwd() } = {}) => {
-    return {
-        postcssPlugin: "postcss-rebase",
-        AtRule: {
-            async import(decl) {
-                let match = decl.params.match(/url\(['"]?(.*?)['"]?\)/);
-                if (!match || !match[1]) {
-                    return;
-                }
-
-                let source = match[1];
-                if (
-                    source.startsWith(".") ||
-                    source.startsWith("/") ||
-                    source.startsWith("http:") ||
-                    source.startsWith("https:")
-                ) {
-                    return;
-                }
-
-                if (source.startsWith("~")) {
-                    source = source.substring(1);
-                }
-
-                let resolvedImportPath = await new Promise((resolve, reject) =>
-                    nodeResolve(
-                        source,
-                        {
-                            basedir: rootDir,
-                            extensions: [".css"],
-                            preserveSymlinks: true,
-                            packageFilter(pkg) {
-                                if (pkg.style) {
-                                    pkg.main = pkg.style;
-                                }
-                                return pkg;
-                            },
-                        },
-                        (err, data) => (err ? reject(err) : resolve(data))
-                    )
-                );
-
-                if (path.extname(resolvedImportPath) !== ".css") {
-                    return;
-                }
-
-                decl.params = `url('${resolvedImportPath}')`;
-            },
-        },
-    };
-})();
-
-export { rc, dependencyGraph, dependencies, getAncestorDirs, styleFiles as files, rebasePlugin };
+export { rc, dependencyGraph, dependencies, getAncestorDirs, styleFiles as files };

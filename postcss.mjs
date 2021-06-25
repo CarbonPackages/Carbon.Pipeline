@@ -6,7 +6,7 @@ import readCache from "read-cache";
 import { bold, dim, cyan, green } from "colorette";
 import prettyHrtime from "pretty-hrtime";
 import { watch, error, dynamicImport, compression, print } from "./Lib/helper.mjs";
-import { files, getAncestorDirs, dependencyGraph, dependencies, rebasePlugin, rc } from "./Lib/postcssHelper.mjs";
+import { files, getAncestorDirs, dependencyGraph, dependencies, rc } from "./Lib/postcssHelper.mjs";
 
 let configFile;
 let compressFunction = compression ? await dynamicImport("./compress.mjs", null) : {};
@@ -72,7 +72,7 @@ function css(css, file) {
     return rc()
         .then((ctx) => {
             configFile = ctx.file;
-            return postcss([rebasePlugin, ...ctx.plugins])
+            return postcss(ctx.plugins)
                 .process(css, {
                     from: file.from,
                     to: file.to[0],
