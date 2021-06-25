@@ -231,7 +231,6 @@ This template comes with a variety of PostCSS Plugins. Feel free to remove some 
 | [Tailwind CSS]               | A utility-first CSS framework for rapidly building custom user interfaces                                                 |
 | [postcss-nested]             | Unwrap nested rules like how Sass does it                                                                                 |
 | [postcss-assets]             | Plugin to manage assets                                                                                                   |
-| [postcss-url]                | Used for rebaseing the url from [postcss-assets]                                                                          |
 | [postcss-focus-visible]      | PostCSS Focus Visible lets you use the :focus-visible pseudo-class in CSS, following the Selectors Level 4 specification. |
 | [postcss-clip-path-polyfill] | Add SVG hack for clip-path property to make it work in Firefox. Currently supports only `polygon()`                       |
 | [postcss-sort-media-queries] | Combine and sort CSS media queries                                                                                        |
@@ -438,7 +437,6 @@ esbuild:
 [postcss-focus-visible]: https://www.npmjs.com/package/postcss-focus-visible
 [postcss-nested]: https://www.npmjs.com/package/postcss-nested
 [postcss-assets]: https://www.npmjs.com/package/postcss-assets
-[postcss-url]: https://www.npmjs.com/package/postcss-url
 [postcss-clip-path-polyfill]: https://www.npmjs.com/package/postcss-clip-path-polyfill
 [postcss-sort-media-queries]: https://www.npmjs.com/package/postcss-sort-media-queries
 [autoprefixer]: https://www.npmjs.com/package/autoprefixer

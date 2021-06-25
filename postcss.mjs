@@ -87,6 +87,11 @@ function css(css, file) {
                 })
                 .then((result) => {
                     const tasks = [];
+                    // This fixes url done with resolve()
+                    result.css = result.css.replace(
+                        /(\/_Resources\/Static\/Packages\/[\w]+\.[\w]+\/)Resources\/Public\//g,
+                        "$1"
+                    );
                     file.to.forEach((to) => {
                         tasks.push(fs.outputFile(to, result.css));
                         if (compression) {

@@ -13,10 +13,6 @@ module.exports = (ctx) => ({
             baseUrl: "/_Resources/Static/Packages",
             loadPaths: ["**/Resources/Public/**/*"],
         },
-        "postcss-url": {
-            filter: /\/_Resources\/Static\/Packages\/[\w]+\.[\w]+\/Resources\/Public\/.*/,
-            url: (asset) => asset.url.replace("/Resources/Public/", "/"),
-        },
         "postcss-focus-visible": true,
         "postcss-clip-path-polyfill": true,
         "postcss-sort-media-queries": true,
