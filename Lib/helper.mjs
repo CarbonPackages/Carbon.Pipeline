@@ -45,7 +45,10 @@ toArray(config.packages).forEach((entry) => {
 
     let files = toArray(entry.files);
     if (!files) {
-        files = glob.sync(`${entryFolder}/*.{${allFileExtensions}}`).map((entry) => path.basename(entry));
+        files = glob
+            .sync(`${entryFolder}/*.{${allFileExtensions}}`)
+            .map((entry) => path.basename(entry))
+            .filter((name) => !name.startsWith("_"));
     }
     if (!files) {
         error(`No files found in ${entryFolder}`);

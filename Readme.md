@@ -43,7 +43,7 @@ packages:
   files: Main.js
 ```
 
-If you don't set files, all parsable files from the input folder get rendered.
+If you don't set files, all parsable files from the input folder get rendered. Files that start with an underscore (`_`) will be ignored.
 
 ```yaml
 packages:
