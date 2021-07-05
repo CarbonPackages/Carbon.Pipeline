@@ -152,23 +152,23 @@ If you set an entry file with the javascript module suffix (`.mjs`, `.mjsx`, `.m
 
 There are four predefined main tasks:
 
-| Command         | Description                                     | Optimize file size | Command                                              |
-| --------------- | ----------------------------------------------- | :----------------: | ---------------------------------------------------- |
-| `yarn watch`    | Start the file watcher                          |                    | `concurrently -r yarn:watch:*`                       |
-| `yarn dev`      | Build the files once                            |                    | `concurrently -r yarn:dev:*`                         |
-| `yarn build`    | Build the files once for production             |         ✓          | `concurrently -r yarn:build:*`                       |
-| `yarn pipeline` | Run install, and build the files for production |         ✓          | `yarn install --silent --non-interactive;yarn build` |
+| Command         | Description                                             | Command                                                                              |
+| --------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `yarn watch`    | Start the file watcher                                  | `concurrently -r yarn:watch:*`                                                       |
+| `yarn dev`      | Build the files once                                    | `concurrently -r yarn:dev:*`                                                         |
+| `yarn build`    | Build the files once for production (optimze file size) | `concurrently -r yarn:build:*`                                                       |
+| `yarn pipeline` | Run install, and build the files for production         | `yarn install --silent --non-interactive;concurrently -r yarn:pipeline:*;yarn build` |
 
 The tasks are split up, so they can run in parallel mode. But you can also run them separately:
 
-| Command          | Description                                    | Optimize file size | Command                                               |
-| ---------------- | ---------------------------------------------- | :----------------: | ----------------------------------------------------- |
-| `yarn watch:js`  | Start the file watcher for JavaScript files    |                    | `node Build/Carbon.Pipeline/esbuild.mjs --watch`      |
-| `yarn watch:css` | Start the file watcher for CSS files           |                    | `node Build/Carbon.Pipeline/postcss.mjs --watch`      |
-| `yarn dev:js`    | Build the files once for JavaScript files      |                    | `node Build/Carbon.Pipeline/esbuild.mjs`              |
-| `yarn dev:css`   | Build the files once for CSS files             |                    | `node Build/Carbon.Pipeline/postcss.mjs`              |
-| `yarn build:js`  | Build the JavaScript files once for production |         ✓          | `node Build/Carbon.Pipeline/esbuild.mjs --production` |
-| `yarn build:css` | Build the CSS files once for production        |         ✓          | `node Build/Carbon.Pipeline/postcss.mjs --production` |
+| Command          | Description                                    | Command                                               |
+| ---------------- | ---------------------------------------------- | ----------------------------------------------------- |
+| `yarn watch:js`  | Start the file watcher for JavaScript files    | `node Build/Carbon.Pipeline/esbuild.mjs --watch`      |
+| `yarn watch:css` | Start the file watcher for CSS files           | `node Build/Carbon.Pipeline/postcss.mjs --watch`      |
+| `yarn dev:js`    | Build the files once for JavaScript files      | `node Build/Carbon.Pipeline/esbuild.mjs`              |
+| `yarn dev:css`   | Build the files once for CSS files             | `node Build/Carbon.Pipeline/postcss.mjs`              |
+| `yarn build:js`  | Build the JavaScript files once for production | `node Build/Carbon.Pipeline/esbuild.mjs --production` |
+| `yarn build:css` | Build the CSS files once for production        | `node Build/Carbon.Pipeline/postcss.mjs --production` |
 
 ### Extendibility
 
