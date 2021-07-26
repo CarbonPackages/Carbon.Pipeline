@@ -18,6 +18,10 @@ const browserlist = (() => {
                 TARGETS[index] = singleTarget;
             }
         }
+        if (TARGET.startsWith("ie ")) {
+            index++;
+            TARGETS[index] = "es5";
+        }
     }
 
     return TARGETS.filter(Boolean);
@@ -69,6 +73,18 @@ async function importPlugins() {
                 plugin,
             },
             vuePlugin.options
+        );
+    }
+
+    const babelPlugin = esbuildPlugins?.babel;
+    console.log(babelPlugin);
+    if (babelPlugin?.enable === true) {
+        const plugin = await dynamicImport("esbuild-plugin-babel");
+        plugins["babel"] = assignPlugin(
+            {
+                plugin,
+            },
+            babelPlugin.options
         );
     }
 

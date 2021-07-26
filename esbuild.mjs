@@ -57,6 +57,11 @@ async function build() {
                 if (vue?.plugin) {
                     returnValue.push(vue.plugin(vue.options));
                 }
+                const babel = plugins.babel;
+                if (babel?.plugin) {
+                    returnValue.push(babel.plugin(babel.options));
+                }
+
                 if (compression) {
                     returnValue.push(
                         plugins.compress({

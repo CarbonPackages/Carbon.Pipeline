@@ -396,6 +396,59 @@ esbuild:
 
 </details>
 
+<details>
+<summary><strong>Babel.js / IE 11 support</strong></summary>
+
+If you want to use [Babel.js], add the following packages to `package.json`:
+
+```bash
+yarn add --dev @babel/core esbuild-plugin-babel
+```
+
+as well additonals babel plugins and/or presets:
+
+```bash
+yarn add --dev @babel/preset-env @babel/plugin-proposal-class-properties @babel/plugin-proposal-object-rest-spread
+```
+
+Further, you have to add a file called `babel.config.json`, for example:
+
+````json
+{
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "modules": false
+            }
+        ]
+    ],
+    "plugins": ["@babel/proposal-class-properties", "@babel/proposal-object-rest-spread"]
+}
+```
+
+Finally, enable the plugin in your [`pipeline.yaml`] file:
+
+```yaml
+esbuild:
+  plugins:
+    babel:
+      enable: true
+      # You can pass your needed options here
+      # options:
+```
+
+If you a poor person and have to support Internet Explorer, you have to edit your `.browserslistrc`.
+If a browser starting with `ie ` is found, the target `es5` gets activated.
+
+```
+defaults
+ie 11
+not dead
+```
+
+</details>
+
 [logo]: https://repository-images.githubusercontent.com/377838441/de0f0b80-d2df-11eb-86a9-7988d27d4ab0
 [esbuild]: https://esbuild.github.io
 [postcss]: https://postcss.org
@@ -447,8 +500,10 @@ esbuild:
 [preact]: https://preactjs.com
 [svelte]: https://svelte.dev
 [vue.js]: https://vuejs.org
+[babel.js]: https://babeljs.io
 [jsx factory]: https://esbuild.github.io/api/#jsx-factory
 [jsx fragment]: https://esbuild.github.io/api/#jsx-fragment
 [external]: https://esbuild.github.io/api/#external
 [brotli]: https://github.com/google/brotli
 [gzip]: https://nodejs.org/api/zlib.html
+````
