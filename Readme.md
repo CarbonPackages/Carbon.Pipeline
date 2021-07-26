@@ -413,17 +413,17 @@ yarn add --dev @babel/preset-env @babel/plugin-proposal-class-properties @babel/
 
 Further, you have to add a file called `babel.config.json`, for example:
 
-````json
+```json
 {
-    "presets": [
-        [
-            "@babel/preset-env",
-            {
-                "modules": false
-            }
-        ]
-    ],
-    "plugins": ["@babel/proposal-class-properties", "@babel/proposal-object-rest-spread"]
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "modules": false
+      }
+    ]
+  ],
+  "plugins": ["@babel/proposal-class-properties", "@babel/proposal-object-rest-spread"]
 }
 ```
 
@@ -506,4 +506,3 @@ not dead
 [external]: https://esbuild.github.io/api/#external
 [brotli]: https://github.com/google/brotli
 [gzip]: https://nodejs.org/api/zlib.html
-````
