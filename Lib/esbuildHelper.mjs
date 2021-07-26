@@ -77,7 +77,6 @@ async function importPlugins() {
     }
 
     const babelPlugin = esbuildPlugins?.babel;
-    console.log(babelPlugin);
     if (babelPlugin?.enable === true) {
         const plugin = await dynamicImport("esbuild-plugin-babel");
         plugins["babel"] = assignPlugin(
