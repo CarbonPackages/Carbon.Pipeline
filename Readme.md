@@ -215,9 +215,19 @@ import "Packages/Plugins/Jonnitto.PhotoSwipe/Resources/Private/Assets/PhotoSwipe
 
 Thanks to a custom made `resolve` function, you can also use [globbing][glob] in CSS imports: `@import "Presentation/**/*.pcss";`
 
+## CSS
+
 ### PostCSS
 
 This template comes with a variety of PostCSS Plugins. Feel free to remove some or add your own favorites packages. The configuration is located in [`.postcssrc.js`]. The suffix of these files should be `.pcss`.
+
+#### Sass-Lang
+
+If you want to use [Sass] (`.scss`or `.sass`) you have to install [`sass`]:
+
+```bash
+yarn add --dev sass
+```
 
 #### PostCSS Plugins
 
@@ -484,6 +494,8 @@ not dead
 [alpine.js]: https://github.com/alpinejs/alpine
 [`tailwind.config.js`]: Installer/Distribution/Defaults/tailwind.config.js
 [tailwind file-size]: https://tailwindcss.com/docs/controlling-file-size
+[sass]: https://sass-lang.com
+[`sass`]: https://www.npmjs.com/package/sass
 [postcss-import]: https://www.npmjs.com/package/postcss-import
 [postcss-focus-visible]: https://www.npmjs.com/package/postcss-focus-visible
 [postcss-nested]: https://www.npmjs.com/package/postcss-nested

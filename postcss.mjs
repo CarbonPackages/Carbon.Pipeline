@@ -5,11 +5,12 @@ import chokidar from "chokidar";
 import readCache from "read-cache";
 import { bold, dim, cyan, green } from "colorette";
 import prettyHrtime from "pretty-hrtime";
-import { watch, error, dynamicImport, compression, print } from "./Lib/helper.mjs";
+import { watch, error, dynamicImport, compression, print, sass } from "./Lib/helper.mjs";
 import { files, getAncestorDirs, dependencyGraph, dependencies, rc } from "./Lib/postcssHelper.mjs";
 
 let configFile;
 let compressFunction = compression ? await dynamicImport("./compress.mjs", null) : {};
+let sassFunction = sass ? await dynamicImport("./sass.mjs", null) : {};
 let { writeBr, writeGz } = compressFunction;
 
 function renderFiles(keys) {
@@ -19,9 +20,20 @@ function renderFiles(keys) {
     if (!keys) {
         keys = Object.keys(files);
     }
+
     return Promise.all(
         keys.map((key) => {
-            return readCache(key).then((content) => css(content, files[key]));
+            return readCache(key).then((content) => {
+                const time = process.hrtime();
+                const file = files[key];
+
+                print(cyan(`Processing ${bold(file.from)}...`));
+
+                if (file.sass) {
+                    content = sassFunction.render(key);
+                }
+                return css(content, file, time);
+            });
         })
     );
 }
@@ -66,9 +78,7 @@ function build() {
         });
 }
 
-function css(css, file) {
-    const time = process.hrtime();
-    print(cyan(`Processing ${bold(file.from)}...`));
+function css(css, file, time) {
     return rc()
         .then((ctx) => {
             configFile = ctx.file;

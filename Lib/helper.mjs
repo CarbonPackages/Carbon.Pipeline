@@ -16,6 +16,7 @@ const watch = process.argv.includes("--watch");
 const production = process.argv.includes("--production");
 const minify = production || process.argv.includes("--minify");
 const compression = production && !watch ? config.buildDefaults.compression : false;
+let sass = false;
 process.env.NODE_ENV = production ? "production" : "development";
 process.env.TAILWIND_MODE = watch ? "watch" : "build";
 
@@ -60,6 +61,10 @@ toArray(config.packages).forEach((entry) => {
     const commonJsEntries = [];
     files.forEach((filename) => {
         if (checkFileExtension("style", filename)) {
+            const needSass = filename.endsWith(".scss") || filename.endsWith(".sass");
+            if (!sass && needSass) {
+                sass = true;
+            }
             const baseFilename = filename.substring(0, filename.lastIndexOf("."));
             const conf = entryConfig(entry, "style");
             const from = path.join(entryFolder, filename);
@@ -69,6 +74,7 @@ toArray(config.packages).forEach((entry) => {
                 to,
                 sourcemap: conf.sourcemap,
                 outdir: conf.outdir,
+                sass: needSass,
             };
         } else if (checkFileExtension("module", filename)) {
             moduleEntries.push(path.join(entryFolder, filename));
@@ -217,5 +223,6 @@ export {
     toArray,
     production,
     compression,
+    sass,
     dynamicImport,
 };

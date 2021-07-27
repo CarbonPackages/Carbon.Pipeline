@@ -15,7 +15,9 @@ function rc() {
             return rc;
         })
         .catch((err) => {
-            if (!err.message.includes("No PostCSS Config found")) throw err;
+            if (!err.message.includes("No PostCSS Config found")) {
+                throw err;
+            }
         });
 }
 
