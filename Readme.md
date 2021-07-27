@@ -217,9 +217,9 @@ Thanks to a custom made `resolve` function, you can also use [globbing][glob] in
 
 ## CSS
 
-### Sass-Lang
+### Sass
 
-If you want to use [Sass] (`.scss`or `.sass`) you have to install [`sass`]:
+If you want to use [Sass] (`.scss`or `.sass` files) you have to install [`sass`]:
 
 ```bash
 yarn add --dev sass
