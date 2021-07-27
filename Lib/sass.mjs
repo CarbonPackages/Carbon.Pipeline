@@ -10,7 +10,9 @@ function render(key) {
         sourceMapContents: true,
         sourceMapEmbed: true,
     });
-    return result.css?.toString();
+    const css = result.css.toString();
+    const importedFiles = [...result.stats.includedFiles].filter((file) => file != key);
+    return { css, importedFiles };
 }
 
 export { render };

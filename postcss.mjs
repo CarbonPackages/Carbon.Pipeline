@@ -30,7 +30,9 @@ function renderFiles(keys) {
                 print(cyan(`Processing ${bold(file.from)}...`));
 
                 if (file.sass) {
-                    content = sassFunction.render(key);
+                    const result = sassFunction.render(key);
+                    files[key].importedFiles = result.importedFiles;
+                    content = result.css;
                 }
                 return css(content, file, time);
             });
@@ -54,6 +56,15 @@ function build() {
                         pollInterval: 10,
                     },
                 });
+
+                // Add files from sass
+                const importedFiles = files[input].importedFiles;
+                let importedFilesLength = importedFiles?.length || 0;
+
+                if (importedFilesLength) {
+                    watcher.add(importedFiles);
+                }
+
                 if (configFile) {
                     watcher.add(configFile);
                 }
@@ -69,6 +80,14 @@ function build() {
                     if (!recompile.length) {
                         recompile = input;
                     }
+
+                    // Add new files from sass
+                    const importedFiles = files[input].importedFiles;
+                    if (importedFilesLength < importedFiles?.length) {
+                        importedFilesLength = importedFiles.length;
+                        watcher.add(importedFiles);
+                    }
+
                     return renderFiles([...new Set(recompile)])
                         .then((results) => watcher.add(dependencies(results)))
                         .then(printMessage)
