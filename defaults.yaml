@@ -45,3 +45,6 @@ esbuild:
       options:
         compileOptions:
           css: true
+    babel:
+      enable: false
+      options: null
