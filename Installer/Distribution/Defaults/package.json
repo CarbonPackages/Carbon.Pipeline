@@ -2,6 +2,7 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
+    "showConfig": "node Build/Carbon.Pipeline/showConfig.mjs",
     "build": "concurrently -r yarn:build:*",
     "build:js": "node Build/Carbon.Pipeline/esbuild.mjs --production",
     "build:css": "node Build/Carbon.Pipeline/postcss.mjs --production",
@@ -43,6 +44,7 @@
     "postcss-sort-media-queries": "^3.11.12",
     "prettier": "^2.3.2",
     "pretty-hrtime": "^1.0.3",
+    "prettyjson": "^1.2.1",
     "read-cache": "^1.0.0",
     "stylelint": "^13.13.1",
     "stylelint-config-recommended-scss": "^4.3.0",
