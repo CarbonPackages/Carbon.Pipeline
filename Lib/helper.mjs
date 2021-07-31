@@ -61,7 +61,7 @@ toArray(config.packages).forEach((entry) => {
     const commonJsEntries = [];
     files.forEach((filename) => {
         if (checkFileExtension("style", filename)) {
-            const needSass = filename.endsWith(".scss") || filename.endsWith(".sass");
+            const needSass = sassFileCheck(filename);
             if (!sass && needSass) {
                 sass = true;
             }
@@ -110,6 +110,10 @@ function scriptEntryConfig(entry, entryPoints, type, format = null) {
         external,
         ...conf,
     };
+}
+
+function sassFileCheck(filename) {
+    return filename.endsWith(".scss") || filename.endsWith(".sass");
 }
 
 function removeCompressedFiles(entry) {
@@ -267,6 +271,17 @@ function valueOuput(value = "", unit = "", options) {
 function minLength(text, minLength = 0) {
     return " ".repeat(Math.max(0, minLength - text.toString().length));
 }
+
+function equalArrays(a, b) {
+    if (a.length !== b.length) {
+        return false;
+    }
+    // Sort arrays
+    a = a.sort();
+    b = b.sort();
+    return a.every((value, index) => value === b[index]);
+}
+
 export {
     asyncForEach,
     scriptFiles,
@@ -281,6 +296,8 @@ export {
     compression,
     sass,
     dynamicImport,
+    sassFileCheck,
     humanFileSize,
     humanDuration,
+    equalArrays,
 };

@@ -51,6 +51,28 @@ function renderFiles(keys) {
     );
 }
 
+function getImportedSaasFiles(inputs, entries) {
+    if (!entries) {
+        entries = [];
+    }
+    let hasNew = true;
+    const currentFiles = [...entries];
+
+    inputs.forEach((input) => {
+        const entry = files[input];
+        if (entry.sass) {
+            entries = entries.concat(entry.importedFiles);
+        }
+    });
+    entries = [...new Set(entries.filter((file) => !!file))];
+
+    if (equalArrays(currentFiles, entries)) {
+        hasNew = false;
+    }
+
+    return { entries, hasNew };
+}
+
 function build() {
     Promise.resolve()
         .then(() => {
@@ -58,10 +80,8 @@ function build() {
         })
         .then((results) => {
             if (watch) {
-                const input = results.map((result) => path.resolve(result.opts.from));
-                const printMessage = () => print(dim("\nWaiting for file changes..."));
-                printMessage();
-                const watcher = chokidar.watch(input.concat(dependencies(results)), {
+                const inputs = results.map((result) => path.resolve(result.opts.from));
+                const watcher = chokidar.watch(inputs.concat(dependencies(results)), {
                     awaitWriteFinish: {
                         stabilityThreshold: 50,
                         pollInterval: 10,
@@ -69,39 +89,55 @@ function build() {
                 });
 
                 // Add files from sass
-                const importedFiles = files[input].importedFiles;
-                let importedFilesLength = importedFiles?.length || 0;
-
-                if (importedFilesLength) {
-                    watcher.add(importedFiles);
+                let importedSaasFiles = [];
+                if (sass) {
+                    const { entries } = getImportedSaasFiles(inputs);
+                    if (entries.length) {
+                        importedSaasFiles = entries;
+                        watcher.add(entries);
+                    }
                 }
 
                 if (configFile) {
                     watcher.add(configFile);
                 }
-                watcher.on("ready", printMessage).on("change", (file) => {
+
+                print(dim("\nWaiting for file changes..."));
+                watcher.on("change", (file) => {
+                    const isSassFile = sassFileCheck(file);
                     let recompile = [];
-                    if (input.includes(file)) {
+                    if (inputs.includes(file)) {
                         recompile.push(file);
                     }
-                    const dependants = dependencyGraph
-                        .dependantsOf(file)
-                        .concat(getAncestorDirs(file).flatMap(dependencyGraph.dependantsOf));
-                    recompile = recompile.concat(dependants.filter((file) => input.includes(file)));
-                    if (!recompile.length) {
-                        recompile = input;
+                    let dependants = [];
+                    if (isSassFile) {
+                        const { entries, hasNew } = getImportedSaasFiles(inputs, importedSaasFiles);
+                        if (entries.length) {
+                            if (hasNew) {
+                                // Add new files from sass
+                                importedSaasFiles = entries;
+                                watcher.add(entries);
+                            }
+                            for (const input in files) {
+                                const entry = files[input];
+                                if (entry.sass && entry.importedFiles.includes(file)) {
+                                    recompile.push(input);
+                                }
+                            }
+                        }
+                    } else {
+                        dependants = dependencyGraph
+                            .dependantsOf(file)
+                            .concat(getAncestorDirs(file).flatMap(dependencyGraph.dependantsOf));
+                        recompile = recompile.concat(dependants.filter((file) => inputs.includes(file)));
                     }
 
-                    // Add new files from sass
-                    const importedFiles = files[input].importedFiles;
-                    if (importedFilesLength < importedFiles?.length) {
-                        importedFilesLength = importedFiles.length;
-                        watcher.add(importedFiles);
+                    if (!recompile.length) {
+                        recompile = inputs;
                     }
 
                     return renderFiles([...new Set(recompile)])
                         .then((results) => watcher.add(dependencies(results)))
-                        .then(printMessage)
                         .catch(error);
                 });
             }
