@@ -3,8 +3,7 @@ import path from "path";
 import fs from "fs-extra";
 import chokidar from "chokidar";
 import readCache from "read-cache";
-import { bold, dim, cyan, green } from "colorette";
-import prettyHrtime from "pretty-hrtime";
+import { bold, dim, cyan, magenta } from "colorette";
 import { watch, error, dynamicImport, compression, print, sass } from "./Lib/helper.mjs";
 import { files, getAncestorDirs, dependencyGraph, dependencies, rc } from "./Lib/postcssHelper.mjs";
 
@@ -12,6 +11,7 @@ let configFile;
 let compressFunction = compression ? await dynamicImport("./compress.mjs", null) : {};
 let sassFunction = sass ? await dynamicImport("./sass.mjs", null) : {};
 let { writeBr, writeGz } = compressFunction;
+let outputLength = 0;
 
 function renderFiles(keys) {
     if (typeof keys === "string") {
@@ -26,8 +26,7 @@ function renderFiles(keys) {
             return readCache(key).then((content) => {
                 const time = process.hrtime();
                 const file = files[key];
-
-                print(cyan(`Processing ${bold(file.from)}...`));
+                outputLength = Math.max(outputLength, file.length);
 
                 if (file.sass) {
                     const result = sassFunction.render(key);
@@ -121,7 +120,10 @@ function css(css, file, time) {
                         /(\/_Resources\/Static\/Packages\/[\w]+\.[\w]+\/)Resources\/Public\//g,
                         "$1"
                     );
-                    file.to.forEach((to) => {
+
+                    const cssFilesize = humanFileSize(result.css.length);
+                    let mapFilesize = 0;
+                    file.to.forEach((to, index) => {
                         tasks.push(fs.outputFile(to, result.css));
                         if (compression) {
                             tasks.push(writeGz(to, result.css));
@@ -131,6 +133,10 @@ function css(css, file, time) {
                             const file = `${to}.map`;
                             const map = result.map.toString();
                             tasks.push(fs.outputFile(file, map));
+                            if (!watch && index === 0) {
+                                const size = fs.statSync(file)?.size;
+                                mapFilesize = humanFileSize(size);
+                            }
                             if (compression) {
                                 tasks.push(writeGz(file, map));
                                 tasks.push(writeBr(file, map));
@@ -138,8 +144,14 @@ function css(css, file, time) {
                         }
                     });
                     return Promise.all(tasks).then(() => {
-                        const prettyTime = prettyHrtime(process.hrtime(time));
-                        print(green(`Finished ${bold(file.from)} in ${bold(prettyTime)}`));
+                        const fileOuput = file.to[0];
+                        const outputFilename = path.join(path.dirname(fileOuput), bold(path.basename(fileOuput)));
+                        const spaces = " ".repeat(outputLength - fileOuput.length);
+                        const duration = watch ? "  " + magenta(humanDuration(process.hrtime(time))) : "";
+                        print(`  ${outputFilename}     ${spaces} ${cyan(cssFilesize) + duration}`);
+                        if (mapFilesize) {
+                            print(`  ${outputFilename}${bold(".map")} ${spaces} ${cyan(mapFilesize)}`);
+                        }
 
                         result.warnings().forEach((warn) => {
                             print(warn.toString());

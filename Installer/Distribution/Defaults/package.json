@@ -43,7 +43,6 @@
     "postcss-reporter": "^7.0.2",
     "postcss-sort-media-queries": "^3.11.12",
     "prettier": "^2.3.2",
-    "pretty-hrtime": "^1.0.3",
     "prettyjson": "^1.2.1",
     "read-cache": "^1.0.0",
     "stylelint": "^13.13.1",

@@ -69,10 +69,14 @@ toArray(config.packages).forEach((entry) => {
             const conf = entryConfig(entry, "style");
             const from = path.join(entryFolder, filename);
             const to = conf.outdir.map((dir) => path.join(dir, `${baseFilename}.css`));
+            const sourcemap = conf.sourcemap;
+            // We add later 4 spaces to the style files to make them compatible with the map files
+            const length = to[0].length - (sourcemap ? 0 : 4);
             styleFiles[path.resolve(from)] = {
                 from,
                 to,
-                sourcemap: conf.sourcemap,
+                sourcemap,
+                length,
                 outdir: conf.outdir,
                 sass: needSass,
             };
@@ -211,6 +215,58 @@ async function dynamicImport(name, selector = "default") {
     return dynamicImport[selector];
 }
 
+function humanFileSize(bytes) {
+    const thresh = 1024;
+    const decimals = 1;
+    const sizes = ["b", "kb", "mb"];
+    const minLength = {
+        value: 6,
+        unit: 2,
+    };
+
+    if (bytes === 0) {
+        return valueOuput(0, sizes[0], minLength);
+    }
+
+    const index = Math.floor(Math.log(bytes) / Math.log(thresh));
+    return valueOuput(parseFloat((bytes / Math.pow(thresh, index)).toFixed(2)), sizes[index], minLength);
+}
+
+function humanDuration(elapsed) {
+    const minLength = {
+        value: 4,
+        unit: 2,
+    };
+    let time = Math.abs(elapsed[0] * 1e3 + elapsed[1] / 1e6);
+    let unit = "h";
+
+    if (time < 1e-3) {
+        time = time * 1e6;
+        unit = "ns";
+    } else if (time < 1) {
+        time = time * 1e3;
+        unit = "μs";
+    } else if (time < 1000) {
+        unit = "ms";
+    } else if ((time /= 1000) < 60) {
+        unit = "s";
+    } else if ((time /= 60) < 60) {
+        unit = "m";
+    }
+
+    return valueOuput(parseFloat(time.toFixed(2)), unit, minLength);
+}
+
+function valueOuput(value = "", unit = "", options) {
+    const prefix = minLength(value, options.value);
+    const suffix = minLength(unit, options.unit);
+
+    return prefix + value + unit + suffix;
+}
+
+function minLength(text, minLength = 0) {
+    return " ".repeat(Math.max(0, minLength - text.toString().length));
+}
 export {
     asyncForEach,
     scriptFiles,
@@ -225,4 +281,6 @@ export {
     compression,
     sass,
     dynamicImport,
+    humanFileSize,
+    humanDuration,
 };
