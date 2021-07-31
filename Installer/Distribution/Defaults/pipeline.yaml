@@ -31,3 +31,5 @@ esbuild:
       enable: false
     svelte:
       enable: false
+    babel:
+      enable: false

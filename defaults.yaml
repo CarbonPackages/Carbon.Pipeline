@@ -40,6 +40,7 @@ esbuild:
   plugins:
     vue:
       enable: false
+      options: null
     svelte:
       enable: false
       options:
