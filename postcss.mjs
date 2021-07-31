@@ -4,8 +4,20 @@ import fs from "fs-extra";
 import chokidar from "chokidar";
 import readCache from "read-cache";
 import { bold, dim, cyan, magenta } from "colorette";
-import { watch, error, dynamicImport, compression, print, sass } from "./Lib/helper.mjs";
-import { files, getAncestorDirs, dependencyGraph, dependencies, rc } from "./Lib/postcssHelper.mjs";
+import {
+    styleFiles as files,
+    watch,
+    error,
+    dynamicImport,
+    compression,
+    print,
+    sass,
+    sassFileCheck,
+    humanFileSize,
+    humanDuration,
+    equalArrays,
+} from "./Lib/helper.mjs";
+import { getAncestorDirs, dependencyGraph, dependencies, rc } from "./Lib/postcssHelper.mjs";
 
 let configFile;
 let compressFunction = compression ? await dynamicImport("./compress.mjs", null) : {};

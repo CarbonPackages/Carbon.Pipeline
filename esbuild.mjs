@@ -1,8 +1,7 @@
 import ESBUILD from "esbuild";
-import { asyncForEach, watch, minify, error, compression } from "./Lib/helper.mjs";
+import { scriptFiles as files, asyncForEach, watch, minify, error, compression } from "./Lib/helper.mjs";
 import {
     browserlist,
-    files,
     logLevel,
     legalComments,
     assignPlugin,

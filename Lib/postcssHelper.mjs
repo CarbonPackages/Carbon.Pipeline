@@ -3,7 +3,7 @@ import glob from "glob";
 import postcssrc from "postcss-load-config";
 import resolve from "resolve";
 import { DepGraph } from "dependency-graph";
-import { styleFiles, minify, config, toArray } from "./helper.mjs";
+import { minify, config, toArray } from "./helper.mjs";
 
 function rc() {
     return postcssrc({
@@ -114,7 +114,9 @@ function dependencies(results) {
     const messages = [];
 
     toArray(results).forEach((result) => {
-        if (result.messages <= 0) return;
+        if (result.messages <= 0) {
+            return;
+        }
 
         result.messages
             .filter((msg) => (msg.type === "dependency" || msg.type === "dir-dependency" ? msg : ""))
@@ -142,4 +144,4 @@ function getAncestorDirs(fileOrDir) {
     return [parentDir, ...getAncestorDirs(parentDir)];
 }
 
-export { rc, dependencyGraph, dependencies, getAncestorDirs, styleFiles as files };
+export { rc, dependencyGraph, dependencies, getAncestorDirs };

@@ -1,6 +1,6 @@
 import BROWSERLIST from "browserslist";
 import fs from "fs-extra";
-import { config, scriptFiles, compression, dynamicImport } from "./helper.mjs";
+import { config, compression, dynamicImport } from "./helper.mjs";
 
 const browserlist = (() => {
     const SUPPORTED_BUILD_TARGETS = ["es", "chrome", "edge", "firefox", "ios", "node", "safari"];
@@ -93,12 +93,4 @@ async function importPlugins() {
 const logLevel = config.esbuild?.logLevel || "info";
 const legalComments = config.esbuild?.legalComments || "linked";
 
-export {
-    browserlist,
-    scriptFiles as files,
-    logLevel,
-    legalComments,
-    assignPlugin,
-    writeFilesToAnotherPackage,
-    importPlugins,
-};
+export { browserlist, logLevel, legalComments, assignPlugin, writeFilesToAnotherPackage, importPlugins };
