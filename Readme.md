@@ -150,14 +150,15 @@ If you set an entry file with the javascript module suffix (`.mjs`, `.mjsx`, `.m
 
 ## Yarn tasks
 
-There are four predefined main tasks:
+There are five predefined main tasks:
 
-| Command         | Description                                             | Command                                                                              |
-| --------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| `yarn watch`    | Start the file watcher                                  | `concurrently -r yarn:watch:*`                                                       |
-| `yarn dev`      | Build the files once                                    | `concurrently -r yarn:dev:*`                                                         |
-| `yarn build`    | Build the files once for production (optimze file size) | `concurrently -r yarn:build:*`                                                       |
-| `yarn pipeline` | Run install, and build the files for production         | `yarn install --silent --non-interactive;concurrently -r yarn:pipeline:*;yarn build` |
+| Command           | Description                                                                 | Command                                                                              |
+| ----------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `yarn watch`      | Start the file watcher                                                      | `concurrently -r yarn:watch:*`                                                       |
+| `yarn dev`        | Build the files once                                                        | `concurrently -r yarn:dev:*`                                                         |
+| `yarn build`      | Build the files once for production (with optimzed file size)               | `concurrently -r yarn:build:*`                                                       |
+| `yarn pipeline`   | Run install, and build the files for production                             | `yarn install --silent --non-interactive;concurrently -r yarn:pipeline:*;yarn build` |
+| `yarn showConfig` | Shows the merged configuration from [`pipeline.yaml`] and [`defaults.yaml`] | `node Build/Carbon.Pipeline/showConfig.mjs`                                          |
 
 The tasks are split up, so they can run in parallel mode. But you can also run them separately:
 
