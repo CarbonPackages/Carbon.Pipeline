@@ -180,11 +180,15 @@ function css(css, file, time) {
                         if (result.map) {
                             const file = `${to}.map`;
                             const map = result.map.toString();
-                            tasks.push(fs.outputFile(file, map));
-                            if (!watch && index === 0) {
-                                const size = fs.statSync(file)?.size;
-                                mapFilesize = humanFileSize(size);
-                            }
+                            tasks.push(
+                                fs.outputFile(file, map, () => {
+                                    if (!watch && index === 0) {
+                                        const size = fs.statSync(file)?.size;
+                                        mapFilesize = humanFileSize(size);
+                                    }
+                                })
+                            );
+
                             if (compression) {
                                 tasks.push(writeGz(file, map));
                                 tasks.push(writeBr(file, map));
