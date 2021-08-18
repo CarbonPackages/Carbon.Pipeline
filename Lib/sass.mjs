@@ -1,4 +1,5 @@
 import sass from "sass";
+import tildeImporter from "node-sass-tilde-importer";
 import { styleFiles, compression } from "./helper.mjs";
 function render(key) {
     const { to, sourcemap } = styleFiles[key];
@@ -6,6 +7,7 @@ function render(key) {
         file: key,
         outFile: to[0],
         outputStyle: compression ? "compressed" : "expanded",
+        importer: tildeImporter,
         sourceMap: sourcemap,
         sourceMapContents: true,
         sourceMapEmbed: true,

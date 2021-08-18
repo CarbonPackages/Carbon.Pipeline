@@ -220,10 +220,17 @@ Thanks to a custom made `resolve` function, you can also use [globbing][glob] in
 
 ### Sass
 
-If you want to use [Sass] (`.scss`or `.sass` files) you have to install [`sass`]:
+If you want to use [Sass] (`.scss`or `.sass` files) you have to install [`sass`] and [`node-sass-tilde-importer`]:
 
 ```bash
-yarn add --dev sass
+yarn add --dev sass node-sass-tilde-importer
+```
+
+You have to ways to import files from `node_modules` (Example with bootstrap):
+
+```css
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/bootstrap";
 ```
 
 ### PostCSS
@@ -497,6 +504,7 @@ not dead
 [tailwind file-size]: https://tailwindcss.com/docs/controlling-file-size
 [sass]: https://sass-lang.com
 [`sass`]: https://www.npmjs.com/package/sass
+[`node-sass-tilde-importer`]: https://www.npmjs.com/package/node-sass-tilde-importer
 [postcss-import]: https://www.npmjs.com/package/postcss-import
 [postcss-focus-visible]: https://www.npmjs.com/package/postcss-focus-visible
 [postcss-nested]: https://www.npmjs.com/package/postcss-nested
