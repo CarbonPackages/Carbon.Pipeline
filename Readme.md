@@ -456,6 +456,37 @@ esbuild:
       # options:
 ```
 
+As the `ENV` variable is set to `development` or `production` if you run the tasks, you can have different setups (For example remove `console` commands with [`babel-plugin-transform-remove-console`] on `production`):
+
+```json
+{
+  "env": {
+    "development": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "modules": false
+          }
+        ]
+      ],
+      "plugins": ["@babel/proposal-class-properties", "@babel/proposal-object-rest-spread"]
+    },
+    "production": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "modules": false
+          }
+        ]
+      ],
+      "plugins": ["@babel/proposal-class-properties", "@babel/proposal-object-rest-spread", "transform-remove-console"]
+    }
+  }
+}
+```
+
 If you a poor person and have to support Internet Explorer, you have to edit your `.browserslistrc`.
 If a browser starting with `ie ` is found, the target `es5` gets activated.
 
@@ -522,6 +553,7 @@ not dead
 [svelte]: https://svelte.dev
 [vue.js]: https://vuejs.org
 [babel.js]: https://babeljs.io
+[`babel-plugin-transform-remove-console`]: https://www.npmjs.com/package/babel-plugin-transform-remove-console
 [jsx factory]: https://esbuild.github.io/api/#jsx-factory
 [jsx fragment]: https://esbuild.github.io/api/#jsx-fragment
 [external]: https://esbuild.github.io/api/#external
