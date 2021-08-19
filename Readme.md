@@ -498,6 +498,45 @@ not dead
 
 </details>
 
+## Live-Reloading
+
+If you want to use live reloading, you can do this with [Browsersync]. You can choose to install it globally (recomended) or locally
+
+To install it globally run `yarn global add browser-sync`, to install it locally run `yarn add --dev browser-sync`.
+
+Then you have to create a inital config with `browser-sync init` (If you installed it locally `yarn browser-sync init`).  
+After that, you need to adjust the created `bs-config.js` file.
+You can adjust every parameter, but the two parameter you need to set is `files` and `proxy`:
+
+```js
+module.exports = {
+  files: ["DistributionPackages/**/Public/**/*.css", "DistributionPackages/**/Public/**/*.js"],
+  proxy: "http://your.local.domain",
+};
+```
+
+If you want to also reload the page if a `fusion` or a template file gets changed, you can do so:
+
+```js
+module.exports = {
+  files: [
+    "DistributionPackages/**/Public/**/*.css",
+    "DistributionPackages/**/Public/**/*.js",
+    "DistributionPackages/**/Private/**/*.fusion",
+    "DistributionPackages/**/Private/**/*.html",
+  ],
+  proxy: "http://your.local.domain",
+};
+```
+
+Make sure you set the correct proxy with the corresponding protocol (`https://` or `http://`), depending on your setup. To create a better overview of the parameter you can delete the not changed values from the file.
+
+To start Browsersync you can run `browser-sync start --config bs-config.js` (If you installed it locally prepend it with `yarn`) or, if you want to start it together with `yarn watch`, you can add following line into the `scripts` section:
+
+```
+"watch:browsersync": "browser-sync start --config bs-config.js",
+```
+
 [logo]: https://repository-images.githubusercontent.com/377838441/de0f0b80-d2df-11eb-86a9-7988d27d4ab0
 [esbuild]: https://esbuild.github.io
 [postcss]: https://postcss.org
@@ -559,3 +598,4 @@ not dead
 [external]: https://esbuild.github.io/api/#external
 [brotli]: https://github.com/google/brotli
 [gzip]: https://nodejs.org/api/zlib.html
+[browsersync]: https://browsersync.io/
