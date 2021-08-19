@@ -70,8 +70,7 @@ toArray(config.packages).forEach((entry) => {
             const from = path.join(entryFolder, filename);
             const to = conf.outdir.map((dir) => path.join(dir, `${baseFilename}.css`));
             const sourcemap = conf.sourcemap;
-            // We add later 4 spaces to the style files to make them compatible with the map files
-            const length = to[0].length - (sourcemap ? 0 : 4);
+            const length = to[0].length;
             styleFiles[path.resolve(from)] = {
                 from,
                 to,
