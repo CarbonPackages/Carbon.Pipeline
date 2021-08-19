@@ -198,7 +198,7 @@ function css(css, file, time) {
                     return Promise.all(tasks).then(() => {
                         const fileOuput = file.to[0];
                         const outputFilename = path.join(path.dirname(fileOuput), bold(path.basename(fileOuput)));
-                        const spaces = " ".repeat(outputLength - fileOuput.length);
+                        const spaces = " ".repeat(Math.max(outputLength - fileOuput.length, 0));
                         const duration = watch ? "  " + magenta(humanDuration(process.hrtime(time))) : "";
                         print(`  ${outputFilename}     ${spaces} ${cyan(cssFilesize) + duration}`);
                         if (mapFilesize) {
