@@ -268,6 +268,39 @@ By the way: [Alpine.js] is excellent in combination with [Tailwind CSS].
 ## Javascript
 
 <details>
+<summary><strong>Flow Settings in Javascript</strong></summary>
+
+If you use tools like [Flownative.Sentry], you perhaps want to pass some of the settings to your Javascript, without setting a `data` attribute somewhere in the markup. For that, you can enable `esbuild.setFlowSettings`. If set to `true`, all settings are passed. It is recommended to set it to a path (e.g. `Flownative.Sentry`). This path is added as `--path` attribute to the `flow configuration:show` command. If you run `yarn build`, which has automatically the flag `--production`, the `FLOW_CONTEXT` is set to `Production`.
+
+```yaml
+esbuild:
+  setFlowSettings: Flownative.Sentry
+```
+
+In Javascript, you can access the variables like this:
+
+```js
+Sentry.init({
+  dsn: FLOW.Flownative.Sentry.dsn,
+  release: FLOW.Flownative.Sentry.release,
+  environment: FLOW.Flownative.Sentry.environment,
+  integrations: [new Integrations.BrowserTracing()],
+});
+```
+
+Make sure your [`.eslintrc`] has the global `FLOW` enabled:
+
+```json
+{
+  "globals": {
+    "FLOW": "readonly"
+  }
+}
+```
+
+</details>
+
+<details>
 <summary><strong>TypeScript</strong></summary>
 
 If you want to use [TypeScript], add the following packages to `package.json`:
@@ -311,6 +344,9 @@ To enable the correct linting, edit [`.eslintrc`]:
   "env": {
     "es6": true,
     "node": true
+  },
+  "globals": {
+    "FLOW": "readonly"
   }
 }
 ```
@@ -496,6 +532,23 @@ ie 11
 not dead
 ```
 
+<details>
+
+<summary><strong>Additional esbuild plugins</strong></summary>
+
+You can also add additional [esbuild] plugins, for example [`esbuild-envfile-plugin`]:
+
+```yaml
+esbuild:
+  additionalPlugins:
+    esbuild-envfile-plugin:
+      functionName: setup
+      options: null
+```
+
+As the plugin return not the function directly (like others), you have to also to pass the name of the function.
+If a plugin returns directly the function, you don't have to set this. If you want to enable such a plugin without any options, you can just pass `name-of-the-plugin: true`
+
 </details>
 
 ## Live-Reloading
@@ -592,7 +645,9 @@ To start Browsersync you can run `browser-sync start --config bs-config.js` (If 
 [svelte]: https://svelte.dev
 [vue.js]: https://vuejs.org
 [babel.js]: https://babeljs.io
+[flownative.sentry]: https://github.com/flownative/flow-sentry
 [`babel-plugin-transform-remove-console`]: https://www.npmjs.com/package/babel-plugin-transform-remove-console
+[`esbuild-envfile-plugin`]: https://www.npmjs.com/package/esbuild-envfile-plugin
 [jsx factory]: https://esbuild.github.io/api/#jsx-factory
 [jsx fragment]: https://esbuild.github.io/api/#jsx-fragment
 [external]: https://esbuild.github.io/api/#external
