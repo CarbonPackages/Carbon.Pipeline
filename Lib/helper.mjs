@@ -37,12 +37,13 @@ toArray(config.packages).forEach((entry) => {
         removeCompressedFiles(entry);
     }
 
-    const entryFolder = path.join(
-        config.folder.base,
-        entry.package,
-        "Resources/Private",
-        entry.folder?.input || config.folder.input
-    );
+    const entryFolder = (() => {
+        let inputFolder = entry.folder?.input;
+        if (!inputFolder && typeof inputFolder !== "string") {
+            inputFolder = config.folder.input;
+        }
+        return path.join(config.folder.base, entry.package, "Resources/Private", inputFolder);
+    })();
 
     let files = toArray(entry.files);
     if (!files) {
