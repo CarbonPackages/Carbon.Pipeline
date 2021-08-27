@@ -270,11 +270,11 @@ By the way: [Alpine.js] is excellent in combination with [Tailwind CSS].
 <details>
 <summary><strong>Flow Settings in Javascript</strong></summary>
 
-If you use tools like [Flownative.Sentry], you perhaps want to pass some of the settings to your Javascript, without setting a `data` attribute somewhere in the markup. For that, you can enable `esbuild.setFlowSettings`. If set to `true`, all settings are passed. It is recommended to set it to a path (e.g. `Flownative.Sentry`). This path is added as `--path` attribute to the `flow configuration:show` command. If you run `yarn build`, which has automatically the flag `--production`, the `FLOW_CONTEXT` is set to `Production`.
+If you use tools like [Flownative.Sentry], you perhaps want to pass some of the settings to your Javascript, without setting a `data` attribute somewhere in the markup. For that, you can enable `esbuild.defineFlowSettings`. If set to `true`, all settings are passed. It is recommended to set it to a path (e.g. `Flownative.Sentry`). This path is added as `--path` attribute to the `flow configuration:show` command. If you run `yarn build`, which has automatically the flag `--production`, the `FLOW_CONTEXT` is set to `Production`.
 
 ```yaml
 esbuild:
-  setFlowSettings: Flownative.Sentry
+  defineFlowSettings: Flownative.Sentry
 ```
 
 In Javascript, you can access the variables like this:

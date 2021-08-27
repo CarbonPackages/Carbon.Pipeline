@@ -106,6 +106,6 @@ async function importPlugins() {
 
 const logLevel = config.esbuild?.logLevel || "info";
 const legalComments = config.esbuild?.legalComments || "linked";
-const flowSettings = readFlowSettings(config.esbuild.setFlowSettings);
+const flowSettings = readFlowSettings(config.esbuild.defineFlowSettings);
 
 export { browserlist, logLevel, legalComments, writeFilesToAnotherPackage, importPlugins, flowSettings };
