@@ -33,6 +33,12 @@ buildDefaults:
     gzip: 9
 
 esbuild:
+  # Set Neos Flow settings as FLOW variable. If `true` all settings are passed.
+  # It is recomended to set it the a path (e.g. Jonnitto.PrettyEmbedHelper)
+  # This is the same as passing --path to the ./flow configuration:show command
+  # In Javascript the value is available under the variable FLOW
+  # (e.g. FLOW.Jonnitto.PrettyEmbedHelper.youtubeApiKey)
+  setFlowSettings: false
   # https://esbuild.github.io/api/#log-level
   logLevel: info
   # https://esbuild.github.io/api/#legal-comments

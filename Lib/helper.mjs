@@ -4,6 +4,7 @@ import path from "path";
 import { red } from "colorette";
 import deepmerge from "deepmerge";
 import glob from "glob";
+import { execSync } from "child_process";
 
 const pipeline = readYamlFile("pipeline");
 const defaults = readYamlFile("defaults", "Build/Carbon.Pipeline");
@@ -164,6 +165,83 @@ async function asyncForEach(array, callback) {
     }
 }
 
+function readFlowSettings(path) {
+    if (!path) {
+        return null;
+    }
+    const settings = (() => {
+        let command = "./flow configuration:show";
+        if (production) {
+            command = "FLOW_CONTEXT=Production " + command;
+        }
+        if (typeof path === "string") {
+            command += " --path " + path;
+        }
+        return execSync(command)
+            .toString("utf8")
+            .replace(/^Configuration "Settings:.*:/, "")
+            .trim();
+    })();
+    const json = yaml.load(settings, { schema: yaml.JSON_SCHEMA, json: true });
+    return convertJsonForDefine(json, path);
+}
+
+function convertJsonForDefine(json, prefix) {
+    prefix = prefix ? prefix + "." : "";
+    const define = {};
+    const isTrueObject = (value) => {
+        if (typeof value !== "object") {
+            return false;
+        }
+        try {
+            for (x of value) {
+                // is no errors happens here is an array
+                break;
+            }
+            return false;
+        } catch {
+            // if there was an error is an object
+            return true;
+        }
+    };
+    const replaceIdentifier = (identifier) =>
+        identifier
+            .replaceAll("..", ".")
+            .replaceAll("-", "_")
+            .replaceAll("0", "ZERO")
+            .replaceAll("1", "ONE")
+            .replaceAll("2", "TWO")
+            .replaceAll("3", "THREE")
+            .replaceAll("4", "FOUR")
+            .replaceAll("5", "FIVE")
+            .replaceAll("6", "SIX")
+            .replaceAll("7", "SEVEN")
+            .replaceAll("8", "EIGHT")
+            .replaceAll("9", "NINE");
+
+    const checkIdentifier = (identifier) => !identifier.match(/[:\d\/\+\$\\\*\[\]]/gi);
+
+    const flatten = (identifier, value) => {
+        identifier = replaceIdentifier(identifier);
+        if (!checkIdentifier(identifier)) {
+            return;
+        }
+
+        if (isTrueObject(value)) {
+            for (const key in value) {
+                flatten(`${identifier}.${key}`, value[key]);
+            }
+        } else {
+            define["FLOW." + prefix + identifier] = JSON.stringify(value);
+        }
+    };
+
+    for (const key in json) {
+        flatten(key, json[key]);
+    }
+    return define;
+}
+
 function readYamlFile(file, folder) {
     file = `${file}.yaml`;
     const filePath = folder ? path.join(folder, file) : file;
@@ -300,4 +378,5 @@ export {
     humanFileSize,
     humanDuration,
     equalArrays,
+    readFlowSettings,
 };

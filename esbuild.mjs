@@ -4,9 +4,9 @@ import {
     browserlist,
     logLevel,
     legalComments,
-    assignPlugin,
     writeFilesToAnotherPackage,
     importPlugins,
+    flowSettings,
 } from "./Lib/esbuildHelper.mjs";
 
 async function build() {
@@ -34,6 +34,10 @@ async function build() {
             outdir: firstOutdir,
             outExtension: {
                 ".js": jsExtension,
+            },
+            define: {
+                ...flowSettings,
+                "process.env.npm_package_version": '"' + process.env.npm_package_version + '"',
             },
             loader: {
                 ".cjsx": "jsx",
