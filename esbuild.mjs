@@ -52,13 +52,13 @@ async function build() {
                         })
                     );
                 }
-                const vue = plugins.vue;
-                if (vue?.plugin) {
-                    returnValue.push(vue.plugin(vue.options));
-                }
-                const babel = plugins.babel;
-                if (babel?.plugin) {
-                    returnValue.push(babel.plugin(babel.options));
+
+                for (const key in plugins) {
+                    const entry = plugins[key];
+                    if (key === "compress" || !entry.isStandardPlugin || !entry?.plugin) {
+                        continue;
+                    }
+                    returnValue.push(entry.plugin(entry.options));
                 }
 
                 if (compression) {

@@ -28,10 +28,11 @@ const browserlist = (() => {
 })();
 
 function assignPlugin(obj, options) {
+    const isStandardPlugin = Object.keys(obj).length === 1;
     if (typeof options !== "object") {
         options = {};
     }
-    return { ...obj, ...options };
+    return { ...obj, ...options, isStandardPlugin };
 }
 
 function writeFilesToAnotherPackage(outputFiles, baseDir, newDir) {
@@ -44,11 +45,12 @@ function writeFilesToAnotherPackage(outputFiles, baseDir, newDir) {
 async function importPlugins() {
     const plugins = {};
     const esbuildPlugins = config.esbuild?.plugins;
+    const additionalPlugins = config.esbuild?.additionalPlugins || [];
 
     if (compression) {
         plugins["compress"] = await dynamicImport("./compress.mjs", "esPlugin");
     }
-    if (!esbuildPlugins) {
+    if (!esbuildPlugins && !additionalPlugins) {
         return plugins;
     }
 
@@ -74,6 +76,18 @@ async function importPlugins() {
             },
             vuePlugin.options
         );
+    }
+
+    for (const name in additionalPlugins) {
+        const configuration = additionalPlugins[name];
+        if (!configuration) {
+            continue;
+        }
+        const importedPackage = await dynamicImport(name);
+        const plugin = configuration.functionName ? importedPackage[configuration.functionName] : importedPackage;
+        if (typeof plugin === "function") {
+            plugins[name] = assignPlugin(plugin, configuration.options);
+        }
     }
 
     const babelPlugin = esbuildPlugins?.babel;

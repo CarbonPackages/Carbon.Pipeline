@@ -49,3 +49,7 @@ esbuild:
     babel:
       enable: false
       options: null
+  # additionalPlugins:
+  #   esbuild-envfile-plugin:
+  #     functionName: setup
+  #     options: null
