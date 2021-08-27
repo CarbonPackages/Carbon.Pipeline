@@ -19,7 +19,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "autoprefixer": "^10.3.2",
+    "autoprefixer": "^10.3.3",
     "browserslist": "^4.16.8",
     "chokidar-cli": "^3.0.0",
     "colorette": "^1.3.0",
@@ -27,7 +27,7 @@
     "cssnano": "^5.0.8",
     "deepmerge": "^4.2.2",
     "dependency-graph": "^0.11.0",
-    "esbuild": "^0.12.22",
+    "esbuild": "^0.12.24",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.1",
@@ -49,6 +49,6 @@
     "stylelint": "^13.13.1",
     "stylelint-config-recommended-scss": "^4.3.0",
     "stylelint-scss": "^3.20.1",
-    "tailwindcss": "^2.2.7"
+    "tailwindcss": "^2.2.8"
   }
 }
