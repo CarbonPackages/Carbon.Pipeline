@@ -206,18 +206,18 @@ function convertJsonForDefine(json, prefix) {
     };
     const replaceIdentifier = (identifier) =>
         identifier
-            .replaceAll("..", ".")
-            .replaceAll("-", "_")
-            .replaceAll("0", "ZERO")
-            .replaceAll("1", "ONE")
-            .replaceAll("2", "TWO")
-            .replaceAll("3", "THREE")
-            .replaceAll("4", "FOUR")
-            .replaceAll("5", "FIVE")
-            .replaceAll("6", "SIX")
-            .replaceAll("7", "SEVEN")
-            .replaceAll("8", "EIGHT")
-            .replaceAll("9", "NINE");
+            .replace(/\.\./g, ".")
+            .replace(/-/g, "_")
+            .replace(/0/g, "ZERO")
+            .replace(/1/g, "ONE")
+            .replace(/2/g, "TWO")
+            .replace(/3/g, "THREE")
+            .replace(/4/g, "FOUR")
+            .replace(/5/g, "FIVE")
+            .replace(/6/g, "SIX")
+            .replace(/7/g, "SEVEN")
+            .replace(/8/g, "EIGHT")
+            .replace(/9/g, "NINE");
 
     const checkIdentifier = (identifier) => !identifier.match(/[:\d\/\+\$\\\*\[\]]/gi);
 
