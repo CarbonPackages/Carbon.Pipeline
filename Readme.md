@@ -531,7 +531,7 @@ defaults
 ie 11
 not dead
 ```
-
+</details>
 <details>
 
 <summary><strong>Additional esbuild plugins</strong></summary>
