@@ -1,0 +1,28 @@
+packages:
+  - package: Test
+    folder:
+      input: ''
+    sourcemap: false
+
+folder:
+  base: ''
+  output:
+    style: Public
+    script: Public
+    module: Public
+    commonJS: Public
+
+buildDefaults:
+  sourcemap: false
+  compression: false
+
+esbuild:
+  legalComments: none
+  pure:
+    - console.log
+    - console.info
+  plugins:
+    vue:
+      enable: true
+    svelte:
+      enable: true
