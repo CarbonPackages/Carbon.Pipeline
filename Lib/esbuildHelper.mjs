@@ -29,7 +29,7 @@ const browserlist = (() => {
 
 function assignPlugin(obj, options) {
     const isStandardPlugin = Object.keys(obj).length === 1;
-    if (typeof options !== "object") {
+    if (!options || typeof options !== "object") {
         options = {};
     }
     return { ...obj, options, isStandardPlugin };
