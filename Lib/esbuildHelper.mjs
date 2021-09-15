@@ -32,7 +32,7 @@ function assignPlugin(obj, options) {
     if (typeof options !== "object") {
         options = {};
     }
-    return { ...obj, ...options, isStandardPlugin };
+    return { ...obj, options, isStandardPlugin };
 }
 
 function writeFilesToAnotherPackage(outputFiles, baseDir, newDir) {
