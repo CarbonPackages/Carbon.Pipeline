@@ -2,6 +2,7 @@ import ESBUILD from "esbuild";
 import { scriptFiles as files, asyncForEach, watch, minify, error, compression } from "./Lib/helper.mjs";
 import {
     browserlist,
+    pure,
     logLevel,
     legalComments,
     writeFilesToAnotherPackage,
@@ -24,6 +25,7 @@ async function build() {
             bundle: true,
             platform: "browser",
             format,
+            pure,
             minify,
             watch,
             external,

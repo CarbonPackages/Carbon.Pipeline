@@ -301,6 +301,21 @@ Make sure your [`.eslintrc`] has the global `FLOW` enabled:
 </details>
 
 <details>
+<summary><strong>Remove certain functions (e.g. console.log) in production builds</strong></summary>
+
+To remove some functions from the production build you can use the `esbuild.pure` setting. If you have just
+one function, you can pass a string, otherwise, you have to set it to an array:
+
+```yaml
+esbuild:
+  pure:
+    - console.log
+    - console.pure
+```
+
+</details>
+
+<details>
 <summary><strong>TypeScript</strong></summary>
 
 If you want to use [TypeScript], add the following packages to `package.json`:
@@ -531,6 +546,7 @@ defaults
 ie 11
 not dead
 ```
+
 </details>
 <details>
 
