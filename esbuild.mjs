@@ -1,14 +1,6 @@
 import ESBUILD from "esbuild";
 import { scriptFiles as files, asyncForEach, watch, minify, error, compression } from "./Lib/helper.mjs";
-import {
-    browserlist,
-    pure,
-    logLevel,
-    legalComments,
-    writeFilesToAnotherPackage,
-    importPlugins,
-    flowSettings,
-} from "./Lib/esbuildHelper.mjs";
+import { browserlist, options, writeFilesToAnotherPackage, importPlugins, flowSettings } from "./Lib/esbuildHelper.mjs";
 
 async function build() {
     // Pre-import plugins
@@ -20,18 +12,16 @@ async function build() {
         const write = compression ? false : !multiplePackages;
 
         await ESBUILD.build({
+            ...options,
             entryPoints,
             sourcemap,
             bundle: true,
             platform: "browser",
             format,
-            pure,
             minify,
             watch,
             external,
             write,
-            logLevel,
-            legalComments,
             target: browserlist,
             outdir: firstOutdir,
             outExtension: {

@@ -104,9 +104,11 @@ async function importPlugins() {
     return plugins;
 }
 
-const pure = toArray(config.esbuild?.pure) || [];
-const logLevel = config.esbuild?.logLevel || "info";
-const legalComments = config.esbuild?.legalComments || "linked";
+const options = config.esbuild?.options || {};
+options.pure = toArray(config.esbuild?.options?.pure) || [];
+options.logLevel = config.esbuild?.options?.logLevel || "info";
+options.legalComments = config.esbuild?.options?.legalComments || "linked";
+
 const flowSettings = readFlowSettings(config.esbuild.defineFlowSettings);
 
-export { browserlist, logLevel, pure, legalComments, writeFilesToAnotherPackage, importPlugins, flowSettings };
+export { browserlist, options, writeFilesToAnotherPackage, importPlugins, flowSettings };

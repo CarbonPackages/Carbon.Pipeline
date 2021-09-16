@@ -17,10 +17,11 @@ buildDefaults:
   compression: false
 
 esbuild:
-  legalComments: none
-  pure:
-    - console.log
-    - console.info
+  options:
+    legalComments: none
+    pure:
+      - console.log
+      - console.info
   plugins:
     vue:
       enable: true
