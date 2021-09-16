@@ -301,16 +301,20 @@ Make sure your [`.eslintrc`] has the global `FLOW` enabled:
 </details>
 
 <details>
-<summary><strong>Remove certain functions (e.g. console.log) in production builds</strong></summary>
+<summary><strong>Pass options to esbuild</strong></summary>
 
-To remove some functions from the production build you can use the `esbuild.pure` setting. If you have just
+You can pass options to the [esbuild API] with `esbuild.options`.
+
+**Example**:
+To remove some functions from the production build you can use the `esbuild.options.pure` setting. If you have just
 one function, you can pass a string, otherwise, you have to set it to an array:
 
 ```yaml
 esbuild:
-  pure:
-    - console.log
-    - console.pure
+  options:
+    pure:
+      - console.log
+      - console.pure
 ```
 
 </details>
@@ -615,6 +619,7 @@ To start Browsersync you can run `browser-sync start --config bs-config.js` (If 
 [`defaults.yaml`]: defaults.yaml
 [`builddefaults.compression`]: defaults.yaml#L31-L33
 [esbuild format]: https://esbuild.github.io/api/#format
+[esbuild api]: https://esbuild.github.io/api/
 [david]: https://img.shields.io/david/dev/CarbonPackages/Carbon.Pipeline?label=dependencies&logo=npm&path=Installer%2FDistribution%2FDefaults
 [david-dm]: https://david-dm.org/CarbonPackages/Carbon.Pipeline?type=dev&path=Installer/Distribution/Defaults
 [github issues]: https://img.shields.io/github/issues/CarbonPackages/Carbon.Pipeline
