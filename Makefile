@@ -21,12 +21,10 @@ prepare:
 	yarn install
 
 upgrade:
-	make prepare
 	yarn upgrade-interactive --latest
 	yes | cp package.json Installer/Distribution/Defaults/package.json
 
 test:
-	make prepare
 	yarn showConfig
 	yarn add esbuild-svelte svelte-preprocess vue vue-template-compiler esbuild-vue sass node-sass-tilde-importer
 	yarn build
