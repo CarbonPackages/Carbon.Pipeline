@@ -19,7 +19,6 @@ import {
 } from "./Lib/helper.mjs";
 import { getAncestorDirs, dependencyGraph, dependencies, rc } from "./Lib/postcssHelper.mjs";
 
-let configFile;
 let compressFunction = compression ? await dynamicImport("./compress.mjs", null) : {};
 let sassFunction = sass ? await dynamicImport("./sass.mjs", null) : {};
 let { writeBr, writeGz } = compressFunction;
@@ -98,10 +97,6 @@ function build() {
                     }
                 }
 
-                if (configFile) {
-                    watcher.add(configFile);
-                }
-
                 print(dim("\nWaiting for file changes..."));
                 watcher.on("change", (file) => {
                     const isSassFile = sassFileCheck(file);
@@ -147,7 +142,6 @@ function build() {
 function css(css, file, time) {
     return rc()
         .then((ctx) => {
-            configFile = ctx.file;
             return postcss(ctx.plugins)
                 .process(css, {
                     from: file.from,
