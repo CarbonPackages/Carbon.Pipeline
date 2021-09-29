@@ -1,7 +1,7 @@
 import yaml from "js-yaml";
 import fs from "fs-extra";
 import path from "path";
-import { red } from "colorette";
+import { red } from "nanocolors";
 import deepmerge from "deepmerge";
 import glob from "glob";
 import { execSync } from "child_process";

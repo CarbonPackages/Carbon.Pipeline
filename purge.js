@@ -1,7 +1,7 @@
 const path = require("path");
 const yaml = require("js-yaml");
 const fs = require("fs");
-const { red } = require("colorette");
+const { red } = require("nanocolors");
 
 const pipeline = readYamlFile("pipeline");
 const defaults = readYamlFile("defaults", "Build/Carbon.Pipeline");
