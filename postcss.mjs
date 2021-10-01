@@ -3,7 +3,7 @@ import path from "path";
 import fs from "fs-extra";
 import chokidar from "chokidar";
 import readCache from "read-cache";
-import { bold, dim, cyan, magenta } from "colorette";
+import { bold, dim, cyan, magenta } from "nanocolors";
 import {
     styleFiles as files,
     watch,
