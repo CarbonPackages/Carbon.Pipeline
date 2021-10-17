@@ -27,7 +27,7 @@
     "deepmerge": "^4.2.2",
     "dependency-graph": "^0.11.0",
     "esbuild": "^0.13.3",
-    "eslint": "^7.32.0",
+    "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "fs-extra": "^10.0.0",
