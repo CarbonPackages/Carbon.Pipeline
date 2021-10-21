@@ -32,6 +32,7 @@ async function build() {
                 "process.env.npm_package_version": '"' + process.env.npm_package_version + '"',
             },
             loader: {
+                ...options.loader,
                 ".cjsx": "jsx",
                 ".ctsx": "tsx",
                 ".mjsx": "jsx",
