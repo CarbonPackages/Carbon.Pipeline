@@ -72,11 +72,13 @@ toArray(config.packages).forEach((entry) => {
             const from = path.join(entryFolder, filename);
             const to = conf.outdir.map((dir) => path.join(dir, `${baseFilename}.css`));
             const sourcemap = conf.sourcemap;
+            const quietDeps = conf.quietDeps;
             const length = to[0].length;
             styleFiles[path.resolve(from)] = {
                 from,
                 to,
                 sourcemap,
+                quietDeps,
                 length,
                 outdir: conf.outdir,
                 sass: needSass,
@@ -136,6 +138,7 @@ function removeCompressedFiles(entry) {
 function entryConfig(entry, type) {
     const inline = getValue(entry, "inline");
     const sourcemap = inline ? false : getValue(entry, "sourcemap");
+    const quietDeps = getValue(entry, "quietDeps");
     const outputFolderKey = inline ? "inline" : type;
     const folderOutput = entry.folder?.output;
     let outputFolder = config.folder.output[outputFolderKey];
@@ -147,6 +150,7 @@ function entryConfig(entry, type) {
     const outdir = toArray(packageName).map((pkg) => path.join(config.folder.base, pkg, "Resources", outputFolder));
     return {
         sourcemap,
+        quietDeps,
         outdir,
     };
 }
