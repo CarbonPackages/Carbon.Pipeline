@@ -31,6 +31,8 @@ buildDefaults:
   compression:
     brotli: 11
     gzip: 9
+  # silences (sass only) compiler warnings from stylesheets loaded through importers and load paths
+  quietDeps: false
 
 esbuild:
   # Set Neos Flow settings as FLOW variable. If `true` all the settings are passed.
