@@ -233,6 +233,7 @@ You have to ways to import files from `node_modules` (Example with bootstrap):
 @import "~bootstrap/scss/bootstrap";
 ```
 
+<details>
 <summary><strong>Pass options to the sass compiler</strong></summary>
 
 You can pass options to the sass compiler with `sassOptions`.
