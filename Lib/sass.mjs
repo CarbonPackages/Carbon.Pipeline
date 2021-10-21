@@ -11,6 +11,7 @@ function render(key) {
         sourceMap: sourcemap,
         sourceMapContents: true,
         sourceMapEmbed: true,
+        quietDeps: quietDeps
     });
     const css = result.css.toString();
     const importedFiles = [...result.stats.includedFiles].filter((file) => file != key);
