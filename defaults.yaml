@@ -2,10 +2,10 @@
 # packages: []
 
 extensions:
-  style: ['.pcss', '.css', '.scss', '.sass']
-  script: ['.js', '.jsx', '.ts', '.tsx', '.json']
-  module: ['.mjs', '.mjsx', '.mts', '.mtsx']
-  commonJS: ['.cjs', '.cjsx', '.cts', '.ctsx']
+  style: [".pcss", ".css", ".scss", ".sass"]
+  script: [".js", ".jsx", ".ts", ".tsx", ".json"]
+  module: [".mjs", ".mjsx", ".mts", ".mtsx"]
+  commonJS: [".cjs", ".cjsx", ".cts", ".ctsx"]
 
 folder:
   base: DistributionPackages
@@ -31,8 +31,9 @@ buildDefaults:
   compression:
     brotli: 11
     gzip: 9
-  # silences (sass only) compiler warnings from stylesheets loaded through importers and load paths
-  quietDeps: false
+
+# Pass options to the sass compiler
+sassOptions: null
 
 esbuild:
   # Set Neos Flow settings as FLOW variable. If `true` all the settings are passed.

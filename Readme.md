@@ -233,6 +233,21 @@ You have to ways to import files from `node_modules` (Example with bootstrap):
 @import "~bootstrap/scss/bootstrap";
 ```
 
+<summary><strong>Pass options to the sass compiler</strong></summary>
+
+You can pass options to the sass compiler with `sassOptions`.
+
+**Example**:
+To silencing warnings from stylesheets loaded through importers and load paths you can enable `quietDeps`:
+
+```yaml
+sassOptions:
+  quietDeps: true
+```
+
+</details>
+
+
 ### PostCSS
 
 This template comes with a variety of PostCSS Plugins. Feel free to remove some or add your own favorites packages. The configuration is located in [`.postcssrc.js`]. The suffix of these files should be `.pcss`.
