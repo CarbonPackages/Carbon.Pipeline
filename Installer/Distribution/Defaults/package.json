@@ -2,7 +2,7 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "postinstall": "touch ./node_modules/.metadata_never_index; touch ./Packages/.metadata_never_index",
+    "postinstall": "touch ./node_modules/.metadata_never_index; mkdir ./Packages; touch ./Packages/.metadata_never_index",
     "showConfig": "node Build/Carbon.Pipeline/showConfig.mjs",
     "build": "concurrently -r yarn:build:*",
     "build:js": "node Build/Carbon.Pipeline/esbuild.mjs --production",
