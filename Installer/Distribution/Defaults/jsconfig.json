@@ -9,5 +9,6 @@
                 "DistributionPackages/*"
             ]
         }
-    }
+    },
+    "include": ["DistributionPackages/**/*"]
 }
