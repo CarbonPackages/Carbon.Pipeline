@@ -29,7 +29,7 @@ test:
 reset:
 	git reset --hard
 	git clean -fx
-	rm -rf node_modules Build Test/Resources/Public
+	rm -rf node_modules Build Test/Resources/Public Packages
 
 
 # define indention for descriptions
