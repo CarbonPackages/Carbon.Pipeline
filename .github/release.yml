@@ -1,0 +1,20 @@
+changelog:
+  exclude:
+    labels:
+      - ignore-for-releasenotes
+  categories:
+    - title: 💥 Breaking changes
+      labels:
+        - breaking
+    - title: ✨ Exciting new features
+      labels:
+        - enhancement
+    - title: 🐛 Found and fixed bugs
+      labels:
+        - bug
+    - title: 📝 Added documentation
+      labels:
+        - documentation
+    - title: 🩹 Other changes
+      labels:
+        - "*"
