@@ -1,6 +1,6 @@
 ![Carbon.Pipeline – Build stack for Neos CMS][logo]
 
-[![Download]][main.zip] [![David]][david-dm] [![GitHub stars]][stargazers] [![GitHub watchers]][subscription] [![GitHub license]][license] [![GitHub issues]][issues] [![GitHub forks]][network] [![Twitter]][tweet] [![Sponsor @Jonnitto on GitHub]][sponsor]
+[![Download]][main.zip] [![GitHub stars]][stargazers] [![GitHub watchers]][subscription] [![GitHub license]][license] [![GitHub issues]][issues] [![GitHub forks]][network] [![Twitter]][tweet] [![Sponsor @Jonnitto on GitHub]][sponsor]
 
 **Carbon.Pipeline is a delicious blend of [esbuild] and [PostCSS] to form a full-featured, ultra-fast modern Javascript and CSS bundler for Flow Framework and [Neos CMS].**
 
@@ -636,8 +636,6 @@ To start Browsersync you can run `browser-sync start --config bs-config.js` (If 
 [`builddefaults.compression`]: defaults.yaml#L31-L33
 [esbuild format]: https://esbuild.github.io/api/#format
 [esbuild api]: https://esbuild.github.io/api/
-[david]: https://img.shields.io/david/dev/CarbonPackages/Carbon.Pipeline?label=dependencies&logo=npm&path=Installer%2FDistribution%2FDefaults
-[david-dm]: https://david-dm.org/CarbonPackages/Carbon.Pipeline?type=dev&path=Installer/Distribution/Defaults
 [github issues]: https://img.shields.io/github/issues/CarbonPackages/Carbon.Pipeline
 [issues]: https://github.com/CarbonPackages/Carbon.Pipeline/issues
 [github forks]: https://img.shields.io/github/forks/CarbonPackages/Carbon.Pipeline
