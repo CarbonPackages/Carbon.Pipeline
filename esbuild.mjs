@@ -5,11 +5,11 @@ import { browserlist, options, writeFilesToAnotherPackage, importPlugins, flowSe
 async function build() {
     // Pre-import plugins
     const plugins = await importPlugins();
-    await asyncForEach(files, async ({ entryPoints, sourcemap, outdir, format, external }) => {
+    await asyncForEach(files, async ({ entryPoints, sourcemap, outdir, format, external, inline }) => {
         const jsExtension = format === "esm" ? ".mjs" : format === "cjs" ? ".cjs" : ".js";
         const firstOutdir = outdir[0];
         const multiplePackages = outdir.length > 1;
-        const write = compression ? false : !multiplePackages;
+        const write = compression ? inline : !multiplePackages;
 
         await ESBUILD.build({
             ...options,
@@ -58,7 +58,7 @@ async function build() {
                     returnValue.push(entry.plugin(entry.options));
                 }
 
-                if (compression) {
+                if (compression && !inline) {
                     returnValue.push(
                         plugins.compress({
                             onEnd: ({ outputFiles }) => {

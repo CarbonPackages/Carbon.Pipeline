@@ -78,6 +78,7 @@ toArray(config.packages).forEach((entry) => {
                 to,
                 sourcemap,
                 length,
+                inline: conf.inline,
                 outdir: conf.outdir,
                 sass: needSass,
             };
@@ -148,6 +149,7 @@ function entryConfig(entry, type) {
     return {
         sourcemap,
         outdir,
+        inline,
     };
 }
 

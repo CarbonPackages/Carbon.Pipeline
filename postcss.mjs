@@ -167,7 +167,7 @@ function css(css, file, time) {
                     let mapFilesize = 0;
                     file.to.forEach((to, index) => {
                         tasks.push(fs.outputFile(to, result.css));
-                        if (compression) {
+                        if (compression && !file.inline) {
                             tasks.push(writeGz(to, result.css));
                             tasks.push(writeBr(to, result.css));
                         }
