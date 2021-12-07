@@ -22,7 +22,7 @@ If applicable, add screenshots to help explain your problem.
 
 - OS: (e.g. macOS)
 - Node version
-- Yarn version
+- Type and version of package manager (yarn/npm/pnpm)
 
 **Additional context**
 Add any other context about the problem here.

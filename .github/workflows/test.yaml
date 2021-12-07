@@ -1,0 +1,146 @@
+name: 'Basic test'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  dependencies: 'svelte svelte-preprocess esbuild-svelte vue vue-template-compiler esbuild-vue sass node-sass-tilde-importer'
+
+jobs:
+  prepare:
+    name: Prepare test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Copy files
+        run: |
+          mkdir -p Build/Carbon.Pipeline/
+          cp -n Test/pipeline.yaml ./
+          cp -n Installer/Distribution/Defaults/{*,.*} ./ || true
+          cp -R {Lib,defaults.yaml,*.mjs,*.js} Build/Carbon.Pipeline/
+
+      - name: Set package manager to pnpm
+        run: |
+          sed -Ei 's/"packageManager": "[a-z]+"/"packageManager": "pnpm"/' package.json
+
+      - name: Upload pnpm
+        uses: actions/upload-artifact@v2
+        with:
+          name: pnpm
+          path: '*'
+
+      - name: Set package manager to yarn
+        run: |
+          sed -Ei 's/"packageManager": "[a-z]+"/"packageManager": "yarn"/' package.json
+
+      - name: Upload yarn
+        uses: actions/upload-artifact@v2
+        with:
+          name: yarn
+          path: '*'
+
+      - name: Set package manager to npm
+        run: |
+          sed -Ei 's/"packageManager": "[a-z]+"/"packageManager": "npm"/' package.json
+
+      - name: Upload npm
+        uses: actions/upload-artifact@v2
+        with:
+          name: npm
+          path: '*'
+
+  pnpm:
+    name: Test with pnpm
+    runs-on: ubuntu-latest
+    needs: prepare
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: pnpm
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.23.6
+          cache: pnpm
+      - name: Setup node
+        uses: actions/setup-node@v2.5.0
+        with:
+          node-version-file: .nvmrc
+      - name: Install dependencies
+        run: |
+          pnpm install
+          pnpm add ${{ env.dependencies }}
+      - name: Show config
+        run: pnpm showConfig
+      - name: Build files
+        run: pnpm build
+
+  yarn:
+    name: Test with yarn
+    runs-on: ubuntu-latest
+    needs: prepare
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: yarn
+      - name: Setup node
+        uses: actions/setup-node@v2.5.0
+        with:
+          node-version-file: .nvmrc
+          cache: yarn
+      - name: Install dependencies
+        run: |
+          yarn install
+          yarn add ${{ env.dependencies }}
+      - name: Show config
+        run: yarn showConfig
+      - name: Build files
+        run: yarn build
+
+  npm:
+    name: Test with npm
+    runs-on: ubuntu-latest
+    needs: prepare
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: npm
+      - uses: actions/setup-node@v2
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Install dependencies
+        run: |
+          npm install
+          npm add ${{ env.dependencies }}
+      - name: Show config
+        run: npm run showConfig
+      - name: Build files
+        run: npm run build
+
+  deleteArtifacts:
+    name: Delete artifacts
+    runs-on: ubuntu-latest
+    needs:
+      - pnpm
+      - yarn
+      - npm
+    steps:
+      - name: Delete artifacts
+        uses: geekyeggo/delete-artifact@v1
+        with:
+          name: |
+            pnpm
+            yarn
+            npm
