@@ -18,7 +18,7 @@ Run `composer require carbon/pipeline --dev`. Some files (if not already existin
 
 ### Manual install
 
-If you want to make some significant adjustments to the build stack, you can also [download the code as zip file][main.zip] and put it in the folder `Build/Carbon.Pipeline`. Go to `Carbon.Pipeline/Installer/Distribution/Defaults` and copy the files to your root folder (Don't forget the hidden files, starting with a dot). After this is done, run the command `yarn install` to install the required packages, defined in `package.json`. Feel free to modify and change dependencies before installing 👍
+If you want to make some significant adjustments to the build stack, you can also [download the code as zip file][main.zip] and put it in the folder `Build/Carbon.Pipeline`. Go to `Carbon.Pipeline/Installer/Distribution/Defaults` and copy the files to your root folder (Don't forget the hidden files, starting with a dot). After this is done, run the command `install` to install the required packages, defined in `package.json`. Feel free to modify and change dependencies before installing 👍
 
 ## Add files to the build stack
 
@@ -309,7 +309,7 @@ By the way: [Alpine.js] is excellent in combination with [Tailwind CSS].
 <details>
 <summary><strong>Flow Settings in Javascript</strong></summary>
 
-If you use tools like [Flownative.Sentry], you perhaps want to pass some of the settings to your Javascript, without setting a `data` attribute somewhere in the markup. For that, you can enable `esbuild.defineFlowSettings`. If set to `true`, all settings are passed. It is recommended to set it to a path (e.g. `Flownative.Sentry`). This path is added as `--path` attribute to the `flow configuration:show` command. If you run `yarn build`, which has automatically the flag `--production`, the `FLOW_CONTEXT` is set to `Production`.
+If you use tools like [Flownative.Sentry], you perhaps want to pass some of the settings to your Javascript, without setting a `data` attribute somewhere in the markup. For that, you can enable `esbuild.defineFlowSettings`. If set to `true`, all settings are passed. It is recommended to set it to a path (e.g. `Flownative.Sentry`). This path is added as `--path` attribute to the `flow configuration:show` command. If you run the command `build`, which has automatically the flag `--production`, the `FLOW_CONTEXT` is set to `Production`.
 
 ```yaml
 esbuild:
@@ -695,7 +695,7 @@ module.exports = {
 
 Make sure you set the correct proxy with the corresponding protocol (`https://` or `http://`), depending on your setup. To create a better overview of the parameter you can delete the not changed values from the file.
 
-To start Browsersync you can run `browser-sync start --config bs-config.js` (If you installed it locally prepend it with `yarn`, `pnpm` or `npm run`) or, if you want to start it together with `watch`, you can add following line into the `scripts` section:
+To start Browsersync you can run `browser-sync start --config bs-config.js`. If you want to start it together with `watch`, you can add following line into the `scripts` section:
 
 ```
 "watch:browsersync": "browser-sync start --config bs-config.js",
