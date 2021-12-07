@@ -10,7 +10,7 @@ First, thank you that you want to give this build stack a try! If you miss a ✨
 
 ## Package manager
 
-You can choose between different package manager: [npm], [Yarn] and the ultra-fast and disk-space saving [pnpm]. To set you favorite task manager, set the name (`npm`, `yarn` or `pnpm`) in the `package.json` under the key `config.packageManager`.
+You can choose between different package manager: [npm], [Yarn] and the ultra-fast and disk-space saving [pnpm]. To set you favorite task manager, set the name (`npm`, `yarn` or `pnpm`) in the `package.json` under the key `config.packageManager`. `pnpm` is set as default.
 
 ### Install via composer
 
