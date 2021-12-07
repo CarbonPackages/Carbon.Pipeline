@@ -29,7 +29,7 @@ jobs:
 
       - name: Set package manager to pnpm
         run: |
-          sed -Ei '' 's/"packageManager": "[a-z]+"/"packageManager": "pnpm"/' package.json
+          sed -Ei 's/"packageManager": "[a-z]+"/"packageManager": "pnpm"/' package.json
 
       - name: Upload pnpm
         uses: actions/upload-artifact@v2
@@ -39,7 +39,7 @@ jobs:
 
       - name: Set package manager to yarn
         run: |
-          sed -Ei '' 's/"packageManager": "[a-z]+"/"packageManager": "yarn"/' package.json
+          sed -Ei 's/"packageManager": "[a-z]+"/"packageManager": "yarn"/' package.json
 
       - name: Upload yarn
         uses: actions/upload-artifact@v2
@@ -49,7 +49,7 @@ jobs:
 
       - name: Set package manager to npm
         run: |
-          sed -Ei '' 's/"packageManager": "[a-z]+"/"packageManager": "npm"/' package.json
+          sed -Ei 's/"packageManager": "[a-z]+"/"packageManager": "npm"/' package.json
 
       - name: Upload npm
         uses: actions/upload-artifact@v2
