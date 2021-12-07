@@ -1,4 +1,4 @@
-.PHONY: prepare upgrade reset test
+.PHONY: prepare up-lock up-pnpm up-yarn up-npm up-copy reset test-pnpm test-yarn test-npm
 
 # Define colors
 GREEN  := $(shell tput -Txterm setaf 2)
@@ -6,30 +6,68 @@ YELLOW := $(shell tput -Txterm setaf 3)
 WHITE  := $(shell tput -Txterm setaf 7)
 RESET  := $(shell tput -Txterm sgr0)
 
-## Copy files and install modules
+## Copy files
 prepare:
-	mkdir -p Build/Carbon.Pipeline/
-	cp -n Test/pipeline.yaml ./
-	cp -n Installer/Distribution/Defaults/{*,.*} ./ || true
-	cp -R {Lib,defaults.yaml,*.mjs,*.js} Build/Carbon.Pipeline/
-	yarn install
+	@mkdir -p Build/Carbon.Pipeline/
+	@cp -n Test/pipeline.yaml ./
+	@cp -n Installer/Distribution/Defaults/{*,.*} ./ || true
+	@cp -R {Lib,defaults.yaml,*.mjs,*.js} Build/Carbon.Pipeline/
 
-## Check for upgraded packages
-upgrade:
-	yarn upgrade-interactive --latest
-	yes | cp package.json Installer/Distribution/Defaults/package.json
+## Update lock files
+up-lock:
+	@echo "${GREEN}Writing lock files...${RESET}"
+	@rm -rf node_modules yarn.lock pnpm-lock.yaml package-lock.json
+	@pnpm install
+	@rm -rf node_modules
+	@yarn install
+	@rm -rf node_modules
+	@npm install 
 
-## Run some basic checks
-test:
-	yarn showConfig
-	yarn add svelte svelte-preprocess esbuild-svelte vue vue-template-compiler esbuild-vue sass node-sass-tilde-importer
-	yarn build
+## Check for upgraded packages with pnpm 
+up-pnpm:
+	@pnpm up --interactive --latest
+
+## Check for upgraded packages with yarn 
+up-yarn:
+	@yarn upgrade-interactive --latest
+
+## Check for upgraded packages with npm
+up-npm:
+	@npm update
+
+## Copy the root package.json to the build directory
+up-copy:
+	@yes | cp package.json Installer/Distribution/Defaults/package.json
+
+## Run some basic checks with pnpm
+test-pnpm:
+	@rm -rf node_modules
+	@sed -Ei '' 's/"packageManager": "[a-z]+"/"packageManager": "pnpm"/' package.json
+	@pnpm add svelte svelte-preprocess esbuild-svelte vue vue-template-compiler esbuild-vue sass node-sass-tilde-importer
+	@pnpm showConfig
+	@pnpm build
+
+## Run some basic checks with yarn
+test-yarn:
+	@rm -rf node_modules
+	@sed -Ei '' 's/"packageManager": "[a-z]+"/"packageManager": "yarn"/' package.json
+	@yarn add svelte svelte-preprocess esbuild-svelte vue vue-template-compiler esbuild-vue sass node-sass-tilde-importer
+	@yarn showConfig
+	@yarn build
+
+## Run some basic checks with npm
+test-npm:
+	@rm -rf node_modules
+	@sed -Ei '' 's/"packageManager": "[a-z]+"/"packageManager": "npm"/' package.json
+	@npm add svelte svelte-preprocess esbuild-svelte vue vue-template-compiler esbuild-vue sass node-sass-tilde-importer
+	@npm run showConfig
+	@npm run build
 
 ## Reset files to old state
 reset:
-	git reset --hard
-	git clean -fx
-	rm -rf node_modules Build Test/Resources/Public Packages
+	@git reset --hard
+	@git clean -fx
+	@rm -rf node_modules Build Test/Resources/Public Packages
 
 
 # define indention for descriptions
