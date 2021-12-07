@@ -28,15 +28,6 @@ jobs:
           cp -R {Lib,defaults.yaml,*.mjs,*.js} Build/Carbon.Pipeline/
 
       - name: Set package manager to pnpm
-        run: sed -i '' 's/"yarn"/"pnpm"/' package.json
-
-      - name: Upload pnpm
-        uses: actions/upload-artifact@v2
-        with:
-          name: pnpm
-          path: /*
-
-      - name: Set package manager to pnpm
         run: |
           sed -Ei '' 's/"packageManager": "[a-z]+"/"packageManager": "pnpm"/' package.json
 
