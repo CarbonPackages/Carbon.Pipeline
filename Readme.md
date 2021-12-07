@@ -8,9 +8,13 @@
 
 First, thank you that you want to give this build stack a try! If you miss a ✨ feature or found a 🐛 bug, feel free to [open an issue].
 
+## Package manager
+
+You can choose between different package manager: [npm], [Yarn] and the ultra-fast and disk-space saving [pnpm]. To set you favorite task manager, set the name (`npm`, `yarn` or `pnpm`) in the `package.json` under the key `config.packageManager`.
+
 ### Install via composer
 
-Run `composer require carbon/pipeline --dev`. Some files (if not already existing) will be copied to your root folder during the installation. After installing the package, run the command `yarn install` to install the required packages, defined in `package.json`. Feel free to modify and change dependencies before installing 👍
+Run `composer require carbon/pipeline --dev`. Some files (if not already existing) will be copied to your root folder during the installation. After installing the package, run the command `install` to install the required packages, defined in `package.json`. Feel free to modify and change dependencies before installing 👍
 
 ### Manual install
 
@@ -148,44 +152,50 @@ Please look at the [`defaults.yaml`] file for all the options.
 
 If you set an entry file with the javascript module suffix (`.mjs`, `.mjsx`, `.mts` or `.mtsx`) the format of this file will be enforced to `esm`. The same with commonJS: If you set an entry file with the javascript commonJS suffix (`.cjs`, `.cjsx`, `.cts` or `.ctsx`) the format of this file will be enforced to `cjs`. E.g., if you have the following array `["Main.js", "Module.mjs", "CommonJS.cjs"]`, and have no specific setting for the format, `Main.js` will have the format `iife`, `Module.mjs` will have the format `esm` and `CommonJS.cjs` will have the format `cjs`.
 
-## Yarn tasks
+## Tasks
+
+**As you can choose your favorite package manager, you have to prepend the task name with the corresponding name (`pnpm`, `yarn` or `npm run`)**
 
 There are five predefined main tasks:
 
-| Command           | Description                                                                 | Command                                                                              |
-| ----------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| `yarn watch`      | Start the file watcher                                                      | `concurrently -r yarn:watch:*`                                                       |
-| `yarn dev`        | Build the files once                                                        | `concurrently -r yarn:dev:*`                                                         |
-| `yarn build`      | Build the files once for production (with optimzed file size)               | `concurrently -r yarn:build:*`                                                       |
-| `yarn pipeline`   | Run install, and build the files for production                             | `yarn install --silent --non-interactive;concurrently -r yarn:pipeline:*;yarn build` |
-| `yarn showConfig` | Shows the merged configuration from [`pipeline.yaml`] and [`defaults.yaml`] | `node Build/Carbon.Pipeline/showConfig.mjs`                                          |
+| Command      | Description                                                                 | Command                                                                                                    |
+| ------------ | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `watch`      | Start the file watcher                                                      | `concurrently -r $npm_package_config_packageManager:watch:*`                                               |
+| `dev`        | Build the files once                                                        | `concurrently -r $npm_package_config_packageManager:dev:*`                                                 |
+| `build`      | Build the files once for production (with optimzed file size)               | `concurrently -r $npm_package_config_packageManager:build:*`                                               |
+| `pipeline`   | Run install, and build the files for production                             | `$npm_package_config_packageManager install;concurrently -r $npm_package_config_packageManager:pipeline:*` |
+| `showConfig` | Shows the merged configuration from [`pipeline.yaml`] and [`defaults.yaml`] | `node Build/Carbon.Pipeline/showConfig.mjs`                                                                |
 
 The tasks are split up, so they can run in parallel mode. But you can also run them separately:
 
-| Command          | Description                                    | Command                                               |
-| ---------------- | ---------------------------------------------- | ----------------------------------------------------- |
-| `yarn watch:js`  | Start the file watcher for JavaScript files    | `node Build/Carbon.Pipeline/esbuild.mjs --watch`      |
-| `yarn watch:css` | Start the file watcher for CSS files           | `node Build/Carbon.Pipeline/postcss.mjs --watch`      |
-| `yarn dev:js`    | Build the files once for JavaScript files      | `node Build/Carbon.Pipeline/esbuild.mjs`              |
-| `yarn dev:css`   | Build the files once for CSS files             | `node Build/Carbon.Pipeline/postcss.mjs`              |
-| `yarn build:js`  | Build the JavaScript files once for production | `node Build/Carbon.Pipeline/esbuild.mjs --production` |
-| `yarn build:css` | Build the CSS files once for production        | `node Build/Carbon.Pipeline/postcss.mjs --production` |
+| Command          | Description                                                   | Command                                                      |
+| ---------------- | ------------------------------------------------------------- | ------------------------------------------------------------ |
+| `watch:js`       | Start the file watcher for JavaScript files                   | `node Build/Carbon.Pipeline/esbuild.mjs --watch`             |
+| `watch:css`      | Start the file watcher for CSS files                          | `node Build/Carbon.Pipeline/postcss.mjs --watch`             |
+| `dev:js`         | Build the files once for JavaScript files                     | `node Build/Carbon.Pipeline/esbuild.mjs`                     |
+| `dev:css`        | Build the files once for CSS files                            | `node Build/Carbon.Pipeline/postcss.mjs`                     |
+| `build:js`       | Build the JavaScript files once for production                | `node Build/Carbon.Pipeline/esbuild.mjs --production`        |
+| `build:css`      | Build the CSS files once for production                       | `node Build/Carbon.Pipeline/postcss.mjs --production`        |
+| `pipeline:build` | Build the files once for production (with optimzed file size) | `concurrently -r $npm_package_config_packageManager:build:*` |
 
 ### Extendibility
 
 Of course, you can also add your own tasks in the `scripts` section of your `package.json` file. For example, if you have a Neos UI custom editor and want to start all your tasks in one place, you can add them like this:
 
 ```
-"build:editor": "yarn --cwd DistributionPackages/Foo.Editor/Resources/Private/Editor/ build",
-"watch:editor": "yarn --cwd DistributionPackages/Foo.Editor/Resources/Private/Editor/ watch",
-"pipeline:editor": "yarn --cwd DistributionPackages/Foo.Editor/Resources/Private/Editor/ install --silent --non-interactive",
+"build:editor": "$npm_package_config_packageManager --dir DistributionPackages/Foo.Editor/Resources/Private/Editor/ build",
+"watch:editor": "$npm_package_config_packageManager --dir DistributionPackages/Foo.Editor/Resources/Private/Editor/ watch",
+"pipeline:editor": "$npm_package_config_packageManager --dir DistributionPackages/Foo.Editor/Resources/Private/Editor/ install",
 ```
 
-Because the tasks start with `build:`, respectively with `watch:` or `pipeline:`, the tasks will be included in the corresponding root command. In this example, `yarn build`, `yarn watch` or `yarn pipeline`.
+> Be aware that you may have different syntax for settings options based on the choosen task manager
+> To set the current work directory, for example you have to set `--cwd` for `yarn`, `--dir` or `-C` for `pnpm` and `--prefix` for `npm`.
+
+Because the tasks start with `build:`, respectively with `watch:` or `pipeline:`, the tasks will be included in the corresponding root command. In this example, `build`, `watch` or `pipeline`. If you want to go crazy you can even mix different task manager.
 
 ## Compression of files
 
-In production mode (`yarn build`), the files also get compressed with [gzip] and [brotli]. You can edit the compression level under the key [`buildDefaults.compression`]. Per default, the highest compression level is set. To disable compression at all, you can set it to `false`:
+In production mode (`build`), the files also get compressed with [gzip] and [brotli]. You can edit the compression level under the key [`buildDefaults.compression`]. Per default, the highest compression level is set. To disable compression at all, you can set it to `false`:
 
 ```yaml
 buildDefaults:
@@ -222,8 +232,22 @@ Thanks to a custom made `resolve` function, you can also use [globbing][glob] in
 
 If you want to use [Sass] (`.scss`or `.sass` files) you have to install [`sass`] and [`node-sass-tilde-importer`]:
 
+For [pnpm]:
+
+```bash
+pnpm add -D sass node-sass-tilde-importer
+```
+
+For [Yarn]:
+
 ```bash
 yarn add --dev sass node-sass-tilde-importer
+```
+
+For [npm]:
+
+```bash
+npm add -D sass node-sass-tilde-importer
 ```
 
 You have to ways to import files from `node_modules` (Example with bootstrap):
@@ -339,8 +363,22 @@ esbuild:
 
 If you want to use [TypeScript], add the following packages to `package.json`:
 
+For [pnpm]:
+
+```bash
+pnpm add -D typescript @typescript-eslint/eslint-plugin
+```
+
+For [Yarn]:
+
 ```bash
 yarn add --dev typescript @typescript-eslint/eslint-plugin
+```
+
+For [npm]:
+
+```bash
+npm add -D typescript @typescript-eslint/eslint-plugin
 ```
 
 Add your `tsconfig.json` file; this is just an example:
@@ -420,8 +458,22 @@ If you're using JSX with a library other than React (such as [Preact],), you'll 
 
 If you want to use [Svelte], add the following packages to `package.json`:
 
+For [pnpm]:
+
+```bash
+pnpm add -D svelte svelte-preprocess esbuild-svelte @tsconfig/svelte
+```
+
+For [Yarn]:
+
 ```bash
 yarn add --dev svelte svelte-preprocess esbuild-svelte @tsconfig/svelte
+```
+
+For [npm]:
+
+```bash
+npm add -D svelte svelte-preprocess esbuild-svelte @tsconfig/svelte
 ```
 
 Enable the plugin in your [`pipeline.yaml`] file:
@@ -467,8 +519,22 @@ Your `tsconfig.json` may look like this:
 
 If you want to use [Vue.js], add the following packages to `package.json`:
 
+For [pnpm]:
+
+```bash
+pnpm add -D vue vue-template-compiler esbuild-vue
+```
+
+For [Yarn]:
+
 ```bash
 yarn add --dev vue vue-template-compiler esbuild-vue
+```
+
+For [npm]:
+
+```bash
+npm add -D vue vue-template-compiler esbuild-vue
 ```
 
 Enable the plugin in your [`pipeline.yaml`] file:
@@ -489,15 +555,25 @@ esbuild:
 
 If you want to use [Babel.js], add the following packages to `package.json`:
 
+For [pnpm]:
+
+```bash
+pnpm add -D @babel/core esbuild-plugin-babel
+```
+
+For [Yarn]:
+
 ```bash
 yarn add --dev @babel/core esbuild-plugin-babel
 ```
 
-as well additonals babel plugins and/or presets:
+For [npm]:
 
 ```bash
-yarn add --dev @babel/preset-env @babel/plugin-proposal-class-properties @babel/plugin-proposal-object-rest-spread
+npm add -D @babel/core esbuild-plugin-babel
 ```
+
+as well as additonals babel plugins and/or presets like `@babel/preset-env`, `@babel/plugin-proposal-class-properties`, `@babel/plugin-proposal-object-rest-spread`
 
 Further, you have to add a file called `babel.config.json`, for example:
 
@@ -588,11 +664,11 @@ If a plugin returns directly the function, you don't have to set this. If you wa
 
 ## Live-Reloading
 
-If you want to use live reloading, you can do this with [Browsersync]. You can choose to install it globally (recomended) or locally
+If you want to use live reloading, you can do this with [Browsersync].
 
-To install it globally run `yarn global add browser-sync`, to install it locally run `yarn add --dev browser-sync`.
+To install it run `pnpm add --global browser-sync`, `yarn global add browser-sync`, or `npm install -g browser-sync`.
 
-Then you have to create a inital config with `browser-sync init` (If you installed it locally `yarn browser-sync init`).  
+Then you have to create a inital config with `browser-sync init`.
 After that, you need to adjust the created `bs-config.js` file.
 You can adjust every parameter, but the two parameter you need to set is `files` and `proxy`:
 
@@ -619,7 +695,7 @@ module.exports = {
 
 Make sure you set the correct proxy with the corresponding protocol (`https://` or `http://`), depending on your setup. To create a better overview of the parameter you can delete the not changed values from the file.
 
-To start Browsersync you can run `browser-sync start --config bs-config.js` (If you installed it locally prepend it with `yarn`) or, if you want to start it together with `yarn watch`, you can add following line into the `scripts` section:
+To start Browsersync you can run `browser-sync start --config bs-config.js` (If you installed it locally prepend it with `yarn`, `pnpm` or `npm run`) or, if you want to start it together with `watch`, you can add following line into the `scripts` section:
 
 ```
 "watch:browsersync": "browser-sync start --config bs-config.js",
@@ -652,6 +728,9 @@ To start Browsersync you can run `browser-sync start --config bs-config.js` (If 
 [download]: https://img.shields.io/badge/download-Download%20as%20zip-informational
 [main.zip]: https://github.com/CarbonPackages/Carbon.Pipeline/archive/main.zip
 [neos cms]: https://www.neos.io
+[npm]: https://www.npmjs.com
+[yarn]: https://yarnpkg.com
+[pnpm]: https://pnpm.io
 [`.eslintrc`]: Installer/Distribution/Defaults/.eslintrc
 [`.postcssrc.js`]: Installer/Distribution/Defaults/.postcssrc.js
 [tailwind css]: https://tailwindcss.com

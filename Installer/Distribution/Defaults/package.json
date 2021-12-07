@@ -1,19 +1,23 @@
 {
   "license": "UNLICENSED",
   "private": true,
+  "config": {
+    "packageManager": "yarn"
+  },
   "scripts": {
     "postinstall": "touch ./node_modules/.metadata_never_index; mkdir ./Packages; touch ./Packages/.metadata_never_index",
     "showConfig": "node Build/Carbon.Pipeline/showConfig.mjs",
-    "build": "concurrently -r yarn:build:*",
+    "build": "concurrently -r $npm_package_config_packageManager:build:*",
     "build:js": "node Build/Carbon.Pipeline/esbuild.mjs --production",
     "build:css": "node Build/Carbon.Pipeline/postcss.mjs --production",
-    "dev": "concurrently -r yarn:dev:*",
+    "dev": "concurrently -r $npm_package_config_packageManager:dev:*",
     "dev:js": "node Build/Carbon.Pipeline/esbuild.mjs",
     "dev:css": "node Build/Carbon.Pipeline/postcss.mjs",
-    "watch": "concurrently -r yarn:watch:*",
+    "watch": "concurrently -r $npm_package_config_packageManager:watch:*",
     "watch:js": "node Build/Carbon.Pipeline/esbuild.mjs --watch",
     "watch:css": "node Build/Carbon.Pipeline/postcss.mjs --watch",
-    "pipeline": "yarn install --silent --non-interactive;concurrently -r yarn:pipeline:*;yarn build"
+    "pipeline:build": "concurrently -r $npm_package_config_packageManager:build:*",
+    "pipeline": "$npm_package_config_packageManager install;concurrently -r $npm_package_config_packageManager:pipeline:*"
   },
   "resolutions": {
     "ansi-regex": "^5.0.1"
