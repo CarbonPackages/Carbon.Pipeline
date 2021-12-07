@@ -769,7 +769,7 @@
   "resolved" "https://registry.npmjs.org/esbuild-darwin-arm64/-/esbuild-darwin-arm64-0.14.2.tgz"
   "version" "0.14.2"
 
-"esbuild@^0.14.1":
+"esbuild@^0.14.2":
   "integrity" "sha512-l076A6o/PIgcyM24s0dWmDI/b8RQf41uWoJu9I0M71CtW/YSw5T5NUeXxs5lo2tFQD+O4CW4nBHJXx3OY5NpXg=="
   "resolved" "https://registry.npmjs.org/esbuild/-/esbuild-0.14.2.tgz"
   "version" "0.14.2"
