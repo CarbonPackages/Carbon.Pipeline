@@ -1,4 +1,4 @@
-name: 'Basic test'
+name: "Basic test"
 
 on:
   workflow_dispatch:
@@ -10,7 +10,7 @@ on:
       - main
 
 env:
-  dependencies: 'svelte svelte-preprocess esbuild-svelte vue vue-template-compiler esbuild-vue sass node-sass-tilde-importer'
+  dependencies: "svelte svelte-preprocess esbuild-svelte vue vue-template-compiler esbuild-vue sass node-sass-tilde-importer"
 
 jobs:
   prepare:
@@ -35,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: pnpm
-          path: '*'
+          path: "*"
 
       - name: Set package manager to yarn
         run: |
@@ -45,7 +45,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: yarn
-          path: '*'
+          path: "*"
 
       - name: Set package manager to npm
         run: |
@@ -55,7 +55,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: npm
-          path: '*'
+          path: "*"
 
   pnpm:
     name: Test with pnpm
@@ -70,11 +70,11 @@ jobs:
         uses: pnpm/action-setup@v2.0.1
         with:
           version: 6.23.6
-          cache: pnpm
       - name: Setup node
         uses: actions/setup-node@v2.5.0
         with:
           node-version-file: .nvmrc
+          cache: pnpm
       - name: Install dependencies
         run: |
           pnpm install
