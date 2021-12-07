@@ -33,7 +33,10 @@
             "/.gitignore",
             "/CODE_OF_CONDUCT.md",
             "/LICENSE",
-            "/Makefile"
+            "/Makefile",
+            "/package-lock.json",
+            "/pnpm-lock.yaml",
+            "/yarn.lock"
         ]
     },
     "extra": {
