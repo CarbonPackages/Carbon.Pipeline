@@ -35,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: pnpm
-          path: /*
+          path: '*'
 
       - name: Set package manager to yarn
         run: |
@@ -45,7 +45,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: yarn
-          path: /*
+          path: '*'
 
       - name: Set package manager to npm
         run: |
@@ -55,7 +55,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: npm
-          path: /*
+          path: '*'
 
   pnpm:
     name: Test with pnpm
