@@ -2,7 +2,7 @@
   "license": "UNLICENSED",
   "private": true,
   "config": {
-    "packageManager": "yarn"
+    "packageManager": "pnpm"
   },
   "scripts": {
     "postinstall": "touch ./node_modules/.metadata_never_index; mkdir ./Packages; touch ./Packages/.metadata_never_index",
