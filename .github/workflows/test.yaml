@@ -10,7 +10,7 @@ on:
       - main
 
 env:
-  dependencies: 'esbuild-svelte svelte-preprocess vue vue-template-compiler esbuild-vue sass node-sass-tilde-importer'
+  dependencies: 'svelte svelte-preprocess esbuild-svelte vue vue-template-compiler esbuild-vue sass node-sass-tilde-importer'
 
 jobs:
   prepare:
