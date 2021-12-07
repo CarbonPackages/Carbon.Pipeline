@@ -10,7 +10,6 @@ on:
       - main
 
 env:
-  node_version: 16
   dependencies: 'esbuild-svelte svelte-preprocess vue vue-template-compiler esbuild-vue sass node-sass-tilde-importer'
 
 jobs:
@@ -20,14 +19,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
-      - name: Setup node
-        uses: actions/setup-node@v2.5.0
-        with:
-          node-version: ${{ env.node_version }}
-
-      - name: Install JSON dependency
-        run: pnpm add --global json
 
       - name: Copy files
         run: |
@@ -84,6 +75,15 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: pnpm
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.23.6
+      - name: Setup node
+        uses: actions/setup-node@v2.5.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
       - name: Install dependencies
         run: pnpm add ${{ env.dependencies }}
       - name: Show config
@@ -100,6 +100,11 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: yarn
+      - name: Setup node
+        uses: actions/setup-node@v2.5.0
+        with:
+          node-version-file: .nvmrc
+          cache: yarn
       - name: Install dependencies
         run: yarn add ${{ env.dependencies }}
       - name: Show config
@@ -116,6 +121,10 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: npm
+      - uses: actions/setup-node@v2
+        with:
+          node-version-file: .nvmrc
+          cache: npm
       - name: Install dependencies
         run: npm add ${{ env.dependencies }}
       - name: Show config
