@@ -70,6 +70,7 @@ jobs:
         uses: pnpm/action-setup@v2.0.1
         with:
           version: 6.23.6
+          cache: pnpm
       - name: Setup node
         uses: actions/setup-node@v2.5.0
         with:
@@ -96,9 +97,10 @@ jobs:
         uses: actions/setup-node@v2.5.0
         with:
           node-version-file: .nvmrc
+          cache: yarn
       - name: Install dependencies
         run: |
-          yarn install --no-lockfile
+          yarn install
           yarn add ${{ env.dependencies }}
       - name: Show config
         run: yarn showConfig
@@ -117,6 +119,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version-file: .nvmrc
+          cache: npm
       - name: Install dependencies
         run: |
           npm install
