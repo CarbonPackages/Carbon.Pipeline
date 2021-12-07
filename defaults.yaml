@@ -2,10 +2,27 @@
 # packages: []
 
 extensions:
-  style: [".pcss", ".css", ".scss", ".sass"]
-  script: [".js", ".jsx", ".ts", ".tsx", ".json"]
-  module: [".mjs", ".mjsx", ".mts", ".mtsx"]
-  commonJS: [".cjs", ".cjsx", ".cts", ".ctsx"]
+  style:
+    - .pcss
+    - .css
+    - .scss
+    - .sass
+  script:
+    - .js
+    - .jsx
+    - .ts
+    - .tsx
+    - .json
+  module:
+    - .mjs
+    - .mjsx
+    - .mts
+    - .mtsx
+  commonJS:
+    - .cjs
+    - .cjsx
+    - .cts
+    - .ctsx
 
 folder:
   base: DistributionPackages
@@ -68,8 +85,8 @@ esbuild:
     svelte:
       enable: false
       options:
-        compileOptions:
-          css: true
+        compilerOptions:
+          css: false
     babel:
       enable: false
       options: null

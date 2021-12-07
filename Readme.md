@@ -248,7 +248,6 @@ sassOptions:
 
 </details>
 
-
 ### PostCSS
 
 This template comes with a variety of PostCSS Plugins. Feel free to remove some or add your own favorites packages. The configuration is located in [`.postcssrc.js`]. The suffix of these files should be `.pcss`.
@@ -434,7 +433,7 @@ esbuild:
       enable: true
       # Add here your options
       options:
-        compileOptions:
+        compilerOptions:
           css: true
 ```
 
