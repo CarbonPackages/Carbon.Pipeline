@@ -22,7 +22,7 @@ upgrade:
 ## Run some basic checks
 test:
 	yarn showConfig
-	yarn add esbuild-svelte svelte-preprocess vue vue-template-compiler esbuild-vue sass node-sass-tilde-importer
+	yarn add svelte svelte-preprocess esbuild-svelte vue vue-template-compiler esbuild-vue sass node-sass-tilde-importer
 	yarn build
 
 ## Reset files to old state
