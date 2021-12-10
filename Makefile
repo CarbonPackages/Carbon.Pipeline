@@ -1,4 +1,4 @@
-.PHONY: prepare up-lock up-pnpm up-yarn up-npm up-copy reset test-pnpm test-yarn test-npm
+.PHONY: prepare up-lock up-pnpm up-yarn up-npm up-copy reset test-pnpm test-yarn test-npm test-all
 
 # Define colors
 GREEN  := $(shell tput -Txterm setaf 2)
@@ -62,6 +62,12 @@ test-npm:
 	@npm add svelte svelte-preprocess esbuild-svelte vue vue-template-compiler esbuild-vue sass node-sass-tilde-importer
 	@npm run showConfig
 	@npm run build
+
+## Run some basic checks with pnpm, yarn and npm
+test-all:
+	@make test-pnpm
+	@make test-yarn
+	@make test-npm
 
 ## Reset files to old state
 reset:
