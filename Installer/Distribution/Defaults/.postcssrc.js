@@ -4,10 +4,8 @@ module.exports = (ctx) => ({
         "postcss-import": {
             resolve: ctx.resolve,
         },
+        "tailwindcss/nesting": true,
         tailwindcss: true,
-        "postcss-nested": {
-            bubble: ["layer", "variants", "responsive", "screen"],
-        },
         "postcss-assets": {
             cachebuster: false,
             basePath: `${ctx.basePath}/`,
