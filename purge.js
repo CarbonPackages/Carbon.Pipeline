@@ -2,10 +2,11 @@ const path = require("path");
 const yaml = require("js-yaml");
 const fs = require("fs");
 const { red } = require("nanocolors");
+const deepmerge = require("deepmerge");
 
 const pipeline = readYamlFile("pipeline");
 const defaults = readYamlFile("defaults", "Build/Carbon.Pipeline");
-const config = { ...defaults, ...pipeline };
+const config = deepmerge(defaults, pipeline);
 
 function readYamlFile(file, folder) {
     file = `${file}.yaml`;
