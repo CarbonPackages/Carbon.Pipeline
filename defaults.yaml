@@ -86,7 +86,7 @@ esbuild:
       enable: false
       options:
         compilerOptions:
-          css: false
+          css: true
     babel:
       enable: false
       options: null
