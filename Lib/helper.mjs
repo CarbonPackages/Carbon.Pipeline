@@ -19,7 +19,6 @@ const minify = production || process.argv.includes("--minify");
 const compression = production && !watch ? config.buildDefaults.compression : false;
 let sass = false;
 process.env.NODE_ENV = production ? "production" : "development";
-process.env.TAILWIND_MODE = watch ? "watch" : "build";
 
 const allFileExtensions = Object.entries(config.extensions)
     .reduce((acc, curr) => {
