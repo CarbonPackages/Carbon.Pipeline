@@ -300,7 +300,14 @@ Of course, you can add your own or remove not-needed Plugins as you want. This i
 
 ### Tailwind CSS
 
-This setup comes with [Tailwind CSS], a highly customizable, low-level CSS framework. An example configuration is provided in [`tailwind.config.js`]. The setup for purge the CSS files is also configured. [Read more about controlling the file size here][tailwind file-size]. Because the CSS bundling is done with the Javascript API from PostCSS, the [Just-in-Time Mode] from Tailwind CSS works perfectly.
+This setup comes with [Tailwind CSS], a highly customizable, low-level CSS framework. An example configuration is provided in [`tailwind.config.js`]. The setup for purge the CSS files is also configured. [Read more about controlling the file size here][tailwind file-size]. Because the CSS bundling is done with the Javascript API from PostCSS, the [Just-in-Time Mode] from Tailwind CSS works perfectly. To remove a specific package you could use this pattern in your `pipeline.yaml`:
+
+```yaml
+buildDefaults:
+  purge:
+    - DistributionPackages/**/(Private|NodeTypes)/**/*.{fusion,html,js,jsx,ts,tsx,mjs,mjsx,mts,mtsx,cjs,cjsx,cts,ctsx,svelte,vue}
+    - "!DistributionPackages/Package.ToRemove"
+```
 
 By the way: [Alpine.js] is excellent in combination with [Tailwind CSS].
 
