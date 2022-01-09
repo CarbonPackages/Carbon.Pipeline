@@ -123,7 +123,8 @@ function dependencies(results) {
             .map(dependencyGraph.add)
             .forEach((dependency) => {
                 if (dependency.type === "dir-dependency") {
-                    messages.push(dependency.dir);
+                    const dir = dependency.glob ? path.join(dependency.dir, dependency.glob) : dependency.dir;
+                    messages.push(dir);
                 } else {
                     messages.push(dependency.file);
                 }
