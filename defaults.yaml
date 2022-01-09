@@ -45,8 +45,8 @@ buildDefaults:
   external: null
   # purge can be a string or an array
   purge:
-    - DistributionPackages/**/Private/**/*.{fusion,html,js,jsx,ts,tsx,mjs,mjsx,mts,mtsx,cjs,cjsx,cts,ctsx,svelte,vue}
-    - DistributionPackages/**/NodeTypes/**/*.{fusion,html,js,jsx,ts,tsx,mjs,mjsx,mts,mtsx,cjs,cjsx,cts,ctsx,svelte,vue}
+    - DistributionPackages/**/(Private|NodeTypes)/**/*.{fusion,html,js,jsx,ts,tsx,mjs,mjsx,mts,mtsx,cjs,cjsx,cts,ctsx,svelte,vue}
+
   compression:
     brotli: 11
     gzip: 9
