@@ -2,17 +2,13 @@ const path = require("path");
 const yaml = require("js-yaml");
 const fs = require("fs");
 const { red } = require("nanocolors");
-const deepmerge = require("deepmerge");
 
-const pipeline = readYamlFile("pipeline");
-const defaults = readYamlFile("defaults", "Build/Carbon.Pipeline");
-const config = deepmerge(defaults, pipeline);
-
-function readYamlFile(file, folder) {
+function readPurgePath(file, folder) {
     file = `${file}.yaml`;
     const filePath = folder ? path.join(folder, file) : file;
     try {
-        return yaml.load(fs.readFileSync(path.join("./", filePath), "utf8"));
+        const definition = yaml.load(fs.readFileSync(path.join("./", filePath), "utf8"));
+        return definition?.buildDefaults?.purge;
     } catch (err) {
         const linebreak = () => console.log("\n");
         linebreak();
@@ -23,7 +19,11 @@ function readYamlFile(file, folder) {
     }
 }
 
-let purge = config.buildDefaults.purge;
+let purge = readPurgePath("pipeline");
+if (!purge) {
+    purge = readPurgePath("defaults", "Build/Carbon.Pipeline");
+}
+
 if (!Array.isArray(purge)) {
     purge = [purge];
 }
