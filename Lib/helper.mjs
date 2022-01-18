@@ -16,7 +16,10 @@ const styleFiles = {};
 const watch = process.argv.includes("--watch");
 const production = process.argv.includes("--production");
 const minify = production || process.argv.includes("--minify");
-const compression = production && !watch ? config.buildDefaults.compression : false;
+let compression = false;
+if (production && (!watch || process.argv.includes("--compression"))) {
+    compression = config.buildDefaults.compression;
+}
 let sass = false;
 process.env.NODE_ENV = production ? "production" : "development";
 
