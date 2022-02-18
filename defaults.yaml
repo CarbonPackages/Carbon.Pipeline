@@ -81,9 +81,12 @@ esbuild:
   plugins:
     vue:
       enable: false
+      plugin: esbuild-plugin-vue3
       options: null
     svelte:
       enable: false
+      plugin: esbuild-svelte
+      preprocess: svelte-preprocess
       options:
         compilerOptions:
           css: true

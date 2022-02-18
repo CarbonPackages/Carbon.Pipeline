@@ -55,8 +55,9 @@ async function importPlugins() {
 
     const sveltePlugin = esbuildPlugins?.svelte;
     if (sveltePlugin?.enable === true) {
-        const plugin = await dynamicImport("esbuild-svelte");
-        const preprocess = await dynamicImport("svelte-preprocess");
+        const plugin = await dynamicImport(esbuildPlugins.svelte.plugin);
+        const preprocessName = esbuildPlugins.svelte.preprocess;
+        const preprocess = preprocessName ? await dynamicImport(preprocessName) : null;
         plugins["svelte"] = assignPlugin(
             {
                 plugin,
@@ -68,7 +69,7 @@ async function importPlugins() {
 
     const vuePlugin = esbuildPlugins?.vue;
     if (vuePlugin?.enable === true) {
-        const plugin = await dynamicImport("esbuild-plugin-vue3");
+        const plugin = await dynamicImport(esbuildPlugins.vue.plugin);
         plugins["vue"] = assignPlugin(
             {
                 plugin,

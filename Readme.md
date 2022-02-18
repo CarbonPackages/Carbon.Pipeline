@@ -490,11 +490,17 @@ esbuild:
   plugins:
     svelte:
       enable: true
+      # Name of the esbuild plugin for svelte
+      # plugin: esbuild-svelte
+      # Name of the preprocess plugin
+      # preprocess: svelte-preprocess
       # Add here your options
       options:
         compilerOptions:
           css: true
 ```
+
+> You can also configure the esbuild plugin and preprocess package which should be used. Just add a key `plugin` or `preprocess` and add the plugin name.
 
 Your `tsconfig.json` may look like this:
 
@@ -551,9 +557,13 @@ esbuild:
   plugins:
     vue:
       enable: true
+      # Name of the esbuild plugin for Vue
+      # plugin: esbuild-plugin-vue3
       # You can pass your needed options here
       # options:
 ```
+
+> You can also configure the esbuild plugin which should be used. Just add a key `plugin` and add the plugin name.
 
 </details>
 
