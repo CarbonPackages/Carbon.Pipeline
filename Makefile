@@ -43,7 +43,7 @@ up-copy:
 test-pnpm:
 	@rm -rf node_modules
 	@sed -Ei '' 's/"packageManager": "[a-z]+"/"packageManager": "pnpm"/' package.json
-	@pnpm add svelte svelte-preprocess esbuild-svelte esbuild-plugin-vue3 sass node-sass-tilde-importer
+	@pnpm add svelte svelte-preprocess esbuild-svelte vue esbuild-plugin-vue3 sass node-sass-tilde-importer
 	@pnpm showConfig
 	@pnpm build
 
@@ -51,7 +51,7 @@ test-pnpm:
 test-yarn:
 	@rm -rf node_modules
 	@sed -Ei '' 's/"packageManager": "[a-z]+"/"packageManager": "yarn"/' package.json
-	@yarn add svelte svelte-preprocess esbuild-svelte esbuild-plugin-vue3 sass node-sass-tilde-importer
+	@yarn add svelte svelte-preprocess esbuild-svelte vue esbuild-plugin-vue3 sass node-sass-tilde-importer
 	@yarn showConfig
 	@yarn build
 
@@ -59,7 +59,7 @@ test-yarn:
 test-npm:
 	@rm -rf node_modules
 	@sed -Ei '' 's/"packageManager": "[a-z]+"/"packageManager": "npm"/' package.json
-	@npm add svelte svelte-preprocess esbuild-svelte esbuild-plugin-vue3 sass node-sass-tilde-importer
+	@npm add svelte svelte-preprocess esbuild-svelte vue esbuild-plugin-vue3 sass node-sass-tilde-importer
 	@npm run showConfig
 	@npm run build
 
