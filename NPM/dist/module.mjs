@@ -1,7 +1,6 @@
 import BROWSERLIST from "browserslist";
 import chokidar from "chokidar";
 import deepmerge from "deepmerge";
-import ESBUILD from "esbuild";
 import fs from "fs-extra";
 import glob from "glob";
 import postcssrc from "postcss-load-config";
@@ -16,7 +15,6 @@ export {
     BROWSERLIST,
     chokidar,
     deepmerge,
-    ESBUILD,
     fs,
     glob,
     postcssrc,
