@@ -1,7 +1,6 @@
 const path = require("path");
-const yaml = require("js-yaml");
 const fs = require("fs");
-const { red } = require("nanocolors");
+const { yaml, red } = require("carbon-pipeline");
 
 function readPurgePath(file, folder) {
     file = `${file}.yaml`;

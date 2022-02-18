@@ -1,5 +1,4 @@
-import BROWSERLIST from "browserslist";
-import fs from "fs-extra";
+import { BROWSERLIST, fs } from "carbon-pipeline";
 import { config, compression, dynamicImport, readFlowSettings, toArray } from "./helper.mjs";
 
 const browserlist = (() => {

@@ -1,9 +1,6 @@
-import postcss from "postcss";
 import path from "path";
-import fs from "fs-extra";
-import chokidar from "chokidar";
-import readCache from "read-cache";
-import { bold, dim, cyan, magenta } from "nanocolors";
+import { fs, chokidar, readCache, bold, dim, cyan, magenta } from "carbon-pipeline";
+import postcss from "postcss";
 import {
     styleFiles as files,
     watch,

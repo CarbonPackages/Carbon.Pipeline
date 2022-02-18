@@ -27,10 +27,11 @@
     "archive": {
         "exclude": [
             "/.github",
-            "/Test",
             "/.editorconfig",
             "/.gitattributes",
             "/.gitignore",
+            "/NPM",
+            "/Test",
             "/CODE_OF_CONDUCT.md",
             "/LICENSE",
             "/Makefile",

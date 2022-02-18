@@ -1,4 +1,4 @@
-import ESBUILD from "esbuild";
+import { ESBUILD } from "carbon-pipeline";
 import { scriptFiles as files, asyncForEach, watch, minify, error, compression } from "./Lib/helper.mjs";
 import { browserlist, options, writeFilesToAnotherPackage, importPlugins, flowSettings } from "./Lib/esbuildHelper.mjs";
 

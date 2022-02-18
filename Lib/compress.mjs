@@ -1,4 +1,4 @@
-import fs from "fs-extra";
+import { fs } from "carbon-pipeline";
 import path from "path";
 import zlib from "zlib";
 import { promisify } from "util";
