@@ -529,19 +529,19 @@ If you want to use [Vue.js], add the following packages to `package.json`:
 For [pnpm]:
 
 ```bash
-pnpm add -D vue vue-template-compiler esbuild-vue
+pnpm add -D vue esbuild-plugin-vue3
 ```
 
 For [Yarn]:
 
 ```bash
-yarn add --dev vue vue-template-compiler esbuild-vue
+yarn add --dev vue esbuild-plugin-vue3
 ```
 
 For [npm]:
 
 ```bash
-npm add -D vue vue-template-compiler esbuild-vue
+npm add -D vue esbuild-plugin-vue3
 ```
 
 Enable the plugin in your [`pipeline.yaml`] file:

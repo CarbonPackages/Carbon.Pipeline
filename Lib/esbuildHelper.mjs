@@ -68,7 +68,7 @@ async function importPlugins() {
 
     const vuePlugin = esbuildPlugins?.vue;
     if (vuePlugin?.enable === true) {
-        const plugin = await dynamicImport("esbuild-vue");
+        const plugin = await dynamicImport("esbuild-plugin-vue3");
         plugins["vue"] = assignPlugin(
             {
                 plugin,
