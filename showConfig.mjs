@@ -1,5 +1,5 @@
 import { config } from "./Lib/helper.mjs";
-import prettyjson from "prettyjson";
+import { prettyjson } from "carbon-pipeline";
 
 const light = process.argv.includes("--light");
 
