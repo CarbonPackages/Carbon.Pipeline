@@ -37,7 +37,7 @@ body:
       label: Additional context
       description: Add any other relevant information.
     validations:
-      required: true
+      required: false
   - type: checkboxes
     id: can-work
     attributes:
