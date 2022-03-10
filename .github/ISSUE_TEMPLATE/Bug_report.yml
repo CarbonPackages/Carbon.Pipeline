@@ -31,9 +31,9 @@ body:
       label: Steps to reproduce
       description: Please add a link to a repository with a minimal reproduction. Or describe accurately how we can reproduce/verify the bug.
       placeholder: |
-        Example steps (replace with your own):
-        1. Clone my repo at https://github.com/<myuser>/example
-        2. pnpm build
+        Example steps (replace with your own): \n
+        1. Clone my repo at https://github.com/<myuser>/example \n
+        2. pnpm build \n
         3. You should see the error come up
     validations:
       required: true
