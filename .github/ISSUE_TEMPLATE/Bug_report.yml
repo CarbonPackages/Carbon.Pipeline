@@ -52,12 +52,6 @@ body:
       description: |
         Please paste the output of running `npx envinfo --system`.
         This will be automatically formatted as a code block, so no need for backticks.
-      placeholder: |
-        System:
-          OS:
-          CPU:
-          Memory:
-          Shell:
       render: shell
     validations:
       required: true
@@ -68,11 +62,6 @@ body:
       description: |
         Please paste the output of running `pnpm ls esbuild postcss carbon-pipeline`.
         This will be automatically formatted as a code block, so no need for backticks.
-      placeholder: |
-        devDependencies:
-        carbon-pipeline 0.1.1
-        esbuild 0.14.25
-        postcss 8.4.8
       render: shell
     validations:
       required: true
@@ -83,11 +72,6 @@ body:
       description: |
         Please paste the output of running `composer info carbon/pipeline`.
         This will be automatically formatted as a code block, so no need for backticks.
-      placeholder: |
-        name     : carbon/pipeline
-        descrip. : Ultra-fast build stack for Neos CMS based on esbuild and PostCSS
-        keywords : Neos, Preact, css, esbuild, javascript, postcss, react, sass, svelte, tailwind, typescript, vue
-        versions : * 0.10.0
       render: shell
     validations:
       required: true
