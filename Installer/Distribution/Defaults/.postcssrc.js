@@ -18,7 +18,7 @@ module.exports = (ctx) => ({
         autoprefixer: true,
         cssnano: ctx.minify
             ? {
-                  preset: ["default", { discardComments: { removeAll: true }, svgo: false, discardEmpty: false }],
+                  preset: ["default", { discardComments: { removeAll: true }, svgo: false }],
               }
             : false,
         "postcss-reporter": {
