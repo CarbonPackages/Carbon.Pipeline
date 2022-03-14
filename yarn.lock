@@ -277,7 +277,7 @@
   dependencies:
     "fill-range" "^7.0.1"
 
-"browserslist@^4.0.0", "browserslist@^4.16.6", "browserslist@^4.19.1", "browserslist@^4.19.2":
+"browserslist@^4.0.0", "browserslist@^4.16.6", "browserslist@^4.19.1", "browserslist@^4.20.0":
   "integrity" "sha512-bnpOoa+DownbciXj0jVGENf8VYQnE2LNWomhYuCsMmmx9Jd9lwq0WXODuwpSsp8AVdKM2/HorrzxAfbKvWTByQ=="
   "resolved" "https://registry.npmjs.org/browserslist/-/browserslist-4.20.0.tgz"
   "version" "4.20.0"
@@ -365,21 +365,20 @@
     "lodash.uniq" "^4.5.0"
 
 "caniuse-lite@^1.0.0", "caniuse-lite@^1.0.30001297", "caniuse-lite@^1.0.30001313":
-  "integrity" "sha512-0zaSO+TnCHtHJIbpLroX7nsD+vYuOVjl3uzFbJO1wMVbuveJA0RK2WcQA9ZUIOiO0/ArMiMgHJLxfEZhQiC0kw=="
-  "resolved" "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001314.tgz"
-  "version" "1.0.30001314"
+  "integrity" "sha512-JgUdNoZKxPZFzbzJwy4hDSyGuH/gXz2rN51QmoR8cBQsVo58llD3A0vlRKKRt8FGf5u69P9eQyIH8/z9vN/S0Q=="
+  "resolved" "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001316.tgz"
+  "version" "1.0.30001316"
 
 "carbon-pipeline@^0.1.1":
-  "integrity" "sha512-kaCntldGtjZZX0+8M/0Ikh2A0mfbPM8j0UoPadxT14/j8NOXHKx+Y0eXwJuNuPfgua2ix8KaSr8xzIKZyfNyBw=="
-  "resolved" "https://registry.npmjs.org/carbon-pipeline/-/carbon-pipeline-0.1.1.tgz"
-  "version" "0.1.1"
+  "integrity" "sha512-blClZ2gLDa1NvKSpH5IiLKVscw7kWfwd1Pb1I8fm6Z2JNQjXSmz5k0M0d3+ENLIkZpMbLT83WtBpaxxy3l1snw=="
+  "resolved" "https://registry.npmjs.org/carbon-pipeline/-/carbon-pipeline-0.1.2.tgz"
+  "version" "0.1.2"
   dependencies:
-    "browserslist" "^4.19.2"
+    "browserslist" "^4.20.0"
     "chokidar" "^3.5.3"
     "deepmerge" "^4.2.2"
     "dependency-graph" "^0.11.0"
-    "esbuild" "^0.14.22"
-    "fs-extra" "^10.0.0"
+    "fs-extra" "^10.0.1"
     "glob" "^7.2.0"
     "js-yaml" "^4.1.0"
     "nanocolors" "^0.2.13"
@@ -555,52 +554,52 @@
   "resolved" "https://registry.npmjs.org/cssesc/-/cssesc-3.0.0.tgz"
   "version" "3.0.0"
 
-"cssnano-preset-default@^5.2.3":
-  "integrity" "sha512-e4pzD/FnsvRywKO3i2Ti4jgAcJO5MhQPudrex92HXAJoMyQfS8lZHIzzC1yZ1t+d2zdkLXFY1sHdsZaT7lKoCQ=="
-  "resolved" "https://registry.npmjs.org/cssnano-preset-default/-/cssnano-preset-default-5.2.3.tgz"
-  "version" "5.2.3"
+"cssnano-preset-default@^*":
+  "integrity" "sha512-w1Gg8xsebln6/axZ6qDFQHuglrGfbIHOIx0g4y9+etRlRab8CGpSpe6UMsrgJe4zhCaJ0LwLmc+PhdLRTwnhIA=="
+  "resolved" "https://registry.npmjs.org/cssnano-preset-default/-/cssnano-preset-default-5.2.4.tgz"
+  "version" "5.2.4"
   dependencies:
     "css-declaration-sorter" "^6.0.3"
-    "cssnano-utils" "^3.1.0"
+    "cssnano-utils" "^*"
     "postcss-calc" "^8.2.3"
-    "postcss-colormin" "^5.3.0"
-    "postcss-convert-values" "^5.1.0"
-    "postcss-discard-comments" "^5.1.1"
-    "postcss-discard-duplicates" "^5.1.0"
-    "postcss-discard-empty" "^5.1.1"
-    "postcss-discard-overridden" "^5.1.0"
-    "postcss-merge-longhand" "^5.1.1"
-    "postcss-merge-rules" "^5.1.0"
-    "postcss-minify-font-values" "^5.1.0"
-    "postcss-minify-gradients" "^5.1.0"
-    "postcss-minify-params" "^5.1.1"
-    "postcss-minify-selectors" "^5.2.0"
-    "postcss-normalize-charset" "^5.1.0"
-    "postcss-normalize-display-values" "^5.1.0"
-    "postcss-normalize-positions" "^5.1.0"
-    "postcss-normalize-repeat-style" "^5.1.0"
-    "postcss-normalize-string" "^5.1.0"
-    "postcss-normalize-timing-functions" "^5.1.0"
-    "postcss-normalize-unicode" "^5.1.0"
-    "postcss-normalize-url" "^5.1.0"
-    "postcss-normalize-whitespace" "^5.1.1"
-    "postcss-ordered-values" "^5.1.0"
-    "postcss-reduce-initial" "^5.1.0"
-    "postcss-reduce-transforms" "^5.1.0"
-    "postcss-svgo" "^5.1.0"
-    "postcss-unique-selectors" "^5.1.1"
+    "postcss-colormin" "^*"
+    "postcss-convert-values" "^*"
+    "postcss-discard-comments" "^*"
+    "postcss-discard-duplicates" "^*"
+    "postcss-discard-empty" "^*"
+    "postcss-discard-overridden" "^*"
+    "postcss-merge-longhand" "^*"
+    "postcss-merge-rules" "^*"
+    "postcss-minify-font-values" "^*"
+    "postcss-minify-gradients" "^*"
+    "postcss-minify-params" "^*"
+    "postcss-minify-selectors" "^*"
+    "postcss-normalize-charset" "^*"
+    "postcss-normalize-display-values" "^*"
+    "postcss-normalize-positions" "^*"
+    "postcss-normalize-repeat-style" "^*"
+    "postcss-normalize-string" "^*"
+    "postcss-normalize-timing-functions" "^*"
+    "postcss-normalize-unicode" "^*"
+    "postcss-normalize-url" "^*"
+    "postcss-normalize-whitespace" "^*"
+    "postcss-ordered-values" "^*"
+    "postcss-reduce-initial" "^*"
+    "postcss-reduce-transforms" "^*"
+    "postcss-svgo" "^*"
+    "postcss-unique-selectors" "^*"
 
-"cssnano-utils@^3.1.0":
+"cssnano-utils@^*", "cssnano-utils@^3.1.0":
   "integrity" "sha512-JQNR19/YZhz4psLX/rQ9M83e3z2Wf/HdJbryzte4a3NSuafyp9w/I4U+hx5C2S9g41qlstH7DEWnZaaj83OuEA=="
   "resolved" "https://registry.npmjs.org/cssnano-utils/-/cssnano-utils-3.1.0.tgz"
   "version" "3.1.0"
 
-"cssnano@^5.1.3":
-  "integrity" "sha512-bdf+sY2w4XV+F5LOCEd7fWnSeMeKBO4lKgoAKVWZOSTR7CmWEk1UW/s9ibTMMnsTsinBmIdgZs755sAGa1eoXQ=="
-  "resolved" "https://registry.npmjs.org/cssnano/-/cssnano-5.1.3.tgz"
-  "version" "5.1.3"
+"cssnano@^5.1.4":
+  "integrity" "sha512-hbfhVZreEPyzl+NbvRsjNo54JOX80b+j6nqG2biLVLaZHJEiqGyMh4xDGHtwhUKd5p59mj2GlDqlUBwJUuIu5A=="
+  "resolved" "https://registry.npmjs.org/cssnano/-/cssnano-5.1.4.tgz"
+  "version" "5.1.4"
   dependencies:
-    "cssnano-preset-default" "^5.2.3"
+    "cssnano-preset-default" "^*"
     "lilconfig" "^2.0.3"
     "yaml" "^1.10.2"
 
@@ -741,36 +740,36 @@
   dependencies:
     "is-arrayish" "^0.2.1"
 
-"esbuild-darwin-arm64@0.14.25":
-  "integrity" "sha512-oTcDgdm0MDVEmw2DWu8BV68pYuImpFgvWREPErBZmNA4MYKGuBRaCiJqq6jZmBR1x+3y1DWCjez+5uLtuAm6mw=="
-  "resolved" "https://registry.npmjs.org/esbuild-darwin-arm64/-/esbuild-darwin-arm64-0.14.25.tgz"
-  "version" "0.14.25"
+"esbuild-darwin-arm64@0.14.26":
+  "integrity" "sha512-eYW+cmP3BGVPDp+wd9bRI5CN5HjkZnrMQtj46Mj//UsSh4SRvflAp3pjs3ooA+MCpIa9xZ8091HqLqpYi7KFWA=="
+  "resolved" "https://registry.npmjs.org/esbuild-darwin-arm64/-/esbuild-darwin-arm64-0.14.26.tgz"
+  "version" "0.14.26"
 
-"esbuild@^0.14.22", "esbuild@^0.14.25":
-  "integrity" "sha512-4JHEIOMNFvK09ziiL+iVmldIhLbn49V4NAVo888tcGFKedEZY/Y8YapfStJ6zSE23tzYPKxqKwQBnQoIO0BI/Q=="
-  "resolved" "https://registry.npmjs.org/esbuild/-/esbuild-0.14.25.tgz"
-  "version" "0.14.25"
+"esbuild@^0.14.26":
+  "integrity" "sha512-v0zIYlFB9NZ82/hFljhvpA7f8rob66r68ymB7juMz6TYAAMYjKGoW+hrMfRRvic5MAOI2wE/SuykFvsELLa6eA=="
+  "resolved" "https://registry.npmjs.org/esbuild/-/esbuild-0.14.26.tgz"
+  "version" "0.14.26"
   optionalDependencies:
-    "esbuild-android-64" "0.14.25"
-    "esbuild-android-arm64" "0.14.25"
-    "esbuild-darwin-64" "0.14.25"
-    "esbuild-darwin-arm64" "0.14.25"
-    "esbuild-freebsd-64" "0.14.25"
-    "esbuild-freebsd-arm64" "0.14.25"
-    "esbuild-linux-32" "0.14.25"
-    "esbuild-linux-64" "0.14.25"
-    "esbuild-linux-arm" "0.14.25"
-    "esbuild-linux-arm64" "0.14.25"
-    "esbuild-linux-mips64le" "0.14.25"
-    "esbuild-linux-ppc64le" "0.14.25"
-    "esbuild-linux-riscv64" "0.14.25"
-    "esbuild-linux-s390x" "0.14.25"
-    "esbuild-netbsd-64" "0.14.25"
-    "esbuild-openbsd-64" "0.14.25"
-    "esbuild-sunos-64" "0.14.25"
-    "esbuild-windows-32" "0.14.25"
-    "esbuild-windows-64" "0.14.25"
-    "esbuild-windows-arm64" "0.14.25"
+    "esbuild-android-64" "0.14.26"
+    "esbuild-android-arm64" "0.14.26"
+    "esbuild-darwin-64" "0.14.26"
+    "esbuild-darwin-arm64" "0.14.26"
+    "esbuild-freebsd-64" "0.14.26"
+    "esbuild-freebsd-arm64" "0.14.26"
+    "esbuild-linux-32" "0.14.26"
+    "esbuild-linux-64" "0.14.26"
+    "esbuild-linux-arm" "0.14.26"
+    "esbuild-linux-arm64" "0.14.26"
+    "esbuild-linux-mips64le" "0.14.26"
+    "esbuild-linux-ppc64le" "0.14.26"
+    "esbuild-linux-riscv64" "0.14.26"
+    "esbuild-linux-s390x" "0.14.26"
+    "esbuild-netbsd-64" "0.14.26"
+    "esbuild-openbsd-64" "0.14.26"
+    "esbuild-sunos-64" "0.14.26"
+    "esbuild-windows-32" "0.14.26"
+    "esbuild-windows-64" "0.14.26"
+    "esbuild-windows-arm64" "0.14.26"
 
 "escalade@^3.1.1":
   "integrity" "sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw=="
@@ -988,7 +987,7 @@
   "resolved" "https://registry.npmjs.org/fraction.js/-/fraction.js-4.2.0.tgz"
   "version" "4.2.0"
 
-"fs-extra@^10.0.0":
+"fs-extra@^10.0.1":
   "integrity" "sha512-NbdoVMZso2Lsrn/QwLXOy6rm0ufY2zEOKCDzJR/0kBsb0E6qed0P3iYK+Ath3BfvXEeu4JhEtXLgILx5psUfag=="
   "resolved" "https://registry.npmjs.org/fs-extra/-/fs-extra-10.0.1.tgz"
   "version" "10.0.1"
@@ -1634,7 +1633,7 @@
   "resolved" "https://registry.npmjs.org/postcss-clip-path-polyfill/-/postcss-clip-path-polyfill-1.1.0.tgz"
   "version" "1.1.0"
 
-"postcss-colormin@^5.3.0":
+"postcss-colormin@^*":
   "integrity" "sha512-WdDO4gOFG2Z8n4P8TWBpshnL3JpmNmJwdnfP2gbk2qBA8PWwOYcmjmI/t3CmMeL72a7Hkd+x/Mg9O2/0rD54Pg=="
   "resolved" "https://registry.npmjs.org/postcss-colormin/-/postcss-colormin-5.3.0.tgz"
   "version" "5.3.0"
@@ -1644,29 +1643,29 @@
     "colord" "^2.9.1"
     "postcss-value-parser" "^4.2.0"
 
-"postcss-convert-values@^5.1.0":
+"postcss-convert-values@^*":
   "integrity" "sha512-GkyPbZEYJiWtQB0KZ0X6qusqFHUepguBCNFi9t5JJc7I2OTXG7C0twbTLvCfaKOLl3rSXmpAwV7W5txd91V84g=="
   "resolved" "https://registry.npmjs.org/postcss-convert-values/-/postcss-convert-values-5.1.0.tgz"
   "version" "5.1.0"
   dependencies:
     "postcss-value-parser" "^4.2.0"
 
-"postcss-discard-comments@^5.1.1":
+"postcss-discard-comments@^*":
   "integrity" "sha512-5JscyFmvkUxz/5/+TB3QTTT9Gi9jHkcn8dcmmuN68JQcv3aQg4y88yEHHhwFB52l/NkaJ43O0dbksGMAo49nfQ=="
   "resolved" "https://registry.npmjs.org/postcss-discard-comments/-/postcss-discard-comments-5.1.1.tgz"
   "version" "5.1.1"
 
-"postcss-discard-duplicates@^5.1.0":
+"postcss-discard-duplicates@^*":
   "integrity" "sha512-zmX3IoSI2aoenxHV6C7plngHWWhUOV3sP1T8y2ifzxzbtnuhk1EdPwm0S1bIUNaJ2eNbWeGLEwzw8huPD67aQw=="
   "resolved" "https://registry.npmjs.org/postcss-discard-duplicates/-/postcss-discard-duplicates-5.1.0.tgz"
   "version" "5.1.0"
 
-"postcss-discard-empty@^5.1.1":
+"postcss-discard-empty@^*":
   "integrity" "sha512-zPz4WljiSuLWsI0ir4Mcnr4qQQ5e1Ukc3i7UfE2XcrwKK2LIPIqE5jxMRxO6GbI3cv//ztXDsXwEWT3BHOGh3A=="
   "resolved" "https://registry.npmjs.org/postcss-discard-empty/-/postcss-discard-empty-5.1.1.tgz"
   "version" "5.1.1"
 
-"postcss-discard-overridden@^5.1.0":
+"postcss-discard-overridden@^*":
   "integrity" "sha512-21nOL7RqWR1kasIVdKs8HNqQJhFxLsyRfAnUDm4Fe4t4mCWL9OJiHvlHPjcd8zc5Myu89b/7wZDnOSjFgeWRtw=="
   "resolved" "https://registry.npmjs.org/postcss-discard-overridden/-/postcss-discard-overridden-5.1.0.tgz"
   "version" "5.1.0"
@@ -1714,15 +1713,15 @@
   "resolved" "https://registry.npmjs.org/postcss-media-query-parser/-/postcss-media-query-parser-0.2.3.tgz"
   "version" "0.2.3"
 
-"postcss-merge-longhand@^5.1.1":
-  "integrity" "sha512-JLtqAY1LvxiD2aej6hcAk/TkXvEPM+Gs1aOkOIZub2MDEiB5NMtpMe/Ir2seIMMM245bsuHggzIhQBv6qFBm4A=="
-  "resolved" "https://registry.npmjs.org/postcss-merge-longhand/-/postcss-merge-longhand-5.1.1.tgz"
-  "version" "5.1.1"
+"postcss-merge-longhand@^*":
+  "integrity" "sha512-18/bp9DZnY1ai9RlahOfLBbmIUKfKFPASxRCiZ1vlpZqWPCn8qWPFlEozqmWL+kBtcEQmG8W9YqGCstDImvp/Q=="
+  "resolved" "https://registry.npmjs.org/postcss-merge-longhand/-/postcss-merge-longhand-5.1.2.tgz"
+  "version" "5.1.2"
   dependencies:
     "postcss-value-parser" "^4.2.0"
-    "stylehacks" "^5.1.0"
+    "stylehacks" "^*"
 
-"postcss-merge-rules@^5.1.0":
+"postcss-merge-rules@^*":
   "integrity" "sha512-NecukEJovQ0mG7h7xV8wbYAkXGTO3MPKnXvuiXzOKcxoOodfTTKYjeo8TMhAswlSkjcPIBlnKbSFcTuVSDaPyQ=="
   "resolved" "https://registry.npmjs.org/postcss-merge-rules/-/postcss-merge-rules-5.1.0.tgz"
   "version" "5.1.0"
@@ -1732,14 +1731,14 @@
     "cssnano-utils" "^3.1.0"
     "postcss-selector-parser" "^6.0.5"
 
-"postcss-minify-font-values@^5.1.0":
+"postcss-minify-font-values@^*":
   "integrity" "sha512-el3mYTgx13ZAPPirSVsHqFzl+BBBDrXvbySvPGFnQcTI4iNslrPaFq4muTkLZmKlGk4gyFAYUBMH30+HurREyA=="
   "resolved" "https://registry.npmjs.org/postcss-minify-font-values/-/postcss-minify-font-values-5.1.0.tgz"
   "version" "5.1.0"
   dependencies:
     "postcss-value-parser" "^4.2.0"
 
-"postcss-minify-gradients@^5.1.0":
+"postcss-minify-gradients@^*":
   "integrity" "sha512-J/TMLklkONn3LuL8wCwfwU8zKC1hpS6VcxFkNUNjmVt53uKqrrykR3ov11mdUYyqVMEx67slMce0tE14cE4DTg=="
   "resolved" "https://registry.npmjs.org/postcss-minify-gradients/-/postcss-minify-gradients-5.1.0.tgz"
   "version" "5.1.0"
@@ -1748,7 +1747,7 @@
     "cssnano-utils" "^3.1.0"
     "postcss-value-parser" "^4.2.0"
 
-"postcss-minify-params@^5.1.1":
+"postcss-minify-params@^*":
   "integrity" "sha512-WCpr+J9Uz8XzMpAfg3UL8z5rde6MifBbh5L8bn8S2F5hq/YDJJzASYCnCHvAB4Fqb94ys8v95ULQkW2EhCFvNg=="
   "resolved" "https://registry.npmjs.org/postcss-minify-params/-/postcss-minify-params-5.1.1.tgz"
   "version" "5.1.1"
@@ -1757,7 +1756,7 @@
     "cssnano-utils" "^3.1.0"
     "postcss-value-parser" "^4.2.0"
 
-"postcss-minify-selectors@^5.2.0":
+"postcss-minify-selectors@^*":
   "integrity" "sha512-vYxvHkW+iULstA+ctVNx0VoRAR4THQQRkG77o0oa4/mBS0OzGvvzLIvHDv/nNEM0crzN2WIyFU5X7wZhaUK3RA=="
   "resolved" "https://registry.npmjs.org/postcss-minify-selectors/-/postcss-minify-selectors-5.2.0.tgz"
   "version" "5.2.0"
@@ -1771,47 +1770,47 @@
   dependencies:
     "postcss-selector-parser" "^6.0.6"
 
-"postcss-normalize-charset@^5.1.0":
+"postcss-normalize-charset@^*":
   "integrity" "sha512-mSgUJ+pd/ldRGVx26p2wz9dNZ7ji6Pn8VWBajMXFf8jk7vUoSrZ2lt/wZR7DtlZYKesmZI680qjr2CeFF2fbUg=="
   "resolved" "https://registry.npmjs.org/postcss-normalize-charset/-/postcss-normalize-charset-5.1.0.tgz"
   "version" "5.1.0"
 
-"postcss-normalize-display-values@^5.1.0":
+"postcss-normalize-display-values@^*":
   "integrity" "sha512-WP4KIM4o2dazQXWmFaqMmcvsKmhdINFblgSeRgn8BJ6vxaMyaJkwAzpPpuvSIoG/rmX3M+IrRZEz2H0glrQNEA=="
   "resolved" "https://registry.npmjs.org/postcss-normalize-display-values/-/postcss-normalize-display-values-5.1.0.tgz"
   "version" "5.1.0"
   dependencies:
     "postcss-value-parser" "^4.2.0"
 
-"postcss-normalize-positions@^5.1.0":
+"postcss-normalize-positions@^*":
   "integrity" "sha512-8gmItgA4H5xiUxgN/3TVvXRoJxkAWLW6f/KKhdsH03atg0cB8ilXnrB5PpSshwVu/dD2ZsRFQcR1OEmSBDAgcQ=="
   "resolved" "https://registry.npmjs.org/postcss-normalize-positions/-/postcss-normalize-positions-5.1.0.tgz"
   "version" "5.1.0"
   dependencies:
     "postcss-value-parser" "^4.2.0"
 
-"postcss-normalize-repeat-style@^5.1.0":
+"postcss-normalize-repeat-style@^*":
   "integrity" "sha512-IR3uBjc+7mcWGL6CtniKNQ4Rr5fTxwkaDHwMBDGGs1x9IVRkYIT/M4NelZWkAOBdV6v3Z9S46zqaKGlyzHSchw=="
   "resolved" "https://registry.npmjs.org/postcss-normalize-repeat-style/-/postcss-normalize-repeat-style-5.1.0.tgz"
   "version" "5.1.0"
   dependencies:
     "postcss-value-parser" "^4.2.0"
 
-"postcss-normalize-string@^5.1.0":
+"postcss-normalize-string@^*":
   "integrity" "sha512-oYiIJOf4T9T1N4i+abeIc7Vgm/xPCGih4bZz5Nm0/ARVJ7K6xrDlLwvwqOydvyL3RHNf8qZk6vo3aatiw/go3w=="
   "resolved" "https://registry.npmjs.org/postcss-normalize-string/-/postcss-normalize-string-5.1.0.tgz"
   "version" "5.1.0"
   dependencies:
     "postcss-value-parser" "^4.2.0"
 
-"postcss-normalize-timing-functions@^5.1.0":
+"postcss-normalize-timing-functions@^*":
   "integrity" "sha512-DOEkzJ4SAXv5xkHl0Wa9cZLF3WCBhF3o1SKVxKQAa+0pYKlueTpCgvkFAHfk+Y64ezX9+nITGrDZeVGgITJXjg=="
   "resolved" "https://registry.npmjs.org/postcss-normalize-timing-functions/-/postcss-normalize-timing-functions-5.1.0.tgz"
   "version" "5.1.0"
   dependencies:
     "postcss-value-parser" "^4.2.0"
 
-"postcss-normalize-unicode@^5.1.0":
+"postcss-normalize-unicode@^*":
   "integrity" "sha512-J6M3MizAAZ2dOdSjy2caayJLQT8E8K9XjLce8AUQMwOrCvjCHv24aLC/Lps1R1ylOfol5VIDMaM/Lo9NGlk1SQ=="
   "resolved" "https://registry.npmjs.org/postcss-normalize-unicode/-/postcss-normalize-unicode-5.1.0.tgz"
   "version" "5.1.0"
@@ -1819,7 +1818,7 @@
     "browserslist" "^4.16.6"
     "postcss-value-parser" "^4.2.0"
 
-"postcss-normalize-url@^5.1.0":
+"postcss-normalize-url@^*":
   "integrity" "sha512-5upGeDO+PVthOxSmds43ZeMeZfKH+/DKgGRD7TElkkyS46JXAUhMzIKiCa7BabPeIy3AQcTkXwVVN7DbqsiCew=="
   "resolved" "https://registry.npmjs.org/postcss-normalize-url/-/postcss-normalize-url-5.1.0.tgz"
   "version" "5.1.0"
@@ -1827,14 +1826,14 @@
     "normalize-url" "^6.0.1"
     "postcss-value-parser" "^4.2.0"
 
-"postcss-normalize-whitespace@^5.1.1":
+"postcss-normalize-whitespace@^*":
   "integrity" "sha512-83ZJ4t3NUDETIHTa3uEg6asWjSBYL5EdkVB0sDncx9ERzOKBVJIUeDO9RyA9Zwtig8El1d79HBp0JEi8wvGQnA=="
   "resolved" "https://registry.npmjs.org/postcss-normalize-whitespace/-/postcss-normalize-whitespace-5.1.1.tgz"
   "version" "5.1.1"
   dependencies:
     "postcss-value-parser" "^4.2.0"
 
-"postcss-ordered-values@^5.1.0":
+"postcss-ordered-values@^*":
   "integrity" "sha512-wU4Z4D4uOIH+BUKkYid36gGDJNQtkVJT7Twv8qH6UyfttbbJWyw4/xIPuVEkkCtQLAJ0EdsNSh8dlvqkXb49TA=="
   "resolved" "https://registry.npmjs.org/postcss-ordered-values/-/postcss-ordered-values-5.1.0.tgz"
   "version" "5.1.0"
@@ -1842,7 +1841,7 @@
     "cssnano-utils" "^3.1.0"
     "postcss-value-parser" "^4.2.0"
 
-"postcss-reduce-initial@^5.1.0":
+"postcss-reduce-initial@^*":
   "integrity" "sha512-5OgTUviz0aeH6MtBjHfbr57tml13PuedK/Ecg8szzd4XRMbYxH4572JFG067z+FqBIf6Zp/d+0581glkvvWMFw=="
   "resolved" "https://registry.npmjs.org/postcss-reduce-initial/-/postcss-reduce-initial-5.1.0.tgz"
   "version" "5.1.0"
@@ -1850,7 +1849,7 @@
     "browserslist" "^4.16.6"
     "caniuse-api" "^3.0.0"
 
-"postcss-reduce-transforms@^5.1.0":
+"postcss-reduce-transforms@^*":
   "integrity" "sha512-2fbdbmgir5AvpW9RLtdONx1QoYG2/EtqpNQbFASDlixBbAYuTcJ0dECwlqNqH7VbaUnEnh8SrxOe2sRIn24XyQ=="
   "resolved" "https://registry.npmjs.org/postcss-reduce-transforms/-/postcss-reduce-transforms-5.1.0.tgz"
   "version" "5.1.0"
@@ -1890,7 +1889,7 @@
   dependencies:
     "sort-css-media-queries" "2.0.4"
 
-"postcss-svgo@^5.1.0":
+"postcss-svgo@^*":
   "integrity" "sha512-D75KsH1zm5ZrHyxPakAxJWtkyXew5qwS70v56exwvw542d9CRtTo78K0WeFxZB4G7JXKKMbEZtZayTGdIky/eA=="
   "resolved" "https://registry.npmjs.org/postcss-svgo/-/postcss-svgo-5.1.0.tgz"
   "version" "5.1.0"
@@ -1898,7 +1897,7 @@
     "postcss-value-parser" "^4.2.0"
     "svgo" "^2.7.0"
 
-"postcss-unique-selectors@^5.1.1":
+"postcss-unique-selectors@^*":
   "integrity" "sha512-5JiODlELrz8L2HwxfPnhOWZYWDxVHWL83ufOv84NrcgipI7TaeRsatAhK4Tr2/ZiYldpK/wBvw5BD3qfaK96GA=="
   "resolved" "https://registry.npmjs.org/postcss-unique-selectors/-/postcss-unique-selectors-5.1.1.tgz"
   "version" "5.1.1"
@@ -2197,7 +2196,7 @@
   "resolved" "https://registry.npmjs.org/style-search/-/style-search-0.1.0.tgz"
   "version" "0.1.0"
 
-"stylehacks@^5.1.0":
+"stylehacks@^*":
   "integrity" "sha512-SzLmvHQTrIWfSgljkQCw2++C9+Ne91d/6Sp92I8c5uHTcy/PgeHamwITIbBW9wnFTY/3ZfSXR9HIL6Ikqmcu6Q=="
   "resolved" "https://registry.npmjs.org/stylehacks/-/stylehacks-5.1.0.tgz"
   "version" "5.1.0"
