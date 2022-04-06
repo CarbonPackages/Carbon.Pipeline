@@ -16,6 +16,10 @@ You can choose between different package manager: [npm], [Yarn] and the ultra-fa
 
 Run `composer require carbon/pipeline --dev`. Some files (if not already existing) will be copied to your root folder during the installation. After installing the package, run the command `install` to install the required packages, defined in `package.json`. Feel free to modify and change dependencies before installing 👍
 
+#### Standalone use in custom projects without Neos
+
+Carbon.Pipeline is also a perfect choice for your non-Neos projects. Consider installing the composer package `neos/composer-plugin` beforehand, to get Carbon.Pipeline installed in the correct directory under `Build/Carbon.Pipeline`.
+
 ### Manual install
 
 If you want to make some significant adjustments to the build stack, you can also [download the code as zip file][main.zip] and put it in the folder `Build/Carbon.Pipeline`. Go to `Carbon.Pipeline/Installer/Distribution/Defaults` and copy the files to your root folder (Don't forget the hidden files, starting with a dot). After this is done, run the command `install` to install the required packages, defined in `package.json`. Feel free to modify and change dependencies before installing 👍
