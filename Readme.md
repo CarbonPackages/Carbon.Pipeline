@@ -26,9 +26,8 @@ Carbon.Pipeline assumes the following project directory structure for resources:
 
 A configured location under
 
-`Resources/Private`: input files
-
-`Resources/`: output files
+* `Resources/Private`: input files
+* `Resources/`: output files
 
 The whole configuration, including which files to build, is configured in [`pipeline.yaml`]. The default values are set in [`defaults.yaml`] and merged with your configuration. Under the key `packages`, you can either add an array with package settings or, if you have just one entry, you can directly add the configuration:
 
