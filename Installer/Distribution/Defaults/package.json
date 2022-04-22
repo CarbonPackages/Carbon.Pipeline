@@ -25,8 +25,8 @@
     "carbon-pipeline": "^0.1.2",
     "concurrently": "^7.1.0",
     "cssnano": "^5.1.7",
-    "esbuild": "^0.14.32",
-    "eslint": "^8.12.0",
+    "esbuild": "^0.14.38",
+    "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "postcss": "^8.4.12",
@@ -37,8 +37,8 @@
     "postcss-reporter": "^7.0.5",
     "postcss-sort-media-queries": "^4.2.1",
     "prettier": "^2.6.2",
-    "stylelint": "^14.6.1",
+    "stylelint": "^14.7.1",
     "stylelint-config-standard": "^25.0.0",
-    "tailwindcss": "^3.0.23"
+    "tailwindcss": "^3.0.24"
   }
 }
