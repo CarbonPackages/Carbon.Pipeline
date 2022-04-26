@@ -13,7 +13,7 @@ prepare:
 	@cp -n Installer/Distribution/Defaults/{*,.*} ./ || true
 	@cp -R {Lib,defaults.yaml,*.mjs,*.js} Build/Carbon.Pipeline/
 
-## Update lock files
+## Update lock files and push them to git
 up-lock:
 	@echo "${GREEN}Writing lock files...${RESET}"
 	@rm -rf node_modules yarn.lock pnpm-lock.yaml package-lock.json
@@ -22,6 +22,9 @@ up-lock:
 	@yarn install
 	@rm -rf node_modules
 	@npm install 
+	@git add yarn.lock pnpm-lock.yaml package-lock.json
+	@git commit -m "Update: Lock files"
+	@git push
 
 ## Check for upgraded packages with pnpm 
 up-pnpm:
