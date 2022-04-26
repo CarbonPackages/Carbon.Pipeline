@@ -132,6 +132,7 @@ jobs:
   deleteArtifacts:
     name: Delete artifacts
     runs-on: ubuntu-latest
+    if: always()
     needs:
       - pnpm
       - yarn
