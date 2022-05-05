@@ -1,4 +1,3 @@
-// cssnano and svgo optimisation has some issues with pleeease-filters
 module.exports = (ctx) => ({
     plugins: {
         "postcss-import": {
