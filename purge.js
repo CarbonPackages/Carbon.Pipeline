@@ -2,8 +2,17 @@ const path = require("path");
 const fs = require("fs");
 const { yaml, red } = require("carbon-pipeline");
 
+const configFile = argv("configFile") || "pipeline.yaml";
+let purge = readPurgePath(configFile);
+if (!purge) {
+    purge = readPurgePath("defaults.yaml", "Build/Carbon.Pipeline");
+}
+
+if (!Array.isArray(purge)) {
+    purge = [purge];
+}
+
 function readPurgePath(file, folder) {
-    file = `${file}.yaml`;
     const filePath = folder ? path.join(folder, file) : file;
     try {
         const definition = yaml.load(fs.readFileSync(path.join("./", filePath), "utf8"));
@@ -18,13 +27,19 @@ function readPurgePath(file, folder) {
     }
 }
 
-let purge = readPurgePath("pipeline");
-if (!purge) {
-    purge = readPurgePath("defaults", "Build/Carbon.Pipeline");
-}
+function argv(key) {
+    // Return true if the key exists and a value is defined
+    if (process.argv.includes(`--${key}`)) {
+        return true;
+    }
+    const value = process.argv.find((element) => element.startsWith(`--${key}=`));
 
-if (!Array.isArray(purge)) {
-    purge = [purge];
+    // Return null if the key does not exist and a value is not defined
+    if (!value) {
+        return null;
+    }
+
+    return value.replace(`--${key}=`, "");
 }
 
 module.exports = purge;

@@ -54,6 +54,11 @@ buildDefaults:
 # Pass options to the sass compiler
 sassOptions: null
 
+# Pass options to the postcss config file
+postcssOptions:
+  tailwindcss:
+    config: './tailwind.config.js'
+
 esbuild:
   # Set Neos Flow settings as FLOW variable. If `true` all the settings are passed.
   # It is recommended to set it to a path (e.g. Flownative.Sentry)
