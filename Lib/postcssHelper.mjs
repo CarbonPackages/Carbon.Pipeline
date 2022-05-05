@@ -7,6 +7,7 @@ function rc() {
         minify,
         basePath: config.folder.base,
         resolve: importResolve,
+        ...config.postcssOptions,
     })
         .then((rc) => {
             return rc;

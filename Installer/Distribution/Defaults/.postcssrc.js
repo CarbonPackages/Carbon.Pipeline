@@ -4,7 +4,7 @@ module.exports = (ctx) => ({
             resolve: ctx.resolve,
         },
         "tailwindcss/nesting": true,
-        tailwindcss: true,
+        tailwindcss: ctx.tailwindcss,
         "postcss-assets": {
             cachebuster: false,
             basePath: `${ctx.basePath}/`,

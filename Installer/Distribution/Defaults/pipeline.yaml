@@ -23,6 +23,11 @@ packages:
     files: Main.js
   - package: Vendor.Theme
 
+# Pass options to the postcss config file
+# In this example, you would have access to the key `prefix` with `ctx.prefix` in your postcss config file (`.postcssrc.js`)
+# postcssOptions:
+#   prefix: true
+
 # If you want to use esbuild features or plugins, you can enable them here.
 # If you have nothing changed here, you can delete this section.
 esbuild:

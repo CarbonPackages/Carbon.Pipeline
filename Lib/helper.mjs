@@ -2,18 +2,19 @@ import { yaml, fs, red, deepmerge, glob } from "carbon-pipeline";
 import path from "path";
 import { execSync } from "child_process";
 
-const pipeline = readYamlFile("pipeline");
-const defaults = readYamlFile("defaults", "Build/Carbon.Pipeline");
-const config = deepmerge(defaults, pipeline);
-
 const scriptFiles = [];
 const styleFiles = {};
 
-const watch = process.argv.includes("--watch");
-const production = process.argv.includes("--production");
-const minify = production || process.argv.includes("--minify");
+const configFile = argv("configFile") || "pipeline.yaml";
+const pipeline = readYamlFile(configFile);
+const defaults = readYamlFile("defaults.yaml", "Build/Carbon.Pipeline");
+const config = deepmerge(defaults, pipeline);
+
+const watch = argv("watch") === true;
+const production = argv("production") === true;
+const minify = production || argv("minify") === true;
 let compression = false;
-if (production && (!watch || process.argv.includes("--compression"))) {
+if (production && (!watch || argv("compression") === true)) {
     compression = config.buildDefaults.compression;
 }
 let sass = false;
@@ -28,7 +29,7 @@ const allFileExtensions = Object.entries(config.extensions)
 
 toArray(config.packages).forEach((entry) => {
     if (!entry.package) {
-        error("No package defined. Please set it in your pipeline.yaml");
+        error(`No package defined. Please set it in your ${configFile}`);
         process.exit(1);
     }
 
@@ -98,6 +99,21 @@ toArray(config.packages).forEach((entry) => {
         scriptFiles.push(scriptEntryConfig(entry, moduleEntries, "module", "esm"));
     }
 });
+
+function argv(key) {
+    // Return true if the key exists and a value is defined
+    if (process.argv.includes(`--${key}`)) {
+        return true;
+    }
+    const value = process.argv.find((element) => element.startsWith(`--${key}=`));
+
+    // Return null if the key does not exist and a value is not defined
+    if (!value) {
+        return null;
+    }
+
+    return value.replace(`--${key}=`, "");
+}
 
 function scriptEntryConfig(entry, entryPoints, type, format = null) {
     const conf = entryConfig(entry, type);
@@ -243,7 +259,6 @@ function convertJsonForDefine(json, prefix) {
 }
 
 function readYamlFile(file, folder) {
-    file = `${file}.yaml`;
     const filePath = folder ? path.join(folder, file) : file;
     try {
         return yaml.load(fs.readFileSync(path.join("./", filePath), "utf8"));
