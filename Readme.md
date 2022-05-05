@@ -10,19 +10,19 @@ First, thank you that you want to give this build stack a try! If you miss a ✨
 
 ## Package manager
 
-You can choose between different package manager: [npm], [Yarn] and the ultra-fast and disk-space saving [pnpm]. To set you favorite task manager, set the name (`npm`, `yarn` or `pnpm`) in the `package.json` under the key `config.packageManager`. `pnpm` is set as default.
+You can choose between different package manager: [npm], [Yarn] and the ultra-fast and disk-space saving [pnpm]. Set your favorite task manager's name (`npm`, `yarn` or `pnpm`) in the `package.json` under the key `config.packageManager`. `pnpm` is set as default.
 
 ### Install via composer
 
-Run `composer require carbon/pipeline --dev`. Some files (if not already existing) will be copied to your root folder during the installation. After installing the package, run the command `install` to install the required packages, defined in `package.json`. Feel free to modify and change dependencies before installing 👍
+Run `composer require carbon/pipeline --dev`. Some files (if not already existing) will be copied to your root folder during the installation. After installing the package, run the command `install` to install the required packages defined in `package.json`. Feel free to modify and change dependencies before installing 👍
 
 #### Standalone use in custom projects without Neos
 
-Carbon.Pipeline is also a perfect choice for your non-Neos projects. Consider installing the composer package `neos/composer-plugin` beforehand, to get Carbon.Pipeline installed in the correct directory under `Build/Carbon.Pipeline`.
+Carbon.Pipeline is also a perfect choice for your non-Neos projects. Consider installing the composer package `neos/composer-plugin` beforehand to get Carbon.Pipeline installed in the correct directory under `Build/Carbon.Pipeline`.
 
 ### Manual install
 
-If you want to make some significant adjustments to the build stack, you can also [download the code as zip file][main.zip] and put it in the folder `Build/Carbon.Pipeline`. Go to `Carbon.Pipeline/Installer/Distribution/Defaults` and copy the files to your root folder (Don't forget the hidden files, starting with a dot). After this is done, run the command `install` to install the required packages, defined in `package.json`. Feel free to modify and change dependencies before installing 👍
+If you want to make significant adjustments to the build stack, you can also [download the code as zip file][main.zip] and put it in the `Build/Carbon.Pipeline` folder. Go to `Carbon.Pipeline/Installer/Distribution/Defaults` and copy the files to your root folder (Don't forget the hidden files, starting with a dot). After this is done, run the command `install` to install the required packages defined in `package.json`. Feel free to modify and change dependencies before installing 👍
 
 ## Add files to the build stack
 
@@ -199,10 +199,10 @@ Of course, you can also add your own tasks in the `scripts` section of your `pac
 "pipeline:editor": "$npm_package_config_packageManager --dir DistributionPackages/Foo.Editor/Resources/Private/Editor/ install",
 ```
 
-> Be aware that you may have different syntax for settings options based on the choosen task manager
+> Be aware that you may have different syntax for settings options based on the chosen task manager
 > To set the current work directory, for example you have to set `--cwd` for `yarn`, `--dir` or `-C` for `pnpm` and `--prefix` for `npm`.
 
-Because the tasks start with `build:`, respectively with `watch:` or `pipeline:`, the tasks will be included in the corresponding root command. In this example, `build`, `watch` or `pipeline`. If you want to go crazy you can even mix different task manager.
+Because the tasks start with `build:`, respectively with `watch:` or `pipeline:`, the tasks will be included in the corresponding root command. In this example, `build`, `watch` or `pipeline`. If you want to go crazy, you can even mix different task managers.
 
 ## Compression of files
 
@@ -236,6 +236,16 @@ import "Packages/Plugins/Jonnitto.PhotoSwipe/Resources/Private/Assets/PhotoSwipe
 ```
 
 Thanks to a custom made `resolve` function, you can also use [globbing][glob] in CSS imports: `@import "Presentation/**/*.pcss";`
+
+## Alter the configuration file
+
+In some setups, you may need multiple configurations with different config files. In this edge case, you can set a other config file in your `scripts` section in your `package.json` file:
+
+```
+"build:custom:css": "node Build/Carbon.Pipeline/postcss.mjs --configFile=pipelineCustom.yaml"
+```
+
+In this example, `pipelineCustom.yaml` gets used instead of `pipeline.yaml`.
 
 ## CSS
 
@@ -274,7 +284,7 @@ You have to ways to import files from `node_modules` (Example with bootstrap):
 You can pass options to the sass compiler with `sassOptions`.
 
 **Example**:
-To silencing warnings from stylesheets loaded through importers and load paths you can enable `quietDeps`:
+To silence warnings from stylesheets loaded through importers and load paths, you can enable `quietDeps`:
 
 ```yaml
 sassOptions:
@@ -285,7 +295,16 @@ sassOptions:
 
 ### PostCSS
 
-This template comes with a variety of PostCSS Plugins. Feel free to remove some or add your own favorites packages. The configuration is located in [`.postcssrc.js`]. The suffix of these files should be `.pcss`.
+This template comes with a variety of PostCSS Plugins. Feel free to remove some or add your own favorite packages. The configuration is located in [`.postcssrc.js`]. The suffix of these files should be `.pcss`.
+
+#### Pass custom options to you PostCSS config file
+
+You can pass custom options to your PostCSS config file with key `postcssOptions`. In this example, you would access the key `prefix` with `ctx.prefix` in your PostCSS config file (`.postcssrc.js`).
+
+```yaml
+postcssOptions:
+  prefix: true
+```
 
 #### PostCSS Plugins
 
@@ -311,7 +330,7 @@ Of course, you can add your own or remove not-needed Plugins as you want. This i
 
 ### Tailwind CSS
 
-This setup comes with [Tailwind CSS], a highly customizable, low-level CSS framework. An example configuration is provided in [`tailwind.config.js`]. The setup for purge the CSS files is also configured. [Read more about controlling the file size here][tailwind file-size]. Because the CSS bundling is done with the Javascript API from PostCSS, the [Just-in-Time Mode] from Tailwind CSS works perfectly. To remove a specific package you could use this pattern in your `pipeline.yaml`:
+This setup comes with [Tailwind CSS], a highly customizable, low-level CSS framework. An example configuration is provided in [`tailwind.config.js`]. The setup for purging the CSS files is also configured. [Read more about controlling the file size here][tailwind file-size]. Because the CSS bundling is done with the Javascript API from PostCSS, the [Just-in-Time Mode] from Tailwind CSS works perfectly. To remove a specific package, you could use this pattern in your `pipeline.yaml`:
 
 ```yaml
 buildDefaults:
@@ -327,7 +346,7 @@ By the way: [Alpine.js] is excellent in combination with [Tailwind CSS].
 <details>
 <summary><strong>Flow Settings in Javascript</strong></summary>
 
-If you use tools like [Flownative.Sentry], you perhaps want to pass some of the settings to your Javascript, without setting a `data` attribute somewhere in the markup. For that, you can enable `esbuild.defineFlowSettings`. If set to `true`, all settings are passed. It is recommended to set it to a path (e.g. `Flownative.Sentry`). This path is added as `--path` attribute to the `flow configuration:show` command. If you run the command `build`, which has automatically the flag `--production`, the `FLOW_CONTEXT` is set to `Production`.
+Suppose you use tools like [Flownative.Sentry], you perhaps want to pass some of the settings to your Javascript without setting a `data` attribute somewhere in the markup. For that, you can enable `esbuild.defineFlowSettings`. If set to `true`, all settings are passed. It is recommended to put it to a path (e.g. `Flownative.Sentry`). This path is added as `--path` attribute to the `flow configuration:show` command. If you run the command `build`, which automatically has the flag `--production`, the `FLOW_CONTEXT` is set to `Production`.
 
 ```yaml
 esbuild:
@@ -363,8 +382,8 @@ Make sure your [`.eslintrc`] has the global `FLOW` enabled:
 You can pass options to the [esbuild API] with `esbuild.options`.
 
 **Example**:
-To remove some functions from the production build you can use the `esbuild.options.pure` setting. If you have just
-one function, you can pass a string, otherwise, you have to set it to an array:
+To remove some functions from the production build, you can use the `esbuild.options.pure` setting. If you have just
+one function, you can pass a string; otherwise, you have to set it to an array:
 
 ```yaml
 esbuild:
@@ -458,7 +477,7 @@ render(<div />);
 <details>
 <summary><strong>Preact</strong></summary>
 
-If you're using JSX with a library other than React (such as [Preact],), you'll likely need to configure the [JSX factory] and [JSX fragment] settings since they default to `React.createElement `and `React.Fragment` respectively. Add this to your `tsconfig.json` or `jsconfig.json`:
+If you're using JSX with a library other than React (such as [Preact],), you'll likely need to configure the [JSX factory] and [JSX fragment] settings since they default to `React.createElement`and `React.Fragment` respectively. Add this to your `tsconfig.json` or `jsconfig.json`:
 
 ```json
 {
@@ -511,7 +530,7 @@ esbuild:
           css: true
 ```
 
-> You can also configure the esbuild plugin and preprocess package which should be used. Just add a key `plugin` or `preprocess` and add the plugin name.
+> You can also configure the esbuild plugin and preprocess package, which should be used. Just add a key `plugin` or `preprocess` and the plugin name.
 
 Your `tsconfig.json` may look like this:
 
@@ -574,7 +593,7 @@ esbuild:
       # options:
 ```
 
-> You can also configure the esbuild plugin which should be used. Just add a key `plugin` and add the plugin name.
+> You can also configure the esbuild plugin, which should be used. Just add a key `plugin` and add the plugin name.
 
 </details>
 
@@ -661,8 +680,8 @@ As the `ENV` variable is set to `development` or `production` if you run the tas
 }
 ```
 
-If you a poor person and have to support Internet Explorer, you have to edit your `.browserslistrc`.
-If a browser starting with `ie ` is found, the target `es5` gets activated.
+If you are a poor person and have to support Internet Explorer, you must edit your `.browserslistrc`.
+If a browser starting with `ie` is found, the target `es5` gets activated.
 
 ```
 defaults
@@ -685,8 +704,8 @@ esbuild:
       options: null
 ```
 
-As the plugin return not the function directly (like others), you have to also to pass the name of the function.
-If a plugin returns directly the function, you don't have to set this. If you want to enable such a plugin without any options, you can just pass `name-of-the-plugin: true`
+As the plugin returns not the function directly (like others), you also have to pass the function's name.
+If a plugin returns the function directly, you don't have to set this. If you want to enable such a plugin without any options, you can just pass `name-of-the-plugin: true`
 
 </details>
 
@@ -696,7 +715,7 @@ If you want to use live reloading, you can do this with [Browsersync].
 
 To install it run `pnpm add --global browser-sync`, `yarn global add browser-sync`, or `npm install -g browser-sync`.
 
-Then you have to create a inital config with `browser-sync init`.
+Then you have to create an initial config with `browser-sync init`.
 After that, you need to adjust the created `bs-config.js` file.
 You can adjust every parameter, but the two parameter you need to set is `files` and `proxy`:
 
@@ -721,9 +740,9 @@ module.exports = {
 };
 ```
 
-Make sure you set the correct proxy with the corresponding protocol (`https://` or `http://`), depending on your setup. To create a better overview of the parameter you can delete the not changed values from the file.
+Make sure you set the correct proxy with the corresponding protocol (`https://` or `http://`), depending on your setup. To create a better overview of the parameter, you can delete the not changed values from the file.
 
-To start Browsersync you can run `browser-sync start --config bs-config.js`. If you want to start it together with `watch`, you can add following line into the `scripts` section:
+To start Browsersync you can run `browser-sync start --config bs-config.js`. If you want to start it together with `watch`, you can add the following line into the `scripts` section:
 
 ```
 "watch:browsersync": "browser-sync start --config bs-config.js",
