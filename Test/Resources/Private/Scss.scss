@@ -2,4 +2,8 @@ $variable: green;
 
 h1 {
     color: $variable;
+
+    &:disabled {
+        opacity: 10;
+    }
 }
