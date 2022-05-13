@@ -20,7 +20,6 @@
     "pipeline": "$npm_package_config_packageManager install;concurrently -r $npm_package_config_packageManager:pipeline:*"
   },
   "devDependencies": {
-    "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "autoprefixer": "^10.4.5",
     "carbon-pipeline": "^0.1.2",
     "concurrently": "^7.1.0",
