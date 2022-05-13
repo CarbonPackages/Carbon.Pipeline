@@ -330,7 +330,7 @@
   dependencies:
     "lodash" "^4.17.14"
 
-"autoprefixer@^10.4.5":
+"autoprefixer@^10.4.7":
   "integrity" "sha512-ypHju4Y2Oav95SipEcCcI5J7CGPuvz8oat7sUtYj3ClK44bldfvtvcxK6IEK++7rqB7YchDGzweZIBG+SD0ZAA=="
   "resolved" "https://registry.npmjs.org/autoprefixer/-/autoprefixer-10.4.7.tgz"
   "version" "10.4.7"
@@ -887,7 +887,7 @@
   "resolved" "https://registry.npmjs.org/esbuild/-/esbuild-0.12.29.tgz"
   "version" "0.12.29"
 
-"esbuild@^0.14.38", "esbuild@>=0.9.6":
+"esbuild@^0.14.39", "esbuild@>=0.9.6":
   "integrity" "sha512-2kKujuzvRWYtwvNjYDY444LQIA3TyJhJIX3Yo4+qkFlDDtGlSicWgeHVJqMUP/2sSfH10PGwfsj+O2ro1m10xQ=="
   "resolved" "https://registry.npmjs.org/esbuild/-/esbuild-0.14.39.tgz"
   "version" "0.14.39"
@@ -965,7 +965,7 @@
   "resolved" "https://registry.npmjs.org/eslint-visitor-keys/-/eslint-visitor-keys-3.3.0.tgz"
   "version" "3.3.0"
 
-"eslint@^8.14.0", "eslint@>=5", "eslint@>=7.0.0", "eslint@>=7.28.0":
+"eslint@^8.15.0", "eslint@>=5", "eslint@>=7.0.0", "eslint@>=7.28.0":
   "integrity" "sha512-GG5USZ1jhCu8HJkzGgeK8/+RGnHaNYZGrGDzUtigK3BsGESW/rs2az23XqE0WVwDxy1VRvvjSSGu5nB0Bu+6SA=="
   "resolved" "https://registry.npmjs.org/eslint/-/eslint-8.15.0.tgz"
   "version" "8.15.0"
@@ -2435,7 +2435,7 @@
   dependencies:
     "stylelint-config-recommended" "^7.0.0"
 
-"stylelint@^14.4.0", "stylelint@^14.7.1":
+"stylelint@^14.4.0", "stylelint@^14.8.2":
   "integrity" "sha512-tjDfexCYfoPdl/xcDJ9Fv+Ko9cvzbDnmdiaqEn3ovXHXasi/hbkt5tSjsiReQ+ENqnz0eltaX/AOO+AlzVdcNA=="
   "resolved" "https://registry.npmjs.org/stylelint/-/stylelint-14.8.2.tgz"
   "version" "14.8.2"
