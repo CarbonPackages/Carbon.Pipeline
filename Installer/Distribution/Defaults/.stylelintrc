@@ -9,7 +9,7 @@
   "rules": {
     "selector-class-pattern": "[a-z-]+",
     "value-keyword-case": ["lower", { "camelCaseSvgKeywords": true }],
-    "function-no-unknown": [true, { "ignoreFunctions": ["theme"] }],
+    "function-no-unknown": [true, { "ignoreFunctions": ["theme", "resolve"] }],
     "at-rule-no-unknown": [
       true,
       { "ignoreAtRules": ["tailwind", "apply", "layer"] }
