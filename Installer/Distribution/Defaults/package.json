@@ -20,24 +20,24 @@
     "pipeline": "$npm_package_config_packageManager install;concurrently -r $npm_package_config_packageManager:pipeline:*"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.7",
+    "autoprefixer": "^10.4.8",
     "carbon-pipeline": "^0.1.2",
-    "concurrently": "^7.2.2",
+    "concurrently": "^7.3.0",
     "cssnano": "^5.1.12",
-    "esbuild": "^0.14.48",
-    "eslint": "^8.19.0",
+    "esbuild": "^0.14.53",
+    "eslint": "^8.21.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "postcss": "^8.4.14",
+    "postcss": "^8.4.16",
     "postcss-assets": "^6.0.0",
     "postcss-clip-path-polyfill": "~1.1.0",
-    "postcss-focus-visible": "^7.0.0",
+    "postcss-focus-visible": "^7.1.0",
     "postcss-import": "^14.1.0",
     "postcss-reporter": "^7.0.5",
     "postcss-sort-media-queries": "^4.2.1",
     "prettier": "^2.7.1",
     "stylelint": "^14.9.1",
     "stylelint-config-standard": "^26.0.0",
-    "tailwindcss": "^3.1.5"
+    "tailwindcss": "^3.1.8"
   }
 }
