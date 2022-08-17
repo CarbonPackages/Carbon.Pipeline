@@ -172,6 +172,9 @@ function getValue(entry, key) {
 }
 
 function checkFileExtension(type, filename) {
+    if (filename.endsWith(".d.ts")) {
+        return false;
+    }
     return config.extensions[type].some((suffix) => filename.endsWith(suffix));
 }
 
