@@ -15,7 +15,7 @@
     "function-no-unknown": [true, { "ignoreFunctions": ["theme", "resolve"] }],
     "at-rule-no-unknown": [
       true,
-      { "ignoreAtRules": ["tailwind", "apply", "layer"] }
+      { "ignoreAtRules": ["tailwind", "apply", "layer", "screen"] }
     ]
   }
 }
