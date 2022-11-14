@@ -5,7 +5,7 @@
     "packageManager": "pnpm"
   },
   "scripts": {
-    "postinstall": "touch ./node_modules/.metadata_never_index; mkdir ./Packages; touch ./Packages/.metadata_never_index",
+    "postinstall": "touch ./node_modules/.metadata_never_index; mkdir -p ./Packages; touch ./Packages/.metadata_never_index",
     "showConfig": "node Build/Carbon.Pipeline/showConfig.mjs",
     "build": "concurrently -r $npm_package_config_packageManager:build:*",
     "build:js": "node Build/Carbon.Pipeline/esbuild.mjs --production",
