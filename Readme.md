@@ -8,10 +8,6 @@
 
 First, thank you that you want to give this build stack a try! If you miss a ✨ feature or found a 🐛 bug, feel free to [open an issue].
 
-## Package manager
-
-You can choose between different package manager: [npm], [Yarn] and the ultra-fast and disk-space saving [pnpm]. Set your favorite task manager's name (`npm`, `yarn` or `pnpm`) in the `package.json` under the key `config.packageManager`. `pnpm` is set as default.
-
 ### Install via composer
 
 Run `composer require carbon/pipeline --dev`. Some files (if not already existing) will be copied to your root folder during the installation. After installing the package, run the command `install` to install the required packages defined in `package.json`. Feel free to modify and change dependencies before installing 👍
@@ -23,6 +19,10 @@ Carbon.Pipeline is also a perfect choice for your non-Neos projects. Consider in
 ### Manual install
 
 If you want to make significant adjustments to the build stack, you can also [download the code as zip file][main.zip] and put it in the `Build/Carbon.Pipeline` folder. Go to `Carbon.Pipeline/Installer/Distribution/Defaults` and copy the files to your root folder (Don't forget the hidden files, starting with a dot). After this is done, run the command `install` to install the required packages defined in `package.json`. Feel free to modify and change dependencies before installing 👍
+
+### Choose a package manager
+
+You can choose between different package manager: [npm], [Yarn] and the ultra-fast and disk-space saving [pnpm]. Set your favorite task manager's name (`npm`, `yarn` or `pnpm`) in the `package.json` under the key `config.packageManager`. `pnpm` is set as default.
 
 ## Add files to the build stack
 
