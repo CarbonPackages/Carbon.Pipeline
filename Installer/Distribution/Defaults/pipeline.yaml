@@ -13,6 +13,7 @@
 # inline                  <boolean>       (default: `false`) Flag to toggle if the files should be written to `Resources/Private/Templates/InlineAssets`
 # sourcemap               <boolean>       (default: `true`) Flag to toggle source map generation
 # format                  <string>        (default: `iife`)
+# jsExtension             <string>        (default: `null`) You can define the output extension of esbuild. `null` matches the format option (esm=.mjs, cjs=.cjs, iife=.js)
 
 packages:
   - package: Vendor.Bar

@@ -119,6 +119,7 @@ A package entry has the following options:
 | `inline`                 | `boolean`           | Flag to toggle if the files should be inlined. If set, sourcemaps are disabled                   | `true`               |
 | `sourcemap`              | `boolean`           | Flag to toggle source map generation                                                             | `false`              |
 | `format`                 | `string`            | Set the format of the output file. [Read more][esbuild format]                                   | `cjs`                |
+| `jsExtension`            | `string`            | Output extension of js files. Defaults to defined format option: esm=.mjs, cjs=.cjs, iife=.js)   | `.js`                |
 
 These are the default values for the folders:
 
@@ -140,6 +141,7 @@ external: null
 inline: false
 sourcemap: true
 format: iife
+jsExtension: null
 ```
 
 The target folders can be adjusted under the key `folder.output`. If you want to change the defaults for all your packages, you can also set this globally in your [`pipeline.yaml`]:

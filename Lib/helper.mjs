@@ -118,12 +118,14 @@ function argv(key) {
 function scriptEntryConfig(entry, entryPoints, type, format = null) {
     const conf = entryConfig(entry, type);
     const external = toArray(entry.external || config.buildDefaults.external) || [];
+    const jsExtension = entry.jsExtension || null;
     format = format || entry.format || config.buildDefaults.format;
 
     return {
         entryPoints,
         format,
         external,
+        jsExtension,
         ...conf,
     };
 }
