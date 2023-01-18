@@ -63,7 +63,7 @@ jobs:
     needs: prepare
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: pnpm
       - name: Install pnpm
@@ -90,7 +90,7 @@ jobs:
     needs: prepare
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: yarn
       - name: Setup node
@@ -113,7 +113,7 @@ jobs:
     needs: prepare
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: npm
       - uses: actions/setup-node@v2
