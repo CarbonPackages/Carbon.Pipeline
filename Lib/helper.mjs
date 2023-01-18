@@ -153,6 +153,11 @@ function entryConfig(entry, type) {
     const sourcemap = inline ? false : getValue(entry, "sourcemap");
     const outputFolderKey = inline ? "inline" : type;
     const folderOutput = entry.folder?.output;
+
+    const defaultExtensions = config.buildDefaults.jsFileExtension;
+    const extensions = getValue(entry, "jsFileExtension");
+    const extension = extensions ? extensions[type] || defaultExtensions[type] || ".js" : ".js";
+
     let outputFolder = config.folder.output[outputFolderKey];
     let packageName = entry.package;
     if (folderOutput) {
@@ -164,6 +169,7 @@ function entryConfig(entry, type) {
         sourcemap,
         outdir,
         inline,
+        extension,
     };
 }
 

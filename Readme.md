@@ -30,8 +30,8 @@ Carbon.Pipeline assumes the following project directory structure for resources:
 
 A configured location under
 
-* `Resources/Private`: input files
-* `Resources/`: output files
+- `Resources/Private`: input files
+- `Resources/`: output files
 
 The whole configuration, including which files to build, is configured in [`pipeline.yaml`]. The default values are set in [`defaults.yaml`] and merged with your configuration. Under the key `packages`, you can either add an array with package settings or, if you have just one entry, you can directly add the configuration:
 
@@ -104,21 +104,25 @@ packages:
 
 A package entry has the following options:
 
-| Key                      | Type                | Description                                                                                      | Example              |
-| ------------------------ | ------------------- | ------------------------------------------------------------------------------------------------ | -------------------- |
-| `package`                | `string`            | The name of the package **(required)**                                                           | `Vendor.Foo`         |
-| `files`                  | `string` or `array` | The names of the entry files. If none given, all parsable files in the input folder get rendered | `Main.js`            |
-| `folder.input`           | `string`            | The folder under `Resources/Private` where to look for the entry files                           | `Assets`             |
-| `folder.output.package`  | `string` or `array` | If set, the files will be writen in a different package (one or multiple)                        | `Foo.Bar`            |
-| `folder.output.inline`   | `string`            | The folder where inline files get rendered                                                       | `Private/Templates/` |
-| `folder.output.style`    | `string`            | The folder where inline styles rendered                                                          | `Public/Assets`      |
-| `folder.output.script`   | `string`            | The folder where inline scripts rendered                                                         | `Public/Assets`      |
-| `folder.output.module`   | `string`            | The folder where inline modules rendered                                                         | `Public/Assets`      |
-| `folder.output.commonJS` | `string`            | The folder where inline commonJS files get rendered                                              | `Public/Assets`      |
-| `external`               | `string` or `array` | You can mark a file or a package as [external] to exclude it from your build.                    | `*/Modules/*`        |
-| `inline`                 | `boolean`           | Flag to toggle if the files should be inlined. If set, sourcemaps are disabled                   | `true`               |
-| `sourcemap`              | `boolean`           | Flag to toggle source map generation                                                             | `false`              |
-| `format`                 | `string`            | Set the format of the output file. [Read more][esbuild format]                                   | `cjs`                |
+| Key                        | Type                | Description                                                                                      | Example              |
+| -------------------------- | ------------------- | ------------------------------------------------------------------------------------------------ | -------------------- |
+| `package`                  | `string`            | The name of the package **(required)**                                                           | `Vendor.Foo`         |
+| `files`                    | `string` or `array` | The names of the entry files. If none given, all parsable files in the input folder get rendered | `Main.js`            |
+| `folder.input`             | `string`            | The folder under `Resources/Private` where to look for the entry files                           | `Assets`             |
+| `folder.output.package`    | `string` or `array` | If set, the files will be writen in a different package (one or multiple)                        | `Foo.Bar`            |
+| `folder.output.inline`     | `string`            | The folder where inline files get rendered                                                       | `Private/Templates/` |
+| `folder.output.style`      | `string`            | The folder where inline styles rendered                                                          | `Public/Assets`      |
+| `folder.output.script`     | `string`            | The folder where inline scripts rendered                                                         | `Public/Assets`      |
+| `folder.output.module`     | `string`            | The folder where inline modules rendered                                                         | `Public/Assets`      |
+| `folder.output.commonJS`   | `string`            | The folder where inline commonJS files get rendered                                              | `Public/Assets`      |
+| `external`                 | `string` or `array` | You can mark a file or a package as [external] to exclude it from your build.                    | `*/Modules/*`        |
+| `inline`                   | `boolean`           | Flag to toggle if the files should be inlined. If set, sourcemaps are disabled                   | `true`               |
+| `sourcemap`                | `boolean`           | Flag to toggle source map generation                                                             | `false`              |
+| `format`                   | `string`            | Set the format of the output file. [Read more][esbuild format]                                   | `cjs`                |
+| `jsFileExtension`          | `array` or `false`  | File extensions of javascript files. If set to `false`, all files will have the extension `.js`  | `false`              |
+| `jsFileExtension.script`   | `string`            | File extension of script files                                                                   | `.js`                |
+| `jsFileExtension.module`   | `string`            | Output extension of module JS files.                                                             | `.module`            |
+| `jsFileExtension.commonJS` | `string`            | Output extension of common JS files.                                                             | `.common`            |
 
 These are the default values for the folders:
 
@@ -140,6 +144,10 @@ external: null
 inline: false
 sourcemap: true
 format: iife
+jsFileExtension:
+  script: .js
+  module: .mjs
+  commonJS: .cjs
 ```
 
 The target folders can be adjusted under the key `folder.output`. If you want to change the defaults for all your packages, you can also set this globally in your [`pipeline.yaml`]:
