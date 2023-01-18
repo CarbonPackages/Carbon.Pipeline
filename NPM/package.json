@@ -1,6 +1,6 @@
 {
   "name": "carbon-pipeline",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "Exteneral dependencies for Carbon.Pipeline",
   "main": "dist/module.cjs",
   "module": "dist/module.mjs",
@@ -46,8 +46,8 @@
     "chokidar": "^3.5.3",
     "deepmerge": "^4.2.2",
     "dependency-graph": "^0.11.0",
-    "fs-extra": "^10.0.1",
-    "glob": "^7.2.0",
+    "fs-extra": "^11.0.0",
+    "glob": "^8.0.3",
     "js-yaml": "^4.1.0",
     "nanocolors": "^0.2.13",
     "postcss-load-config": "^3.1.3",
