@@ -139,7 +139,7 @@ jobs:
       - npm
     steps:
       - name: Delete artifacts
-        uses: geekyeggo/delete-artifact@v1
+        uses: geekyeggo/delete-artifact@v2
         with:
           name: |
             pnpm
