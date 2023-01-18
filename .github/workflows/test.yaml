@@ -32,7 +32,7 @@ jobs:
           sed -Ei 's/"packageManager": "[a-z]+"/"packageManager": "pnpm"/' package.json
 
       - name: Upload pnpm
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: pnpm
           path: '*'
@@ -42,7 +42,7 @@ jobs:
           sed -Ei 's/"packageManager": "[a-z]+"/"packageManager": "yarn"/' package.json
 
       - name: Upload yarn
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: yarn
           path: '*'
@@ -52,7 +52,7 @@ jobs:
           sed -Ei 's/"packageManager": "[a-z]+"/"packageManager": "npm"/' package.json
 
       - name: Upload npm
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: npm
           path: '*'
