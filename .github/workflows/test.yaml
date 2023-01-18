@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Copy files
         run: |
@@ -32,7 +32,7 @@ jobs:
           sed -Ei 's/"packageManager": "[a-z]+"/"packageManager": "pnpm"/' package.json
 
       - name: Upload pnpm
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: pnpm
           path: '*'
@@ -42,7 +42,7 @@ jobs:
           sed -Ei 's/"packageManager": "[a-z]+"/"packageManager": "yarn"/' package.json
 
       - name: Upload yarn
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: yarn
           path: '*'
@@ -52,7 +52,7 @@ jobs:
           sed -Ei 's/"packageManager": "[a-z]+"/"packageManager": "npm"/' package.json
 
       - name: Upload npm
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: npm
           path: '*'
@@ -63,15 +63,15 @@ jobs:
     needs: prepare
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: pnpm
       - name: Install pnpm
-        uses: pnpm/action-setup@v2.0.1
+        uses: pnpm/action-setup@v2.2.4
         with:
           version: latest
       - name: Setup node
-        uses: actions/setup-node@v2.5.0
+        uses: actions/setup-node@v3.6.0
         with:
           node-version-file: .nvmrc
           cache: pnpm
@@ -90,11 +90,11 @@ jobs:
     needs: prepare
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: yarn
       - name: Setup node
-        uses: actions/setup-node@v2.5.0
+        uses: actions/setup-node@v3.6.0
         with:
           node-version-file: .nvmrc
           cache: yarn
@@ -113,10 +113,10 @@ jobs:
     needs: prepare
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: npm
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3.6.0
         with:
           node-version-file: .nvmrc
           cache: npm
