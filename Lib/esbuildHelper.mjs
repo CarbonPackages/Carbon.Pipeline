@@ -34,15 +34,22 @@ function assignPlugin(obj, options) {
     return { ...obj, options, isStandardPlugin };
 }
 
-function writeFilesToAnotherPackage(outputFiles, baseDir, newDir) {
-    outputFiles.forEach(({ path, contents }) => {
-        path = path.replace(baseDir, newDir);
-        fs.outputFile(path, contents);
-    });
+function copyFolderPlugin({ source, target }) {
+    return {
+        name: "copyFolder",
+        async setup(build) {
+            build.onEnd(async (result) => {
+                await fs.ensureDir(target);
+                await fs.copy(source, target);
+            });
+        },
+    };
 }
 
 async function importPlugins() {
-    const plugins = {};
+    const plugins = {
+        copyFolder: copyFolderPlugin,
+    };
     const esbuildPlugins = config.esbuild?.plugins;
     const additionalPlugins = config.esbuild?.additionalPlugins || [];
 
@@ -111,4 +118,4 @@ options.legalComments = config.esbuild?.options?.legalComments || "linked";
 
 const flowSettings = readFlowSettings(config.esbuild.defineFlowSettings);
 
-export { browserlist, options, writeFilesToAnotherPackage, importPlugins, flowSettings };
+export { browserlist, options, importPlugins, flowSettings };

@@ -1,6 +1,6 @@
 import ESBUILD from "esbuild";
-import { scriptFiles as files, asyncForEach, watch, minify, error, compression } from "./Lib/helper.mjs";
-import { browserlist, options, writeFilesToAnotherPackage, importPlugins, flowSettings } from "./Lib/esbuildHelper.mjs";
+import { scriptFiles as files, asyncForEach, watch, minify, compression } from "./Lib/helper.mjs";
+import { browserlist, options, importPlugins, flowSettings } from "./Lib/esbuildHelper.mjs";
 
 async function build() {
     // Pre-import plugins
@@ -9,9 +9,9 @@ async function build() {
         const jsExtension = format === "esm" ? ".mjs" : format === "cjs" ? ".cjs" : ".js";
         const firstOutdir = outdir[0];
         const multiplePackages = outdir.length > 1;
-        const write = compression ? inline : !multiplePackages;
+        const write = !compression || inline;
 
-        await ESBUILD.build({
+        const esOptions = {
             ...options,
             entryPoints,
             sourcemap,
@@ -19,7 +19,6 @@ async function build() {
             platform: "browser",
             format,
             minify,
-            watch,
             external,
             write,
             target: browserlist,
@@ -52,37 +51,36 @@ async function build() {
 
                 for (const key in plugins) {
                     const entry = plugins[key];
-                    if (key === "compress" || !entry.isStandardPlugin || !entry?.plugin) {
+                    if (key === "compress" || key === "copyFolder" || !entry.isStandardPlugin || !entry?.plugin) {
                         continue;
                     }
                     returnValue.push(entry.plugin(entry.options));
                 }
 
                 if (compression && !inline) {
-                    returnValue.push(
-                        plugins.compress({
-                            onEnd: ({ outputFiles }) => {
-                                if (multiplePackages) {
-                                    // We skip the first entry with index = 1
-                                    for (let index = 1; index < outdir.length; index++) {
-                                        writeFilesToAnotherPackage(outputFiles, firstOutdir, outdir[index]);
-                                    }
-                                }
-                            },
-                        })
-                    );
+                    returnValue.push(plugins.compress());
                 }
+
+                if (multiplePackages) {
+                    const source = firstOutdir;
+                    // We skip the first entry with index = 1
+                    for (let index = 1; index < outdir.length; index++) {
+                        const target = outdir[index];
+                        returnValue.push(plugins.copyFolder({ source, target }));
+                    }
+                }
+
                 return returnValue;
             })(),
-        })
-            .then((result) => {
-                if (!write && !compression) {
-                    outdir.forEach((dir) => {
-                        writeFilesToAnotherPackage(result.outputFiles, firstOutdir, dir);
-                    });
-                }
-            })
-            .catch(error);
+        };
+
+        if (watch) {
+            const context = await ESBUILD.context(esOptions);
+            // Enable watch mode
+            await context.watch();
+        } else {
+            await ESBUILD.build(esOptions);
+        }
     });
 }
 
