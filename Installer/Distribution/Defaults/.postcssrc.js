@@ -11,7 +11,6 @@ module.exports = (ctx) => ({
             baseUrl: "/_Resources/Static/Packages",
             loadPaths: ["**/Resources/Public/**/*"],
         },
-        "postcss-focus-visible": true,
         "postcss-clip-path-polyfill": true,
         "postcss-sort-media-queries": true,
         autoprefixer: true,
