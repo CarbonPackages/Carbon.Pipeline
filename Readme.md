@@ -319,18 +319,17 @@ postcssOptions:
 <details>
 <summary><strong>Following plugins are included:</strong></summary>
 
-| Name                         | Description                                                                                                               |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| [postcss-import]             | Plugin to transform `@import` rules by inlining content. Thanks to a custom `resolve` function you can also use [glob]    |
-| [Tailwind CSS]               | A utility-first CSS framework for rapidly building custom user interfaces                                                 |
-| [postcss-nested]             | Unwrap nested rules like how Sass does it                                                                                 |
-| [postcss-assets]             | Plugin to manage assets                                                                                                   |
-| [postcss-focus-visible]      | PostCSS Focus Visible lets you use the :focus-visible pseudo-class in CSS, following the Selectors Level 4 specification. |
-| [postcss-clip-path-polyfill] | Add SVG hack for clip-path property to make it work in Firefox. Currently supports only `polygon()`                       |
-| [postcss-sort-media-queries] | Combine and sort CSS media queries                                                                                        |
-| [autoprefixer]               | Parse CSS and add vendor prefixes to CSS rules using values from [Can I Use]                                              |
-| [cssnano]                    | Modern CSS compression                                                                                                    |
-| [postcss-reporter]           | `console.log()` the messages (warnings, etc.) registered by other PostCSS plugins                                         |
+| Name                         | Description                                                                                                            |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| [postcss-import]             | Plugin to transform `@import` rules by inlining content. Thanks to a custom `resolve` function you can also use [glob] |
+| [Tailwind CSS]               | A utility-first CSS framework for rapidly building custom user interfaces                                              |
+| [postcss-nested]             | Unwrap nested rules like how Sass does it                                                                              |
+| [postcss-assets]             | Plugin to manage assets                                                                                                |
+| [postcss-clip-path-polyfill] | Add SVG hack for clip-path property to make it work in Firefox. Currently supports only `polygon()`                    |
+| [postcss-sort-media-queries] | Combine and sort CSS media queries                                                                                     |
+| [autoprefixer]               | Parse CSS and add vendor prefixes to CSS rules using values from [Can I Use]                                           |
+| [cssnano]                    | Modern CSS compression                                                                                                 |
+| [postcss-reporter]           | `console.log()` the messages (warnings, etc.) registered by other PostCSS plugins                                      |
 
 Of course, you can add your own or remove not-needed Plugins as you want. This is just meant as a starting point.
 
@@ -799,7 +798,6 @@ To start Browsersync you can run `browser-sync start --config bs-config.js`. If 
 [`sass`]: https://www.npmjs.com/package/sass
 [`node-sass-tilde-importer`]: https://www.npmjs.com/package/node-sass-tilde-importer
 [postcss-import]: https://www.npmjs.com/package/postcss-import
-[postcss-focus-visible]: https://www.npmjs.com/package/postcss-focus-visible
 [postcss-nested]: https://www.npmjs.com/package/postcss-nested
 [postcss-assets]: https://www.npmjs.com/package/postcss-assets
 [postcss-clip-path-polyfill]: https://www.npmjs.com/package/postcss-clip-path-polyfill
