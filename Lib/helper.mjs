@@ -13,6 +13,7 @@ const config = deepmerge(defaults, pipeline);
 const watch = argv("watch") === true;
 const production = argv("production") === true;
 const minify = production || argv("minify") === true;
+const silent = argv("silent") === true;
 let compression = false;
 if (production && (!watch || argv("compression") === true)) {
     compression = config.buildDefaults.compression;
@@ -300,7 +301,9 @@ function error() {
 }
 
 function print() {
-    console.warn(...arguments);
+    if (!silent) {
+        console.warn(...arguments);
+    }
 }
 
 function toArray(entry) {
@@ -397,6 +400,7 @@ export {
     production,
     compression,
     sass,
+    silent,
     dynamicImport,
     sassFileCheck,
     humanFileSize,

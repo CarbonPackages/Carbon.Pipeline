@@ -1,5 +1,5 @@
 import ESBUILD from "esbuild";
-import { scriptFiles as files, asyncForEach, watch, minify, compression } from "./Lib/helper.mjs";
+import { scriptFiles as files, asyncForEach, watch, minify, compression, silent } from "./Lib/helper.mjs";
 import { browserlist, options, importPlugins, flowSettings } from "./Lib/esbuildHelper.mjs";
 
 async function build() {
@@ -9,6 +9,10 @@ async function build() {
         const firstOutdir = outdir[0];
         const multiplePackages = outdir.length > 1;
         const write = !compression || inline;
+
+        if (silent) {
+            options.logLevel = "silent";
+        }
 
         const esOptions = {
             ...options,
