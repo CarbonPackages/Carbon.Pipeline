@@ -1,4 +1,4 @@
-import sass from "sass";
+import * as sass from "sass";
 import tildeImporter from "node-sass-tilde-importer";
 import { config, styleFiles, compression } from "./helper.mjs";
 function render(key) {
