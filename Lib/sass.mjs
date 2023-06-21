@@ -1,9 +1,9 @@
-import * as sass from "sass";
+import { renderSync } from "sass";
 import tildeImporter from "node-sass-tilde-importer";
 import { config, styleFiles, compression } from "./helper.mjs";
 function render(key) {
     const { to, sourcemap } = styleFiles[key];
-    const result = sass.renderSync({
+    const result = renderSync({
         outputStyle: compression ? "compressed" : "expanded",
         sourceMap: sourcemap,
         sourceMapContents: true,
