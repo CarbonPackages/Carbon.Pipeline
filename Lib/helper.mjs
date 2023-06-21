@@ -46,6 +46,14 @@ toArray(config.packages).forEach((entry) => {
         return path.join(config.folder.base, entry.package, "Resources/Private", inputFolder);
     })();
 
+    if (!fs.existsSync(entryFolder)) {
+        if (entry.noErrorIfNotAvailable) {
+            return;
+        }
+        error(`The folder for the package ${entry.package} was not found. Please check your ${configFile}`);
+        process.exit(1);
+    }
+
     let files = toArray(entry.files);
     if (!files) {
         files = glob
