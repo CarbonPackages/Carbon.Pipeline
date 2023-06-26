@@ -50,10 +50,48 @@ async function build() {
                 let returnValue = [];
                 const svelte = plugins.svelte;
                 if (svelte?.plugin) {
+                    const filterWarnings = {
+                        code: [],
+                        filenameStartsWith: [],
+                    };
+                    if (svelte?.filterWarnings?.code) {
+                        const obj = svelte.filterWarnings.code;
+                        for (const key in obj) {
+                            if (obj[key]) {
+                                filterWarnings.code.push(key);
+                            }
+                        }
+                    }
+                    if (svelte?.filterWarnings?.filenameStartsWith) {
+                        const obj = svelte.filterWarnings.filenameStartsWith;
+                        for (const key in obj) {
+                            if (obj[key]) {
+                                filterWarnings.filenameStartsWith.push(key);
+                            }
+                        }
+                    }
+
                     returnValue.push(
                         svelte.plugin({
                             preprocess: svelte.preprocess(),
                             ...svelte.options,
+                            filterWarnings: (warning) => {
+                                let returnValue = true;
+
+                                filterWarnings.code.forEach((code) => {
+                                    if (warning.code === code) {
+                                        returnValue = false;
+                                    }
+                                });
+
+                                filterWarnings.filenameStartsWith.forEach((startsWith) => {
+                                    if (warning.filename.startsWith(startsWith)) {
+                                        returnValue = false;
+                                    }
+                                });
+
+                                return returnValue;
+                            },
                         })
                     );
                 }

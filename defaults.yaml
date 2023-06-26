@@ -98,6 +98,13 @@ esbuild:
       enable: false
       plugin: esbuild-svelte
       preprocess: svelte-preprocess
+      filterWarnings:
+        # Disable warnings if the filename and path starts with the given string
+        filenameStartsWith:
+          'node_modules/': true
+        # Disable warnings for the following rules
+        code: null
+
       options:
         compilerOptions:
           css: injected

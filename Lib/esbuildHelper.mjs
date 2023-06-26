@@ -69,6 +69,7 @@ async function importPlugins() {
             {
                 plugin,
                 preprocess,
+                filterWarnings: sveltePlugin.filterWarnings,
             },
             sveltePlugin.options
         );
