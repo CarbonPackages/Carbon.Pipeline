@@ -9,6 +9,11 @@ async function build() {
         const firstOutdir = outdir[0];
         const multiplePackages = outdir.length > 1;
         const write = !compression || inline;
+        const mainFields = ["browser", "module", "main"];
+
+        if (plugins?.svelte?.plugin) {
+            mainFields.unshift("svelte");
+        }
 
         if (silent) {
             options.logLevel = "silent";
@@ -16,6 +21,7 @@ async function build() {
 
         const esOptions = {
             ...options,
+            mainFields,
             entryPoints,
             sourcemap,
             bundle: true,

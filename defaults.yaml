@@ -100,7 +100,7 @@ esbuild:
       preprocess: svelte-preprocess
       options:
         compilerOptions:
-          css: true
+          css: injected
     babel:
       enable: false
       options: null
