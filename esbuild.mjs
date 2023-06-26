@@ -9,10 +9,13 @@ async function build() {
         const firstOutdir = outdir[0];
         const multiplePackages = outdir.length > 1;
         const write = !compression || inline;
-        const mainFields = ["browser", "module", "main"];
 
+        let additionlOptionsForSvelte = {};
         if (plugins?.svelte?.plugin) {
-            mainFields.unshift("svelte");
+            additionlOptionsForSvelte = {
+                mainFields: ["svelte", "browser", "module", "main"],
+                conditions: ["svelte", "browser", "default", "import", "module"],
+            };
         }
 
         if (silent) {
@@ -20,8 +23,8 @@ async function build() {
         }
 
         const esOptions = {
+            ...additionlOptionsForSvelte,
             ...options,
-            mainFields,
             entryPoints,
             sourcemap,
             bundle: true,
