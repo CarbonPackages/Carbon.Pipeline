@@ -55,10 +55,10 @@
   "resolved" "https://registry.npmjs.org/@csstools/selector-specificity/-/selector-specificity-2.2.0.tgz"
   "version" "2.2.0"
 
-"@esbuild/darwin-arm64@0.18.6":
-  "integrity" "sha512-/tuyl4R+QhhoROQtuQj9E/yfJtZNdv2HKaHwYhhHGQDN1Teziem2Kh7BWQMumfiY7Lu9g5rO7scWdGE4OsQ6MQ=="
-  "resolved" "https://registry.npmjs.org/@esbuild/darwin-arm64/-/darwin-arm64-0.18.6.tgz"
-  "version" "0.18.6"
+"@esbuild/darwin-arm64@0.18.9":
+  "integrity" "sha512-vw9kWBT2EvDhLAVkI5c2KWFh+GMwgXrzR1QnIpZazA+tIacaelNLMMSTHEJisOeQqiMQhv8goTODFm9liS7wpw=="
+  "resolved" "https://registry.npmjs.org/@esbuild/darwin-arm64/-/darwin-arm64-0.18.9.tgz"
+  "version" "0.18.9"
 
 "@eslint-community/eslint-utils@^4.2.0":
   "integrity" "sha512-1/sA4dwrzBAyeUoQ6oxahHKmrZvsnLCg4RfxW3ZFGGmQkSNQPFNLV9CUEFQP1x9EYXHTo5p6xdhZM1Ne9p/AfA=="
@@ -435,9 +435,9 @@
     "lodash.uniq" "^4.5.0"
 
 "caniuse-lite@^1.0.0", "caniuse-lite@^1.0.30001464", "caniuse-lite@^1.0.30001503":
-  "integrity" "sha512-6XNEcpygZMCKaufIcgpQNZNf00GEqc7VQON+9Rd0K1bMYo8xhMZRAo5zpbnbMNizi4YNgIDAFrdykWsvY3H4Hw=="
-  "resolved" "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001506.tgz"
-  "version" "1.0.30001506"
+  "integrity" "sha512-sdQZOJdmt3GJs1UMNpCCCyeuS2IEGLXnHyAo9yIO5JJDjbjoVRij4M1qep6P6gFpptD1PqIYgzM+gwJbOi92mw=="
+  "resolved" "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001508.tgz"
+  "version" "1.0.30001508"
 
 "carbon-pipeline@^0.1.4":
   "integrity" "sha512-E0hsLMeM+iE1074qqm1mh3//9cW+q3XVszjfwD7aE6mheqTAyLbXI+ofowm7T/Pk65ct+ljGXapIVtVfnoShAA=="
@@ -780,9 +780,9 @@
     "domhandler" "^5.0.3"
 
 "electron-to-chromium@^1.4.431":
-  "integrity" "sha512-B0CBWVFhvoQCW/XtjRzgrmqcgVWg6RXOEM/dK59+wFV93BFGR6AeNKc4OyhM+T3IhJaOOG8o/V+33Y2mwJWtzw=="
-  "resolved" "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.435.tgz"
-  "version" "1.4.435"
+  "integrity" "sha512-r6dCgNpRhPwiWlxbHzZQ/d9swfPaEJGi8ekqRBwQYaR3WmA5VkqQfBWSDDjuJU1ntO+W9tHx8OHV/96Q8e0dVw=="
+  "resolved" "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.440.tgz"
+  "version" "1.4.440"
 
 "emoji-regex@^8.0.0":
   "integrity" "sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A=="
@@ -801,33 +801,33 @@
   dependencies:
     "is-arrayish" "^0.2.1"
 
-"esbuild@^0.18.6":
-  "integrity" "sha512-5QgxWaAhU/tPBpvkxUmnFv2YINHuZzjbk0LeUUnC2i3aJHjfi5yR49lgKgF7cb98bclOp/kans8M5TGbGFfJlQ=="
-  "resolved" "https://registry.npmjs.org/esbuild/-/esbuild-0.18.6.tgz"
-  "version" "0.18.6"
+"esbuild@^0.18.9":
+  "integrity" "sha512-rFw+7KsO3vF/imkldsCcIGnQVJ11Zq5a178SVS0N0wwFQ/alzS8owG06rivQ8FEuc66SJupdhTuYT7mnvmidLA=="
+  "resolved" "https://registry.npmjs.org/esbuild/-/esbuild-0.18.9.tgz"
+  "version" "0.18.9"
   optionalDependencies:
-    "@esbuild/android-arm" "0.18.6"
-    "@esbuild/android-arm64" "0.18.6"
-    "@esbuild/android-x64" "0.18.6"
-    "@esbuild/darwin-arm64" "0.18.6"
-    "@esbuild/darwin-x64" "0.18.6"
-    "@esbuild/freebsd-arm64" "0.18.6"
-    "@esbuild/freebsd-x64" "0.18.6"
-    "@esbuild/linux-arm" "0.18.6"
-    "@esbuild/linux-arm64" "0.18.6"
-    "@esbuild/linux-ia32" "0.18.6"
-    "@esbuild/linux-loong64" "0.18.6"
-    "@esbuild/linux-mips64el" "0.18.6"
-    "@esbuild/linux-ppc64" "0.18.6"
-    "@esbuild/linux-riscv64" "0.18.6"
-    "@esbuild/linux-s390x" "0.18.6"
-    "@esbuild/linux-x64" "0.18.6"
-    "@esbuild/netbsd-x64" "0.18.6"
-    "@esbuild/openbsd-x64" "0.18.6"
-    "@esbuild/sunos-x64" "0.18.6"
-    "@esbuild/win32-arm64" "0.18.6"
-    "@esbuild/win32-ia32" "0.18.6"
-    "@esbuild/win32-x64" "0.18.6"
+    "@esbuild/android-arm" "0.18.9"
+    "@esbuild/android-arm64" "0.18.9"
+    "@esbuild/android-x64" "0.18.9"
+    "@esbuild/darwin-arm64" "0.18.9"
+    "@esbuild/darwin-x64" "0.18.9"
+    "@esbuild/freebsd-arm64" "0.18.9"
+    "@esbuild/freebsd-x64" "0.18.9"
+    "@esbuild/linux-arm" "0.18.9"
+    "@esbuild/linux-arm64" "0.18.9"
+    "@esbuild/linux-ia32" "0.18.9"
+    "@esbuild/linux-loong64" "0.18.9"
+    "@esbuild/linux-mips64el" "0.18.9"
+    "@esbuild/linux-ppc64" "0.18.9"
+    "@esbuild/linux-riscv64" "0.18.9"
+    "@esbuild/linux-s390x" "0.18.9"
+    "@esbuild/linux-x64" "0.18.9"
+    "@esbuild/netbsd-x64" "0.18.9"
+    "@esbuild/openbsd-x64" "0.18.9"
+    "@esbuild/sunos-x64" "0.18.9"
+    "@esbuild/win32-arm64" "0.18.9"
+    "@esbuild/win32-ia32" "0.18.9"
+    "@esbuild/win32-x64" "0.18.9"
 
 "escalade@^3.1.1":
   "integrity" "sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw=="
@@ -2182,9 +2182,9 @@
     "tslib" "^2.1.0"
 
 "semver@^7.3.4":
-  "integrity" "sha512-SoftuTROv/cRjCze/scjGyiDtcUyxw1rgYQSZY7XTmtR5hX+dm76iDbTH8TkLPHCQmlbQVSSbNZCPM2hb0knnQ=="
-  "resolved" "https://registry.npmjs.org/semver/-/semver-7.5.2.tgz"
-  "version" "7.5.2"
+  "integrity" "sha512-QBlUtyVk/5EeHbi7X0fw6liDZc7BBmEaSYn01fMU1OUYbf6GPsbTtd8WmnqbI20SeycoHSeiybkE/q1Q+qlThQ=="
+  "resolved" "https://registry.npmjs.org/semver/-/semver-7.5.3.tgz"
+  "version" "7.5.3"
   dependencies:
     "lru-cache" "^6.0.0"
 
@@ -2323,10 +2323,10 @@
   dependencies:
     "stylelint-config-recommended" "^12.0.0"
 
-"stylelint@^15.5.0", "stylelint@^15.8.0":
-  "integrity" "sha512-x9qBk84F3MEjMEUNCE7MtWmfj9G9y5XzJ0cpQeJdy2l/IoqjC8Ih0N0ytmOTnXE4Yv0J7I1cmVRQUVNSPCxTsA=="
-  "resolved" "https://registry.npmjs.org/stylelint/-/stylelint-15.8.0.tgz"
-  "version" "15.8.0"
+"stylelint@^15.5.0", "stylelint@^15.9.0":
+  "integrity" "sha512-sXtAZi64CllWr6A+8ymDWnlIaYwuAa7XRmGnJxLQXFNnLjd3Izm4HAD+loKVaZ7cpK6SLxhAUX1lwPJKGCn0mg=="
+  "resolved" "https://registry.npmjs.org/stylelint/-/stylelint-15.9.0.tgz"
+  "version" "15.9.0"
   dependencies:
     "@csstools/css-parser-algorithms" "^2.2.0"
     "@csstools/css-tokenizer" "^2.1.1"
