@@ -79,12 +79,13 @@ async function build() {
                         }
                     }
 
-                    const svelteOptions = deepmerge({ compilerOptions: { dev: !production } }, svelte.options);
+                    const compilerOptions = deepmerge({ dev: !production }, svelte.options?.compilerOptions || {});
 
                     returnValue.push(
                         svelte.plugin({
                             preprocess: svelte.preprocess(),
-                            ...svelteOptions,
+                            ...svelte.options,
+                            compilerOptions,
                             filterWarnings: (warning) => {
                                 let returnValue = true;
 
