@@ -1,5 +1,5 @@
 import { BROWSERLIST, fs } from "carbon-pipeline";
-import { config, compression, dynamicImport, readFlowSettings, toArray, production } from "./helper.mjs";
+import { config, compression, dynamicImport, readFlowSettings, toArray, production, minify } from "./helper.mjs";
 
 const browserlist = (() => {
     const SUPPORTED_BUILD_TARGETS = ["es", "chrome", "edge", "firefox", "ios", "node", "safari"];
@@ -107,6 +107,18 @@ async function importPlugins() {
                 plugin,
             },
             babelPlugin.options
+        );
+    }
+
+    const injectStylePlugin = esbuildPlugins?.injectStyle;
+    if (injectStylePlugin?.enable === true) {
+        const plugin = await dynamicImport("./injectStyle.mjs");
+        const options = { minify, ...(injectStylePlugin.options || {}) };
+        plugins["injectStyle"] = assignPlugin(
+            {
+                plugin,
+            },
+            options
         );
     }
 

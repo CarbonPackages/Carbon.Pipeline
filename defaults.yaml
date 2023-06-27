@@ -112,6 +112,8 @@ esbuild:
     babel:
       enable: false
       options: null
+    injectStyle:
+      enable: true
   # additionalPlugins:
   #   esbuild-envfile-plugin:
   #     functionName: setup
