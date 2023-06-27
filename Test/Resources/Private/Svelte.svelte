@@ -1,11 +1,13 @@
 <script>
     let name = 'Carbon.Pipeline';
+    import './_Svelte.css';
 </script>
 
-<input type="text" bind:value={name}>
-
-<h1>Hello {name}!</h1>
-<h2>Hello {name}!</h2>
+<div class="container">
+    <input type="text" bind:value={name}>
+    <h1>Hello {name}!</h1>
+    <h2>Hello {name}!</h2>
+</div>
 
 <style>
     h1 {
