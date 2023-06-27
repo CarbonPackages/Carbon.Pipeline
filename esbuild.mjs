@@ -1,5 +1,6 @@
 import ESBUILD from "esbuild";
-import { scriptFiles as files, asyncForEach, watch, minify, compression, silent } from "./Lib/helper.mjs";
+import { deepmerge } from "carbon-pipeline";
+import { scriptFiles as files, asyncForEach, watch, minify, compression, silent, production } from "./Lib/helper.mjs";
 import { browserlist, options, importPlugins, flowSettings } from "./Lib/esbuildHelper.mjs";
 
 async function build() {
@@ -78,10 +79,12 @@ async function build() {
                         }
                     }
 
+                    const svelteOptions = deepmerge({ compilerOptions: { dev: !production } }, svelte.options);
+
                     returnValue.push(
                         svelte.plugin({
                             preprocess: svelte.preprocess(),
-                            ...svelte.options,
+                            ...svelteOptions,
                             filterWarnings: (warning) => {
                                 let returnValue = true;
 
