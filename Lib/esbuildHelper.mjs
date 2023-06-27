@@ -1,5 +1,5 @@
 import { BROWSERLIST, fs } from "carbon-pipeline";
-import { config, compression, dynamicImport, readFlowSettings, toArray } from "./helper.mjs";
+import { config, compression, dynamicImport, readFlowSettings, toArray, production } from "./helper.mjs";
 
 const browserlist = (() => {
     const SUPPORTED_BUILD_TARGETS = ["es", "chrome", "edge", "firefox", "ios", "node", "safari"];
@@ -78,11 +78,12 @@ async function importPlugins() {
     const vuePlugin = esbuildPlugins?.vue;
     if (vuePlugin?.enable === true) {
         const plugin = await dynamicImport(esbuildPlugins.vue.plugin);
+        const options = { enableDevTools: !production, ...(vuePlugin.options || {}) };
         plugins["vue"] = assignPlugin(
             {
                 plugin,
             },
-            vuePlugin.options
+            options
         );
     }
 
