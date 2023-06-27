@@ -93,7 +93,8 @@ esbuild:
     vue:
       enable: false
       plugin: esbuild-plugin-vue3
-      options: null
+      options:
+        cssInline: true
     svelte:
       enable: false
       plugin: esbuild-svelte
