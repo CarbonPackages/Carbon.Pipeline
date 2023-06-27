@@ -63,9 +63,6 @@ esbuild:
       options: null
     svelte:
       enable: false
-      options:
-        compilerOptions:
-          css: true
     babel:
       enable: false
       options: null
