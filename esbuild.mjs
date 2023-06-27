@@ -22,6 +22,10 @@ async function build() {
             options.logLevel = "silent";
         }
 
+        if (inline) {
+            options.legalComments = "none";
+        }
+
         const esOptions = {
             ...additionlOptionsForSvelte,
             ...options,
