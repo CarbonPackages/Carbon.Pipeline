@@ -71,7 +71,7 @@ jobs:
         with:
           version: latest
       - name: Setup node
-        uses: actions/setup-node@v3.7.0
+        uses: actions/setup-node@v3.8.1
         with:
           node-version-file: .nvmrc
           cache: pnpm
@@ -94,7 +94,7 @@ jobs:
         with:
           name: yarn
       - name: Setup node
-        uses: actions/setup-node@v3.7.0
+        uses: actions/setup-node@v3.8.1
         with:
           node-version-file: .nvmrc
           cache: yarn
@@ -116,7 +116,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: npm
-      - uses: actions/setup-node@v3.7.0
+      - uses: actions/setup-node@v3.8.1
         with:
           node-version-file: .nvmrc
           cache: npm
