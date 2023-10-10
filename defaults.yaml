@@ -64,6 +64,7 @@ sassOptions: null
 postcssOptions:
   tailwindcss:
     config: './tailwind.config.js'
+  additionalPackagePathPrefixes: []
 
 esbuild:
   # Set Neos Flow settings as FLOW variable. If `true` all the settings are passed.

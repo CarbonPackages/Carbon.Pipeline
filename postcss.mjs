@@ -1,5 +1,6 @@
 import path from "path";
 import { fs, chokidar, readCache, bold, dim, cyan, magenta } from "carbon-pipeline";
+import { config } from './Lib/helper.mjs'
 import postcss from "postcss";
 import {
     styleFiles as files,
@@ -137,6 +138,13 @@ function build() {
 }
 
 function css(css, file, time) {
+    const { postcssOptions: { additionalPackagePathPrefixes } = [] } = config;
+    const combinedPaths = Array.isArray(additionalPackagePathPrefixes) ? additionalPackagePathPrefixes.map(e => {
+        return `${e}/`
+    }).join('|') : '';
+
+    const regexPattern = new RegExp(`(/_Resources/Static/Packages/)(?:${combinedPaths})?([\\w]+.[\\w]+/)Resources/Public/`, 'g');
+
     return rc()
         .then((ctx) => {
             return postcss(ctx.plugins)
@@ -155,10 +163,7 @@ function css(css, file, time) {
                 .then((result) => {
                     const tasks = [];
                     // This fixes url done with resolve()
-                    result.css = result.css.replace(
-                        /(\/_Resources\/Static\/Packages\/[\w]+\.[\w]+\/)Resources\/Public\//g,
-                        "$1"
-                    );
+                    result.css = result.css.replace(regexPattern,"$1$2");
 
                     const cssFilesize = humanFileSize(result.css.length);
                     let mapFilesize = 0;
