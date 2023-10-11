@@ -338,7 +338,7 @@ postcssOptions:
     - Plugins
 ```
 
-This ensures that the path that is generated (eg `/_Resources/Static/Packages/(Sites|Plugins)/Your.Package/.../`) will be correctly resolved, removing the sub-folder from the path.
+This ensures that the path that is generated (eg `/_Resources/Static/Packages/(Sites|Plugins)/Your.Package/.../`) will be correctly resolved, removing the subfolder from the path.
 
 #### PostCSS Plugins
 
