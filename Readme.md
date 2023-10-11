@@ -314,6 +314,32 @@ postcssOptions:
   prefix: true
 ```
 
+#### Use postcss resolve() function
+You can use `resolve()` in your css/scss files to load resources (eg images) from `Resources/Public` of the package. The path will be resolved at compile-time.
+
+```
+.my-class {
+  background-image: resolve('Images/my-image.jpg')
+}
+```
+
+resolves to 
+```
+.my-class {
+  background-image: url('/_Resources/Static/Packages/Your.Package/Images/my-image.jpg')
+}
+```
+
+If you choose to order your Packages in DistributionPackages in subfolders, you can add this setting to ensure the paths are correctly rewritten:
+```
+postcssOptions:
+  additionalPackagePathPrefixes:
+    - Sites
+    - Plugins
+```
+
+This ensures that the path that is generated (eg `/_Resources/Static/Packages/(Sites|Plugins)/Your.Package/.../`) will be correctly resolved, removing the subfolder from the path.
+
 #### PostCSS Plugins
 
 <details>
