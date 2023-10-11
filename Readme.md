@@ -330,7 +330,7 @@ resolves to
 }
 ```
 
-If you choose to order your Packages in DistributionPackages in sub-folders, you can add this setting to ensure the paths are correctly rewritten:
+If you choose to order your Packages in DistributionPackages in subfolders, you can add this setting to ensure the paths are correctly rewritten:
 ```
 postcssOptions:
   additionalPackagePathPrefixes:
