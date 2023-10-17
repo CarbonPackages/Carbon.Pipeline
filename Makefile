@@ -62,6 +62,7 @@ test-pnpm:
 test-yarn:
 	@rm -rf node_modules
 	@yarn setPackageManager yarn
+	@yarn set version stable
 	@yarn install
 	@yarn add svelte svelte-preprocess esbuild-svelte vue esbuild-plugin-vue3 sass node-sass-tilde-importer
 	@yarn showConfig
