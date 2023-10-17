@@ -2,12 +2,12 @@ const { scripts } = require("../../package.json");
 const { execSync } = require("child_process");
 
 const newPackageManager = process.argv[2];
+const packageManagers = ["pnpm", "npm", "yarn"];
 
 if (!newPackageManager) {
     errorMessage("Please specify a package manager as an argument.");
 }
 
-const packageManagers = ["pnpm", "npm", "yarn"];
 if (!packageManagers.includes(newPackageManager)) {
     errorMessage("Please specify a valid package manager");
 }
