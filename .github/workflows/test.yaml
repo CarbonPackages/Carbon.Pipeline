@@ -77,7 +77,7 @@ jobs:
           cache: yarn
       - name: Install dependencies
         run: |
-          yarn set version latest
+          yarn set version stable
           yarn install
           yarn setPackageManager yarn
           yarn add ${{ env.dependencies }}
