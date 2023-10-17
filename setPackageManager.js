@@ -1,6 +1,5 @@
 const { scripts } = require("../../package.json");
 const { execSync } = require("child_process");
-const { red, bold, cyan } = require("carbon-pipeline");
 
 const newPackageManager = process.argv[2];
 
@@ -49,4 +48,16 @@ function errorMessage(message) {
     console.error(` Example: ${cyan(`${randomPackageManager} setPackageManager ${randomPackageManager}`)}`);
     console.error("\n");
     process.exit(1);
+}
+
+function cyan(text) {
+    return `\x1b[36m${text}\x1b[0m`;
+}
+
+function red(text) {
+    return `\x1b[31m${text}\x1b[0m`;
+}
+
+function bold(text) {
+    return `\x1b[1m${text}\x1b[0m`;
 }
