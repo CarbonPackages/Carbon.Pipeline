@@ -2,7 +2,7 @@ import BROWSERLIST from "browserslist";
 import chokidar from "chokidar";
 import deepmerge from "deepmerge";
 import fs from "fs-extra";
-import glob from "glob";
+import { glob } from "glob";
 import postcssrc from "postcss-load-config";
 import prettyjson from "prettyjson";
 import readCache from "read-cache";
