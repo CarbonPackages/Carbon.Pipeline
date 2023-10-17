@@ -27,34 +27,10 @@ jobs:
           cp -n Installer/Distribution/Defaults/{*,.*} ./ || true
           cp -R {Lib,defaults.yaml,*.mjs,*.js} Build/Carbon.Pipeline/
 
-      - name: Set package manager to pnpm
-        run: |
-          sed -Ei 's/"packageManager": "[a-z]+"/"packageManager": "pnpm"/' package.json
-
-      - name: Upload pnpm
+      - name: Upload
         uses: actions/upload-artifact@v3
         with:
-          name: pnpm
-          path: '*'
-
-      - name: Set package manager to yarn
-        run: |
-          sed -Ei 's/"packageManager": "[a-z]+"/"packageManager": "yarn"/' package.json
-
-      - name: Upload yarn
-        uses: actions/upload-artifact@v3
-        with:
-          name: yarn
-          path: '*'
-
-      - name: Set package manager to npm
-        run: |
-          sed -Ei 's/"packageManager": "[a-z]+"/"packageManager": "npm"/' package.json
-
-      - name: Upload npm
-        uses: actions/upload-artifact@v3
-        with:
-          name: npm
+          name: test
           path: '*'
 
   pnpm:
@@ -65,7 +41,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
-          name: pnpm
+          name: test
       - name: Install pnpm
         uses: pnpm/action-setup@v2.4.0
         with:
@@ -78,6 +54,7 @@ jobs:
       - name: Install dependencies
         run: |
           pnpm install
+          pnpm setPackageManager pnpm
           pnpm add ${{ env.dependencies }}
       - name: Show config
         run: pnpm showConfig
@@ -92,7 +69,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
-          name: yarn
+          name: test
       - name: Setup node
         uses: actions/setup-node@v3.8.1
         with:
@@ -100,7 +77,9 @@ jobs:
           cache: yarn
       - name: Install dependencies
         run: |
+          yarn set version latest
           yarn install
+          yarn setPackageManager yarn
           yarn add ${{ env.dependencies }}
       - name: Show config
         run: yarn showConfig
@@ -115,7 +94,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
-          name: npm
+          name: test
       - uses: actions/setup-node@v3.8.1
         with:
           node-version-file: .nvmrc
@@ -123,6 +102,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
+          npm setPackageManager npm
           npm add ${{ env.dependencies }}
       - name: Show config
         run: npm run showConfig
@@ -141,7 +121,4 @@ jobs:
       - name: Delete artifacts
         uses: geekyeggo/delete-artifact@v2
         with:
-          name: |
-            pnpm
-            yarn
-            npm
+          name: test

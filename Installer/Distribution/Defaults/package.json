@@ -1,27 +1,25 @@
 {
   "license": "UNLICENSED",
   "private": true,
-  "config": {
-    "packageManager": "pnpm"
-  },
   "scripts": {
+    "setPackageManager": "node Build/Carbon.Pipeline/setPackageManager.js",
     "postinstall": "touch ./node_modules/.metadata_never_index; mkdir -p ./Packages; touch ./Packages/.metadata_never_index",
     "showConfig": "node Build/Carbon.Pipeline/showConfig.mjs",
-    "build": "concurrently -r $npm_package_config_packageManager:build:*",
+    "build": "concurrently -r pnpm:build:*",
     "build:js": "node Build/Carbon.Pipeline/esbuild.mjs --production",
     "build:css": "node Build/Carbon.Pipeline/postcss.mjs --production",
-    "dev": "concurrently -r $npm_package_config_packageManager:dev:*",
+    "dev": "concurrently -r pnpm:dev:*",
     "dev:js": "node Build/Carbon.Pipeline/esbuild.mjs",
     "dev:css": "node Build/Carbon.Pipeline/postcss.mjs",
-    "watch": "concurrently -r $npm_package_config_packageManager:watch:*",
+    "watch": "concurrently -r pnpm:watch:*",
     "watch:js": "node Build/Carbon.Pipeline/esbuild.mjs --watch",
     "watch:css": "node Build/Carbon.Pipeline/postcss.mjs --watch",
-    "pipeline:build": "concurrently -r $npm_package_config_packageManager:build:*",
-    "pipeline": "$npm_package_config_packageManager install;concurrently -r $npm_package_config_packageManager:pipeline:*"
+    "pipeline:build": "concurrently -r pnpm:build:*",
+    "pipeline": "pnpm install;concurrently -r pnpm:pipeline:*"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",
-    "carbon-pipeline": "^0.1.5",
+    "carbon-pipeline": "^0.1.6",
     "concurrently": "^8.2.1",
     "cssnano": "^6.0.1",
     "esbuild": "^0.19.5",

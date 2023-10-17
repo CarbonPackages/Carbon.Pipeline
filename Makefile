@@ -21,16 +21,16 @@ up-lock:
 	@rm -rf node_modules
 	@yarn install
 	@rm -rf node_modules
-	@npm install 
+	@npm install
 	@git add yarn.lock pnpm-lock.yaml package-lock.json
 	@git commit -m "Update: Lock files"
 	@git push
 
-## Check for upgraded packages with pnpm 
+## Check for upgraded packages with pnpm
 up-pnpm:
 	@pnpm up --interactive --latest
 
-## Check for upgraded packages with yarn 
+## Check for upgraded packages with yarn
 up-yarn:
 	@yarn upgrade-interactive --latest
 
@@ -45,7 +45,8 @@ up-copy:
 ## Run some basic checks with pnpm
 test-pnpm:
 	@rm -rf node_modules
-	@sed -Ei '' 's/"packageManager": "[a-z]+"/"packageManager": "pnpm"/' package.json
+	@pnpm install
+	@pnpm setPackageManager pnpm
 	@pnpm add svelte svelte-preprocess esbuild-svelte vue esbuild-plugin-vue3 sass node-sass-tilde-importer
 	@pnpm showConfig
 	@pnpm build
@@ -53,7 +54,8 @@ test-pnpm:
 ## Run some basic checks with yarn
 test-yarn:
 	@rm -rf node_modules
-	@sed -Ei '' 's/"packageManager": "[a-z]+"/"packageManager": "yarn"/' package.json
+	@yarn install
+	@yarn setPackageManager yarn
 	@yarn add svelte svelte-preprocess esbuild-svelte vue esbuild-plugin-vue3 sass node-sass-tilde-importer
 	@yarn showConfig
 	@yarn build
@@ -61,7 +63,8 @@ test-yarn:
 ## Run some basic checks with npm
 test-npm:
 	@rm -rf node_modules
-	@sed -Ei '' 's/"packageManager": "[a-z]+"/"packageManager": "npm"/' package.json
+	@npm install
+	@npm setPackageManager npm
 	@npm add svelte svelte-preprocess esbuild-svelte vue esbuild-plugin-vue3 sass node-sass-tilde-importer
 	@npm run showConfig
 	@npm run build
