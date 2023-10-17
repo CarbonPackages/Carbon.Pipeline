@@ -1,8 +1,17 @@
-const { scripts } = require("../../package.json");
+const { scripts, config } = require("../../package.json");
 const { execSync } = require("child_process");
 
 const newPackageManager = process.argv[2];
 const packageManagers = ["pnpm", "npm", "yarn"];
+
+if (config?.packageManager) {
+    const isAlone = Object.keys(config).length == 1;
+    if (isAlone) {
+        execSync("npm pkg delete config");
+    } else {
+        execSync("npm pkg delete config.packageManager");
+    }
+}
 
 if (!newPackageManager) {
     errorMessage("Please specify a package manager as an argument.");
