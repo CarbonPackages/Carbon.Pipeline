@@ -53,8 +53,8 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: |
+          node Build/Carbon.Pipeline/setPackageManager.js pnpm
           pnpm install
-          pnpm setPackageManager pnpm
           pnpm add ${{ env.dependencies }}
       - name: Show config
         run: pnpm showConfig
@@ -77,9 +77,9 @@ jobs:
           cache: yarn
       - name: Install dependencies
         run: |
+          node Build/Carbon.Pipeline/setPackageManager.js yarn
           yarn set version stable
           yarn install
-          yarn setPackageManager yarn
           yarn add ${{ env.dependencies }}
       - name: Show config
         run: yarn showConfig
@@ -101,8 +101,8 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: |
+          node Build/Carbon.Pipeline/setPackageManager.js npm
           npm install
-          npm setPackageManager npm
           npm add ${{ env.dependencies }}
       - name: Show config
         run: npm run showConfig
