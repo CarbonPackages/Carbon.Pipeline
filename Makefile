@@ -20,11 +20,12 @@ up-lock:
 	@pnpm setPackageManager pnpm
 	@pnpm install
 	@rm -rf node_modules
-	@yarn setPackageManager yarn
-	@yarn install
-	@rm -rf node_modules
 	@npm run setPackageManager npm
 	@npm install
+	@rm -rf node_modules
+	@yarn setPackageManager yarn
+	@yarn set version stable
+	@yarn install
 	@git add yarn.lock pnpm-lock.yaml package-lock.json
 	@git commit -m "Update: Lock files"
 	@git push

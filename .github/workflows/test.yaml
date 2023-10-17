@@ -54,7 +54,7 @@ jobs:
       - name: Install dependencies
         run: |
           node Build/Carbon.Pipeline/setPackageManager.js pnpm
-          pnpm install
+          pnpm install --no-frozen-lockfile
           pnpm add ${{ env.dependencies }}
       - name: Show config
         run: pnpm showConfig
