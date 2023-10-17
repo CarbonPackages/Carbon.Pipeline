@@ -17,6 +17,8 @@ jobs:
     name: Test with pnpm
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
       - name: Copy files
         run: |
           mkdir -p Build/Carbon.Pipeline/
@@ -46,6 +48,8 @@ jobs:
     name: Test with yarn
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
       - name: Copy files
         run: |
           mkdir -p Build/Carbon.Pipeline/
@@ -72,6 +76,8 @@ jobs:
     name: Test with npm
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
       - name: Copy files
         run: |
           mkdir -p Build/Carbon.Pipeline/
