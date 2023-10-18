@@ -22,7 +22,7 @@ If you want to make significant adjustments to the build stack, you can also [do
 
 ### Choose a package manager
 
-You can choose between different package managers: [npm], [Yarn] and the ultra-fast and disk-space saving [pnpm]. You can set your favorite package manager by running the command `pnpm setPackageManager`, `npm setPackageManager npm` or `yarn setPackageManager yarn`. The script behind it don't need any dependencies, so you can run it before the `install` command. **The default package manager is `pnpm`**
+You can choose between different package managers: [npm], [Yarn] and the ultra-fast and disk-space saving [pnpm]. You can set your favorite package manager by running the command `pnpm setPackageManager`, `npm run setPackageManager npm` or `yarn setPackageManager yarn`. The script behind it don't need any dependencies, so you can run it before the `install` command. **The default package manager is `pnpm`**
 
 ## Add files to the build stack
 
