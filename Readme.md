@@ -8,7 +8,7 @@
 
 First, thank you that you want to give this build stack a try! If you miss a ✨ feature or found a 🐛 bug, feel free to [open an issue].
 
-### Install via composer
+### Install via [composer]
 
 Run `composer require carbon/pipeline --dev`. Some files (if not already existing) will be copied to your root folder during the installation. After installing the package, run the command `install` to install the required packages defined in `package.json`. Feel free to modify and change dependencies before installing 👍
 
@@ -22,7 +22,7 @@ If you want to make significant adjustments to the build stack, you can also [do
 
 ### Choose a package manager
 
-You can choose between different package manager: [npm], [Yarn] and the ultra-fast and disk-space saving [pnpm]. Set your favorite task manager's name (`npm`, `yarn` or `pnpm`) in the `package.json` under the key `config.packageManager`. `pnpm` is set as default.
+You can choose between different package managers: [npm], [Yarn] and the ultra-fast and disk-space saving [pnpm]. You can set your favorite package manager by running the command `pnpm setPackageManager`, `npm setPackageManager npm` or `yarn setPackageManager yarn`. The script behind it don't need any dependencies, so you can run it before the `install` command. **The default package manager is `pnpm`**
 
 ## Add files to the build stack
 
@@ -177,13 +177,14 @@ If you set an entry file with the javascript module suffix (`.mjs`, `.mjsx`, `.m
 
 There are five predefined main tasks:
 
-| Command      | Description                                                                 | Command                                                                                                    |
-| ------------ | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `watch`      | Start the file watcher                                                      | `concurrently -r $npm_package_config_packageManager:watch:*`                                               |
-| `dev`        | Build the files once                                                        | `concurrently -r $npm_package_config_packageManager:dev:*`                                                 |
-| `build`      | Build the files once for production (with optimzed file size)               | `concurrently -r $npm_package_config_packageManager:build:*`                                               |
-| `pipeline`   | Run install, and build the files for production                             | `$npm_package_config_packageManager install;concurrently -r $npm_package_config_packageManager:pipeline:*` |
-| `showConfig` | Shows the merged configuration from [`pipeline.yaml`] and [`defaults.yaml`] | `node Build/Carbon.Pipeline/showConfig.mjs`                                                                |
+| Command             | Description                                                                 | Command                                                                                                    |
+| ------------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `watch`             | Start the file watcher                                                      | `concurrently -r $npm_package_config_packageManager:watch:*`                                               |
+| `dev`               | Build the files once                                                        | `concurrently -r $npm_package_config_packageManager:dev:*`                                                 |
+| `build`             | Build the files once for production (with optimzed file size)               | `concurrently -r $npm_package_config_packageManager:build:*`                                               |
+| `pipeline`          | Run install, and build the files for production                             | `$npm_package_config_packageManager install;concurrently -r $npm_package_config_packageManager:pipeline:*` |
+| `showConfig`        | Shows the merged configuration from [`pipeline.yaml`] and [`defaults.yaml`] | `node Build/Carbon.Pipeline/showConfig.mjs`                                                                |
+| `setPackageManager` | [Set your package manager.]                                                 | `node Build/Carbon.Pipeline/setPackageManager.js`                                                          |
 
 The tasks are split up, so they can run in parallel mode. But you can also run them separately:
 
@@ -315,6 +316,7 @@ postcssOptions:
 ```
 
 #### Use postcss resolve() function
+
 You can use `resolve()` in your css/scss files to load resources (eg images) from `Resources/Public` of the package. The path will be resolved at compile-time.
 
 ```
@@ -323,7 +325,8 @@ You can use `resolve()` in your css/scss files to load resources (eg images) fro
 }
 ```
 
-resolves to 
+resolves to
+
 ```
 .my-class {
   background-image: url('/_Resources/Static/Packages/Your.Package/Images/my-image.jpg')
@@ -331,6 +334,7 @@ resolves to
 ```
 
 If you choose to order your Packages in DistributionPackages in subfolders, you can add this setting to ensure the paths are correctly rewritten:
+
 ```
 postcssOptions:
   additionalPackagePathPrefixes:
@@ -498,7 +502,7 @@ To enable the correct linting, edit [`.eslintrc`]:
 <details>
 <summary><strong>React</strong></summary>
 
-Using JSX syntax usually requires you to manually import the JSX library you are using. For example, if you are using React, by default, you will need to import React into each JSX file like this:
+Using JSX syntax usually requires you to manually import the JSX library you are using. For example, if you are using [React], by default, you will need to import React into each JSX file like this:
 
 ```js
 import * as React from "react";
@@ -848,3 +852,4 @@ To start Browsersync you can run `browser-sync start --config bs-config.js`. If 
 [brotli]: https://github.com/google/brotli
 [gzip]: https://nodejs.org/api/zlib.html
 [browsersync]: https://browsersync.io/
+[Set your package manager.]: #choose-a-package-manager
