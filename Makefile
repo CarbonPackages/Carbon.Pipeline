@@ -87,7 +87,7 @@ test-all:
 reset:
 	@git reset --hard
 	@git clean -fx
-	@rm -rf node_modules Build Test/Resources/Public Packages
+	@rm -rf node_modules Build Test/Resources/Public Packages .yarn
 
 
 # define indention for descriptions
