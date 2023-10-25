@@ -20,10 +20,10 @@
   "devDependencies": {
     "autoprefixer": "^10.4.16",
     "carbon-pipeline": "^0.1.6",
-    "concurrently": "^8.2.1",
+    "concurrently": "^8.2.2",
     "cssnano": "^6.0.1",
     "esbuild": "^0.19.5",
-    "eslint": "^8.51.0",
+    "eslint": "^8.52.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
     "postcss": "^8.4.31",
@@ -35,6 +35,6 @@
     "prettier": "^3.0.3",
     "stylelint": "^15.11.0",
     "stylelint-config-standard": "^34.0.0",
-    "tailwindcss": "^3.3.3"
+    "tailwindcss": "^3.3.4"
   }
 }
