@@ -30,7 +30,7 @@ jobs:
         with:
           version: latest
       - name: Setup node
-        uses: actions/setup-node@v4.0.0
+        uses: actions/setup-node@v4.0.1
         with:
           node-version-file: .nvmrc
           cache: pnpm
@@ -57,7 +57,7 @@ jobs:
           cp -n Installer/Distribution/Defaults/{*,.*} ./ || true
           cp -R {Lib,defaults.yaml,*.mjs,*.js} Build/Carbon.Pipeline/
       - name: Setup node
-        uses: actions/setup-node@v4.0.0
+        uses: actions/setup-node@v4.0.1
         with:
           node-version-file: .nvmrc
           cache: yarn
@@ -84,7 +84,7 @@ jobs:
           cp -n Test/pipeline.yaml ./
           cp -n Installer/Distribution/Defaults/{*,.*} ./ || true
           cp -R {Lib,defaults.yaml,*.mjs,*.js} Build/Carbon.Pipeline/
-      - uses: actions/setup-node@v4.0.0
+      - uses: actions/setup-node@v4.0.1
         with:
           node-version-file: .nvmrc
           cache: npm
