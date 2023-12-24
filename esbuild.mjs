@@ -11,6 +11,11 @@ async function build() {
         const multiplePackages = outdir.length > 1;
         const write = !compression || inline;
 
+        let splitting = false
+        if (options.splitting && format == "esm") {
+            splitting = true;
+        }
+
         let additionlOptionsForSvelte = {};
         if (plugins?.svelte?.plugin) {
             additionlOptionsForSvelte = {
@@ -30,6 +35,7 @@ async function build() {
         const esOptions = {
             ...additionlOptionsForSvelte,
             ...options,
+            splitting,
             entryPoints,
             sourcemap,
             bundle: true,
