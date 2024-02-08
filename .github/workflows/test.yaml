@@ -26,7 +26,7 @@ jobs:
           cp -n Installer/Distribution/Defaults/{*,.*} ./ || true
           cp -R {Lib,defaults.yaml,*.mjs,*.js} Build/Carbon.Pipeline/
       - name: Install pnpm
-        uses: pnpm/action-setup@v2.4.0
+        uses: pnpm/action-setup@v3.0.0
         with:
           version: latest
       - name: Setup node
