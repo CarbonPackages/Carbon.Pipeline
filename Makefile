@@ -54,7 +54,7 @@ test-pnpm:
 	@rm -rf node_modules
 	@pnpm setPackageManager pnpm
 	@pnpm install
-	@pnpm add svelte svelte-preprocess esbuild-svelte vue esbuild-plugin-vue3 sass node-sass-tilde-importer
+	@pnpm add svelte svelte-preprocess esbuild-svelte sass node-sass-tilde-importer
 	@pnpm showConfig
 	@pnpm build
 
@@ -64,7 +64,7 @@ test-yarn:
 	@yarn setPackageManager yarn
 	@yarn set version stable
 	@yarn install
-	@yarn add svelte svelte-preprocess esbuild-svelte vue esbuild-plugin-vue3 @vue/compiler-core @vue/compiler-sfc sass node-sass-tilde-importer
+	@yarn add svelte svelte-preprocess esbuild-svelte sass node-sass-tilde-importer
 	@yarn showConfig
 	@yarn build
 
@@ -73,7 +73,7 @@ test-npm:
 	@rm -rf node_modules
 	@npm setPackageManager npm
 	@npm install
-	@npm add svelte svelte-preprocess esbuild-svelte vue esbuild-plugin-vue3 sass node-sass-tilde-importer
+	@npm add svelte svelte-preprocess esbuild-svelte sass node-sass-tilde-importer
 	@npm run showConfig
 	@npm run build
 

@@ -23,7 +23,5 @@ esbuild:
       - console.log
       - console.info
   plugins:
-    vue:
-      enable: true
     svelte:
       enable: true
