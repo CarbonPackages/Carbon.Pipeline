@@ -1,7 +1,7 @@
-const content = require("./Build/Carbon.Pipeline/purge");
+import content from "./Build/Carbon.Pipeline/content";
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
     content,
     theme: {
         extend: {},

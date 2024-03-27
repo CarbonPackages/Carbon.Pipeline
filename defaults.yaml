@@ -63,7 +63,7 @@ sassOptions: null
 # Pass options to the postcss config file
 postcssOptions:
   tailwindcss:
-    config: './tailwind.config.js'
+    config: './tailwind.config.mjs'
   additionalPackagePathPrefixes: []
 
 esbuild:
