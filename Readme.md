@@ -304,11 +304,11 @@ sassOptions:
 
 ### PostCSS
 
-This template comes with a variety of PostCSS Plugins. Feel free to remove some or add your own favorite packages. The configuration is located in [`.postcssrc.js`]. The suffix of these files should be `.pcss`.
+This template comes with a variety of PostCSS Plugins. Feel free to remove some or add your own favorite packages. The configuration is located in [`.postcssrc.mjs`]. The suffix of these files should be `.pcss`.
 
 #### Pass custom options to you PostCSS config file
 
-You can pass custom options to your PostCSS config file with key `postcssOptions`. In this example, you would access the key `prefix` with `ctx.prefix` in your PostCSS config file (`.postcssrc.js`).
+You can pass custom options to your PostCSS config file with key `postcssOptions`. In this example, you would access the key `prefix` with `ctx.prefix` in your PostCSS config file (`.postcssrc.mjs`).
 
 ```yaml
 postcssOptions:
@@ -367,7 +367,7 @@ Of course, you can add your own or remove not-needed Plugins as you want. This i
 
 ### Tailwind CSS
 
-This setup comes with [Tailwind CSS], a highly customizable, low-level CSS framework. An example configuration is provided in [`tailwind.config.js`]. The setup for purging the CSS files is also configured. [Read more about controlling the file size here][tailwind file-size]. Because the CSS bundling is done with the Javascript API from PostCSS, the [Just-in-Time Mode] from Tailwind CSS works perfectly. To remove a specific package, you could use this pattern in your `pipeline.yaml`:
+This setup comes with [Tailwind CSS], a highly customizable, low-level CSS framework. An example configuration is provided in [`tailwind.config.mjs`]. The setup for purging the CSS files is also configured. [Read more about controlling the file size here][tailwind file-size]. Because the CSS bundling is done with the Javascript API from PostCSS, the [Just-in-Time Mode] from Tailwind CSS works perfectly. To remove a specific package, you could use this pattern in your `pipeline.yaml`:
 
 ```yaml
 buildDefaults:
@@ -818,11 +818,11 @@ To start Browsersync you can run `browser-sync start --config bs-config.js`. If 
 [yarn]: https://yarnpkg.com
 [pnpm]: https://pnpm.io
 [`.eslintrc`]: Installer/Distribution/Defaults/.eslintrc
-[`.postcssrc.js`]: Installer/Distribution/Defaults/.postcssrc.js
+[`.postcssrc.mjs`]: Installer/Distribution/Defaults/.postcssrc.mjs
 [tailwind css]: https://tailwindcss.com
 [just-in-time mode]: https://tailwindcss.com/docs/just-in-time-mode
 [alpine.js]: https://github.com/alpinejs/alpine
-[`tailwind.config.js`]: Installer/Distribution/Defaults/tailwind.config.js
+[`tailwind.config.mjs`]: Installer/Distribution/Defaults/tailwind.config.mjs
 [tailwind file-size]: https://tailwindcss.com/docs/controlling-file-size
 [sass]: https://sass-lang.com
 [`sass`]: https://www.npmjs.com/package/sass

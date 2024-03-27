@@ -27,7 +27,7 @@ packages:
   - package: Vendor.Theme
 
 # Pass options to the postcss config file
-# In this example, you would have access to the key `prefix` with `ctx.prefix` in your postcss config file (`.postcssrc.js`)
+# In this example, you would have access to the key `prefix` with `ctx.prefix` in your postcss config file (`.postcssrc.mjs`)
 # postcssOptions:
 #   prefix: true
 
