@@ -1,6 +1,7 @@
 name: ✨ Feature request
 description: Suggest an idea for this project
-labels: enhancement
+labels:
+  - enhancement
 assignees: jonnitto
 body:
   - type: markdown
