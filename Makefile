@@ -1,4 +1,4 @@
-.PHONY: prepare up-lock up-pnpm up-yarn up-npm up-copy reset test-pnpm test-yarn test-npm test-all
+.PHONY: prepare update-lockfiles check-for-upgrades reset test-pnpm test-yarn test-npm test-all
 
 # Define colors
 GREEN  := $(shell tput -Txterm setaf 2)
@@ -10,44 +10,39 @@ RESET  := $(shell tput -Txterm sgr0)
 prepare:
 	@mkdir -p Build/Carbon.Pipeline/
 	@cp -n Test/pipeline.yaml ./
-	@cp -n Installer/Distribution/Defaults/{*,.*} ./ || true
+	@cp -n RootFiles/Global/{*,.*} ./ || true
+	@cp -n RootFiles/JavaScript/{*,.*} ./ || true
 	@cp -R {Lib,defaults.yaml,*.mjs,*.js} Build/Carbon.Pipeline/
 
 ## Update lock files and push them to git
-up-lock:
+update-lockfiles:
 	@echo "${GREEN}Writing lock files...${RESET}"
 	@rm -rf node_modules yarn.lock pnpm-lock.yaml package-lock.json
 	@pnpm setPackageManager pnpm
 	@pnpm install
-	@rm -rf node_modules
+	@git add pnpm-lock.yaml
+	@git commit -m "Update: pnpm-lock.yaml"
+	@rm -rf node_modules pnpm-lock.yaml
 	@npm run setPackageManager npm
 	@npm install
-	@rm -rf node_modules
+	@git add package-lock.json
+	@git commit -m "Update: package-lock.json"
+	@rm -rf @rm -rf node_modules package-lock.json
 	@yarn setPackageManager yarn
 	@yarn set version stable
 	@yarn install
-	@git add yarn.lock pnpm-lock.yaml package-lock.json
-	@git commit -m "Update: Lock files"
+	@git add yarn.lock
+	@git commit -m "Update: yarn.lock"
 	@git push
 
 ## Check for upgraded packages with pnpm
-up-pnpm:
+check-for-upgrades:
 	@pnpm setPackageManager pnpm
 	@pnpm up --interactive --latest
-
-## Check for upgraded packages with yarn
-up-yarn:
-	@yarn setPackageManager yarn
-	@yarn upgrade-interactive --latest
-
-## Check for upgraded packages with npm
-up-npm:
-	@npm setPackageManager npm
-	@npm update
-
-## Copy the root package.json to the build directory
-up-copy:
-	@yes | cp package.json Installer/Distribution/Defaults/package.json
+	@yes | cp package.json RootFiles/JavaScript/package.json
+	@pnpm add -D typescript-eslint
+	@yes | cp package.json RootFiles/TypeScript/package.json
+	@pnpm remove typescript-eslint
 
 ## Run some basic checks with pnpm
 test-pnpm:

@@ -17,6 +17,11 @@
         "Preact",
         "Svelte"
     ],
+    "autoload": {
+        "psr-4": {
+            "Carbon\\Pipeline\\": "Classes/"
+        }
+    },
     "authors": [
         {
             "name": "Jon Uhlmann",
@@ -41,10 +46,8 @@
         ]
     },
     "extra": {
-        "neos": {
-            "installer-resource-folders": [
-                "/Installer/"
-            ]
+        "neos/flow": {
+            "post-update": "Carbon\\Pipeline\\Composer::postPackageUpdate"
         }
     }
 }

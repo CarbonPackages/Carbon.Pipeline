@@ -1,4 +1,9 @@
 composer.json
+composer.lock
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
 *.noLinter.*
 **/Public/**/*
 **/Templates/InlineAssets/**/*
+Sites.xml

@@ -1,6 +1,6 @@
 import path from "path";
 import { fs, chokidar, readCache, bold, dim, cyan, magenta } from "carbon-pipeline";
-import { config } from './Lib/helper.mjs'
+import { config } from "./Lib/helper.mjs";
 import postcss from "postcss";
 import {
     styleFiles as files,
@@ -141,9 +141,9 @@ function css(css, file, time) {
     const { postcssOptions: { additionalPackagePathPrefixes } = [] } = config;
     const combinedPaths = Array.isArray(additionalPackagePathPrefixes) ? additionalPackagePathPrefixes.map(e => {
         return `${e}/`
-    }).join('|') : '';
+    }).join("|") : "";
 
-    const regexPattern = new RegExp(`(/_Resources/Static/Packages/)(?:${combinedPaths})?([\\w]+.[\\w]+/)Resources/Public/`, 'g');
+    const regexPattern = new RegExp(`(/_Resources/Static/Packages/)(?:${combinedPaths})?([\\w]+.[\\w]+/)Resources/Public/`, "g");
 
     return rc()
         .then((ctx) => {

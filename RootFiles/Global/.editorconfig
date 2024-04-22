@@ -42,7 +42,7 @@ max_line_length = 200
 indent_size = 2
 
 # Markdown uses trailing whitespace for line breaks
-[*.{note,md,edit,read}]
+[*.md]
 max_line_length = 200
 trim_trailing_whitespace = false
 indent_size = 2
