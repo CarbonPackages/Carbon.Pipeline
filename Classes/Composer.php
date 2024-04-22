@@ -18,7 +18,7 @@ class Composer
     {
         $console = new ConsoleOutput();
         $console->outputLine('');
-        $install = $console->askConfirmation('<question> Do you want to copy the needed files for Carbon.Pipeline to you project root? </question> (<options=bold>y</>/n) ', true);
+        $install = $console->askConfirmation('<question> Do you want to copy the needed files for Carbon.Pipeline to your project root? </question> (<options=bold>y</>/n) ', true);
         $console->outputLine('');
         if (!$install) {
             return;
