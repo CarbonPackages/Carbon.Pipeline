@@ -14,7 +14,7 @@ class Composer
      * @return void
      * @throws FilesException
      */
-    public static function postPackageUpdate(): void
+    public static function postPackageUpdateAndInstall(): void
     {
         $console = new ConsoleOutput();
         $console->outputLine('');

@@ -47,7 +47,8 @@
     },
     "extra": {
         "neos/flow": {
-            "post-update": "Carbon\\Pipeline\\Composer::postPackageUpdate"
+            "post-update": "Carbon\\Pipeline\\Composer::postPackageUpdateAndInstall",
+            "post-install": "Carbon\\Pipeline\\Composer::postPackageUpdateAndInstall"
         }
     }
 }
