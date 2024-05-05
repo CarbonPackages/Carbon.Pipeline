@@ -5,17 +5,23 @@ namespace Carbon\Pipeline;
 use Neos\Flow\Cli\ConsoleOutput;
 use Neos\Utility\Exception\FilesException;
 use Neos\Utility\Files;
+use Composer\Installer\PackageEvent;
 
 class Composer
 {
     /**
      * Copy files to project root
      *
+     * @param PackageEvent|null $event
      * @return void
      * @throws FilesException
      */
-    public static function postPackageUpdateAndInstall(): void
+    public static function postPackageUpdateAndInstall(?PackageEvent $event = null): void
     {
+        if (isset($event) && $event->getIO()->isInteractive() == false) {
+            return;
+        }
+
         $console = new ConsoleOutput();
         $console->outputLine('');
         $install = $console->askConfirmation('<question> Do you want to copy the needed files for Carbon.Pipeline to your project root? </question> (<options=bold>y</>/n) ', true);
