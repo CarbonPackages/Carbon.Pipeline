@@ -38,7 +38,7 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: |
-          npm pkg set "scripts.build"="concurrently -r pnpm:build:*"
+          npm pkg set "scripts.build"="concurrently -r 'pnpm:build:*'"
           node Build/Carbon.Pipeline/setPackageManager.js pnpm
           pnpm install --no-frozen-lockfile
           pnpm add ${{ env.dependencies }}
@@ -68,7 +68,7 @@ jobs:
           cache: yarn
       - name: Install dependencies
         run: |
-          npm pkg set "scripts.build"="concurrently -r yarn:build:*"
+          npm pkg set "scripts.build"="'concurrently -r 'yarn:build:*'"
           node Build/Carbon.Pipeline/setPackageManager.js yarn
           yarn set version stable
           yarn install
@@ -98,7 +98,7 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: |
-          npm pkg set "scripts.build"="concurrently -r npm:build:*"
+          npm pkg set "scripts.build"="concurrently -r 'npm:build:*'"
           node Build/Carbon.Pipeline/setPackageManager.js npm
           npm install
           npm add ${{ env.dependencies }}

@@ -14,7 +14,7 @@ prepare:
 	@cp -n RootFiles/JavaScript/{*,.*} ./ || true
 	@cp -n RootFiles/TailwindCSS/{*,.*} ./ || true
 	@cp -R {Lib,defaults.yaml,*.mjs,*.js} Build/Carbon.Pipeline/
-	@npm pkg set "scripts.build"="concurrently -r pnpm:build:*"
+	@npm pkg set "scripts.build"="concurrently -r 'pnpm:build:*'"
 
 ## Update lock files and push them to git
 update-lockfiles:
