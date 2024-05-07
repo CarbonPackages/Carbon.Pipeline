@@ -35,7 +35,6 @@ jobs:
         uses: actions/setup-node@v4.0.2
         with:
           node-version-file: .nvmrc
-          cache: pnpm
       - name: Install dependencies
         run: |
           pnpm install --no-frozen-lockfile
@@ -65,11 +64,10 @@ jobs:
         uses: actions/setup-node@v4.0.2
         with:
           node-version-file: .nvmrc
-          cache: yarn
       - name: Install dependencies
         run: |
           yarn set version stable
-          yarn install
+          yarn install --no-lockfile
           yarn add ${{ env.dependencies }}
       - name: Show config
         run: yarn showConfig
@@ -95,7 +93,6 @@ jobs:
       - uses: actions/setup-node@v4.0.2
         with:
           node-version-file: .nvmrc
-          cache: npm
       - name: Install dependencies
         run: |
           npm install
