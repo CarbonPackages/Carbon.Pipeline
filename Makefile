@@ -12,6 +12,7 @@ prepare:
 	@cp -n Test/pipeline.yaml ./
 	@cp -n RootFiles/Global/{*,.*} ./ || true
 	@cp -n RootFiles/JavaScript/{*,.*} ./ || true
+	@cp -n RootFiles/TailwindCSS/{*,.*} ./ || true
 	@cp -R {Lib,defaults.yaml,*.mjs,*.js} Build/Carbon.Pipeline/
 
 ## Update lock files and push them to git

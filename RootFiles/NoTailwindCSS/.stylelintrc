@@ -1,0 +1,18 @@
+{
+  "extends": "stylelint-config-standard",
+  "ignoreFiles": [
+    "**/Public/**",
+    "**/Private/Templates/**",
+    "node_modules/**",
+    "**/*.noLinter.*"
+  ],
+  "rules": {
+    "selector-class-pattern": "[a-z-]+",
+    "value-keyword-case": [
+      "lower",
+      { "camelCaseSvgKeywords": true }
+    ],
+    "function-no-unknown": true,
+    "at-rule-no-unknown": true
+  }
+}
