@@ -1,4 +1,4 @@
-.PHONY: prepare update-lockfiles check-for-upgrades reset test-pnpm test-yarn test-npm test-all
+.PHONY: prepare check-for-upgrades reset test-pnpm test-yarn test-npm test-all
 
 # Define colors
 GREEN  := $(shell tput -Txterm setaf 2)
@@ -15,23 +15,6 @@ prepare:
 	@cp -n RootFiles/TailwindCSS/{*,.*} ./ || true
 	@cp -R {Lib,defaults.yaml,*.mjs,*.js} Build/Carbon.Pipeline/
 	@npm pkg set "scripts.build"="concurrently -r 'pnpm:build:*'"
-
-## Update lock files and push them to git
-update-lockfiles:
-	@echo "${GREEN}Writing lock files...${RESET}"
-	@rm -rf node_modules yarn.lock pnpm-lock.yaml package-lock.json
-	@pnpm setPackageManager pnpm
-	@pnpm install
-	@rm -rf node_modules
-	@npm run setPackageManager npm
-	@npm install
-	@rm -rf node_modules
-	@yarn setPackageManager yarn
-	@yarn set version stable
-	@yarn install
-	@git add yarn.lock pnpm-lock.yaml package-lock.json
-	@git commit -m "Update: Lock files"
-	@git push
 
 ## Check for upgraded packages with pnpm
 check-for-upgrades:
