@@ -84,7 +84,7 @@ reset:
 
 
 # define indention for descriptions
-TARGET_MAX_CHAR_NUM=10
+TARGET_MAX_CHAR_NUM=18
 
 ## Show help
 help:
