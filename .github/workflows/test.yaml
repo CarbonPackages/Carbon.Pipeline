@@ -67,7 +67,7 @@ jobs:
       - name: Install dependencies
         run: |
           yarn set version stable
-          yarn install --refresh-lockfile
+          yarn install --no-immutable
           yarn add ${{ env.dependencies }}
       - name: Show config
         run: yarn showConfig
