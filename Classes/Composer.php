@@ -33,15 +33,16 @@ class Composer
         $keepExistingFiles = $console->askConfirmation('<question> Do you want to keep existing files? </question> [<options=bold>Y</>/n] ', true);
         $console->outputLine('');
 
-        $packageManager = $console->select('<question> Which package manager you want to use? </question>', ['pnpm', 'npm', 'yarn']);
+        $packageManager = $console->select('<question> Which package manager you want to use? </question> [<options=bold>pnpm</>]', ['pnpm', 'npm', 'yarn'], 'pnpm');
         $console->outputLine('');
 
         $cssFrameworkArray = [
+            'none' => 'None',
             'bootstrap' => 'Bootstrap (installs also Sass)',
             'tailwindcss' => 'Tailwind CSS',
             'bulma' => 'Bulma (installs also Sass)',
         ];
-        $cssFramework = $console->select('<question> Do you want to use a CSS framework? </question>', $cssFrameworkArray, null, true);
+        $cssFramework = $console->select('<question> Do you want to use a CSS framework? </question> [<options=bold>None</>]', $cssFrameworkArray, 'none', true);
         $console->outputLine('');
 
         $sass = in_array('bootstrap', $cssFramework) || in_array('bulma', $cssFramework);
@@ -93,7 +94,7 @@ class Composer
      */
     protected static function installPackage(string $packageManager, bool $typescript, bool $sass, array $cssFramework): void
     {
-        $packages = $cssFramework;
+        $packages = in_array('none', $cssFramework) ? [] : $cssFramework;
         if ($typescript) {
             $packages[] = 'typescript-eslint';
         }
