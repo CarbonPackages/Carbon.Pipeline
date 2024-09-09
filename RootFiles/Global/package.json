@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "setPackageManager": "node Build/Carbon.Pipeline/setPackageManager.js",
+    "setPackageManager": "node Build/Carbon.Pipeline/setPackageManager.cjs",
     "postinstall": "touch ./node_modules/.metadata_never_index; mkdir -p ./Packages; touch ./Packages/.metadata_never_index",
     "showConfig": "node Build/Carbon.Pipeline/showConfig.mjs",
     "build:js": "node Build/Carbon.Pipeline/esbuild.mjs --production",
