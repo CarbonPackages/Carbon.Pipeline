@@ -30,7 +30,7 @@ test-pnpm:
 	@rm -rf node_modules
 	@pnpm setPackageManager pnpm
 	@pnpm install
-	@pnpm add svelte svelte-preprocess esbuild-svelte sass node-sass-tilde-importer
+	@pnpm add tailwindcss svelte svelte-preprocess esbuild-svelte sass node-sass-tilde-importer
 	@pnpm showConfig
 	@pnpm build
 
@@ -40,7 +40,7 @@ test-yarn:
 	@yarn setPackageManager yarn
 	@yarn set version stable
 	@yarn install
-	@yarn add svelte svelte-preprocess esbuild-svelte sass node-sass-tilde-importer
+	@yarn add tailwindcss svelte svelte-preprocess esbuild-svelte sass node-sass-tilde-importer
 	@yarn showConfig
 	@yarn build
 
@@ -49,7 +49,7 @@ test-npm:
 	@rm -rf node_modules
 	@npm setPackageManager npm
 	@npm install
-	@npm add svelte svelte-preprocess esbuild-svelte sass node-sass-tilde-importer
+	@npm add tailwindcss svelte svelte-preprocess esbuild-svelte sass node-sass-tilde-importer
 	@npm run showConfig
 	@npm run build
 
