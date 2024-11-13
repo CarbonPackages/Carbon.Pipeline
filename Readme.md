@@ -521,7 +521,8 @@ esbuild:
       # Add here your options
       options:
         compilerOptions:
-          css: true
+          # external or injected
+          css: external
 ```
 
 > You can also configure the esbuild plugin and preprocess package, which should be used. Just add a key `plugin` or `preprocess` and the plugin name.
