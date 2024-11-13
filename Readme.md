@@ -1,4 +1,5 @@
-![Carbon.Pipeline – Build stack for Neos CMS][logo]
+![Carbon.Pipeline – Build stack for Neos CMS][logo-dark]
+![Carbon.Pipeline – Build stack for Neos CMS][logo-light]
 
 [![Latest stable version]][packagist] [![Download]][main.zip] [![GitHub stars]][stargazers] [![GitHub watchers]][subscription] [![GitHub license]][license] [![GitHub issues]][issues] [![GitHub forks]][network] [![Twitter]][tweet] [![Sponsor @Jonnitto on GitHub]][sponsor]
 
@@ -747,7 +748,8 @@ To start Browsersync you can run `browser-sync start --config bs-config.js`. If 
 
 [packagist]: https://packagist.org/packages/carbon/pipeline
 [latest stable version]: https://poser.pugx.org/carbon/pipeline/v/stable
-[logo]: https://repository-images.githubusercontent.com/377838441/de0f0b80-d2df-11eb-86a9-7988d27d4ab0
+[logo-light]: https://github.com/user-attachments/assets/b8f980bc-ba34-4595-8a34-51ba10f6da8a#gh-light-mode-only
+[logo-dark]: https://github.com/user-attachments/assets/34191bf1-213e-484e-aa4a-62b337163592#gh-dark-mode-only
 [esbuild]: https://esbuild.github.io
 [postcss]: https://postcss.org
 [open an issue]: https://github.com/CarbonPackages/Carbon.Pipeline/issues/new
