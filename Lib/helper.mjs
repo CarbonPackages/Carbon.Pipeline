@@ -8,7 +8,7 @@ const styleFiles = {};
 const configFile = argv("configFile") || "pipeline.yaml";
 const pipeline = readYamlFile(configFile);
 const defaults = readYamlFile("defaults.yaml", "Build/Carbon.Pipeline");
-const config = deepmerge(defaults, pipeline);
+const config = getConfig(defaults, pipeline);
 
 const watch = argv("watch") === true;
 const production = argv("production") === true;
@@ -109,6 +109,21 @@ toArray(config.packages).forEach((entry) => {
         scriptFiles.push(scriptEntryConfig(entry, moduleEntries, "module", "esm"));
     }
 });
+
+function getConfig(defaults, pipeline) {
+    let config = deepmerge(defaults, pipeline);
+    if (!pipeline.import) {
+        return config;
+    }
+    const imports = typeof pipeline.import == "string" ? [pipeline.import] : pipeline.import;
+    for (const key in imports) {
+        const filePath = imports[key];
+        if (filePath) {
+            config = deepmerge(config, readYamlFile(filePath));
+        }
+    }
+    return config;
+}
 
 function argv(key) {
     // Return true if the key exists and a value is defined
