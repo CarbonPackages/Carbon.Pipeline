@@ -111,6 +111,7 @@ A package entry has the following options:
 | -------------------------- | ------------------- | ------------------------------------------------------------------------------------------------ | -------------------- |
 | `package`                  | `string`            | The name of the package **(required)**                                                           | `Vendor.Foo`         |
 | `files`                    | `string` or `array` | The names of the entry files. If none given, all parsable files in the input folder get rendered | `Main.js`            |
+| `ignoredFiles`             | `string` or `array` | List of files who should be ignored                                                              | `Main.js`            |
 | `folder.input`             | `string`            | The folder under `Resources/Private` where to look for the entry files                           | `Assets`             |
 | `folder.output.package`    | `string` or `array` | If set, the files will be writen in a different package (one or multiple)                        | `Foo.Bar`            |
 | `folder.output.inline`     | `string`            | The folder where inline files get rendered                                                       | `Private/Templates/` |
