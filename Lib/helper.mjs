@@ -335,7 +335,6 @@ async function dynamicImport(name, selector = "default") {
 
 function humanFileSize(bytes) {
     const thresh = 1024;
-    const decimals = 1;
     const sizes = ["b", "kb", "mb"];
     const minLength = {
         value: 6,
