@@ -13,7 +13,7 @@ prepare:
 	@cp -n RootFiles/Global/{*,.*} ./ || true
 	@cp -n RootFiles/JavaScript/{*,.*} ./ || true
 	@cp -n RootFiles/TailwindCSS/{*,.*} ./ || true
-	@cp -R {Lib,defaults.yaml,*.mjs,*.js,*.cjs} Build/Carbon.Pipeline/
+	@cp -R {Lib,defaults.yaml,*.mjs,*.cjs} Build/Carbon.Pipeline/
 	@npm pkg set "scripts.build"="concurrently -r 'pnpm:build:*'"
 
 ## Check for upgraded packages with pnpm
