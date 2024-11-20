@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
-    "carbon-pipeline": "^0.1.6",
+    "carbon-pipeline": "^0.2.1",
     "concurrently": "^9.0.0",
     "cssnano": "^7.0.6",
     "esbuild": "^0.24.0",

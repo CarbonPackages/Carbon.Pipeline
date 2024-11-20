@@ -375,14 +375,24 @@ Of course, you can add your own or remove not-needed Plugins as you want. This i
 
 ### Tailwind CSS
 
-This setup comes with [Tailwind CSS], a highly customizable, low-level CSS framework. An example configuration is provided in [`tailwind.config.mjs`]. The setup for purging the CSS files is also configured. [Read more about controlling the file size here][tailwind file-size]. Because the CSS bundling is done with the Javascript API from PostCSS, the [Just-in-Time Mode] from Tailwind CSS works perfectly. To remove a specific package, you could use this pattern in your `pipeline.yaml`:
+This setup comes with [Tailwind CSS], a highly customizable, low-level CSS framework. An example configuration is provided in [`tailwind.config.mjs`]. The setup for get the content for the CSS files is also configured. [Read more about controlling the file size here][optimizing-for-production]. To remove a specific package, you could use this pattern in your `pipeline.yaml`:
 
 ```yaml
 buildDefaults:
-  purge:
-    - DistributionPackages/**/(Private|NodeTypes)/**/*.{fusion,html,js,jsx,ts,tsx,mjs,mjsx,mts,mtsx,cjs,cjsx,cts,ctsx,svelte,vue}
-    - "!DistributionPackages/Package.ToRemove"
+  content:
+    RemovePacakge: "!DistributionPackages/Package.ToRemove"
 ```
+
+By default, following entries are pre-defined:
+
+```yaml
+buildDefaults:
+  content:
+    DistributionPackages: DistributionPackages/**/(Private|NodeTypes)/**/*.{fusion,html,js,jsx,ts,tsx,mjs,mjsx,mts,mtsx,cjs,cjsx,cts,ctsx,svelte,vue}
+    ignoreNodeModules: '!DistributionPackages/**/Private/**/node_modules'
+```
+
+The script put automatically all entries starting with an `!` at the end of the list. You can control this setting by calling `pnpm showConfig --path=buildDefaults.content`
 
 By the way: [Alpine.js] is excellent in combination with [Tailwind CSS].
 
@@ -783,10 +793,9 @@ To start Browsersync you can run `browser-sync start --config bs-config.js`. If 
 [`eslint.config.mjs`]: RootFiles/JavaScript/eslint.config.mjs
 [`.postcssrc.mjs`]: RootFiles/Global/.postcssrc.mjs
 [tailwind css]: https://tailwindcss.com
-[just-in-time mode]: https://tailwindcss.com/docs/just-in-time-mode
 [alpine.js]: https://github.com/alpinejs/alpine
 [`tailwind.config.mjs`]: RootFiles/Global/tailwind.config.mjs
-[tailwind file-size]: https://tailwindcss.com/docs/controlling-file-size
+[optimizing-for-production]: https://tailwindcss.com/docs/optimizing-for-production
 [sass]: https://sass-lang.com
 [`sass`]: https://www.npmjs.com/package/sass
 [`node-sass-tilde-importer`]: https://www.npmjs.com/package/node-sass-tilde-importer

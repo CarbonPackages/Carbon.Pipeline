@@ -1,6 +1,6 @@
 import BROWSERLIST from "browserslist";
 import chokidar from "chokidar";
-import deepmerge from "deepmerge";
+import { merge } from "ts-deepmerge";
 import fs from "fs-extra";
 import { glob } from "glob";
 import postcssrc from "postcss-load-config";
@@ -10,6 +10,8 @@ import resolve from "resolve";
 import yaml from "js-yaml";
 import { DepGraph } from "dependency-graph";
 import { red, bold, dim, cyan, magenta } from "nanocolors";
+
+const deepmerge = merge;
 
 export {
     BROWSERLIST,

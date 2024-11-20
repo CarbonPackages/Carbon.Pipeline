@@ -5,15 +5,14 @@ import { execSync } from "child_process";
 const scriptFiles = [];
 const styleFiles = {};
 
-const configFile = argv("configFile") || "pipeline.yaml";
-const pipeline = readYamlFile(configFile);
-const defaults = readYamlFile("defaults.yaml", "Build/Carbon.Pipeline");
-const config = getConfig(defaults, pipeline);
-
 const watch = argv("watch") === true;
 const production = argv("production") === true;
 const minify = production || argv("minify") === true;
 const silent = argv("silent") === true;
+
+const configFile = argv("configFile") || "pipeline.yaml";
+const config = getConfig(configFile);
+
 let compression = false;
 if (production && (!watch || argv("compression") === true)) {
     compression = config.buildDefaults.compression;
@@ -109,21 +108,6 @@ toArray(config.packages).forEach((entry) => {
         scriptFiles.push(scriptEntryConfig(entry, moduleEntries, "module", "esm"));
     }
 });
-
-function getConfig(defaults, pipeline) {
-    let config = deepmerge(defaults, pipeline);
-    if (!pipeline.import) {
-        return config;
-    }
-    const imports = typeof pipeline.import == "string" ? [pipeline.import] : pipeline.import;
-    for (const key in imports) {
-        const filePath = imports[key];
-        if (filePath) {
-            config = deepmerge(config, readYamlFile(filePath));
-        }
-    }
-    return config;
-}
 
 function argv(key) {
     // Return true if the key exists and a value is defined
@@ -292,12 +276,11 @@ function convertJsonForDefine(json, prefix) {
     return define;
 }
 
-function readYamlFile(file, folder) {
-    const filePath = folder ? path.join(folder, file) : file;
+function readYamlFile(filePath) {
     try {
         return yaml.load(fs.readFileSync(path.join("./", filePath), "utf8"));
     } catch (err) {
-        error(`Error reading ${file}:`, err);
+        error(`Error reading ${filePath}:`, err);
         process.exit(1);
     }
 }
@@ -330,9 +313,14 @@ function print() {
     }
 }
 
+function isObject(item) {
+    return Object.prototype.toString.call(item) === '[object Object]'
+}
+
 function toArray(entry) {
     if (Array.isArray(entry)) {
-        return entry.filter((item) => !!item);
+        // Remove empty and double values
+        return [...new Set(entry.filter((item) => !!item))];
     }
     if (entry) {
         return [entry];
@@ -410,7 +398,49 @@ function equalArrays(a, b) {
     return a.every((value, index) => value === b[index]);
 }
 
+function getConfig(configFile) {
+    const defaultConfig = readYamlFile("Build/Carbon.Pipeline/defaults.yaml");
+    const pipelineConfig = readYamlFile(configFile);
+    if (!pipelineConfig.import) {
+        return mergeConfig(defaultConfig, pipelineConfig);
+    }
+    const imports = typeof pipelineConfig.import == "string" ? [pipelineConfig.import] : pipelineConfig.import;
+    delete pipelineConfig.import;
+    let importedConfig = [];
+    for (const key in imports) {
+        const filePath = imports[key];
+        if (filePath) {
+            importedConfig.push(readYamlFile(filePath));
+        }
+    }
+    return mergeConfig(defaultConfig, pipelineConfig, ...importedConfig);
+}
+
+function mergeConfig() {
+    const config = deepmerge(...arguments);
+    const settings = config?.buildDefaults?.content
+    if (!settings) {
+        return config;
+    }
+    // Convert object or string to array with unique items
+    const contentOptions = toArray(isObject(settings) ? Object.values(settings) : settings);
+    const allowed = [];
+    const forbidden = [];
+    // Sort items into allowed and forbidden
+    contentOptions.forEach((option) => {
+        if (option.startsWith("!")) {
+            forbidden.push(option);
+            return;
+        }
+        allowed.push(option);
+    });
+    config.buildDefaults.content = [...allowed, ...forbidden];
+    return config;
+}
+
+
 export {
+    argv,
     asyncForEach,
     scriptFiles,
     styleFiles,

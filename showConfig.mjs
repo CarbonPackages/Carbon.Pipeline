@@ -1,7 +1,8 @@
-import { config } from "./Lib/helper.mjs";
+import { config, argv } from "./Lib/helper.mjs";
 import { prettyjson } from "carbon-pipeline";
 
-const light = process.argv.includes("--light");
+const light = argv("light");
+const path = argv("path");
 
 const options = {
     keysColor: light ? "blue" : "yellow",
@@ -9,9 +10,13 @@ const options = {
     stringColor: light ? "black" : "white",
     numberColor: light ? "magenta" : "brightMagenta",
     multilineStringColor: light ? "black" : "white",
-    inlineArrays: true,
+    inlineArrays: false,
 };
 
-const dump = prettyjson.render(config, options);
-
+let output = config;
+if (path) {
+   const parts = path.split(".");
+   output = parts.reduce((o, part) => o[part], output);
+}
+const dump = prettyjson.render(output, options);
 console.log(`\n\n${dump}\n\n`);

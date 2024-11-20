@@ -48,10 +48,10 @@ buildDefaults:
   # external can be a string or an array
   # https://esbuild.github.io/api/#external
   external: null
-  # purge can be a string or an array
-  purge:
-    - DistributionPackages/**/(Private|NodeTypes)/**/*.{fusion,html,js,jsx,ts,tsx,mjs,mjsx,mts,mtsx,cjs,cjsx,cts,ctsx,svelte,vue}
-    - '!DistributionPackages/**/Private/**/node_modules'
+
+  content:
+    DistributionPackages: DistributionPackages/**/(Private|NodeTypes)/**/*.{fusion,html,js,jsx,ts,tsx,mjs,mjsx,mts,mtsx,cjs,cjsx,cts,ctsx,svelte,vue}
+    ignoreNodeModules: '!DistributionPackages/**/Private/**/node_modules'
 
   compression:
     brotli: 11
