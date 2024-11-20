@@ -59,7 +59,7 @@ jobs:
           cp -n RootFiles/Global/{*,.*} ./ || true
           cp -n RootFiles/JavaScript/* ./ || true
           cp -n RootFiles/TailwindCSS/{*,.*} ./ || true
-          cp -R {Lib,defaults.yaml,*.mjs,*.js,*.cjs} Build/Carbon.Pipeline/
+          cp -R {Lib,defaults.yaml,*.mjs,*.cjs} Build/Carbon.Pipeline/
       - name: Setup node
         uses: actions/setup-node@v4.1.0
         with:
@@ -89,7 +89,7 @@ jobs:
           cp -n RootFiles/Global/{*,.*} ./ || true
           cp -n RootFiles/JavaScript/* ./ || true
           cp -n RootFiles/TailwindCSS/{*,.*} ./ || true
-          cp -R {Lib,defaults.yaml,*.mjs,*.js,*.cjs} Build/Carbon.Pipeline/
+          cp -R {Lib,defaults.yaml,*.mjs,*.cjs} Build/Carbon.Pipeline/
       - uses: actions/setup-node@v4.1.0
         with:
           node-version-file: .nvmrc
