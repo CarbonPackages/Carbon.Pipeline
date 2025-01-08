@@ -20,10 +20,6 @@ prepare:
 check-for-upgrades:
 	@pnpm setPackageManager pnpm
 	@pnpm up --interactive --latest
-	@yes | cp package.json RootFiles/JavaScript/package.json
-	@pnpm add -D typescript-eslint
-	@yes | cp package.json RootFiles/TypeScript/package.json
-	@pnpm remove typescript-eslint
 
 ## Run some basic checks with pnpm
 test-pnpm:
