@@ -12,7 +12,6 @@ export default function (ctx) {
                 baseUrl: "/_Resources/Static/Packages",
                 loadPaths: ["**/Resources/Public/**/*"],
             },
-            "postcss-clip-path-polyfill": true,
             "postcss-sort-media-queries": true,
             autoprefixer: true,
             cssnano: ctx.minify
