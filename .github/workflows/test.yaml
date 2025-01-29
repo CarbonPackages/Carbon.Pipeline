@@ -10,7 +10,7 @@ on:
       - main
 
 env:
-  dependencies: 'tailwindcss svelte svelte-preprocess esbuild-svelte vue esbuild-plugin-vue3 sass node-sass-tilde-importer'
+  dependencies: 'tailwindcss@3 autoprefixer cssnano svelte svelte-preprocess esbuild-svelte vue esbuild-plugin-vue3 sass node-sass-tilde-importer'
 
 jobs:
   pnpm:
@@ -25,7 +25,7 @@ jobs:
           cp -n Test/pipeline.yaml ./
           cp -n RootFiles/Global/{*,.*} ./ || true
           cp -n RootFiles/JavaScript/* ./ || true
-          cp -n RootFiles/TailwindCSS/{*,.*} ./ || true
+          cp -n RootFiles/TailwindCSS3/{*,.*} ./ || true
           cp -R {Lib,defaults.yaml,*.mjs,*.cjs} Build/Carbon.Pipeline/
       - name: Install pnpm
         uses: pnpm/action-setup@v4.0.0
@@ -58,7 +58,7 @@ jobs:
           cp -n Test/pipeline.yaml ./
           cp -n RootFiles/Global/{*,.*} ./ || true
           cp -n RootFiles/JavaScript/* ./ || true
-          cp -n RootFiles/TailwindCSS/{*,.*} ./ || true
+          cp -n RootFiles/TailwindCSS3/{*,.*} ./ || true
           cp -R {Lib,defaults.yaml,*.mjs,*.cjs} Build/Carbon.Pipeline/
       - name: Setup node
         uses: actions/setup-node@v4.2.0
@@ -88,7 +88,7 @@ jobs:
           cp -n Test/pipeline.yaml ./
           cp -n RootFiles/Global/{*,.*} ./ || true
           cp -n RootFiles/JavaScript/* ./ || true
-          cp -n RootFiles/TailwindCSS/{*,.*} ./ || true
+          cp -n RootFiles/TailwindCSS3/{*,.*} ./ || true
           cp -R {Lib,defaults.yaml,*.mjs,*.cjs} Build/Carbon.Pipeline/
       - uses: actions/setup-node@v4.2.0
         with:

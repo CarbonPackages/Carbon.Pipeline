@@ -12,7 +12,7 @@ prepare:
 	@cp -n Test/pipeline.yaml ./
 	@cp -n RootFiles/Global/{*,.*} ./ || true
 	@cp -n RootFiles/JavaScript/{*,.*} ./ || true
-	@cp -n RootFiles/TailwindCSS/{*,.*} ./ || true
+	@cp -n RootFiles/TailwindCSS3/{*,.*} ./ || true
 	@cp -R {Lib,defaults.yaml,*.mjs,*.cjs} Build/Carbon.Pipeline/
 	@npm pkg set "scripts.build"="concurrently -r 'pnpm:build:*'"
 
@@ -26,7 +26,7 @@ test-pnpm:
 	@rm -rf node_modules
 	@pnpm setPackageManager pnpm
 	@pnpm install
-	@pnpm add tailwindcss svelte svelte-preprocess esbuild-svelte sass node-sass-tilde-importer
+	@pnpm add tailwindcss@3 autoprefixer cssnano svelte svelte-preprocess esbuild-svelte sass node-sass-tilde-importer
 	@pnpm showConfig
 	@pnpm build
 
@@ -36,7 +36,7 @@ test-yarn:
 	@yarn setPackageManager yarn
 	@yarn set version stable
 	@yarn install
-	@yarn add tailwindcss svelte svelte-preprocess esbuild-svelte sass node-sass-tilde-importer
+	@yarn add tailwindcss@3 autoprefixer cssnano svelte svelte-preprocess esbuild-svelte sass node-sass-tilde-importer
 	@yarn showConfig
 	@yarn build
 
@@ -45,7 +45,7 @@ test-npm:
 	@rm -rf node_modules
 	@npm setPackageManager npm
 	@npm install
-	@npm add tailwindcss svelte svelte-preprocess esbuild-svelte sass node-sass-tilde-importer
+	@npm add tailwindcss@3 autoprefixer cssnano svelte svelte-preprocess esbuild-svelte sass node-sass-tilde-importer
 	@npm run showConfig
 	@npm run build
 

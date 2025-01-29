@@ -39,13 +39,30 @@ class Composer
         $cssFrameworkArray = [
             'none' => 'None',
             'bootstrap' => 'Bootstrap (installs also Sass)',
-            'tailwindcss' => 'Tailwind CSS',
+            'tailwindcss@3' => 'Tailwind CSS 3',
+            // 'tailwindcss@4' => 'Tailwind CSS 4',
             'bulma' => 'Bulma (installs also Sass)',
         ];
-        $cssFramework = $console->select('<question> Do you want to use a CSS framework? </question> [<options=bold>None</>]', $cssFrameworkArray, 'none', true);
+        $cssFramework = $console->select('<question> Do you want to use a CSS framework? </question> [<options=bold>None</>]', $cssFrameworkArray, 'none');
         $console->outputLine('');
 
-        $sass = in_array('bootstrap', $cssFramework) || in_array('bulma', $cssFramework);
+        $sass = false;
+
+        switch ($cssFramework) {
+            case 'tailwindcss@3':
+                self::copyFile('TailwindCSS3', $keepExistingFiles);
+                break;
+            case 'tailwindcss@4':
+                self::copyFile('TailwindCSS4', $keepExistingFiles);
+                break;
+            case 'bootstrap':
+            case 'bulma':
+                $sass = true;
+            default:
+                self::copyFile('NoTailwindCSS', $keepExistingFiles);
+                break;
+        }
+
         if (!$sass) {
             $sass = $console->askConfirmation('<question> Do you want to use Sass? </question> [y/<options=bold>N</>] ', false);
             $console->outputLine('');
@@ -59,11 +76,6 @@ class Composer
             self::copyFile('TypeScript', $keepExistingFiles);
         } else {
             self::copyFile('JavaScript', $keepExistingFiles);
-        }
-        if (in_array('tailwindcss', $cssFramework)) {
-            self::copyFile('TailwindCSS', $keepExistingFiles);
-        } else {
-            self::copyFile('NoTailwindCSS', $keepExistingFiles);
         }
 
         self::setScripts($packageManager);
@@ -88,18 +100,27 @@ class Composer
      *
      * @param string $packageManager
      * @param bool $typescript
-     * @param array<int,string> $cssFramework
+     * @param string $cssFramework
      * @param bool $sass
      * @return void
      */
-    protected static function installPackage(string $packageManager, bool $typescript, bool $sass, array $cssFramework): void
+    protected static function installPackage(string $packageManager, bool $typescript, bool $sass, string $cssFramework): void
     {
-        $packages = in_array('none', $cssFramework) ? [] : $cssFramework;
+        $packages = $cssFramework == 'none' ? [] : [$cssFramework];
+
         if ($typescript) {
             $packages[] = 'typescript-eslint';
         }
         if ($sass) {
             $packages[] = 'sass node-sass-tilde-importer';
+        }
+        switch ($cssFramework) {
+            case 'tailwindcss@4':
+                $packages[] = '@tailwindcss/postcss';
+                break;
+            default:
+                $packages[] = 'autoprefixer cssnano';
+                break;
         }
 
         $dependencies = implode(' ', $packages);
