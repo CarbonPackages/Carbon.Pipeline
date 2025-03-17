@@ -32,7 +32,7 @@ jobs:
         with:
           version: latest
       - name: Setup node
-        uses: actions/setup-node@v4.2.0
+        uses: actions/setup-node@v4.3.0
         with:
           node-version-file: .nvmrc
       - name: Install dependencies
@@ -61,7 +61,7 @@ jobs:
           cp -n RootFiles/TailwindCSS3/{*,.*} ./ || true
           cp -R {Lib,defaults.yaml,*.mjs,*.cjs} Build/Carbon.Pipeline/
       - name: Setup node
-        uses: actions/setup-node@v4.2.0
+        uses: actions/setup-node@v4.3.0
         with:
           node-version-file: .nvmrc
       - name: Install dependencies
@@ -90,7 +90,7 @@ jobs:
           cp -n RootFiles/JavaScript/* ./ || true
           cp -n RootFiles/TailwindCSS3/{*,.*} ./ || true
           cp -R {Lib,defaults.yaml,*.mjs,*.cjs} Build/Carbon.Pipeline/
-      - uses: actions/setup-node@v4.2.0
+      - uses: actions/setup-node@v4.3.0
         with:
           node-version-file: .nvmrc
       - name: Install dependencies
