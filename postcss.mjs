@@ -44,7 +44,7 @@ function renderFiles(keys) {
                 }
                 return css(content, file, time);
             });
-        })
+        }),
     );
 }
 
@@ -139,11 +139,18 @@ function build() {
 
 function css(css, file, time) {
     const { postcssOptions: { additionalPackagePathPrefixes } = [] } = config;
-    const combinedPaths = Array.isArray(additionalPackagePathPrefixes) ? additionalPackagePathPrefixes.map(e => {
-        return `${e}/`
-    }).join("|") : "";
+    const combinedPaths = Array.isArray(additionalPackagePathPrefixes)
+        ? additionalPackagePathPrefixes
+              .map((e) => {
+                  return `${e}/`;
+              })
+              .join("|")
+        : "";
 
-    const regexPattern = new RegExp(`(/_Resources/Static/Packages/)(?:${combinedPaths})?([\\w]+.[\\w]+/)Resources/Public/`, "g");
+    const regexPattern = new RegExp(
+        `(/_Resources/Static/Packages/)(?:${combinedPaths})?([\\w]+.[\\w]+/)Resources/Public/`,
+        "g",
+    );
 
     return rc()
         .then((ctx) => {
@@ -163,7 +170,7 @@ function css(css, file, time) {
                 .then((result) => {
                     const tasks = [];
                     // This fixes url done with resolve()
-                    result.css = result.css.replace(regexPattern,"$1$2");
+                    result.css = result.css.replace(regexPattern, "$1$2");
 
                     const cssFilesize = humanFileSize(result.css.length);
                     let mapFilesize = 0;
@@ -182,7 +189,7 @@ function css(css, file, time) {
                                         const size = fs.statSync(file)?.size;
                                         mapFilesize = humanFileSize(size);
                                     }
-                                })
+                                }),
                             );
 
                             if (compression) {

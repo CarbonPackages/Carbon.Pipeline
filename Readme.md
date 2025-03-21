@@ -210,7 +210,7 @@ Of course, you can also add your own tasks in the `scripts` section of your `pac
 {
   "build:editor": "pnpm --dir DistributionPackages/Foo.Editor/Resources/Private/Editor/ build",
   "watch:editor": "pnpm --dir DistributionPackages/Foo.Editor/Resources/Private/Editor/ watch",
-  "pipeline:editor": "pnpm --dir DistributionPackages/Foo.Editor/Resources/Private/Editor/ install",
+  "pipeline:editor": "pnpm --dir DistributionPackages/Foo.Editor/Resources/Private/Editor/ install"
 }
 ```
 
@@ -329,7 +329,7 @@ You can use `resolve()` in your css/scss files to load resources (eg images) fro
 
 ```css
 .my-class {
-  background-image: resolve('Images/my-image.jpg')
+  background-image: resolve("Images/my-image.jpg");
 }
 ```
 
@@ -337,7 +337,7 @@ resolves to
 
 ```css
 .my-class {
-  background-image: url('/_Resources/Static/Packages/Your.Package/Images/my-image.jpg')
+  background-image: url("/_Resources/Static/Packages/Your.Package/Images/my-image.jpg");
 }
 ```
 
@@ -388,7 +388,7 @@ By default, following entries are pre-defined:
 buildDefaults:
   content:
     DistributionPackages: DistributionPackages/**/(Private|NodeTypes)/**/*.{fusion,html,js,jsx,ts,tsx,mjs,mjsx,mts,mtsx,cjs,cjsx,cts,ctsx,svelte,vue}
-    ignoreNodeModules: '!DistributionPackages/**/Private/**/node_modules'
+    ignoreNodeModules: "!DistributionPackages/**/Private/**/node_modules"
 ```
 
 The script put automatically all entries starting with an `!` at the end of the list. You can control this setting by calling `pnpm showConfig --path=buildDefaults.content`
@@ -435,18 +435,18 @@ import pluginJs from "@eslint/js";
 import prettierRecommended from "eslint-plugin-prettier/recommended";
 
 export default [
-    pluginJs.configs.recommended,
-    prettierRecommended,
-    {
-        ignores: ["Build/", "Packages/", "**/Public/", "**/Resources/Private/Templates/", "*.noLinter.*"],
-        languageOptions: {
-            globals: {
-                ...globals.browser,
-                ...globals.node,
-                FLOW: "readonly",
-            },
-        },
+  pluginJs.configs.recommended,
+  prettierRecommended,
+  {
+    ignores: ["Build/", "Packages/", "**/Public/", "**/Resources/Private/Templates/", "*.noLinter.*"],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        FLOW: "readonly",
+      },
     },
+  },
 ];
 ```
 
@@ -763,7 +763,7 @@ To start Browsersync you can run `browser-sync start --config bs-config.js`. If 
 
 ```json
 {
-  "watch:browsersync": "browser-sync start --config bs-config.js",
+  "watch:browsersync": "browser-sync start --config bs-config.js"
 }
 ```
 

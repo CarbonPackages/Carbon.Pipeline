@@ -29,7 +29,7 @@ async function writeBr(filename, contents) {
     }
     return await write(
         `${filename}.br`,
-        await compressBr(contents, { params: { [zlib.constants.BROTLI_PARAM_QUALITY]: compression.brotli } })
+        await compressBr(contents, { params: { [zlib.constants.BROTLI_PARAM_QUALITY]: compression.brotli } }),
     );
 }
 
@@ -47,8 +47,8 @@ function esPlugin({ onEnd } = {}) {
                             write(filename, contents),
                             writeGz(filename, contents),
                             writeBr(filename, contents),
-                        ])
-                    )
+                        ]),
+                    ),
                 );
                 onEnd?.({ outputFiles: outputFiles.flat().filter(Boolean) });
             });

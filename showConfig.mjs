@@ -15,8 +15,8 @@ const options = {
 
 let output = config;
 if (path) {
-   const parts = path.split(".");
-   output = parts.reduce((o, part) => o[part], output);
+    const parts = path.split(".");
+    output = parts.reduce((o, part) => o[part], output);
 }
 const dump = prettyjson.render(output, options);
 console.log(`\n\n${dump}\n\n`);

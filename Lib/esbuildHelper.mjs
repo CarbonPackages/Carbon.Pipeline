@@ -72,7 +72,7 @@ async function importPlugins() {
                 preprocess,
                 filterWarnings: sveltePlugin.filterWarnings,
             },
-            sveltePlugin.options
+            sveltePlugin.options,
         );
     }
 
@@ -84,7 +84,7 @@ async function importPlugins() {
             {
                 plugin,
             },
-            options
+            options,
         );
     }
 
@@ -107,7 +107,7 @@ async function importPlugins() {
             {
                 plugin,
             },
-            babelPlugin.options
+            babelPlugin.options,
         );
     }
 
@@ -119,7 +119,7 @@ async function importPlugins() {
             {
                 plugin,
             },
-            options
+            options,
         );
     }
 

@@ -75,8 +75,8 @@ function importResolve(id, base, options) {
                         paths.unshift(base);
                     }
                     throw new Error(`Failed to find '${id}' in [${paths.join(",\n        ")}]`);
-                })
-        )
+                }),
+        ),
     );
 }
 

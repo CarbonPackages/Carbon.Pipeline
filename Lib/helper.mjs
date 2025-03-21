@@ -236,7 +236,7 @@ function print() {
 }
 
 function isObject(item) {
-    return Object.prototype.toString.call(item) === '[object Object]'
+    return Object.prototype.toString.call(item) === "[object Object]";
 }
 
 function toArray(entry) {
@@ -340,7 +340,7 @@ function getConfig(configFile) {
 
 function mergeConfig() {
     const config = deepmerge(...arguments);
-    const settings = config?.buildDefaults?.content
+    const settings = config?.buildDefaults?.content;
     if (!settings) {
         return config;
     }
@@ -359,7 +359,6 @@ function mergeConfig() {
     config.buildDefaults.content = [...allowed, ...forbidden];
     return config;
 }
-
 
 export {
     argv,

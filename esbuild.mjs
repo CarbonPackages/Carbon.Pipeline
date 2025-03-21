@@ -11,7 +11,7 @@ async function build() {
         const multiplePackages = outdir.length > 1;
         const write = !compression || inline;
 
-        let splitting = false
+        let splitting = false;
         if (options.splitting && format == "esm") {
             splitting = true;
         }
@@ -109,7 +109,7 @@ async function build() {
 
                                 return returnValue;
                             },
-                        })
+                        }),
                     );
                 }
 

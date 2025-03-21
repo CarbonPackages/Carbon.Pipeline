@@ -21,16 +21,15 @@ function readFlowSettings() {
         return;
     }
 
-    const config = esbuildConfig?.flowCommand
+    const config = esbuildConfig?.flowCommand;
 
     // Check if ddev is set
-    let prefix = '';
+    let prefix = "";
     if (config?.ddevCheck) {
         try {
             execSync(config.ddevCheck);
-            prefix = 'ddev exec';
-        } catch (error) {
-        }
+            prefix = "ddev exec";
+        } catch (error) {}
     }
 
     // Settings is a single value
