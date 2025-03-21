@@ -74,6 +74,11 @@ esbuild:
   # (e.g. FLOW.Flownative.Sentry)
   defineFlowSettings: false
 
+  flowCommand:
+    production: 'FLOW_CONTEXT=Production php flow configuration:show'
+    development: 'php flow configuration:show'
+    ddevCheck: 'ddev -v >/dev/null 2>&1'
+
   # Set options for esbuild
   options:
     # Define a string (for only one function) or an array with functions who can be removed on production builds.

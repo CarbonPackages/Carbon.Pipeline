@@ -130,6 +130,6 @@ options.pure = toArray(config.esbuild?.options?.pure) || [];
 options.logLevel = config.esbuild?.options?.logLevel || "info";
 options.legalComments = config.esbuild?.options?.legalComments || "linked";
 
-const flowSettings = readFlowSettings(config.esbuild.defineFlowSettings);
+const flowSettings = readFlowSettings(config.esbuild.defineFlowSettings, config.esbuild.flowCommand);
 
 export { browserlist, options, importPlugins, flowSettings };

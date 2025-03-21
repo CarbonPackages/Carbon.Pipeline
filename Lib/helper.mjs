@@ -199,23 +199,24 @@ async function asyncForEach(array, callback) {
     }
 }
 
-function readFlowSettings(path) {
+function readFlowSettings(path, config) {
     if (!path) {
         return null;
     }
-    const settings = (() => {
-        let command = "./flow configuration:show";
-        if (production) {
-            command = "FLOW_CONTEXT=Production " + command;
+    let command = '';
+    if (config?.ddevCheck) {
+        try {
+            execSync(config.ddevCheck);
+            command += 'ddev exec ';
+        } catch (error) {
         }
-        if (typeof path === "string") {
-            command += " --path " + path;
-        }
-        return execSync(command)
-            .toString("utf8")
-            .replace(/^Configuration "Settings:.*:/, "")
-            .trim();
-    })();
+    }
+    command += production ? config.production : config.development;
+    if (typeof path === "string") {
+        command += ` --path ${path}`;
+    }
+
+    const settings = execSync(command).toString("utf8").replace(/^Configuration "Settings:.*:/, "").trim();
     const json = yaml.load(settings, { schema: yaml.JSON_SCHEMA, json: true });
     return convertJsonForDefine(json, path);
 }
