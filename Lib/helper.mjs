@@ -1,6 +1,5 @@
 import { yaml, fs, red, deepmerge, glob } from "carbon-pipeline";
 import path from "path";
-import { execSync } from "child_process";
 
 const scriptFiles = [];
 const styleFiles = {};
@@ -199,79 +198,6 @@ async function asyncForEach(array, callback) {
     }
 }
 
-function execCommand(command, path, prefix) {
-    prefix = prefix ? prefix + " " : "";
-    const suffix = path ? ` --path ${path}` : "";
-    const result = execSync(prefix + command + suffix).toString("utf8");
-    if (result.includes(" was empty!")) {
-        return null;
-    }
-    return result.replace(/^Configuration "Settings:.*:/, "").trim();
-}
-
-function readFlowSettings(path, config) {
-    if (!path) {
-        return null;
-    }
-    let prefix = '';
-    if (config?.ddevCheck) {
-        try {
-            execSync(config.ddevCheck);
-            prefix = 'ddev exec';
-        } catch (error) {
-        }
-    }
-
-    let settings = null;
-    if (production) {
-        settings = execCommand(config.production, path, prefix);
-    }
-    if (!settings) {
-        settings = execCommand(config.development, path, prefix);
-    }
-    if (!settings) {
-        console.error("\n");
-        console.error(red(` No settings were found under the path ${path} `));
-        console.error("\n");
-        process.exit(1);
-    }
-    const json = yaml.load(settings, { schema: yaml.JSON_SCHEMA, json: true });
-    return convertJsonForDefine(json, path);
-}
-
-function convertJsonForDefine(json, prefix) {
-    prefix = prefix ? prefix + "." : "";
-    const define = {};
-    const objects = {};
-
-    const isKeyedObject = (value) => {
-        if (typeof value !== "object") {
-            return false;
-        }
-        return !Array.isArray(value);
-    }
-
-    const checkIdentifier = (identifier) => !identifier.match(/[:\d\/\+\$\\\*\[\]]/gi);
-    const flatten = (identifier, value) => {
-        if (!checkIdentifier(identifier)) {
-            return;
-        }
-
-        define["FLOW." + prefix + identifier] = JSON.stringify(value);
-
-        if (isKeyedObject(value)) {
-            for (const key in value) {
-                flatten(`${identifier}.${key}`, value[key]);
-            }
-        }
-    };
-
-    for (const key in json) {
-        flatten(key, json[key]);
-    }
-    return define;
-}
-
 function readYamlFile(filePath) {
     try {
         return yaml.load(fs.readFileSync(path.join("./", filePath), "utf8"));
@@ -455,5 +381,4 @@ export {
     humanFileSize,
     humanDuration,
     equalArrays,
-    readFlowSettings,
 };
