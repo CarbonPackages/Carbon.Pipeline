@@ -224,50 +224,27 @@ function readFlowSettings(path, config) {
 function convertJsonForDefine(json, prefix) {
     prefix = prefix ? prefix + "." : "";
     const define = {};
-    const isTrueObject = (value) => {
+    const objects = {};
+
+    const isKeyedObject = (value) => {
         if (typeof value !== "object") {
             return false;
         }
-        try {
-            for (x of value) {
-                // is no errors happens here is an array
-                break;
-            }
-            return false;
-        } catch {
-            // if there was an error is an object
-            return true;
-        }
-    };
-    const replaceIdentifier = (identifier) =>
-        identifier
-            .replace(/\.\./g, ".")
-            .replace(/-/g, "_")
-            .replace(/0/g, "ZERO")
-            .replace(/1/g, "ONE")
-            .replace(/2/g, "TWO")
-            .replace(/3/g, "THREE")
-            .replace(/4/g, "FOUR")
-            .replace(/5/g, "FIVE")
-            .replace(/6/g, "SIX")
-            .replace(/7/g, "SEVEN")
-            .replace(/8/g, "EIGHT")
-            .replace(/9/g, "NINE");
+        return !Array.isArray(value);
+    }
 
     const checkIdentifier = (identifier) => !identifier.match(/[:\d\/\+\$\\\*\[\]]/gi);
-
     const flatten = (identifier, value) => {
-        identifier = replaceIdentifier(identifier);
         if (!checkIdentifier(identifier)) {
             return;
         }
 
-        if (isTrueObject(value)) {
+        define["FLOW." + prefix + identifier] = JSON.stringify(value);
+
+        if (isKeyedObject(value)) {
             for (const key in value) {
                 flatten(`${identifier}.${key}`, value[key]);
             }
-        } else {
-            define["FLOW." + prefix + identifier] = JSON.stringify(value);
         }
     };
 
