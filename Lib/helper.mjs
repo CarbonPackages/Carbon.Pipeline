@@ -199,24 +199,42 @@ async function asyncForEach(array, callback) {
     }
 }
 
+function execCommand(command, path, prefix) {
+    prefix = prefix ? prefix + " " : "";
+    const suffix = path ? ` --path ${path}` : "";
+    const result = execSync(prefix + command + suffix).toString("utf8");
+    if (result.includes(" was empty!")) {
+        return null;
+    }
+    return result.replace(/^Configuration "Settings:.*:/, "").trim();
+}
+
 function readFlowSettings(path, config) {
     if (!path) {
         return null;
     }
-    let command = '';
+    let prefix = '';
     if (config?.ddevCheck) {
         try {
             execSync(config.ddevCheck);
-            command += 'ddev exec ';
+            prefix = 'ddev exec';
         } catch (error) {
         }
     }
-    command += production ? config.production : config.development;
-    if (typeof path === "string") {
-        command += ` --path ${path}`;
-    }
 
-    const settings = execSync(command).toString("utf8").replace(/^Configuration "Settings:.*:/, "").trim();
+    let settings = null;
+    if (production) {
+        settings = execCommand(config.production, path, prefix);
+    }
+    if (!settings) {
+        settings = execCommand(config.development, path, prefix);
+    }
+    if (!settings) {
+        console.error("\n");
+        console.error(red(` No settings were found under the path ${path} `));
+        console.error("\n");
+        process.exit(1);
+    }
     const json = yaml.load(settings, { schema: yaml.JSON_SCHEMA, json: true });
     return convertJsonForDefine(json, path);
 }
