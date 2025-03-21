@@ -400,11 +400,11 @@ By the way: [Alpine.js] is excellent in combination with [Tailwind CSS].
 <details>
 <summary><strong>Flow Settings in Javascript</strong></summary>
 
-Suppose you use tools like [Flownative.Sentry], you perhaps want to pass some of the settings to your Javascript without setting a `data` attribute somewhere in the markup. For that, you can enable `esbuild.defineFlowSettings`. Just add the path (e.g. `Flownative.Sentry`) to the setting. In the background, the command `flow configuration:show --path` is runned. If you run the command `build`, which automatically has the flag `--production`, the `FLOW_CONTEXT` is set to `Production`.
+Suppose you use tools like [Flownative.Sentry], you perhaps want to pass some of the settings to your Javascript without setting a `data` attribute somewhere in the markup. For that, you can enable `esbuild.defineFlowSettings`. Just add the path (e.g. `Flownative.Sentry.release`) to the setting. In the background, the command `flow configuration:show` is runned. If you run the command `build`, which automatically has the flag `--production`, the `FLOW_CONTEXT` is set to `Production`.
 
 ```yaml
 esbuild:
-  defineFlowSettings: Flownative.Sentry
+  defineFlowSettings: Flownative.Sentry.release
 ```
 
 `defineFlowSettings` can be also an array of strings:
@@ -412,9 +412,12 @@ esbuild:
 ```yaml
 esbuild:
   defineFlowSettings:
-    - Flownative.Sentry
-    - Vendor.AnotherPackage
+    - Flownative.Sentry.release
+    - Flownative.Sentry.environment
+    - Flownative.Sentry.dsn
 ```
+
+Every entry results into one injected variable.
 
 In Javascript, you can access the variables like this:
 
@@ -426,6 +429,25 @@ Sentry.init({
   integrations: [new Integrations.BrowserTracing()],
 });
 ```
+
+**Important**
+
+As some chars are not allowed to be injected as variable keys, the will get replaced:
+
+| Char | Replaced with |
+| :--: | :-----------: |
+| `..` |      `.`      |
+| `-`  |      `_`      |
+| `0`  |    `ZERO`     |
+| `1`  |     `ONE`     |
+| `2`  |     `TWO`     |
+| `3`  |    `THREE`    |
+| `4`  |    `FOUR`     |
+| `5`  |    `FIVE`     |
+| `6`  |     `SIX`     |
+| `7`  |    `SEVEN`    |
+| `8`  |    `EIGHT`    |
+| `9`  |    `NINE`     |
 
 Make sure your [`eslint.config.mjs`] has the global `FLOW` enabled:
 
