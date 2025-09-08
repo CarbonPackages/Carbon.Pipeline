@@ -422,11 +422,18 @@ Every entry results into one injected variable.
 In Javascript, you can access the variables like this:
 
 ```js
+import * as Sentry from "@sentry/browser";
+
 Sentry.init({
-  dsn: FLOW.Flownative.Sentry.dsn,
-  release: FLOW.Flownative.Sentry.release,
-  environment: FLOW.Flownative.Sentry.environment,
-  integrations: [new Integrations.BrowserTracing()],
+    dsn: FLOW.Flownative.Sentry.dsn,
+    release: FLOW.Flownative.Sentry.release,
+    environment: FLOW.Flownative.Sentry.environment,
+    integrations: [Sentry.browserTracingIntegration()],
+
+    // Set tracesSampleRate to 1.0 to capture 100%
+    // of transactions for performance monitoring.
+    // We recommend adjusting this value in production
+    tracesSampleRate: 0.25,
 });
 ```
 
