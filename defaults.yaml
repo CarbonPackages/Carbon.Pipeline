@@ -50,7 +50,8 @@ buildDefaults:
   external: null
 
   content:
-    DistributionPackages: DistributionPackages/**/(Private|NodeTypes)/**/*.{fusion,html,js,jsx,ts,tsx,mjs,mjsx,mts,mtsx,cjs,cjsx,cts,ctsx,svelte,vue}
+    DistributionPackagesPrivate: DistributionPackages/**/Private/**/*.{fusion,html,js,jsx,ts,tsx,mjs,mjsx,mts,mtsx,cjs,cjsx,cts,ctsx,svelte,vue}
+    DistributionPackagesNodeTypes: DistributionPackages/**/NodeTypes/**/*.{fusion,html,js,jsx,ts,tsx,mjs,mjsx,mts,mtsx,cjs,cjsx,cts,ctsx,svelte,vue}
     ignoreNodeModules: '!DistributionPackages/**/Private/**/node_modules'
 
   compression:
