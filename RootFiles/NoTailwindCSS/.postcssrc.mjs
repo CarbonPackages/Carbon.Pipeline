@@ -4,12 +4,6 @@ export default function (ctx) {
             "postcss-import": {
                 resolve: ctx.resolve,
             },
-            "postcss-assets": {
-                cachebuster: false,
-                basePath: `${ctx.basePath}/`,
-                baseUrl: "/_Resources/Static/Packages",
-                loadPaths: ["**/Resources/Public/**/*"],
-            },
             "postcss-sort-media-queries": true,
             autoprefixer: true,
             cssnano: ctx.minify

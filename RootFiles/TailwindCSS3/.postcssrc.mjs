@@ -6,12 +6,6 @@ export default function (ctx) {
             },
             "tailwindcss/nesting": true,
             tailwindcss: ctx.tailwindcss,
-            "postcss-assets": {
-                cachebuster: false,
-                basePath: `${ctx.basePath}/`,
-                baseUrl: "/_Resources/Static/Packages",
-                loadPaths: ["**/Resources/Public/**/*"],
-            },
             "postcss-sort-media-queries": true,
             autoprefixer: true,
             cssnano: ctx.minify

@@ -2,6 +2,9 @@
   "license": "UNLICENSED",
   "private": true,
   "type": "module",
+  "imports": {
+    "#tailwindConfig": "./tailwind.config.mjs"
+  },
   "scripts": {
     "setPackageManager": "node Build/Carbon.Pipeline/setPackageManager.cjs",
     "postinstall": "touch ./node_modules/.metadata_never_index; mkdir -p ./Packages; touch ./Packages/.metadata_never_index",
@@ -21,7 +24,6 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "postcss": "^8.4.49",
-    "postcss-assets": "^6.0.0",
     "postcss-import": "^16.1.0",
     "postcss-reporter": "^7.1.0",
     "postcss-sort-media-queries": "^5.2.0",
