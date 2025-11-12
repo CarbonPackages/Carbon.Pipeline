@@ -52,7 +52,8 @@ buildDefaults:
   content:
     DistributionPackagesPrivate: DistributionPackages/**/Private/**/*.{fusion,cpx,html,js,jsx,ts,tsx,mjs,mjsx,mts,mtsx,cjs,cjsx,cts,ctsx,svelte,vue}
     DistributionPackagesNodeTypes: DistributionPackages/**/NodeTypes/**/*.{fusion,cpx,html,js,jsx,ts,tsx,mjs,mjsx,mts,mtsx,cjs,cjsx,cts,ctsx,svelte,vue}
-    ignoreNodeModules: '!DistributionPackages/**/Private/**/node_modules'
+    DistributionPackagesComponents: DistributionPackages/**/Components/**/*.{cpx,js,jsx,ts,tsx,mjs,mjsx,mts,mtsx,cjs,cjsx,cts,ctsx,svelte,vue}
+    ignoreNodeModules: '!DistributionPackages/**/node_modules'
 
   compression:
     brotli: 11
