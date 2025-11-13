@@ -1,6 +1,9 @@
-import path from "path";
+import path from "node:path";
 import { glob, postcssrc, resolve, DepGraph } from "carbon-pipeline";
 import { minify, config, toArray } from "./helper.mjs";
+import pkg from "../../../package.json" with { type: "json" };
+
+const imports = pkg?.imports || {};
 
 function rc() {
     return postcssrc({
@@ -41,6 +44,9 @@ function resolveAlias(path) {
 }
 
 function resolveModule(id, opts) {
+    if (id && id.startsWith("#") && imports[id]) {
+        id = path.resolve(imports[id]);
+    }
     id = resolveAlias(id);
     return new Promise((res, rej) => {
         resolve(id, opts, (err, path) => (err ? rej(err) : res(path)));
