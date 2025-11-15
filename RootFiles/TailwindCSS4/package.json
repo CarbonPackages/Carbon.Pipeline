@@ -1,0 +1,21 @@
+{
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "imports": {
+    "#tailwindConfig": "./tailwind.config.mjs",
+    "#tailwindCSS": "./Path/to/your/tailwind4-entry-file"
+  },
+  "scripts": {
+    "setPackageManager": "node Build/Carbon.Pipeline/setPackageManager.cjs",
+    "postinstall": "touch ./node_modules/.metadata_never_index; mkdir -p ./Packages; touch ./Packages/.metadata_never_index",
+    "showConfig": "node Build/Carbon.Pipeline/showConfig.mjs",
+    "build:js": "node Build/Carbon.Pipeline/esbuild.mjs --production",
+    "build:css": "node Build/Carbon.Pipeline/postcss.mjs --production",
+    "dev:js": "node Build/Carbon.Pipeline/esbuild.mjs",
+    "dev:css": "node Build/Carbon.Pipeline/postcss.mjs",
+    "watch:js": "node Build/Carbon.Pipeline/esbuild.mjs --watch",
+    "watch:css": "node Build/Carbon.Pipeline/postcss.mjs --watch",
+    "build": "concurrently -r 'pnpm:build:*'"
+  }
+}

@@ -6,16 +6,12 @@ export default function (ctx) {
             },
             "tailwindcss/nesting": true,
             tailwindcss: ctx.tailwindcss,
-            "postcss-sort-media-queries": true,
             autoprefixer: true,
             cssnano: ctx.minify
                 ? {
                       preset: ["default", { discardComments: { removeAll: true }, svgo: false, calc: false }],
                   }
                 : false,
-            "postcss-reporter": {
-                clearReportedMessages: true,
-            },
         },
     };
 }

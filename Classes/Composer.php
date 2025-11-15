@@ -40,7 +40,7 @@ class Composer
             'none' => 'None',
             'bootstrap' => 'Bootstrap (installs also Sass)',
             'tailwindcss@3' => 'Tailwind CSS 3',
-            // 'tailwindcss@4' => 'Tailwind CSS 4',
+            'tailwindcss@4' => 'Tailwind CSS 4',
             'bulma' => 'Bulma (installs also Sass)',
         ];
         $cssFramework = $console->select('<question> Do you want to use a CSS framework? </question> [<options=bold>None</>]', $cssFrameworkArray, 'none');
@@ -58,6 +58,7 @@ class Composer
             case 'bootstrap':
             case 'bulma':
                 $sass = true;
+                // no break
             default:
                 self::copyFile('NoTailwindCSS', $keepExistingFiles);
                 break;
@@ -108,6 +109,8 @@ class Composer
     {
         $packages = $cssFramework == 'none' ? [] : [$cssFramework];
 
+        $packages[] = 'carbon-pipeline concurrently esbuild eslint eslint-config-prettier eslint-plugin-prettier postcss postcss-import prettier stylelint stylelint-config-standard';
+
         if ($typescript) {
             $packages[] = 'typescript-eslint';
         }
@@ -118,8 +121,11 @@ class Composer
             case 'tailwindcss@4':
                 $packages[] = '@tailwindcss/postcss';
                 break;
-            default:
+            case 'tailwindcss@3':
                 $packages[] = 'autoprefixer cssnano';
+                break;
+            default:
+                $packages[] = 'postcss-sort-media-queries postcss-reporter autoprefixer cssnano';
                 break;
         }
 

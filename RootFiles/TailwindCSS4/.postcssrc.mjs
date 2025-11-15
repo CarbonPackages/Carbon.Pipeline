@@ -4,11 +4,7 @@ export default function (ctx) {
             "postcss-import": {
                 resolve: ctx.resolve,
             },
-            "@tailwindcss/postcss": ctx.tailwindcss,
-            "postcss-sort-media-queries": true,
-            "postcss-reporter": {
-                clearReportedMessages: true,
-            },
+            "@tailwindcss/postcss": true
         },
     };
 }
