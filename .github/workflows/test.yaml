@@ -10,7 +10,7 @@ on:
       - main
 
 env:
-  dependencies: 'tailwindcss@3 autoprefixer cssnano svelte svelte-preprocess esbuild-svelte vue esbuild-plugin-vue3 sass node-sass-tilde-importer'
+  dependencies: 'carbon-pipeline concurrently esbuild eslint eslint-config-prettier eslint-plugin-prettier postcss postcss-import prettier stylelint stylelint-config-standard tailwindcss@3 autoprefixer cssnano svelte svelte-preprocess esbuild-svelte vue esbuild-plugin-vue3 sass node-sass-tilde-importer'
 
 jobs:
   pnpm:
