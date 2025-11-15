@@ -3,7 +3,8 @@
   "private": true,
   "type": "module",
   "imports": {
-    "#tailwindConfig": "./tailwind.config.mjs"
+    "#tailwindConfig": "./tailwind.config.mjs",
+    "#tailwindCSS": "./Path/to/your/tailwind4-entry-file"
   },
   "scripts": {
     "setPackageManager": "node Build/Carbon.Pipeline/setPackageManager.cjs",
