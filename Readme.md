@@ -754,6 +754,27 @@ If a plugin returns the function directly, you don't have to set this. If you wa
 
 </details>
 
+## Watching files doesen't work
+
+If you encounter the problem that file watching doesn't work (because of limitation of your OS) you may remove some file extentsions from the `buildDefaults.content`
+
+This is the original entry:
+
+```yaml
+buildDefaults:
+  content:
+    DistributionPackages: DistributionPackages/**/{Private,NodeTypes,Components}/**/*.{fusion,cpx,html,js,jsx,ts,tsx,mjs,mjsx,mts,mtsx,cjs,cjsx,cts,ctsx,svelte,vue}
+```
+
+So, if don't use CommonJS, Svelte an Vue and write all your code in TypeScript, you can shorten (and speeding) things up by remove the not needed file extensions:
+
+```yaml
+buildDefaults:
+  content:
+    DistributionPackages: DistributionPackages/**/{Private,NodeTypes,Components}/**/*.{fusion,cpx,html,ts,tsx,mts,mtsx}
+```
+
+
 ## Live-Reloading
 
 If you want to use live reloading, you can do this with [Browsersync].
