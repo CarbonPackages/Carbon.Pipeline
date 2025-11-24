@@ -361,11 +361,10 @@ This ensures that the path that is generated (eg `/_Resources/Static/Packages/(S
 | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | [postcss-import]             | Plugin to transform `@import` rules by inlining content. Thanks to a custom `resolve` function you can also use [glob] |
 | [Tailwind CSS]               | A utility-first CSS framework for rapidly building custom user interfaces                                              |
-| [postcss-nested]             | Unwrap nested rules like how Sass does it                                                                              |
-| [postcss-sort-media-queries] | Combine and sort CSS media queries                                                                                     |
-| [autoprefixer]               | Parse CSS and add vendor prefixes to CSS rules using values from [Can I Use]                                           |
-| [cssnano]                    | Modern CSS compression                                                                                                 |
-| [postcss-reporter]           | `console.log()` the messages (warnings, etc.) registered by other PostCSS plugins                                      |
+| [postcss-sort-media-queries] | Combine and sort CSS media queries (Only if no Tailwind is installed)                                                  |
+| [autoprefixer]               | Parse CSS and add vendor prefixes to CSS rules using values from [Can I Use] (Not with Tailwind 4)                     |
+| [cssnano]                    | Modern CSS compression (Not with Tailwind 4)                                                                           |
+| [postcss-reporter]           | `console.log()` the messages (warnings, etc.) registered by other PostCSS plugins (Only if no Tailwind is installed)   |
 
 Of course, you can add your own or remove not-needed Plugins as you want. This is just meant as a starting point.
 
@@ -386,8 +385,8 @@ By default, following entries are pre-defined:
 ```yaml
 buildDefaults:
   content:
-    DistributionPackages: DistributionPackages/**/(Private|NodeTypes)/**/*.{fusion,html,js,jsx,ts,tsx,mjs,mjsx,mts,mtsx,cjs,cjsx,cts,ctsx,svelte,vue}
-    ignoreNodeModules: "!DistributionPackages/**/Private/**/node_modules"
+    DistributionPackages: DistributionPackages/**/{Private,NodeTypes,Components}/**/*.{fusion,cpx,html,js,jsx,ts,tsx,mjs,mjsx,mts,mtsx,cjs,cjsx,cts,ctsx,svelte,vue}
+    ignoreNodeModules: '!DistributionPackages/**/node_modules'
 ```
 
 The script put automatically all entries starting with an `!` at the end of the list. You can control this setting by calling `pnpm showConfig --path=buildDefaults.content`
@@ -857,7 +856,6 @@ To start Browsersync you can run `browser-sync start --config bs-config.js`. If 
 [`sass`]: https://www.npmjs.com/package/sass
 [`node-sass-tilde-importer`]: https://www.npmjs.com/package/node-sass-tilde-importer
 [postcss-import]: https://www.npmjs.com/package/postcss-import
-[postcss-nested]: https://www.npmjs.com/package/postcss-nested
 [postcss-sort-media-queries]: https://www.npmjs.com/package/postcss-sort-media-queries
 [autoprefixer]: https://www.npmjs.com/package/autoprefixer
 [can i use]: https://caniuse.com
