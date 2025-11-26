@@ -181,14 +181,14 @@ If you set an entry file with the javascript module suffix (`.mjs`, `.mjsx`, `.m
 
 There are five predefined main tasks:
 
-| Command             | Description                                                                 | Command                                           |
-| ------------------- | --------------------------------------------------------------------------- | ------------------------------------------------- |
-| `watch`             | Start the file watcher                                                      | `concurrently -r pnpm:watch:*`                    |
-| `dev`               | Build the files once                                                        | `concurrently -r pnpm:dev:*`                      |
-| `build`             | Build the files once for production (with optimzed file size)               | `concurrently -r pnpm:build:*`                    |
-| `pipeline`          | Run install, and build the files for production                             | `pnpm install;concurrently -r pnpm:pipeline:*`    |
-| `showConfig`        | Shows the merged configuration from [`pipeline.yaml`] and [`defaults.yaml`] | `node Build/Carbon.Pipeline/showConfig.mjs`       |
-| `setPackageManager` | [Set your package manager.]                                                 | `node Build/Carbon.Pipeline/setPackageManager.js` |
+| Command             | Description                                                                 | Command                                            |
+| ------------------- | --------------------------------------------------------------------------- | -------------------------------------------------- |
+| `watch`             | Start the file watcher                                                      | `concurrently -r pnpm:watch:*`                     |
+| `dev`               | Build the files once                                                        | `concurrently -r pnpm:dev:*`                       |
+| `build`             | Build the files once for production (with optimzed file size)               | `concurrently -r pnpm:build:*`                     |
+| `pipeline`          | Run install, and build the files for production                             | `pnpm install;concurrently -r pnpm:pipeline:*`     |
+| `showConfig`        | Shows the merged configuration from [`pipeline.yaml`] and [`defaults.yaml`] | `node Build/Carbon.Pipeline/showConfig.mjs`        |
+| `setPackageManager` | [Set your package manager.]                                                 | `node Build/Carbon.Pipeline/setPackageManager.cjs` |
 
 The tasks are split up, so they can run in parallel mode. But you can also run them separately:
 
