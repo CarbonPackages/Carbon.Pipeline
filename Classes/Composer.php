@@ -145,6 +145,7 @@ class Composer
         $commands = [
             'build' => sprintf("concurrently -r '%s:build:*'", $packageManager),
             'dev' => sprintf("concurrently -r '%s:dev:*'", $packageManager),
+            'watch' => sprintf("concurrently -r '%s:watch:*'", $packageManager),
             'pipeline:build' => sprintf("concurrently -r '%s:build:*'", $packageManager),
             'pipeline' => sprintf("%s install;concurrently -r '%s:pipeline:*'", $packageManager, $packageManager),
         ];
