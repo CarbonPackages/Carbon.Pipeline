@@ -33,7 +33,7 @@ class Composer
         $keepExistingFiles = $console->askConfirmation('<question> Do you want to keep existing files? </question> [<options=bold>Y</>/n] ', true);
         $console->outputLine('');
 
-        $packageManager = $console->select('<question> Which package manager you want to use? </question> [<options=bold>pnpm</>]', ['pnpm', 'npm', 'yarn'], 'pnpm');
+        $packageManager = $console->select('<question> Which (already installed) package manager you want to use? </question> [<options=bold>pnpm</>]', ['pnpm', 'npm', 'yarn'], 'pnpm');
         $console->outputLine('');
 
         $cssFrameworkArray = [
