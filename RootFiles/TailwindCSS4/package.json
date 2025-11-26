@@ -15,7 +15,6 @@
     "dev:js": "node Build/Carbon.Pipeline/esbuild.mjs",
     "dev:css": "node Build/Carbon.Pipeline/postcss.mjs",
     "watch:js": "node Build/Carbon.Pipeline/esbuild.mjs --watch",
-    "watch:css": "node Build/Carbon.Pipeline/postcss.mjs --watch",
-    "build": "concurrently -r 'pnpm:build:*'"
+    "watch:css": "node Build/Carbon.Pipeline/postcss.mjs --watch"
   }
 }
