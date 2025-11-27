@@ -84,6 +84,21 @@ class Composer
 
         $console->outputLine('<success>Files copied successfully.</success>');
         $console->outputLine('');
+
+        if ($cssFramework == 'tailwindcss@4') {
+            $console->outputLine('<info>Make sure to set up the Tailwind CSS 4 configuration as needed. Refer to the official Tailwind CSS documentation for guidance.</info>');
+            $console->outputLine('');
+            $console->outputLine('<info>An example CSS file could look like this:</info>');
+            $console->outputLine('');
+            $console->outputLine('@import "tailwindcss" source(none);');
+            $console->outputLine('/* Config source based on Carbon.Pipline */');
+            $console->outputLine('@config "#tailwindConfig";');
+            $console->outputLine('');
+            $console->outputLine('<info>Make sure that package.json has following entry:</info>');
+            $console->outputLine('"imports": {');
+            $console->outputLine('    "#tailwindConfig": "./tailwind.config.mjs"');
+            $console->outputLine('}');
+        }
     }
 
     /**
