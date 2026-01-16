@@ -396,6 +396,52 @@ By the way: [Alpine.js] is excellent in combination with [Tailwind CSS].
 ## Javascript
 
 <details>
+<summary><strong>Enviroments variables in Javascript</strong></summary>
+
+You can use your enviroments variables in Javascript. To do so, you have to define `defineEnvVariables`
+
+```yaml
+esbuild:
+  defineEnvVariables: RELEASE_DATE
+```
+
+`defineEnvVariables` can be also an array of strings:
+
+```yaml
+esbuild:
+  defineEnvVariables:
+    - RELEASE_DATE
+    - RELEASE_VERSION
+```
+
+After that, you can acces your variable under `ENV.VARIABLE_NAME`, e.g. `ENV.RELEASE_DATE`
+
+Make sure your [`eslint.config.mjs`] has the global `ENV` enabled:
+
+```js
+import globals from "globals";
+import pluginJs from "@eslint/js";
+import prettierRecommended from "eslint-plugin-prettier/recommended";
+
+export default [
+  pluginJs.configs.recommended,
+  prettierRecommended,
+  {
+    ignores: ["Build/", "Packages/", "**/Public/", "**/Resources/Private/Templates/", "*.noLinter.*"],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        FLOW: "readonly",
+        ENV: "readonly",
+      },
+    },
+  },
+];
+```
+
+</details>
+
 <summary><strong>Flow Settings in Javascript</strong></summary>
 
 Suppose you use tools like [Flownative.Sentry], you perhaps want to pass some of the settings to your Javascript without setting a `data` attribute somewhere in the markup. For that, you can enable `esbuild.defineFlowSettings`. Just add the path (e.g. `Flownative.Sentry.release`) to the setting. In the background, the command `flow configuration:show` is runned. If you run the command `build`, which automatically has the flag `--production`, the `FLOW_CONTEXT` is set to `Production`.
@@ -471,6 +517,7 @@ export default [
         ...globals.browser,
         ...globals.node,
         FLOW: "readonly",
+        ENV: "readonly",
       },
     },
   },

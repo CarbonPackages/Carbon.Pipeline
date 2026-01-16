@@ -1,6 +1,7 @@
 import { BROWSERLIST, fs } from "carbon-pipeline";
 import { config, compression, dynamicImport, toArray, production, minify } from "./helper.mjs";
 import flowSettings from "./flowSettings.mjs";
+import envVariables from "./envVariables.mjs";
 
 const browserlist = (() => {
     const SUPPORTED_BUILD_TARGETS = ["es", "chrome", "edge", "firefox", "ios", "node", "safari"];
@@ -131,4 +132,4 @@ options.pure = toArray(config.esbuild?.options?.pure) || [];
 options.logLevel = config.esbuild?.options?.logLevel || "info";
 options.legalComments = config.esbuild?.options?.legalComments || "linked";
 
-export { browserlist, options, importPlugins, flowSettings };
+export { browserlist, options, importPlugins, flowSettings, envVariables };

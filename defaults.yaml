@@ -68,6 +68,11 @@ postcssOptions:
   additionalPackagePathPrefixes: []
 
 esbuild:
+  # Set environment variables
+  # Every value pair is set as an environment variable
+  # You can access them in Javascript via ENV.VARIABLE_NAME
+  defineEnvVariables: false
+
   # Set Neos Flow settings as FLOW variable. If `true` all the settings are passed.
   # It is recommended to set it to a path (e.g. Flownative.Sentry)
   # This is the same as passing --path to the ./flow configuration:show command

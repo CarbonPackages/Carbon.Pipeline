@@ -1,7 +1,7 @@
 import ESBUILD from "esbuild";
 import { deepmerge } from "carbon-pipeline";
 import { scriptFiles as files, asyncForEach, watch, minify, compression, silent, production } from "./Lib/helper.mjs";
-import { browserlist, options, importPlugins, flowSettings } from "./Lib/esbuildHelper.mjs";
+import { browserlist, options, importPlugins, flowSettings, envVariables } from "./Lib/esbuildHelper.mjs";
 
 async function build() {
     // Pre-import plugins
@@ -51,6 +51,7 @@ async function build() {
             },
             define: {
                 ...flowSettings,
+                ...envVariables,
                 "process.env.npm_package_version": '"' + process.env.npm_package_version + '"',
             },
             loader: {

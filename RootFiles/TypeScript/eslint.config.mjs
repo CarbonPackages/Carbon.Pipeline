@@ -14,6 +14,7 @@ export default [
                 ...globals.browser,
                 ...globals.node,
                 FLOW: "readonly",
+                ENV: "readonly,
             },
         },
     },
