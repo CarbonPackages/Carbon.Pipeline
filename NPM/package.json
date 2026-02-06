@@ -1,6 +1,6 @@
 {
   "name": "carbon-pipeline",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Exteneral dependencies for Carbon.Pipeline",
   "main": "dist/module.mjs",
   "files": [
