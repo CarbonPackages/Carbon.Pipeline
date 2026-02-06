@@ -6,7 +6,7 @@ import { browserlist, options, importPlugins, flowSettings, envVariables } from 
 async function build() {
     // Pre-import plugins
     const plugins = await importPlugins();
-    await asyncForEach(files, async ({ entryPoints, sourcemap, outdir, format, external, inline, extension }) => {
+    await asyncForEach(files, async ({ entryPoints, sourcemap, outdir, format, external, inline, extension, alias }) => {
         const firstOutdir = outdir[0];
         const multiplePackages = outdir.length > 1;
         const write = !compression || inline;
@@ -35,6 +35,7 @@ async function build() {
         const esOptions = {
             ...additionlOptionsForSvelte,
             ...options,
+            alias,
             splitting,
             entryPoints,
             sourcemap,

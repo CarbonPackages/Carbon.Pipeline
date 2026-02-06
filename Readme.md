@@ -107,26 +107,27 @@ packages:
 
 A package entry has the following options:
 
-| Key                        | Type                | Description                                                                                      | Example              |
-| -------------------------- | ------------------- | ------------------------------------------------------------------------------------------------ | -------------------- |
-| `package`                  | `string`            | The name of the package **(required)**                                                           | `Vendor.Foo`         |
-| `files`                    | `string` or `array` | The names of the entry files. If none given, all parsable files in the input folder get rendered | `Main.js`            |
-| `ignoredFiles`             | `string` or `array` | List of files who should be ignored                                                              | `Main.js`            |
-| `folder.input`             | `string`            | The folder under `Resources/Private` where to look for the entry files                           | `Assets`             |
-| `folder.output.package`    | `string` or `array` | If set, the files will be writen in a different package (one or multiple)                        | `Foo.Bar`            |
-| `folder.output.inline`     | `string`            | The folder where inline files get rendered                                                       | `Private/Templates/` |
-| `folder.output.style`      | `string`            | The folder where inline styles rendered                                                          | `Public/Assets`      |
-| `folder.output.script`     | `string`            | The folder where inline scripts rendered                                                         | `Public/Assets`      |
-| `folder.output.module`     | `string`            | The folder where inline modules rendered                                                         | `Public/Assets`      |
-| `folder.output.commonJS`   | `string`            | The folder where inline commonJS files get rendered                                              | `Public/Assets`      |
-| `external`                 | `string` or `array` | You can mark a file or a package as [external] to exclude it from your build.                    | `*/Modules/*`        |
-| `inline`                   | `boolean`           | Flag to toggle if the files should be inlined. If set, sourcemaps are disabled                   | `true`               |
-| `sourcemap`                | `boolean`           | Flag to toggle source map generation                                                             | `false`              |
-| `format`                   | `string`            | Set the format of the output file. [Read more][esbuild format]                                   | `cjs`                |
-| `jsFileExtension`          | `array` or `false`  | File extensions of javascript files. If set to `false`, all files will have the extension `.js`  | `false`              |
-| `jsFileExtension.script`   | `string`            | File extension of script files                                                                   | `.js`                |
-| `jsFileExtension.module`   | `string`            | Output extension of module JS files.                                                             | `.module`            |
-| `jsFileExtension.commonJS` | `string`            | Output extension of common JS files.                                                             | `.common`            |
+| Key                        | Type                | Description                                                                                      | Example                |
+| -------------------------- | ------------------- | ------------------------------------------------------------------------------------------------ | ---------------------- |
+| `package`                  | `string`            | The name of the package **(required)**                                                           | `Vendor.Foo`           |
+| `files`                    | `string` or `array` | The names of the entry files. If none given, all parsable files in the input folder get rendered | `Main.js`              |
+| `ignoredFiles`             | `string` or `array` | List of files who should be ignored                                                              | `Main.js`              |
+| `folder.input`             | `string`            | The folder under `Resources/Private` where to look for the entry files                           | `Assets`               |
+| `folder.output.package`    | `string` or `array` | If set, the files will be writen in a different package (one or multiple)                        | `Foo.Bar`              |
+| `folder.output.inline`     | `string`            | The folder where inline files get rendered                                                       | `Private/Templates/`   |
+| `folder.output.style`      | `string`            | The folder where inline styles rendered                                                          | `Public/Assets`        |
+| `folder.output.script`     | `string`            | The folder where inline scripts rendered                                                         | `Public/Assets`        |
+| `folder.output.module`     | `string`            | The folder where inline modules rendered                                                         | `Public/Assets`        |
+| `folder.output.commonJS`   | `string`            | The folder where inline commonJS files get rendered                                              | `Public/Assets`        |
+| `external`                 | `string` or `array` | You can mark a file or a package as [external] to exclude it from your build.                    | `*/Modules/*`          |
+| `inline`                   | `boolean`           | Flag to toggle if the files should be inlined. If set, sourcemaps are disabled                   | `true`                 |
+| `sourcemap`                | `boolean`           | Flag to toggle source map generation                                                             | `false`                |
+| `format`                   | `string`            | Set the format of the output file. [Read more][esbuild format]                                   | `cjs`                  |
+| `jsFileExtension`          | `array` or `false`  | File extensions of javascript files. If set to `false`, all files will have the extension `.js`  | `false`                |
+| `jsFileExtension.script`   | `string`            | File extension of script files                                                                   | `.js`                  |
+| `jsFileExtension.module`   | `string`            | Output extension of module JS files.                                                             | `.module`              |
+| `jsFileExtension.commonJS` | `string`            | Output extension of common JS files.                                                             | `.common`              |
+| `alias`                    | `object`            | This feature lets you substitute one package for another when bundling                           | `{'oldpkg': 'newpkg'}` |
 
 These are the default values for the folders:
 
@@ -386,7 +387,7 @@ By default, following entries are pre-defined:
 buildDefaults:
   content:
     DistributionPackages: DistributionPackages/**/{Private,NodeTypes,Components}/**/*.{fusion,cpx,html,js,jsx,ts,tsx,mjs,mjsx,mts,mtsx,cjs,cjsx,cts,ctsx,svelte,vue}
-    ignoreNodeModules: '!DistributionPackages/**/node_modules'
+    ignoreNodeModules: "!DistributionPackages/**/node_modules"
 ```
 
 The script put automatically all entries starting with an `!` at the end of the list. You can control this setting by calling `pnpm showConfig --path=buildDefaults.content`
@@ -469,15 +470,15 @@ In Javascript, you can access the variables like this:
 import * as Sentry from "@sentry/browser";
 
 Sentry.init({
-    dsn: FLOW.Flownative.Sentry.dsn,
-    release: FLOW.Flownative.Sentry.release,
-    environment: FLOW.Flownative.Sentry.environment,
-    integrations: [Sentry.browserTracingIntegration()],
+  dsn: FLOW.Flownative.Sentry.dsn,
+  release: FLOW.Flownative.Sentry.release,
+  environment: FLOW.Flownative.Sentry.environment,
+  integrations: [Sentry.browserTracingIntegration()],
 
-    // Set tracesSampleRate to 1.0 to capture 100%
-    // of transactions for performance monitoring.
-    // We recommend adjusting this value in production
-    tracesSampleRate: 0.25,
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 0.25,
 });
 ```
 
@@ -819,7 +820,6 @@ buildDefaults:
   content:
     DistributionPackages: DistributionPackages/**/{Private,NodeTypes,Components}/**/*.{fusion,cpx,html,ts,tsx,mts,mtsx}
 ```
-
 
 ## Live-Reloading
 

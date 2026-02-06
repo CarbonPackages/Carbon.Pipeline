@@ -176,12 +176,15 @@ function entryConfig(entry, type) {
         outputFolder = folderOutput[outputFolderKey] || outputFolder;
         packageName = folderOutput.package || packageName;
     }
+
+    const alias = getValue(entry, "alias") || config.esbuild?.options?.alias || {};
     const outdir = toArray(packageName).map((pkg) => path.join(cwd, config.folder.base, pkg, "Resources", outputFolder));
     return {
         sourcemap,
         outdir,
         inline,
         extension,
+        alias,
     };
 }
 

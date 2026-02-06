@@ -16,6 +16,7 @@
 # jsFileExtension.script   <string>        (default: `.js`) Extension for script files. If you set `jsFileExtension` to `false`, it will set to `.js`
 # jsFileExtension.module   <string>        (default: `.mjs`) Extension for module files. If you set `jsFileExtension` to `false`, it will set to `.js`
 # jsFileExtension.commonJS <string>        (default: `.cjs`) Extension for commonJS files. If you set `jsFileExtension` to `false`, it will set to `.js`
+# alias                    <object>        (default: `{}`) This feature lets you substitute one package for another when bundling. https://esbuild.github.io/api/#alias
 
 packages:
   - package: Vendor.Bar
