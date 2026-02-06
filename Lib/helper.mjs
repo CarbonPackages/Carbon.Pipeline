@@ -8,6 +8,10 @@ const watch = argv("watch") === true;
 const production = argv("production") === true;
 const minify = production || argv("minify") === true;
 const silent = argv("silent") === true;
+let cwd = argv("cwd") || '';
+if (typeof cwd !== "string") {
+    cwd = '';
+}
 
 const configFile = argv("configFile") || "pipeline.yaml";
 const config = getConfig(configFile);
@@ -41,7 +45,7 @@ toArray(config.packages).forEach((entry) => {
         if (!inputFolder && typeof inputFolder !== "string") {
             inputFolder = config.folder.input;
         }
-        return path.join(config.folder.base, entry.package, "Resources/Private", inputFolder);
+        return path.join(cwd, config.folder.base, entry.package, "Resources/Private", inputFolder);
     })();
 
     if (!fs.existsSync(entryFolder)) {
@@ -172,7 +176,7 @@ function entryConfig(entry, type) {
         outputFolder = folderOutput[outputFolderKey] || outputFolder;
         packageName = folderOutput.package || packageName;
     }
-    const outdir = toArray(packageName).map((pkg) => path.join(config.folder.base, pkg, "Resources", outputFolder));
+    const outdir = toArray(packageName).map((pkg) => path.join(cwd, config.folder.base, pkg, "Resources", outputFolder));
     return {
         sourcemap,
         outdir,
@@ -321,8 +325,8 @@ function equalArrays(a, b) {
 }
 
 function getConfig(configFile) {
-    const defaultConfig = readYamlFile("Build/Carbon.Pipeline/defaults.yaml");
-    const pipelineConfig = readYamlFile(configFile);
+    const defaultConfig = readYamlFile(path.join(cwd, "Build/Carbon.Pipeline/defaults.yaml"));
+    const pipelineConfig = readYamlFile(path.join(cwd, configFile));
     if (!pipelineConfig.import) {
         return mergeConfig(defaultConfig, pipelineConfig);
     }
@@ -332,7 +336,7 @@ function getConfig(configFile) {
     for (const key in imports) {
         const filePath = imports[key];
         if (filePath) {
-            importedConfig.push(readYamlFile(filePath));
+            importedConfig.push(readYamlFile(path.join(cwd, filePath)));
         }
     }
     return mergeConfig(defaultConfig, pipelineConfig, ...importedConfig);
