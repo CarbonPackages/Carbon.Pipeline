@@ -26,7 +26,7 @@ test-pnpm:
 	@rm -rf node_modules
 	@pnpm setPackageManager pnpm
 	@pnpm install
-	@pnpm add carbon-pipeline concurrently esbuild eslint eslint-config-prettier eslint-plugin-prettier postcss postcss-import prettier stylelint stylelint-config-standard tailwindcss@3 autoprefixer cssnano svelte svelte-preprocess esbuild-svelte sass node-sass-tilde-importer
+	@pnpm add carbon-pipeline concurrently esbuild eslint eslint-config-prettier eslint-plugin-prettier postcss postcss-import prettier stylelint stylelint-config-standard tailwindcss@3 autoprefixer cssnano svelte svelte-preprocess esbuild-svelte sass
 	@pnpm showConfig
 	@pnpm build
 
@@ -36,7 +36,7 @@ test-yarn:
 	@yarn setPackageManager yarn
 	@yarn set version stable
 	@yarn install
-	@yarn add carbon-pipeline concurrently esbuild eslint eslint-config-prettier eslint-plugin-prettier postcss postcss-import prettier stylelint stylelint-config-standard tailwindcss@3 autoprefixer cssnano svelte svelte-preprocess esbuild-svelte sass node-sass-tilde-importer
+	@yarn add carbon-pipeline concurrently esbuild eslint eslint-config-prettier eslint-plugin-prettier postcss postcss-import prettier stylelint stylelint-config-standard tailwindcss@3 autoprefixer cssnano svelte svelte-preprocess esbuild-svelte sass
 	@yarn showConfig
 	@yarn build
 
@@ -45,7 +45,7 @@ test-npm:
 	@rm -rf node_modules
 	@npm setPackageManager npm
 	@npm install
-	@npm add carbon-pipeline concurrently esbuild eslint eslint-config-prettier eslint-plugin-prettier postcss postcss-import prettier stylelint stylelint-config-standard tailwindcss@3 autoprefixer cssnano svelte svelte-preprocess esbuild-svelte sass node-sass-tilde-importer
+	@npm add carbon-pipeline concurrently esbuild eslint eslint-config-prettier eslint-plugin-prettier postcss postcss-import prettier stylelint stylelint-config-standard tailwindcss@3 autoprefixer cssnano svelte svelte-preprocess esbuild-svelte sass
 	@npm run showConfig
 	@npm run build
 

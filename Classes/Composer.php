@@ -130,7 +130,7 @@ class Composer
             $packages[] = 'typescript-eslint';
         }
         if ($sass) {
-            $packages[] = 'sass node-sass-tilde-importer';
+            $packages[] = 'sass';
         }
         switch ($cssFramework) {
             case 'tailwindcss@4':

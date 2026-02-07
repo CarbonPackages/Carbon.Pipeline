@@ -1,20 +1,17 @@
-import { renderSync } from "sass";
-import tildeImporter from "node-sass-tilde-importer";
+import { compile, NodePackageImporter } from "sass";
 import { config, styleFiles, compression } from "./helper.mjs";
 function render(key) {
-    const { to, sourcemap } = styleFiles[key];
-    const result = renderSync({
-        outputStyle: compression ? "compressed" : "expanded",
+    const { sourcemap, inline } = styleFiles[key];
+    const result = compile(key, {
+        style: compression ? "compressed" : "expanded",
         sourceMap: sourcemap,
-        sourceMapContents: true,
-        sourceMapEmbed: true,
+        sourceMapIncludeSources: true,
+        charset: !inline,
         ...config.sassOptions,
-        file: key,
-        outFile: to[0],
-        importer: tildeImporter,
-    });
+        importers: [new NodePackageImporter()]
+    })
     const css = result.css.toString();
-    const importedFiles = [...result.stats.includedFiles].filter((file) => file != key);
+    const importedFiles = [...result.loadedUrls].map(item => item.pathname).filter((file) => file != key);
     return { css, importedFiles };
 }
 

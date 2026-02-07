@@ -269,31 +269,30 @@ In this example, `pipelineCustom.yaml` gets used instead of `pipeline.yaml`.
 
 ### Sass
 
-If you want to use [Sass] (`.scss`or `.sass` files) you have to install [`sass`] and [`node-sass-tilde-importer`]:
+If you want to use [Sass] (`.scss`or `.sass` files) you have to install [`sass`]:
 
 For [pnpm]:
 
 ```bash
-pnpm add -D sass node-sass-tilde-importer
+pnpm add -D sass
 ```
 
 For [Yarn]:
 
 ```bash
-yarn add --dev sass node-sass-tilde-importer
+yarn add --dev sass
 ```
 
 For [npm]:
 
 ```bash
-npm add -D sass node-sass-tilde-importer
+npm add -D sass
 ```
 
-You have to ways to import files from `node_modules` (Example with bootstrap):
+You can now import files from `node_modules` like this (Example with bootstrap):
 
 ```css
-@import "node_modules/bootstrap/scss/bootstrap";
-@import "~bootstrap/scss/bootstrap";
+@use "pkg:bootstrap/scss/bootstrap";
 ```
 
 <details>
@@ -901,7 +900,6 @@ To start Browsersync you can run `browser-sync start --config bs-config.js`. If 
 [optimizing-for-production]: https://tailwindcss.com/docs/optimizing-for-production
 [sass]: https://sass-lang.com
 [`sass`]: https://www.npmjs.com/package/sass
-[`node-sass-tilde-importer`]: https://www.npmjs.com/package/node-sass-tilde-importer
 [postcss-import]: https://www.npmjs.com/package/postcss-import
 [postcss-sort-media-queries]: https://www.npmjs.com/package/postcss-sort-media-queries
 [autoprefixer]: https://www.npmjs.com/package/autoprefixer
