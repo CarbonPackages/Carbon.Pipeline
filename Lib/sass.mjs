@@ -1,8 +1,16 @@
+import path from "node:path";
 import { compile, NodePackageImporter } from "sass";
-import { config, styleFiles, compression } from "./helper.mjs";
+import { config, styleFiles, compression, toArray } from "./helper.mjs";
+
+const loadPaths = (() => {
+    const aliasFolders = [...new Set([config.folder.base, ...toArray(config.folder.additionalAliases)])];
+    return [...new Set(aliasFolders.map(folder => path.resolve(path.dirname(folder))))];
+})();
+
 function render(key) {
     const { sourcemap, inline } = styleFiles[key];
     const result = compile(key, {
+        loadPaths,
         style: compression ? "compressed" : "expanded",
         sourceMap: sourcemap,
         sourceMapIncludeSources: true,
