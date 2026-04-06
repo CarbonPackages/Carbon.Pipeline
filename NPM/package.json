@@ -1,6 +1,6 @@
 {
   "name": "carbon-pipeline",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Exteneral dependencies for Carbon.Pipeline",
   "main": "dist/module.mjs",
   "files": [
@@ -34,11 +34,11 @@
   },
   "homepage": "https://github.com/CarbonPackages/Carbon.Pipeline#readme",
   "dependencies": {
-    "browserslist": "^4.28.1",
+    "browserslist": "^4.28.2",
     "chokidar": "^5.0.0",
     "dependency-graph": "^1.0.0",
-    "fs-extra": "^11.3.3",
-    "glob": "^13.0.1",
+    "fs-extra": "^11.3.4",
+    "glob": "^13.0.6",
     "js-yaml": "^4.1.1",
     "nanocolors": "^0.2.13",
     "postcss-load-config": "^6.0.1",
