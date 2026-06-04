@@ -35,6 +35,16 @@ jobs:
         uses: actions/setup-node@v6.3.0
         with:
           node-version-file: .nvmrc
+      - name: Create pnpm workspace file
+        run: |
+          cat <<'EOF' > pnpm-workspace.yaml
+          packages:
+            - '.'
+          allowBuilds:
+            '@parcel/watcher': true
+            esbuild: true
+            svelte-preprocess: true
+          EOF
       - name: Install dependencies
         run: |
           pnpm install --no-frozen-lockfile
