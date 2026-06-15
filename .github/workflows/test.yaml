@@ -28,7 +28,7 @@ jobs:
           cp -n RootFiles/TailwindCSS3/{*,.*} ./ || true
           cp -R {Lib,defaults.yaml,*.mjs,*.cjs} Build/Carbon.Pipeline/
       - name: Install pnpm
-        uses: pnpm/action-setup@v6.0.8
+        uses: pnpm/action-setup@v6.0.9
         with:
           version: 11
       - name: Setup node
