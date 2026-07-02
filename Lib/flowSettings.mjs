@@ -87,7 +87,7 @@ function readSettings(config, prefix, path) {
     if (settings === emptyMessage) {
         error(emptyMessage);
     }
-    return yaml.load(settings, { schema: yaml.JSON_SCHEMA, json: true });
+    return yaml.load(settings, { schema: yaml.CORE_SCHEMA.withTags(yaml.mergeTag), json: true });
 }
 
 function readPath(config, prefix, path) {
@@ -102,7 +102,7 @@ function readPath(config, prefix, path) {
     if (settings === emptyMessage) {
         error(emptyMessage);
     }
-    const json = yaml.load(settings, { schema: yaml.JSON_SCHEMA, json: true });
+    const json = yaml.load(settings, { schema: yaml.CORE_SCHEMA.withTags(yaml.mergeTag), json: true });
     return convertJsonForDefine(json, path);
 }
 

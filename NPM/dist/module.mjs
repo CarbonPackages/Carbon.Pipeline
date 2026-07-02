@@ -7,7 +7,7 @@ import postcssrc from "postcss-load-config";
 import prettyjson from "prettyjson";
 import readCache from "read-cache";
 import resolve from "resolve";
-import yaml from "js-yaml";
+import * as yaml from "js-yaml";
 import { DepGraph } from "dependency-graph";
 import { red, bold, dim, cyan, magenta } from "nanocolors";
 
