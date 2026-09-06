@@ -1,17 +1,13 @@
-const { scripts, config } = require("../../package.json");
-const { execSync } = require("child_process");
+const fs = require("node:fs");
+const path = require("node:path");
+
+const packageJsonPath = path.resolve(__dirname, "../../package.json");
+const packageJson = require(packageJsonPath);
+
+const { scripts, config } = packageJson;
 
 const newPackageManager = process.argv[2];
 const packageManagers = ["pnpm", "npm", "yarn"];
-
-if (config?.packageManager) {
-    const isAlone = Object.keys(config).length == 1;
-    if (isAlone) {
-        execSync("npm pkg delete config");
-    } else {
-        execSync("npm pkg delete config.packageManager");
-    }
-}
 
 if (!newPackageManager) {
     errorMessage("Please specify a package manager as an argument.");
@@ -21,28 +17,42 @@ if (!packageManagers.includes(newPackageManager)) {
     errorMessage("Please specify a valid package manager");
 }
 
-// Push dynamic entry for backward compatibility
+if (config?.packageManager) {
+    if (Object.keys(config).length === 1) {
+        delete packageJson.config;
+    } else {
+        delete packageJson.config.packageManager;
+    }
+}
+
 packageManagers.push("$npm_package_config_packageManager");
 
 const replacementKey = "NEW_PACKAGE_MANAGER";
+
 console.log(" Updating package.json scripts...");
+
 for (const key in scripts) {
     let command = scripts[key];
-    // First, replace the package manager with NEW_PACKAGE_MANAGER
-    // We have to do this as pnpm and npm are similar
-    packageManagers.forEach((oldManger) => {
-        command = command.replaceAll(`${oldManger} `, `${replacementKey} `);
-        command = command.replaceAll(`${oldManger}:`, `${replacementKey}:`);
+
+    packageManagers.forEach((oldManager) => {
+        command = command.replaceAll(`${oldManager} `, `${replacementKey} `);
+        command = command.replaceAll(`${oldManager}:`, `${replacementKey}:`);
     });
-    // Now we put the new package manager in place
+
     command = command.replaceAll(`${replacementKey} `, `${newPackageManager} `);
     command = command.replaceAll(`${replacementKey}:`, `${newPackageManager}:`);
-    execSync(`npm pkg set scripts.${key}="${command}"`);
+
+    packageJson.scripts[key] = command;
 }
 
-sucessMessage();
+fs.writeFileSync(
+    packageJsonPath,
+    `${JSON.stringify(packageJson, null, 2)}\n`
+);
 
-function sucessMessage() {
+successMessage();
+
+function successMessage() {
     console.log("\n");
     console.log(cyan(` Set package manager to ${bold(newPackageManager)}`));
     console.log("");
