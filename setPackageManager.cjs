@@ -1,5 +1,5 @@
 const { scripts, config } = require("../../package.json");
-const { execSync } = require("child_process");
+const { execSync, execFileSync } = require("child_process");
 
 const newPackageManager = process.argv[2];
 const packageManagers = ["pnpm", "npm", "yarn"];
@@ -37,7 +37,7 @@ for (const key in scripts) {
     // Now we put the new package manager in place
     command = command.replaceAll(`${replacementKey} `, `${newPackageManager} `);
     command = command.replaceAll(`${replacementKey}:`, `${newPackageManager}:`);
-    execSync(`npm pkg set scripts.${key}="${command}"`);
+    execFileSync("npm", ["pkg", "set", `scripts.${key}=${command}`]);
 }
 
 sucessMessage();
