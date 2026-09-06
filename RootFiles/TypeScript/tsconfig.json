@@ -2,11 +2,10 @@
     "compilerOptions": {
         "target": "es2022",
         "module": "es2022",
-        "moduleResolution": "node",
-        "baseUrl": "./",
+        "moduleResolution": "bundler",
         "paths": {
-            "Packages/*": ["Packages/*"],
-            "DistributionPackages/*": ["DistributionPackages/*"]
+            "Packages/*": ["./Packages/*"],
+            "DistributionPackages/*": ["./DistributionPackages/*"]
         }
     },
     "include": ["DistributionPackages/**/*"]
